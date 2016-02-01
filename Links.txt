@@ -1,3 +1,21 @@
 http://poscomp.ufabc.edu.br/index.php/exame-de-qualificacao
 https://mail.google.com/mail/u/0/#inbox/150fc6e4aa1ce4c5
 https://www.overleaf.com/3082043vrbzsc#/8550757/
+
+IMPROVING COMPANION AI IN SMALL-SCALE ATTRITION GAMES -> http://gram.cs.mcgill.ca/theses/xu-15-improving.pdf
+Intelligent Agents in Computer Games -> http://www.aaai.org/Papers/AAAI/1999/AAAI99-143.pdf
+Computational Intelligence and Knowledge -> https://www.cs.ubc.ca/~poole/ci/ch1.pdf
+Intelligent agents: theory and practice -> http://www.cs.upc.edu/~jvazquez/teaching/masd/docs/wooldridge95intelligent.pdf
+An Approach to Quantifying Pokemon’s Entertainment Impact with focus on Battle -> https://dspace.jaist.ac.jp/dspace/bitstream/10119/12994/1/21804.pdf
+
+CIG 2014:
+
+Automated Design for Playability in Computer Game Agents -> http://www.cs.mun.ca/~banzhaf/papers/CIG2014.pdf
+Evolving Artificial Neural Networks Applied to Generate Virtual Characters -> https://repositorium.sdum.uminho.pt/bitstream/1822/31125/1/2014-cig.pdf
+Game strategies for The Settlers of Catan -> http://homepages.inf.ed.ac.uk/alex/papers/cig2014_gs.pdf
+Monte Carlo Tree Search Variants for Simultaneous Move Games -> http://mlanctot.info/files/papers/cig14-smmctsggp.pdf
+Evolving Personas for Player Decision Modeling -> http://julian.togelius.com/Holmgard2014Evolving.pdf
+
+CIG 2013:
+http://eldar.mathstat.uoguelph.ca/dashlock/CIG2013/proceedings.html
+Using Genetic Programming to Evolve Heuristics for a Monte Carlo Tree Search Ms Pac-Man Agent -> http://eldar.mathstat.uoguelph.ca/dashlock/CIG2013/papers/paper_60.pdf
