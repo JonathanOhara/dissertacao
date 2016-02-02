@@ -1,3 +1,21 @@
 \chapter{Metodologia}
+\label{cap:proposta}
 
-Essa é uma Metodologia
+Para atingir os objetivos propostos serão implementados três agentes. Dois desses serão agentes que irão ser submetido a uma grande quantidade de treino para que possam chegar a patamares sólidos. O terceiro será um agente baseado em grafos com diferentes profundidades onde pode ser visto a evolução no ranquemanto com o aumento de profundidade de árvore de decisão.
+
+\begin{itemize}
+
+	\item \textbf{Agente 1 com neuroevolução}. O primeiro agente persiste em um rede neural onde os pesos de sua rede serão ajustados por um algoritmo evolutivo.
+	
+	\item \textbf{Agente 2 com aprendizado por reforço}. Esse agente irá se ajustar através de estimulos positivos e negativos que regularão sua decisão dentro do jogo.
+	
+	\item \textbf{Agente 3 baseado em grafo de decisão}. Utilizará uma árvore de decisão onde os possíveis movimentos serão mapeados. O algoritmo tentará prever possíveis incógnitas do adversário assumindo o pior cenário possível para cada variável não conhecida..
+	
+\end{itemize}
+
+\section{Treino e aprendizado}
+
+O primeiro agente que será testado contra jogadores humanos é o agente 3(grafo). Será criado várias versões desse agente, cada versão terá uma quantidade diferente de profundidade em sua árvore de escolhas. Cada versão do agente será submetido a uma série da batalhas que só terá fim quando seu ranqueamento se estabilizar.
+
+\section{Avaliação de resultado}
+%falar sobre quantificar a vitoria

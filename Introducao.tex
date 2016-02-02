@@ -9,10 +9,17 @@ Esse trabalho explora a criação de agentes inteligentes que compitam com jogador
 \newline
 Um dos grandes desafios na criação desses agentes é a adaptabilidade. Os agentes serão treinados em batalhas com times randômicas, além de precisar se adapatar ao seu próprio time, o agente não conhecerá o time adversário até que o jogador adversário mostre um de seus \textit{Pokémons} e use uma de suas habilidades.
 \newline
-Por causa da característica de desconhecer o time adversário, dificulta bastante a criação de grafos de possíveis jogadas do adversário, pois o agente precisaria predizer os possíveis \textit{Pokémons} adversários e suas característica. Desse modo dificulta bastante técnicas baseadas em grafos de jogadas como a técnica utilizada no famoso \textit{Deep Blue} que segundo o trabalho \textit{Deep Blue System Overview} \cite{deepblue1} "O \textit{Deep Blue} é um massivo sistema paralelo para realização de busca em árvores de jogos de xadrez".
+Por causa da característica de desconhecer o time adversário, dificulta bastante a criação de grafos de possíveis jogadas do adversário, pois o agente precisaria predizer os possíveis \textit{Pokémons} adversários assim como suas característica. Desse modo dificulta bastante técnicas baseadas em grafos de jogadas como a técnica utilizada no famoso \textit{Deep Blue} que segundo o trabalho \textit{Deep Blue System Overview} \cite{deepblue1} "O \textit{Deep Blue} é um massivo sistema paralelo para realização de busca em árvores de jogos de xadrez".
 
 \section{Objetivos}
 \label{sec:objetivos}
+O Objetivo desse trabalho é o desenvolvimento de agentes inteligentes que joguem e aprendam com milhares de jogadores humanos. Será implementada distintas técnicas para criação e aprendizado desses agentes. No decorrer do trabalho será sumarizado a evolução dos agentes no sistema de ranqueamento do jogo e, essa posição será confrontada com a quantidade de treinamento que cada agente recebeu, podendo assim observar a curva de melhora em relação a quantidade de treinamento.
+
+Para criação desses agentes foi desenvolvida uma \textit{API} (Application Programming Interface) que permitirá a comunicação com o jogo \textit{Pokémon Showdown}. Inicialmente a \textit{API} está disponibilizada apenas para \textit{JavaScript} mas durante o desenvolvimento do projeto será portada para \textit{Java}
 
 \section{Principais contribuições}
 \label{sec:principais}
+
+O trabalho irá explorar a criação de agentes inteligentes adaptativos, num ambiente que pouco se sabe sobre o adversário. Os agentes terão informações apenas durante a batalha e, essas informações são apenas aquelas que o adversário realizar. Por exemplo: o agente só saberá que adversário tem um \textit{Pokémon} até o mesmo usá-lo, os movimentos que \textit{Pokémon} tem serão apenas conhecidos a medida que o adversário utilizá-los e existem caractéristicas que agente não tem como descobrir como por exemplo a quantidade de ataque e defesa distruibida no monstro.
+
+Além disso a construção de uma \textit{API} para acesso ao jogo contrubuirá para que outros pesquisadores também possam desenvolver estudos e criar seus próprios agentes podendo criar-se uma cultura de competição entre agente inteligentes na plataforma \textit{Pokémon Showdown}.
