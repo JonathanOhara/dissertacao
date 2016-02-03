@@ -15,7 +15,18 @@ Para atingir os objetivos propostos serão implementados três agentes. Dois desse
 
 \section{Treino e aprendizado}
 
-O primeiro agente que será testado contra jogadores humanos é o agente 3(grafo). Será criado várias versões desse agente, cada versão terá uma quantidade diferente de profundidade em sua árvore de escolhas. Cada versão do agente será submetido a uma série da batalhas que só terá fim quando seu ranqueamento se estabilizar.
+O primeiro agente que será testado contra jogadores humanos é o agente 3(grafo). Será criado várias versões desse agente, cada versão será cablibrado com uma profundidade diferente em sua árvore. Cada versão do agente será submetido a uma série da batalhas que só terá fim quando seu ranqueamento se estabilizar.
+
+Os agentes 1 e 2 terão comportamentos semelhantes em como serão treinados. Ambos agentes terão duas versões, cada versão fará um treinamento diferente:
+
+\begin{itemize}
+	\item \textbf{Treino contra humanos}: O agente será submetido a jogar contra jogadores humanos que será escolhido pelo próprio jogo \textit{Pokémon Showdown!}, o sistema de pareamento de partidas é feito pelo ranqueamento dos dois jogadores, ou seja, o adversário sempre vai ter uma pontuação no \textit{rank} próxima da do agente.
+	\item \textbf{Treino contra agente 3}: Os agentes 1 e 2 jogarão apenas contra o agente 3, sempre que o agente conseguir um grande números de vitória sobre o agente 3 esse agente será modificado adicionando mais um na profundidade de sua árvore.
+\end{itemize}
 
 \section{Avaliação de resultado}
+
+Avaliar a situação da batalha será um recurso muito importante pois o agente 3 precisará avaliar cada nó de sua árvore para fazer a melhor escolha ou possível ou a escolha que gere menos boas escolhas para o adversário.Essa avaliação terá como base a quantidade de pokémons vivos e a situação dele(quantidade de pontos de vida, afetado por alguem efeito negativo entre outros).
+
+Ao fim de cada batalha também feita uma avaliação da vitória. Com essa avaliação será possível aferir o quão dispar foi a situação do vencedora. Além disso, com essa métrica podemos eliminar possíveis ruídos em resultados de batalhas como desistências ou desconexões por parte dos adverários.
 %falar sobre quantificar a vitoria
