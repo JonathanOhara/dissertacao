@@ -1,32 +1,32 @@
 \chapter{Metodologia}
-\label{cap:proposta}
+\label{cap:metodologia}
 
-Para atingir os objetivos propostos serão implementados três agentes. Dois desses serão agentes que irão ser submetido a uma grande quantidade de treino para que possam chegar a patamares sólidos. O terceiro será um agente baseado em grafos com diferentes profundidades onde pode ser visto a evolução no ranquemanto com o aumento de profundidade de árvore de decisão.
+Para atingir os objetivos propostos serão implementados três agentes. Dois desses agentes serão submetidos a uma grande quantidade de treino para que possam chegar a patamares estáveis. O terceiro será um agente baseado em grafos com diferentes profundidades onde, será categorizado a evolução no ranquemanto do jogo de acordo com o aumento de profundidade de árvore de decisão.
 
 \begin{itemize}
 
 	\item \textbf{Agente 1 com neuroevolução}. O primeiro agente persiste em um rede neural onde os pesos de sua rede serão ajustados por um algoritmo evolutivo.
 	
-	\item \textbf{Agente 2 com aprendizado por reforço}. Esse agente irá se ajustar através de estimulos positivos e negativos que regularão sua decisão dentro do jogo.
+	\item \textbf{Agente 2 com aprendizado por reforço}. Esse agente irá se ajustar através de estimulos positivos e negativos que regularão sua decisão dentro do jogo através do algoritmo de aprendizado por reforço.
 	
-	\item \textbf{Agente 3 baseado em grafo de decisão}. Utilizará uma árvore de decisão onde os possíveis movimentos serão mapeados. O algoritmo tentará prever possíveis incógnitas do adversário assumindo o pior cenário possível para cada variável não conhecida..
+	\item \textbf{Agente 3 baseado em grafo de decisão}. Utilizará uma árvore de decisão onde os possíveis movimentos serão mapeados. O algoritmo tentará prever possíveis incógnitas do adversário assumindo o pior cenário possível para cada variável não conhecida.
 	
 \end{itemize}
 
 \section{Treino e aprendizado}
+\label{cap:treino}
 
 O primeiro agente que será testado contra jogadores humanos é o agente 3(grafo). Será criado várias versões desse agente, cada versão será cablibrado com uma profundidade diferente em sua árvore. Cada versão do agente será submetido a uma série da batalhas que só terá fim quando seu ranqueamento se estabilizar.
 
 Os agentes 1 e 2 terão comportamentos semelhantes em como serão treinados. Ambos agentes terão duas versões, cada versão fará um treinamento diferente:
 
 \begin{itemize}
-	\item \textbf{Treino contra humanos}: O agente será submetido a jogar contra jogadores humanos que será escolhido pelo próprio jogo \textit{Pokémon Showdown!}, o sistema de pareamento de partidas é feito pelo ranqueamento dos dois jogadores, ou seja, o adversário sempre vai ter uma pontuação no \textit{rank} próxima da do agente.
-	\item \textbf{Treino contra agente 3}: Os agentes 1 e 2 jogarão apenas contra o agente 3, sempre que o agente conseguir um grande números de vitória sobre o agente 3 esse agente será modificado adicionando mais um na profundidade de sua árvore.
+	\item \textbf{Treino contra humanos}: O agente será submetido a jogar contra jogadores humanos que será escolhido pelo próprio jogo \textit{Pokémon Showdown}, o sistema de pareamento de partidas é feito baseado no ranqueamento dos dois jogadores, ou seja, o adversário sempre vai ter uma pontuação no \textit{rank} semelhante ao agente.
+	\item \textbf{Treino contra agente 3}: Os agentes 1 e 2 jogarão apenas contra o agente 3, sempre que o agente que está treinando conseguir um grande números de vitória sobre o agente 3, será aumentado mais um nível de profundidade na árvore do agente 3.
 \end{itemize}
 
 \section{Avaliação de resultado}
 
-Avaliar a situação da batalha será um recurso muito importante pois o agente 3 precisará avaliar cada nó de sua árvore para fazer a melhor escolha ou possível ou a escolha que gere menos boas escolhas para o adversário.Essa avaliação terá como base a quantidade de pokémons vivos e a situação dele(quantidade de pontos de vida, afetado por alguem efeito negativo entre outros).
+Avaliar a situação da batalha será um recurso muito importante pois o agente 3 precisará avaliar cada nó de sua árvore para fazer a melhor escolha  possível ou a escolha que gere menos boas escolhas para o adversário.Essa avaliação terá como base a quantidade de pokémons vivos e a situação dele(quantidade de pontos de vida, afetado por alguem efeito negativo entre outros).
 
-Ao fim de cada batalha também feita uma avaliação da vitória. Com essa avaliação será possível aferir o quão dispar foi a situação do vencedora. Além disso, com essa métrica podemos eliminar possíveis ruídos em resultados de batalhas como desistências ou desconexões por parte dos adverários.
-%falar sobre quantificar a vitoria
+Ao fim de cada batalha também feita uma avaliação da vitória. Com essa avaliação será possível aferir o quão dispar foi a situação do vencedor. Além disso, com essa métrica podemos eliminar possíveis ruídos em resultados de batalhas como desistências ou desconexões por parte dos oponentes.

@@ -1,3 +1,56 @@
 \chapter{Plano de Trabalho}
 
-Plano de trabalho e cronograma: itemize e coloque no diagrama de cronograma tudo que vc já fez relacionado a essa pesquisa (ex.: cite o estudo de caso do angry birds, a elaboração da interface com o jogo) e os próximos passos. Coloque nesse cronograma a previsão de elaboração de um artigo e da dissertação.Plano de trabalho e cronograma: itemize e coloque no diagrama de cronograma tudo que vc já fez relacionado a essa pesquisa (ex.: cite o estudo de caso do angry birds, a elaboração da interface com o jogo) e os próximos passos. Coloque nesse cronograma a previsão de elaboração de um artigo e da dissertação.
+As atividades compreendidas no cronograma são:
+
+\begin{itemize}
+
+	\item \textbf{Revisão de literatura (RDL)}: Leitura e entendimentos de trabalham que permeiam o assunto da dissertação dentre eles redes neurais, computação evolutiva, neuroevolução, aprendizado por reforço, agentes inteligentes para jogos entre outros.
+	
+	\item \textbf{Estudo de caso AIBirds (AIB)}: Criação de um agente inteligente baseado em grafos para a competição AIBirds. AIBirds ou \textit{Angry Birds AI Competition} é uma competição entre agentes que joguem o jogo Angry Birds. Segundo sua página oficial "A tarefa dessa competição é desenvolver um programa de computador que jogue Angry Birds autonomamente e sem intervenção humana." \cite{aibirds1} A competição foi sediada no congresso IJCAI 2015 e o agente desenvolvido foi nomeado UFAngryBirdsC. O desenvolvimento desse agente foi muito importante para o trabalho, além de adquirir experiência para criação de agente para jogos serviu como inspiração para o tema do trabalho.
+	
+	\item \textbf{Desenvolvimento de API de comunicação com o jogo Pokemon Showdown (API)}: Para que seja possível criação de agentes foi desenvolvida uma API em JavaScript que recupera todas informações e pode realizar as mesmas informações que um jogador humano pode fazer. Durante o desenvolvimento foi tomado muito cuidado para que a API não tenha mais informações ou ações que uma pessoa pode obter ou realizar.
+	
+	\item \textbf{Escever documento de qualificação (EDQ)}: Escrever o documento para o exame de qualificação.
+	
+	\item \textbf{Desenvolvimento dos três agentes (DTA)}: Como já citado anteriormente serão criados três agentes utilizando técnicas diferentes como: reuroevolução, aprendizado por reforço e algoritmo de grafos baseado em \textit{minimax}.
+	
+	\item \textbf{Treino inicial dos Agentes (TIA)}: Como descrito na seção \ref{sec:treino} será inicialmente treinado apenas o agente 3. Esse agente será muito importante para o treino dos próximos agentes e para sugerir uma categorização para jogadores humanos para cada faixa de ranqueamento.
+	
+	\item \textbf{Treino dos demais agentes (TDA)}: Treino dos agentes 1 e 2 contra o agente 3 e contra jogadores humanos. Nessa fase também será sumarizada a subida no ranqueamento de acordo com a quantidade de treino. 
+	
+	\item \textbf{Compilação de resultados (CDR)}: Compilação dos resultados de cada agente e comparação da performance de cada agentes com jogadores humanos.
+	
+	\item \textbf{Escever documento da dissertação (EDD)}: Escrever o documento para a defesa da dissertação.
+	
+	\item \textbf{Desenvolver WebSocket de comunicação com outras linguagens (DWS)}: Será desenvolvido um WebSocket na API para que possa ser desenvolvida agentes em qualquer outra linguagem que tenha o recurso de WebSocket.
+	
+	\item \textbf{Escrever documentação da API (WIK)}: Fazer uma página mostrando como utilizar os principais recursos da API e como utilizar ela em outra linguagens através do WebSocket.
+	
+\end{itemize}
+
+O cronograma abaixo compreende o período de maio de 2015 data onde foram feitos as primeiras etapas relacionadas a dissertação, até setembro de 2016 mês que pretende-se defender a dissertação.
+
+\begin{table}[!ht]
+\centering
+\caption{Cronograma da Dissertação}
+\label{tabelaCronograma}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|c|}{\textbf{}} & \multicolumn{8}{c|}{\textbf{2015}}                                                                            & \multicolumn{9}{c|}{\textbf{2016}}                                                                                          \\ \hline
+                                & \textbf{05} & \textbf{06} & \textbf{07} & \textbf{08} & \textbf{09} & \textbf{10} & \textbf{11} & \textbf{12} & \textbf{01} & \textbf{02} & \textbf{03} & \textbf{04} & \textbf{05} & \textbf{06} & \textbf{07} & \textbf{08} & \textbf{09} \\ \hline
+\textbf{RDL}                    & X           & X           & X           & X           & X           & X           & X           & X           &             &             &             &             &             &             &             &             &             \\ \hline
+\textbf{AIB}                    & X           & X           & X           &             &             &             &             &             &             &             &             &             &             &             &             &             &             \\ \hline
+\textbf{API}                    &             &             &             &             &             &             & X           & X           & X           &             &             &             &             &             &             &             &             \\ \hline
+\textbf{EDQ}                    &             &             &             &             &             &             &             &             & X           & X           &             &             &             &             &             &             &             \\ \hline
+\textbf{DTA}                    &             &             &             &             &             &             &             &             &             & X           & X           & X           &             &             &             &             &             \\ \hline
+\textbf{TIA}                    &             &             &             &             &             &             &             &             &             &             &             & X           & X           &             &             &             &             \\ \hline
+\textbf{TDA}                    &             &             &             &             &             &             &             &             &             &             &             &             & X           & X           &             &             &             \\ \hline
+\textbf{CDR}                    &             &             &             &             &             &             &             &             &             &             &             &             &             & X           & X           &             &             \\ \hline
+\textbf{EDD}                    &             &             &             &             &             &             &             &             &             &             &             &             &             &             & X           & X           & X           \\ \hline
+\textbf{DWS}                    &             &             &             &             &             &             &             &             &             &             &             &             & X           & X           &             &             &             \\ \hline
+\textbf{WIK}                    &             &             &             &             &             &             &             &             &             &             &             &             &             & X           & X           &             &             \\ \hline
+\end{tabular}
+\end{table}
+
+
+%Plano de trabalho e cronograma: itemize e coloque no diagrama de cronograma tudo que vc já fez relacionado a essa pesquisa (ex.: cite o estudo de caso do angry birds, a elaboração da interface com o jogo) e os próximos passos. Coloque nesse cronograma a previsão de elaboração de um artigo e da dissertação.
