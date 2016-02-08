@@ -1,3 +1,51 @@
-\chapter{Revisão Bibliográfica}
+\chapter{Agentes Inteligentes}
+\label{cap:agentesInteligentes}
 
-Rev. Bibliográfica: leitura e resumo de todos os trabalhos relacionados. Nele vc vai descrever artigos que aplicam técnicas de IA em joos do mesmo estilo, artigos que tentam aplicar para esse mesmo jogo (talvez não tenha), artigos de técnicas que serão utilizadas nesse seu trabalho.
+Na computação, especialmente em inteligência artificial, é bem comum utilzar-se do termo agente ou agente inteligente. Por definição do dicionário \cite{michaelis} agente significa "Que age, que exerce alguma ação; que produz algum efeito".
+
+Na academia temos definições mais direcionadas como a de \cite{aiModenApproach} "Um agente é algo capaz de de perceber seu ambiente através de sensores e agir sobre esse ambiente por meio de atuadores", ou a de \cite{kidsim} "Vamos definir um agente como uma entidade de \textit{software} persistente dedicada para um propósito específico. 'Persistente' distingue agentes de sub-rotinas; agentes têm suas próprais ideias sobre como realizar tarefas, suas próprias agendas. 'Propósitos especiais' os distingue de aplicações multifuncionais inteiras; agentes são tipicamente muito menores."
+
+Existem diversas definições de agentes. Mas qual seria a diferença de um agente para um programa de computador?. Os autores \cite{agentOrProgram} propõem uma definição mais sólida para agente "Um agente autônomo é um sistema situado no dentro e como parte de um ambiente que sente esse ambiente e age sobre ele, ao longo do tempo, em busca de sua própria agenda e de modo a efetivar o que sente no futuro." ainda segundo os autores maioria dos programas comuns quembram ou mais regras dessa definição como, por exemplo, um sistema de folha de pagamento sente o ambiente através de suas entradas e age sobre ele gerando uma saída, mas não é um agente porque é sua saída normalmente não afeta o que ele sente mais tarde.
+
+\section{Classificações de agentes}
+
+Os agentes possuem também diferentes explicações quanto a suas características, classificações e taxonomia. Uma das definições mais antigas e mais adotas é a de \cite{Nwana96softwareagents} nesse trabalho o autor define três dimensões para o agente:
+
+\begin{itemize}
+
+	\item \textbf{Mobilidade}. Capacidade de se mover em torno de alguma rede. Definindo como agentes fixos ou móveis;
+	
+	\item \textbf{Deliberativos ou reativos}. Agentes deliberativos possuem  simbólicos internos, modelos de raciocínio e se envolvem com o planejamento e negociação a fim de conseguir uma coordenação com outros agentes. Já os reativos agem por estímulos/respostas que o estado atual do ambiente que está inserido o proporciona.
+	
+	\item \textbf{Ideais e atributos primários}. Os agentes podem ser classificados em três características: autônonmos, cooperativos e aprendizes. Autonomia se refere ao princípio que o agente deve realizar ações sem intervenção humana. Cooperação é a habilidade de se comunicar com outros agentes. Aprendizagem é a capacidade de aprender conforme ações são lidas ou realizadas. Dessas definições surgem quatro tipos de agentes conforme mostra a Figura \ref{fig:tiposagentes}.
+	
+\end{itemize}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=16cm]{figures/tiposagentes.png}
+\caption[Visão parcial da tipologia de um Agente]{Visão parcial da tipologia de um Agente.}
+\label{fig:tiposagentes}
+\end{figure}
+
+Já \cite{agentOrProgram} classifica os agentes pelas propriedades que eles apresentam, são elas: reatividade, autonomia, orientada a objetivo, temporária ou contínua, comunicativa, aprendizagem, mobilidade, flexibilidade e caráter.
+
+\section{Agentes em jogos}
+
+Antigamente maioria do processamento do sistema que rodava um jogo(computador, video-game entre outros) era utilizada em sua grande maioria para processamentos gráficos. Com a evolução e custo baixo dos equipamentos(\textit{hardware}) hoje em dia é possível dar mais atenção a outros aspectos de um jogo. Segundo \cite{iaInGames}
+"Como jogos de computador se tornam mais complexos e os consumidores exigem adversários mais sofisticados controlados pelo computador, os desenvolvedores de jogos são obrigados a colocar uma maior ênfase nos aspectos de inteligência artificial de seus jogos". Por isso hoje, existem um grande número de jogos que não são conhecidos por sua beleza gráfica, segundo \cite{aiForGames} recentemente, um número cada vez maior de jogos tem como a Inteligência Artificial o ponto principal do jogo. Creatures[Cyberlife Technology Ltd., 1997] em 1997, e jogos como The Sims
+[Maxis Software, Inc., 2000] e Black and White [Lionhead Studios Ltd., 2001]. Ainda segundo \cite{aiForGames} o jogo Creatures foi um dos sistemas mais complexos de inteligência artifical visto em um jogo, com um cerébro baseado em rede neural para cada criatura.
+
+Agentes para jogos tem uma infinidade de própositos. Ao associar esses dois termos é bem comum pensar em oponentes controlados por agentes, porém a utilização de agentes vai muito além disso. É possível utilização de agentes em outros aspectos como na geração de conteúdo procedural, criação de desafios e missões entre outros.
+
+O artigo \textit{Procedural Content Generation for Games: A survey} \cite{PCGsurvey2013} cita que agentes para criação de diferentes tipos de terrenos sem perder o controle do \textit{design}.
+
+Segundo \cite{questGenerator2011} a geração procedural de missões em jogos(especialmente para MMORPGs online) tem o pontencial de aumentar a variadade e a longevidade dos jogos.
+
+%Rev. Bibliográfica: leitura e resumo de todos os trabalhos relacionados. Nele vc vai descrever artigos que aplicam técnicas de IA em joos do mesmo estilo, artigos que tentam aplicar para esse mesmo jogo (talvez não tenha), artigos de técnicas que serão utilizadas nesse seu trabalho.
+
+
+%Usar: http://www.aaai.org/Papers/AAAI/1999/AAAI99-143.pdf 
+%As computer games become more complex and consumers demand more sophisticated computer controlled opponents, game developers are required to place a greater emphasis on the artificial intelligence aspects of their games
+
+%Games and Agents: Designing Intelligent Gameplay -> http://ii.tudelft.nl/~maaike/papers/Ijcgt_2009.pdf

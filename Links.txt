@@ -8,8 +8,23 @@ Computational Intelligence and Knowledge -> https://www.cs.ubc.ca/~poole/ci/ch1.
 Intelligent agents: theory and practice -> http://www.cs.upc.edu/~jvazquez/teaching/masd/docs/wooldridge95intelligent.pdf
 An Approach to Quantifying Pokemon’s Entertainment Impact with focus on Battle -> https://dspace.jaist.ac.jp/dspace/bitstream/10119/12994/1/21804.pdf
 
-CIG 2014:
+A Roadmap of Agent Research and Development -> http://dl.acm.org/citation.cfm?id=608616
+Games, computers, and artificial intelligence -> https://ccc.inaoep.mx/~jagonzalez/AI/Games.pdf
 
+Artificial Intelligence for Computer Games -> file:///C:/Users/OHARA/Downloads/tralha/251652.pdf
+
+THE PAST, PRESENT AND FUTURE OF ARTIFICIAL NEURAL NETWORKS IN DIGITAL GAMES -> http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.149.9367&rep=rep1&type=pdf
+
+Creating Intelligent Agents in Games -> http://homepage.psy.utexas.edu/homepage/class/psy394U/hayhoe/cognitive%20science%202007/miikkulainen/foe.pdf
+
+A platform for evolving characters in competitive games -> C:\Users\OHARA\Downloads\tralha\A platform for evolving characters in competitive games.pdf
+
+CIG 2015:
+https://drive.google.com/file/d/0B5HuIjJWz97UcFFqR2JFLW9TNUk/view
+https://drive.google.com/file/d/0B5HuIjJWz97UU2RfRmU5bmF0VWM/view
+
+CIG 2014:
+http://www.cig2014.de/doku.php/accepted_papers
 Automated Design for Playability in Computer Game Agents -> http://www.cs.mun.ca/~banzhaf/papers/CIG2014.pdf
 Evolving Artificial Neural Networks Applied to Generate Virtual Characters -> https://repositorium.sdum.uminho.pt/bitstream/1822/31125/1/2014-cig.pdf
 Game strategies for The Settlers of Catan -> http://homepages.inf.ed.ac.uk/alex/papers/cig2014_gs.pdf
@@ -19,3 +34,33 @@ Evolving Personas for Player Decision Modeling -> http://julian.togelius.com/Hol
 CIG 2013:
 http://eldar.mathstat.uoguelph.ca/dashlock/CIG2013/proceedings.html
 Using Genetic Programming to Evolve Heuristics for a Monte Carlo Tree Search Ms Pac-Man Agent -> http://eldar.mathstat.uoguelph.ca/dashlock/CIG2013/papers/paper_60.pdf
+
+CIG 2012:
+http://geneura.ugr.es/cig2012/proceedings.html
+
+CIG 2011:
+http://cilab.sejong.ac.kr/cig2011/proceedings/CIG2011/Table%20of%20Contents.htm
+
+Computational and Human Intelligence in Blind Go. -> http://cilab.sejong.ac.kr/cig2011/proceedings/CIG2011/papers/paper57.pdf
+
+Cig 2010:
+http://game.itu.dk/cig2010/proceedings/wp-content/acceptedpapers.html
+
+Modular Reinforcement Learning Architectures for Artificially Intelligent Agents in Complex Game Environments -> http://game.itu.dk/cig2010/proceedings/papers/cig10_047_094.pdf
+
+CIG 2009:
+http://ieeexplore.ieee.org/xpl/mostRecentIssue.jsp?punumber=5278415
+
+CIG 2008:
+http://www.csse.uwa.edu.au/cig08/acceptedPapers.html
+
+
+CIG 2007:
+http://cswww.essex.ac.uk/cig/2007/index.jsp?page=papers.html
+
+
+CIG 2006:
+http://www.cse.unr.edu/~sushil/cig06/proceedings/cigv5.pdf
+
+CIG 2005:
+http://cswww.essex.ac.uk/cig/2005/index.jsp?page=papers.html
