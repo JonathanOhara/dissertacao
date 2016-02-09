@@ -19,6 +19,10 @@ Creating Intelligent Agents in Games -> http://homepage.psy.utexas.edu/homepage/
 
 A platform for evolving characters in competitive games -> C:\Users\OHARA\Downloads\tralha\A platform for evolving characters in competitive games.pdf
 
+Creating a Dynamically Learning AI with the usage of Evolving Neural Networks - http://marcpeyre.com/Neural_Network_Research_Project_Report.pdf
+
+Artificial Intelligence for Computer Games -> http://www.hindawi.com/journals/ijcgt/2009/251652/
+
 CIG 2015:
 https://drive.google.com/file/d/0B5HuIjJWz97UcFFqR2JFLW9TNUk/view
 https://drive.google.com/file/d/0B5HuIjJWz97UU2RfRmU5bmF0VWM/view
