@@ -1,1 +1,59 @@
-\chapter{Técnicas de Inteligência Artificial utilizada nos agentes}
+\chapter{Inteligência Artificial}
+\label{cap:inteligenciaArtificial}
+
+Neste capítulo é feito uma revisão das técinicas de inteligência artificial que serão utilizadas nesse trabalho. Algoritmos baseados em grafos \ref{sec:algoritmoGrafos}, aprendizado por reforço \ref{sec:aprendizadoReforco} e neuroevolução \ref{sec:neuroevolucao}.
+
+\section{Inteligência para jogos}
+\label{sec:inteligenciaJogos}
+
+O estudo de IA/IC (Inteligência artificial/Inteligência computacional) para jogos é uma área de estudo que vem crescendo muito na última década. Grandes conferências como o IEEE Conference on Computational Intelligence and Games (CIG), AAAI Aritificial Intelligence and Interactive Digital Entertainment (AIIDE) e IEEE Transactions on Computational Intelligence and AI in Games (TCAIG) já contam com mais de dez edições.
+
+Jogos podem ser usados como cenário desafiador para avaliação de métodos de inteligência computacional, pois eles provêm elementos dinâmicos e competitivos que são pertinentes ao mundo real \cite{cig2014}.
+
+Segundo \cite{panoramaAIGames} durante so seminários em Dagstuhl(centro de pesquisa de ciência da computação alemanha) foi possível identificar dez grandes tópicos em IA/AC:
+
+\begin{itemize}
+	\item  Aprendizado de comportamento para jogadores não humanos (JNH); 
+	\item  Busca e planejamento;
+	\item  Modelagem de personagens;
+	\item  Jogos como avaliação comparativa para Inteligência Artificial (IA);
+	\item  Geração de conteúdo procedural;
+	\item  Narrativa computacional;
+	\item  Agentes críveis;
+	\item  \textit{Game design} assistido por IA;
+	\item  IA para jogos em geral;
+	\item  IA em jogos comerciais.
+\end{itemize}
+
+Ainda segundo \cite{panoramaAIGames} todas as áreas de pesquisa podem ser vistas como potenciais influenciadores delas mesmas em algum grau. Essas conexões e interconexões geram outras áreas de pesquisa.
+
+Nas próximas seções será feito uma revisão dos principais métodos que é utilizado nos jogos e que serão usados neste trabalho.
+
+\section{Algoritmos baseados em grafos}
+\label{sec:algoritmoGrafos}
+
+Um dos grandes desafios de um  agente e de um jogador dentro de um jogo é a tomada de decisão, expandindo um pouco essa ideia, pode-se dividir a tomada de decisão em partes menores: levantar opções, avaliar as opções e escolher qual pode conduzir o jogador a vitória dado um determinado cenário.
+
+Uma algoritmo muito comum para esse cenário é o \textit{minimax}. Segundo \cite{browne12asurvey} jogos do mundo real normalmente envolvem uma estrutura de recompensas em que apenas as recompensas obtidas em estados terminais(jogadas que definem quem é o vencedor) do jogo descrevem com precisão o quão bem cada jogador está se saindo. Os jogos são, portanto, normalmente modelado como árvores de decisões da seguinte forma:
+
+\begin{itemize}
+	
+	\item \textbf{Minimax} tenta minimizar recompensa máxima do oponente em cada estado, e é a abordagem tradicional para pesquisa de jogos combinatórios em dois jogadores.
+	
+	\item \textbf{Expectimax} generaliza \textit{minimax} para jogos estocásticos em que as transições de estado para estado são probabilística. O valor de um nó é a soma dos valores dos nós filhos ponderados por suas probabilidades(possibilidade de um estado ocorrer). Estratégias de poda de árvore mais complexas devido a probabildade de um nó acontecer.
+
+	\item \textbf{Miximax} é semelhante ao \textit{expectimax} de apenas um jogador e é usado principalmente em jogos com informações não precisas. Ele usa uma estratégia  predefinida para tratar a decisão do oponente como nós probabilísticos.
+	
+\end{itemize}
+
+%Falar Sobre como funciona o Minimax
+
+%Falar sobre evolucoes do minimax (alphabeta)
+
+%falar do Monte Carlo Tree Search
+
+\section{Aprendizado por reforço}
+\label{sec:aprendizadoReforco}
+
+\section{Neuroevolução}
+\label{sec:neuroevolucao}
