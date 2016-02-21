@@ -46,14 +46,76 @@ Uma algoritmo muito comum para esse cenário é o \textit{minimax}. Segundo \cite{
 	
 \end{itemize}
 
-%Falar Sobre como funciona o Minimax
+O trabalho de \cite{campbell1983comparison} descreve o algoritmo de \textit{minimax} do seguinte modo: O algoritmo assume que existem dois jogadores chamados Max e Min, e atribui um valor para cada nó dentro da árvore(de decisão) do jogo(e também para nó raiz) do seguinte modo: Nós folhas ou terminais podem dar o valor \textit{minimax} recursivamente. Se a jogada p do jogador Max for escolhida, então o valor de p é o máximo valor dos filhos de p. Similarmente, se for a vez do jogador Min será escolhido o menor valor dos sucessores de p.  
 
-%Falar sobre evolucoes do minimax (alphabeta)
+Na figura \ref{fig:minimaxjogodavelha} é mostrado a aplicação do algoritmo de \textit{minimax} para um cenário do jogo da velha. Na imagem o jogador Max é representado pelo caractere \textbf{X} e o jogador Min por \textbf{O}. Como dito anteriormente a análise dessa árvore começou a ser feita pelos nós terminais, em situações vitóriosas foi atribuído o valor de 10, em empates 0 e em derrota o valor -10. Em seguida, os pai desses nós folhas são preenchidos com o mínimo ou o máximo valor dos nós filhos. No primeiro nó de MIN(primeiro nó da segunda fileira) existem dois nós filhos, um com valor 10 e outro com valor -10, por ser um nó MIN é atribuido para esse nó o menor valor(no caso -10). A linha em azul mostra a melhor jogada no momento para o nó raiz.
 
-%falar do Monte Carlo Tree Search
+\begin{figure}[!h]
+\centering
+\includegraphics[width=16cm]{figures/minimax.png}
+\caption[Minimax]{\textit{Minimax} aplicado a um cenário de jogo da velha.}
+\label{fig:minimaxjogodavelha}
+\end{figure}
+
+Repare que a melhor jogada indicada pelo algoritmo gera um empate. Segundo \cite{evoltuinaryneuralnetworks} um dos problemas do \textit{minimax} é presumir que sempre o adversário irá fazer a melhor escolha possível. Muitas vezes, em situações de derrota iminente a melhor jogada pode não ser para o mais alto de \textit{minimax}, especialmente se ele ainda irá resultar em uma derrota.
+
+Outro problema do \textit{minimax} é a quantidade de nós que ele precisa analisar em jogos com grande número de possíveis jogadas e que duram um grande número de turnos(grande profundidade na árvore). Uma técnica muito utilizada para mitigar esse problema é a chamada poda \textit{alpha-beta}.
+
+Segundo \cite{knuth1976analysis} essa é tecnica é usada geralmente para aumentar a velocidade de busca sem perder informação. Nessa técnica são ignorado nós e suas sub-árvores de jogadas incapazes de ser melhor que movimentos que já conhecemos. Durante a análise das jogadas são definidas duas váriaveis \textit{alpha} e \textit{beta}. \textit{Alpha} representa o valor máximo que o jogador Max e \textit{beta} a pontuação mínima  do jogador Min. A cada avaliação de nó esses limites são verificados, caso o valor da avaliação não estiver entre esses limites o nó e todas suas árvores são cortados.
+
+Outra técnica de otimização do \textit{minimax} é a Árvore de Busca de Monte Carlo(MCTS). Segundo \cite{campbell1983comparison} o processo de construnção da MCTS é feita de modo incremental e assimétrico na forma: para cada iteração do algoritmo, uma "política de árvore"  é utilizada para definir o nó mais urgente da árvore atual. A política da árvore tenta balancear considerações da exploração(procura areas que aindanão tenham sido bem amostradas) e exploração(procura areas que parecem ser promissoras). O nó escolhido é avaliado e todos seus ancetrais são atualizados com suas novas estatísticas.
+
+Uma das grandes vantagens do MCTS é a possibilidade de utilizar de maneira incremental, ou seja, é possível delimitar um tempo ou número máximo de iterações que o algoritmo irá rodar, facilitando a aplicação em ambientes que exigem baixo tempo de resposta(jogos de tempo real) ou tempo de respsota fixado(jogos baseados em turno).
 
 \section{Aprendizado por reforço}
 \label{sec:aprendizadoReforco}
+
+Uma técnica bastante utilizada em aprendizado de máquina é o aprendizado por reforço (RL). Segundo \cite{Sutton:1998:IRL:551283} a ideia de aprender interagindo com nosso ambiente provavelmente é a primeira coisa que nos ocorre quando pensamenos sobre aprendizado natural.
+
+Segundo \cite{kaelbling1996reinforcement} o algoritmo de aprendizado por reforço é um 	modo de programar agentes por um sistema de punição e recompensa sem precisar especificar como a tarefa precisa ser realizada.
+
+Segundo \cite{Mitchell:1997:ML:541177} o aprendizado por reforço pode resolver tarefas como aprender a controlar um robô móvel, aprender a otimizar operações em fábricas, e aprender a jogar jogos de tabuleiros.
+
+Novamente segundo \cite{kaelbling1996reinforcement} existem duas principais estratégias para resolver problemas com aprendizado por reforço. A primeira é uma busca entre os possíveis comportamentos para achar aquele que se adequa bem ao ambiente. O Segundo modo é utilizar métodos estocásticos e métodos de programação dinâmica para estimar a utilidade de tomar ações em estados do mundo.
+
+A figura a \ref{fig:aprendizadoporreforco} mostra o funcionamento básico do algoritmo. O agente está em um determinado estado e executa uma ação recebendo uma recompensa ou punição e vai para um novo estado.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=16cm]{figures/basicrl.png}
+\caption[Funcionamento aprendizado por reforço]{Esquema padrão do aprendizado por reforço.}
+\label{fig:aprendizadoporreforco}
+\end{figure}
+
+Existe uma série de alterações nessa abordagem para abrangir uma maior gama de problemas. Uma variação bem comum é a situação chamada de recompensa atrasada. Segundo \cite{Mitchell:1997:ML:541177} existe alguns aspectos diferentes ao considerar utilizar aprendizado por reforço para alguns problemas:
+
+\begin{itemize}
+	
+	\item \textbf{Recompensa atrasada}. Grandes recompensas podem estar somente em estados que serão apenas alcançados num futuro longínquo.
+	
+	\item \textbf{Exploração}. No aprendizado por reforço, o agente influencia a distribuição do treino pela sequência de ações qe escolhe. Com isso surge a dúvida qual das estratégias produz o mais efetivo aprendizado (para colher novas informações). Explorar todos as possíveis ações, ou explorar estados e acões já conhecidos com alta recompensa (para maximizar a sua recompensa culmulativa).
+
+	\item \textbf{Estados parcialmente observáveis}. Em muitos casos os sensores do agente não consegue observar o estado inteiro do ambiente. Por exemplo, um robô com câmera frontal não pode enxegar o ambiente que está atrás dele.
+	
+	\item \textbf{Aprendizagem ao longo da vida}. Possibilidade de utilizar conhecimentos obtidos anteriormentes para reduzir a complexidade de aprender novas Tarefas.
+	
+\end{itemize}
+
+Uma das técnicas que resolve esse problema é a chamada processo de decisão de Markov(MDP). Segundo \cite{kaelbling1996reinforcement} consiste em:
+
+\begin{itemize}
+	
+	\item Um conjunto de estados chamado S,
+	\item Um conjunto de ações chamado A,
+	\item Uma função de recompensa onde $R: S\times A \rightarrow \mathbb{R}$,
+	\item Uma função de transição entre o estados onde $T: S\times A \rightarrow II(S)$.
+	
+\end{itemize}
+
+A função de transição de estados específica o próximo estado como uma função do estado atual e a ação do agente. Para que isso seja válido o ambiente tem que satisfazer a propridade de Markov, que diz que a transição de estados tem que ser independente de qualquer informação de estados e ações do agentes anteriores.
+
+Com essas propriedades é possível calcular qualquer estado futuro pela função de transição de estados resolvendo o problema de recompensa atrasada, como é possível calcular todos os possíveis futuros e estados e ações também é possível calcular futuras recompensas.
+
 
 \section{Neuroevolução}
 \label{sec:neuroevolucao}

@@ -85,11 +85,25 @@ Um recurso bastante utilizado para pesquisa em inteligência artificial é o desen
 
 As competições de inteligência para Start Craft que ocorrem 2010 avançou significamente o campo de inteligência artificial para jogos de estratégia em tempo real segundo \cite{6637024}. Em Star Craft os jogadores tem que se preocupar em construir um exército ao mesmo tempo que gere uma economia bem complexa e o vencedor é definido pelo jogador que derrotar todas as tropas adversárias. Nessa competição dois agentes são colocados para guerrear até que haja um vencedor. A comunicação com o jogo é feito pela BWAPI uma API em C++ que permite comunicação do agente com o jogo, ou seja, através dessa biblioteca é possível realizar comandos que serão executados no jogo.
 
-%Colocar imagem do Star Craft AI
+A figura \ref{fig:starcraftai} mostra a API funcionando. Ele usa o sistema de conversa do jogo para mostrar mensagens do agente.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=16cm]{figures/bwapi.png}
+\caption[BWAPI - StarCraft API]{BWAPI em funcionamento.}
+\label{fig:starcraftai}
+\end{figure}
 
 Outra competição um pouco diferente é a AI Birds \cite{aibirds1}, nessa competição os agentes são submetidos a jogar Angry Birds, o objetivo desse jogo é você destruir objetos(ganhando assim pontos) com passáros que são arremessados por um estilingue. Diferente do Star Craft nessa competição não há um enfretamento direto entre os agentes, eles são submetidos a enfrentar o mesmo cenário e ganha o agente que obtiver mais pontos. A comunicação com o jogo é bastante diferente do Star Craft, nesse caso o jogo roda via navegador de internet(Google Chrome) e um plugin de JavaScript tira fotos do jogo e passa essa imagem via WebSocket para uma linguagem que irá interpretar tal foto.
 
-%Colocar imagem do AI Birds
+Na figura \ref{fig:angrybirdsai} pode ser visto como a API se comunica com jogo. Uma imagem é caputrada do navegador e a partir disso é utilizado um algoritmo de reconhecimento de imagem para identificar o que é cada coisa(os quadrados em volta do objeto é o que a API está reconhecendo).
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=16cm]{figures/aibirds.png}
+\caption[AIBIRDS - Angry Birds AI API]{Api Angry Birds AI em funcionamento.}
+\label{fig:angrybirdsai}
+\end{figure}
 
 %IDÉIA: Talvez comentar de outra competição como Geometry Friends
 
