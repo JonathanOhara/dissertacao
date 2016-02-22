@@ -1,12 +1,18 @@
 \chapter{Introdução}
 \label{cap:introducao}
 
+Com o grande crescimento da inteligência artificial e inteligência computacional e o estabelecimento como área de esquisa um grande número de trabalhos sobre criações de agentes, ou seja, \textit{softwares} que fazem uma determinada tarefa utilizando alguma(s) estratégia(s) (no capítulo \ref{cap:agentesInteligentes} será aprofundado o conceito de agentes) foi produzido. Otimização de treinos, busca em árvore de decisão e competição entre agentes são apenas alguns pontos do que está sendo pesquisado.
+
+Para fomentar ainda mais essa área, um grande número de competições acadêmicas foi criado. Essas competições tem diferentes finalidades como batlalhas entre agentes, agentes que se comportam como jogadores humanos entre outros.
+
+Esse trabalho irá explorar o ambiente de simulação de batalhas \textit{Pokémon} \textit{on-line} chamado de \textit{Pokémon Showdown}. Para se comunicar com esse ambiente será feito uma API Application Programming Interface) onde serão desenvolvidos agentes para jogar contra jogadores humanos.
+
 \section{Motivação}
 \label{sec:motivacao}
 
-Existem diversas finalidades para criação de agentes inteligentes para jogos. Podemos enumerar algumas como: adaptação a diferentes tipos de jogador, gerar diferentes experiências em cada nova partida, gerar grandes desafios entre outras.
+Existem diversas finalidades para criação de agentes inteligentes para jogos. Podemos enumerar algumas como: testar se é possível um agente jogar um jogo tão bem quanto um jogador humano e testar algoritmos de aprendizados para agentes entre outros.
 
-Esse trabalho explora a criação de agentes inteligentes que compitam com jogadores humanos no sistema de batalhas \textit{Pokémon} no ambiente \textit{Pokémon Showdown}.
+Esse trabalho explora a criação de agentes inteligentes que compitam em alto nível com jogadores humanos no sistema de batalhas \textit{Pokémon}.
 
 Um dos grandes desafios na criação desses agentes é a adaptabilidade e a competitividade. Diferentes de jogos como xadrez, damas, reversi e outros jogos de tabuleiro, em batalhas \textit{Pokémon} nada se sabe do adversário até que comece o jogo, ou seja, invalidando qualquer tipo de técnica prevendo possíveis movimentos antes do jogo começar já que cada time pode ser montado de uma infinidade de modos diferentes. Para acentuar ainda mais essas proprieaddes os agentes irão treinar e competir no modo randômico, nesse modo a escolha do seu time assim como de seu adversário é feito pelo próprio sistema do jogo.
 
@@ -16,7 +22,7 @@ Por causa da característica de desconhecimento do time adversário, a utilização 
 \label{sec:objetivos}
 O Objetivo desse trabalho é o desenvolvimento de agentes inteligentes que joguem e aprendam com milhares de jogadores humanos. Será implementada distintas técnicas para criação e aprendizado desses agentes. No decorrer do trabalho será sumarizado a evolução dos agentes no sistema de ranqueamento do jogo e, essa posição será confrontada com a quantidade de treinamento que cada agente recebeu, podendo assim observar a curva de melhora em relação a quantidade de treinamento.
 
-Para criação desses agentes foi desenvolvida uma API (Application Programming Interface) que permitirá a comunicação com o jogo \textit{Pokémon Showdown}. Inicialmente a API está disponibilizada apenas para JavaScript mas durante o desenvolvimento do projeto será portada para Java através de WebSockets.
+Para criação desses agentes foi desenvolvida uma API que permitirá a comunicação com o jogo \textit{Pokémon Showdown}. Inicialmente a API está disponibilizada apenas para JavaScript mas durante o desenvolvimento do projeto será portada para Java através de WebSockets.
 
 \section{Principais contribuições}
 \label{sec:principais}

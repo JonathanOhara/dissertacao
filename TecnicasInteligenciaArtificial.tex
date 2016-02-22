@@ -116,6 +116,127 @@ A função de transição de estados específica o próximo estado como uma função do 
 
 Com essas propriedades é possível calcular qualquer estado futuro pela função de transição de estados resolvendo o problema de recompensa atrasada, como é possível calcular todos os possíveis futuros e estados e ações também é possível calcular futuras recompensas.
 
+Uma técnica muito utilizado para melhorar o processo de escolher qual política de ações é o Q-Learning. Segundo \cite{kaelbling1996reinforcement} no Q-Learning os valores de Q (valor de escolher uma ação a em um estado s) irá convergir para valores ideais, idenpendente de como o agente se comporta enquanto os dados estão sendo coletados (desde que todas ações/estados sejão julgados uma boa quantidade de vezes).
+
+O Q-Learning geralmente é implementado como duas matrizes de tamanhos $n\times n$ onde n é o número de estados. 
+
+Na equação a seguir \ref{eq:rmatrix} é mostrado a matriz de recompensa ou \textbf{R} onde as linhas são os estados e as colunas são ações. Nesse exemplo a matriz é iniciada com 0, o estado objetivo (estado 5) é marcado como 100 e os estados que não podem ser alcançados são marcados com -1(por exemplo $R(0,1) = -1$ quer dizer que é impossível ao estar no estado 0 ir ao estado 1). 
+
+\begin{equation}
+R_{n,n} = 
+ \begin{pmatrix}
+  -1	&	-1	&	-1	&	-1	&	0	&	-1	\\
+  -1	&	-1	&	-1	&	0	&	-1	&	100	\\
+  -1	&	-1	&	-1	&	0	&	-1	&	-1	\\
+  -1	&	0	&	0	&	-1	&	0	&	-1	\\
+	0	&	-1	&	-1	&	0	&	-1	&	100	\\
+  -1	&	0	&	-1	&	-1	&	0	&	100	\\
+ \end{pmatrix}
+ \label{eq:rmatrix}
+\end{equation}
+
+A segunda matriz é a matriz de aprendizagem do Q-Learning chamada de \textbf{Q}. A matriz é iniciada com zero em todos os valores e durante o algoritmo esses valores serão ajustados.
+
+Conhecidos as duas matrizes o procedimento de aprendizagem pode ser definido pela seguinte equação \ref{eq:qlearningequation}:
+
+\begin{equation}
+	Q(s, a) = R(s, a) + \gamma \times Max[Q(s', a*)]
+	\label{eq:qlearningequation}
+\end{equation}
+
+Onde:
+
+\begin{itemize}
+	\item \textbf{s}. É o estado atual,
+	\item \textbf{a}. É a ação escolhida,
+	\item \textbf{$\gamma$}. É o fator de desconto ou taxa de aprendizagem. Segundo \cite{Mitchell:1997:ML:541177} Esse pode ser qualquer contstante entre $0 \leq \gamma \leq 1$. Se $\gamma$ é proximo de zero, o agente tenderá a considerar mais recompensas imediatas, se for próximo de um o agente considerará mais as futuras recompensas,
+	\item \textbf{s'}. O próximo estado.
+	\item \textbf{a*}. Todas as ações do próximo estado.
+\end{itemize}
+
+O treinamento constite em realizar diversas vezes essa equação até que a matriz Q convirja para valores sólidos.
 
 \section{Neuroevolução}
 \label{sec:neuroevolucao}
+
+Uma técnica bastante comum e bastante utilizada na pesquisa de inteligência para jogos é a neuroevolução. Segundo \cite{risi2014neuroevolution} neuroevolução se refere a geração de redes neurais(pesos de suas conexões e/ou topologias) usando algoritmos evolutivos. Além de poder ser utilizada para um grande número de propósitos em jogos, os jogos são um excelentes ambientes de testes para pesquisa de neuroevolução.
+
+\subsection{Redes Neurais}
+
+Segundo \cite{koehn1994combining} foram inventadas no espírito de ser uma metáfora biológica. A metáfora biológica para redes neurais é o cérebro humano. Como o cérebro, esse modelo computacional consiste em pequenas unidades interconectadas. Essas unidades (ou nós) tem habilidades bem simples. Assim, a força desse modelo deriva da interação dessas unidades. Ela depende da sua estrutura(topologia) e suas conexões.
+
+Essas pequenas unidades, conexões e topologias pode ser comparado a neurônios e sinapses. Um modelo bem comum e bastante utilizado é o chamado \textit{perceptron}. Segundo \cite{beiu2003survey} uma rede neural de \textit{perceptron} é composta por um grafo onde os nós são neurônios e as arestas são as sinapses. Essa rede tem alguns nós de entrada, e alguns(pelo menos um) nó de saída.
+
+O modelo simples de perceptron funciona com saídas binárias, sendo muito utilizado para reconhecimento de padrões, ele funciona da seguinte forma:
+
+\begin{itemize}
+	\item Uma vetor de entrada X, onde cada posição do vetor representa uma característica diferente da entrada,
+	\item Uma vetor W chamado de vetor de pesos sinápticos, para cada característica de entrada um peso é associado. Esse é o vetor onde os valores serão ajustados até que a saída fique correta,
+	\item Bias b é um valor de polarização permite mudar a função de ativação para a esquerda ou para a direita, ou seja, essa é uma variável que também é ajustada pelo modelo e ela permite melhor espalhar os resultados que a função de ativação gera.
+\end{itemize}
+
+A saída do perceptron pode ser definida pela seguinte equação:
+
+\begin{equation}
+y = \sigma( \displaystyle\sum_{j=1}^{n} w_j x_ij + b_i )
+\end{equation}
+
+Onde:
+
+\begin{itemize}
+	\item \textbf{y} é o valor de saída(0 ou 1).
+	\item \textbf{$\sigma$} é a função de ativação. Retorna 1 para valores maiores que zero, e retorna 0 para valores menores ou iguais a zero.
+	\item \textbf{n} é o tamanho do vetor de entrada.
+\end{itemize}
+
+Até que para todas entradas, todas saídas estão corretas o vetor W e o bias é atualizado. Segundo \cite{estebon1997perceptrons} ajustando as pesos das conexões entre ascamadas, a saida do \textit{perceptron} pode ser treinada para corresponder uma determinada saída. O treino é completo quando um conjunto de entradas passa pela rede e os resultados obtidos são os resultados desejados. Se existir alguma diferença entre a saída atual e a saída desejada, os pesos são ajustados na camada de adaptação para produzir um conjunto de saída mais próximo dos valores desejados.
+
+A equação de treinamento pode ser escrita da seguinte forma:
+
+\begin{equation}
+w'_ij = w_ij + \alpha(t_j - x_j) \times a_i
+\end{equation}
+
+Onde:
+
+\begin{itemize}
+	\item \textbf{$w'_ij$} é o novo valor do peso.
+	\item \textbf{$w_ij$} é o valor atual do peso.
+	\item \textbf{$\alpha$} taxa de aprendizagem onde $0 \leq \alpha \leq 1$. Valores baixos para $\alpha$ faz com que os pesos sejão ajustados mais suavementes.
+	\item \textbf{$t_j$} Resultado esperado.
+	\item \textbf{$x_j$} Resultado atual.
+	\item \textbf{$a_i$} Valor de correção. Se o peso não precisa ser ajustado o valor será 0, caso contrário será 1.
+\end{itemize}
+
+\subsection{Algoritmos genéticos}
+
+A primeira pesquisa na área de algoritmos genéticos foi feito por John Holland  no livro \textit{Adaptation in Natural and Artificial Systems}. Segundo \cite{mitchell1995genetic} algoritmos genéticos(GA) é uma abstração da evolução biológica, onde move-se uma população de cromossomos (representando candidatos a soluções de um determinado problema) para uma nova população, usando "seleção" junto com operadores baseados em genéticas para cruzamentos e mutação. 
+
+Segundo \cite{485447} antes de aplicar o algoritmo genético, é necessário mapear qual será a arquitetura do cromosomo de modo que ele representa uma solução para o problema. Para usar o modo convencional do algoritmo genético com cromosomos de tamanhos fixados é preciso:
+
+\begin{itemize}
+	\item Determinar o esquema de representação.
+	\item Determinar como mensurar o \textit{fitness}. Segundo \cite{mitchell1995genetic} o \textit{fitness} é definido por uma função que atribui uma nota(\textit{fitness}) para cada cromossomo da população atual. O \textit{fitness} do cromosomo depende de quão bem o cromosomo resolve o problema.
+	\item Determinar os parâmetros e variáveis para controlar o algoritmo.
+	\item Determinar um modo de mostrar o resutlado e um critério de parada para o algoritmo.
+\end{itemize}
+
+Segundo \cite{485447} O algoritmo evolutivo pode ser separados em três passos:
+
+\begin{itemize}
+	\item Randomicamente criar uma população inicial de cromosomos(soluções para o problema).
+	\item Executar os seguintes sub-passos na população até que o critério de parada seja satisfeito:
+		\subitem{1:} Determinar para cada indivíduo um \textit{fitness} através da função avaliadora de \textit{fitness}.
+		\subitem{2:} Selecionar quais indivíduos passarão para a próxima geração por uma probabilidade baseada em seu \textit{fitness}. Aplicar na nova população de indivíduos as 3 seguintes operações genéticas: copiar um indivíduo para a nova população; criar dois novos indivíduos combinando seus cromosomos através de alguma operação de cruzamento (\textit{crossover}); mutar algumas características de um cromossomo randomicamente.
+	\item Pegar o melhor indivíduo já criado(aquele com melhor \textit{fitness}) para utilizar na resolução do problema.
+\end{itemize}
+ 
+O resultado de algoritmo genético muitas vezes não é o melhor resultado possível, porém gera um resultado excelentes em cenários onde não se sabe como resolver um problema, ou em cenários onde a solução ótima demora muito tempo para ser calculada.
+
+\subsection{Neuroevolução}
+
+No trabalho \textit{Combining genetic algorithms and neural networks: The encoding problem} de \cite{koehn1994combining} é levantado a seguinte questão: Se ambas técnicas são autônomas, porque então combiná-las? Ainda segundo \cite{koehn1994combining} a resposta curta para essa questão diz que o problema de redes neurais é o número de parâmetros que precisam ser atribuídos antes de qualquer treino começar, nesse ponto entra o algoritmo genético. O autor do trabalho completa dizendo que a inspiração vem da natureza, o sucesso de um indivíduo não é determinado apenas pelo conhecimento e habilidades, que ele ganha através da experiência, também depende da herança genética.
+
+Existe também outros modos de aplicar algoritmos evoluitivos em rede neurais, é comum encontrar abordagens onde o algoritmo genético é utilizado para fazer o treinamento de redes neurais. Segundo \cite{risi2014neuroevolution}, cada indivíduo é codificado em uma rede neural, e submetido para uma determinada tarefa por uma determinada quantidade de tempo. A performance ou \textit{fitness} da rede é então guardado, uma vez que os valores de aptidão para os genótipos(indivíduos) na população atual são determinados, uma nova população é gerado trocando as codificações do genótipo através de mutações e combinando os genótipos através de cruzamentos. Em geral, genótipos com alto \textit{fitness} tem uma alta chance de ser selecionado para reprodução e os seus descendentes substituem genótipos com valores de \textit{fitness} mais baixos, formando assim uma nova geração. 
+
+No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar reversi(jogo de tabuleiro), para isso, foi implementado uma população de 50 rede neurais evoluindo por 1000 gerações, para calcular o \textit{fitness} de cada rede neural a rede era submetida a 244 jogos contra um agente baseado em \textit{minimax}, a percentagem de vitória define o \textit{fitness} do indivíduo.
