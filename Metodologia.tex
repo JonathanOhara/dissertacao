@@ -16,9 +16,9 @@ Para atingir os objetivos propostos serão implementados três agentes. Dois desse
 \section{Treino e aprendizado}
 \label{sec:treino}
 
-O primeiro agente que será testado contra jogadores humanos é o agente 3(grafo). Várias versões do agente serão criadas, cada versão será cablibrada com uma profundidade diferente em sua árvore. Cada versão do agente será submetido a uma série da batalhas que só terá fim quando seu ranqueamento se estabilizar.
+O primeiro agente que será testado contra jogadores humanos é o agente 3 (grafo). Várias versões do agente serão criadas, cada versão será cablibrada com uma profundidade diferente em sua árvore. Cada versão do agente será submetido a uma série da batalhas que só terá fim quando seu ranqueamento no jogo se estabilizar.
 
-Os agentes 1 e 2 terão comportamentos semelhantes em como serão treinados. Ambos agentes terão duas versões, cada versão fará um treinamento diferente:
+Os agentes 1 e 2 terão comportamentos semelhantes em como serão treinados. Ambos agentes terão duas versões, cada versão será submetida aos seguintes treinamentos:
 
 \begin{itemize}
 	
@@ -32,4 +32,4 @@ Os agentes 1 e 2 terão comportamentos semelhantes em como serão treinados. Ambos
 
 Avaliar a situação da batalha será um recurso muito importante pois o agente 3 precisará avaliar cada nó de sua árvore para fazer a melhor escolha possível, ou a escolha que gere menos boas escolhas para o adversário. Essa avaliação terá como base a quantidade de pokémons vivos e a situação dele(quantidade de pontos de vida, afetado por alguem efeito negativo entre outros).
 
-Ao fim de cada batalha também feita uma avaliação da vitória. Com essa avaliação será possível aferir o quão dispar foi a situação do vencedor, além disso, com essa métrica podemos eliminar possíveis ruídos em resultados de batalhas como desistências ou desconexões por parte dos oponentes.
+Ao fim de cada batalha também será feita uma avaliação do jogo. Com essa avaliação será possível aferir o quão dispar foi a situação do vencedor, além disso, com essa métrica podemos eliminar possíveis ruídos em resultados de batalhas como desistências ou desconexões por parte dos oponentes.

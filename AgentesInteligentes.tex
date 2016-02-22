@@ -3,9 +3,9 @@
 
 Na computação, especialmente em inteligência artificial, é bem comum utilzar-se do termo agente ou agente inteligente. Por definição do dicionário \cite{michaelis} agente significa "Que age, que exerce alguma ação; que produz algum efeito".
 
-Na academia temos definições mais direcionadas como a de \cite{aiModenApproach} "Um agente é algo capaz de de perceber seu ambiente através de sensores e agir sobre esse ambiente por meio de atuadores", ou a de \cite{kidsim} "Vamos definir um agente como uma entidade de \textit{software} persistente dedicada para um propósito específico. 'Persistente' distingue agentes de sub-rotinas; agentes têm suas próprais ideias sobre como realizar tarefas, suas próprias agendas. 'Propósitos especiais' os distingue de aplicações multifuncionais inteiras; agentes são tipicamente muito menores."
+Na academia temos definições mais direcionadas como a de \cite{aiModenApproach} "Um agente é algo capaz de de perceber seu ambiente através de sensores e agir sobre esse ambiente por meio de atuadores", ou a de \cite{kidsim} "Vamos definir um agente como uma entidade de \textit{software} persistente dedicada para um propósito específico. 'Persistente' distingue agentes de sub-rotinas; agentes têm seus próprais ideias sobre como realizar tarefas, suas próprias agendas. 'Propósitos especiais' os distingue de aplicações multifuncionais inteiras; agentes são tipicamente muito menores."
 
-Existem diversas definições de agentes. Mas qual seria a diferença de um agente para um programa de computador? Os autores \cite{agentOrProgram} propõem uma definição mais sólida para agente "Um agente autônomo é um sistema situado dentro e como parte de um ambiente que sente esse ambiente e age sobre ele, ao longo do tempo, em busca de sua própria agenda e de modo a efetivar o que sente no futuro." ainda segundo os autores maioria dos programas comuns violam uma ou mais regras dessa definição, por exemplo um sistema de folha de pagamento sente o ambiente através de suas entradas e age sobre ele gerando uma saída, mas não é um agente porque é sua saída normalmente não afeta o que ele sente mais tarde.
+Existem diversas definições de agentes. Mas qual seria a diferença de um agente para um programa de computador? Os autores \cite{agentOrProgram} propõem uma definição mais sólida para agente "Um agente autônomo é um sistema situado dentro e como parte de um ambiente que sente esse ambiente e age sobre ele e, ao longo do tempo, busca de sua própria agenda de modo a efetivar o que sente no futuro." ainda segundo os autores maioria dos programas comuns violam uma ou mais regras dessa definição, por exemplo um sistema de folha de pagamento sente o ambiente através de suas entradas e age sobre ele gerando uma saída, mas não é um agente porque sua saída normalmente não afeta o que ele sente mais tarde.
 
 \section{Classificações de agentes}
 
@@ -13,7 +13,7 @@ Os agentes possuem também diferentes explicações quanto a suas características, 
 
 \begin{itemize}
 
-	\item \textbf{Mobilidade}. Capacidade de se mover em torno de alguma rede. Definindo como agentes fixos ou móveis;
+	\item \textbf{Mobilidade}. Capacidade de se mover em torno de alguma rede. Definindo agentes como fixos ou móveis;
 	
 	\item \textbf{Deliberativos ou reativos}. Agentes deliberativos possuem simbólos internos, modelos de raciocínio e se envolvem com o planejamento e negociação a fim de conseguir uma coordenação com outros agentes. Já os reativos agem por estímulos/respostas que o estado atual do ambiente que está inserido o proporciona.
 	
@@ -30,27 +30,27 @@ Os agentes possuem também diferentes explicações quanto a suas características, 
 
 Já \cite{agentOrProgram} classifica os agentes pelas propriedades que eles apresentam, são elas: reatividade, autonomia, orientação a objetivo, temporária ou contínua, comunicativa, aprendizagem, mobilidade, flexibilidade e caráter.
 
-Emboras as diferentes definições muita coisas são comuns ou muito parecidas como a presença de  características como autonomia, aprendizado, objetivos e comunicatividade. 
+Emboras as diferentes definições, muitas coisas são comuns ou muito parecidas como a presença de  características como autonomia, aprendizado, objetivos e comunicatividade. 
 
 \section{Agentes em jogos}
 
-Antigamente maioria do processamento do sistema que rodava um jogo(computador, video-game entre outros) era utilizada em sua grande maioria para processamentos gráficos. Com a evolução e custo baixo dos equipamentos(\textit{hardware}) hoje em dia é possível dar mais atenção a outros aspectos de um jogo. Segundo \cite{iaInGames} "Como jogos de computador se tornam mais complexos e os consumidores exigem adversários mais sofisticados controlados pelo computador, os desenvolvedores de jogos são obrigados a colocar uma maior ênfase nos aspectos de inteligência artificial de seus jogos". Por isso hoje, existem um grande número de jogos que não são conhecidos por sua beleza gráfica, \cite{aiForGames} mostrou que um número cada vez maior de jogos tem como principal ponto do jogo a Inteligência Artificial. Creatures[Cyberlife Technology Ltd., 1997] em 1997, e jogos como The Sims[Maxis Software, Inc., 2000] e Black and White [Lionhead Studios Ltd., 2001]. Ainda segundo \cite{aiForGames} o jogo Creatures foi um dos sistemas mais complexos de inteligência artifical visto em um jogo, com um cerébro baseado em rede neural para cada criatura presente no jogo.
+Antigamente maioria do processamento do sistema que rodava um jogo(computador, video-game entre outros) era utilizada para processamentos gráficos. Com a evolução e custo baixo dos equipamentos (\textit{hardware}) hoje em dia é possível dar mais atenção a outros aspectos de um jogo. O autor \cite{iaInGames} discorre um outro ponto "Como jogos de computador se tornam mais complexos e os consumidores exigem adversários mais sofisticados controlados pelo computador, os desenvolvedores de jogos são obrigados a colocar uma maior ênfase nos aspectos de inteligência artificial de seus jogos". Por isso hoje, existem um grande número de jogos que não são conhecidos por sua beleza gráfica, segundo \cite{aiForGames} um número cada vez maior de jogos tem como principal ponto do jogo a Inteligência Artificial, como por exemplo Creatures[Cyberlife Technology Ltd., 1997] em 1997, e jogos como The Sims[Maxis Software, Inc., 2000] e Black and White [Lionhead Studios Ltd., 2001]. Ainda segundo \cite{aiForGames} o jogo Creatures foi um dos sistemas mais complexos de inteligência artifical visto em um jogo, com um cerébro baseado em rede neural para cada criatura presente no jogo.
 
 Agentes para jogos tem uma infinidade de própositos. Ao associar esses dois termos é bem comum pensar em oponentes controlados por agentes, porém a utilização de agentes vai muito além disso. É possível utilização de agentes em outros aspectos como na geração de conteúdo procedural, criação de desafios e missões entre outros.
 
-O artigo \textit{Procedural Content Generation for Games: A survey} \cite{PCGsurvey2013} cita que agentes para geração de conteúdo através de agentes inteligentes permite a criação de diferentes tipos de terrenos sem perder o controle do \textit{design} do jogo.
+O artigo \textit{Procedural Content Generation for Games: A survey} \cite{PCGsurvey2013} cita que a geração de conteúdo através de agentes inteligentes permite a criação de diferentes tipos de terrenos sem perder o controle do \textit{design} do jogo.
 
-O trabalho de \cite{questGenerator2011} explora a geração procedural de missões e desafio em jogos(especialmente para MMORPGs online), segundo os autores essa abordagem tem o pontencial de aumentar a variedade e a longevidade de um jogo.
+O trabalho de \cite{questGenerator2011} explora a geração procedural de missões e desafio em jogos(especialmente para jogos de MMORPGs \textit{online}), segundo os autores essa abordagem tem o pontencial de aumentar a variedade e a longevidade de um jogo.
 
-Existem também outras aplicações para agentes como busca de caminhos em ambientes complexos, geração de objetos, danificação de objetos entre outras aplicações.
+Existem também outras aplicações para agentes como busca de caminhos em ambientes complexos, geração de objetos, danificação de objetos entre outras.
 
 \section{Agentes inteligente contra jogadores}
 
-Existem várias abordagens para criação de agentes que enfrentam jogadores. Pode-se enumerar alguns deles como agentes adaptativos, evolutivos, competitivos entre outros.
+Existem várias abordagens para criação de agentes que enfrentam jogadores. Pode-se enumerar alguns deles como agentes adaptativos, evolutivos e competitivos.
 
-Em alguns jogos o jogador não tem uma opção de dificuldade, ficando a critério do sistema do jogo controlar a dificuldade, como nos jogos \textit{Middle Earth: Shadow of Mordor} e \textit{Max Payne 2}. Segundo \cite{Ponsen04improvingadaptive} nogo Max Payne 2 é introduzido algo chamado opções dinâmicas de dificuldade. Informações do mundo jogo são extraídas para estimar a habilidade do jogador, ajustando a dificuldade da inteligência artificial.
+Em alguns jogos o jogador não tem uma opção de dificuldade, ficando a critério do sistema do jogo controlar a dificuldade, como nos jogos \textit{Middle Earth: Shadow of Mordor} e \textit{Max Payne 2}. Segundo \cite{Ponsen04improvingadaptive} nogo Max Payne 2 é introduzido algo chamado opções dinâmicas de dificuldade. Informações do mundo do jogo são extraídas para estimar a habilidade do jogador, ajustando a dificuldade da inteligência artificial.
 
-Alguns agentes são criados para acompanhar a curva de aprendizado de cada pessoa, para que o jogador sempre tenha um bom nível de desafio sempre que jogar. No jogo \textit{Star Craft 2} existe o modo chamado pareamento contra Inteligência artificial, nesse modo o desempenho do jogador nos jogos anteriores define qual o nível do jogador, ou seja, quanto mais o jogador evolui mais dificil será seu oponente.
+Alguns agentes são criados para acompanhar a curva de aprendizado de cada pessoa, para que o jogador sempre tenha um bom nível de desafio sempre que jogar. No jogo \textit{Star Craft 2} existe o modo chamado pareamento contra Inteligência Artificial, nesse modo o desempenho do jogador em partidas passadas define qual o nível do jogador, ou seja, quanto mais o jogador evolui mais dificil será seu oponente.
 
 Outra abordagem interessante é a utilizada em Drivatar \cite{microsoft:drivatar} inserida no jogo Forza Motorsport onde o sistema cria agentes "humanizados" que aprendem com a pessoa que está jogando, incorporando suas características e utilizando para jogar contra o próprio jogador. 
 
@@ -60,7 +60,7 @@ O agente jogador mais conhecido é o Deep Blue da IBM. O artigo Deep Blue: System
 
 \begin{itemize}
 
-	\item \textbf{Buscador alphabeta}. Menor parte do \textit{chip}, contendo apenas 5\% de seu total, esse componente é responsável por fazer a busca na árvore de jogadas. O algoritmo utilizado é uma variante do \textit{alphabeta} chamado de \textit{minimum-window alpha beta search} nessa técnica não é necessário uma pilha de valores.
+	\item \textbf{Buscador alphabeta}. Menor parte do \textit{chip}, contendo apenas 5\% de seu total, esse componente é responsável por fazer a busca na árvore de jogadas. O algoritmo utilizado é uma variante do \textit{alphabeta} chamado de \textit{minimum-window alpha beta search}, essa técnica foi escolhida por não ser necessário uma pilha de valores.
 	
 	\item \textbf{Gerador de movimentos}. Esse componente contém o \textit{array} bidimensional 8x8 referente a cada posição do tabuleiro do xadrez, ele também é responsável por realizar e verificar a legalidade dos movimentos de acordo com as regras do xadrez.
 	
@@ -70,20 +70,20 @@ O agente jogador mais conhecido é o Deep Blue da IBM. O artigo Deep Blue: System
 
 Como pode ser visto no agente do Deep Blue a heurística é algo muito importante na construção de um agente para jogos complexos. Em alguns jogos a avaliação de heurística não é tão importante, um exemplo desse tipo de jogo é o jogo da velha pois temos uma árvore pequena de possibildades e o resultado é vitória, empate ou derrota, ou seja, não é necessário a cada nó da árvore uma complexa avaliação de heurística.
 
-Segundo \textit{Nielsen:1994:HE:189200.189209} avaliação heurística envolve ter um pequeno conjunto de avaliadores examinando a interface e avaliando a sua conformidade em relação ao resultado. 
+Segundo \cite{Nielsen:1994:HE:189200.189209} avaliação heurística envolve ter um pequeno conjunto de avaliadores examinando a interface e avaliando a sua conformidade em relação ao resultado. 
 
 Os autores \cite{DBLP:conf/aaai/ChristensenK86} dicorrem que, em jogos de tabuleiro de duas pessoas a função de heurística é vagamente caracterizado pela "força" do posicionamento de um jogador contra o outro. Ainda segundo \cite{DBLP:conf/aaai/ChristensenK86} pode-se dizer que uma função de avaliação de heurística tem duas propriedades:
 
 \begin{itemize}
-	\item Quando aplicado a um estado final(no caso de uma árvore um nó folha), a avaliação de heurística tem que devolver o estado corretamente;
+	\item Quando aplicado a um estado final(no caso de uma árvore, um nó folha), a avaliação de heurística tem que devolver o estado corretamente;
 	\item O valor da função de heurística é invariável ao longo de um caminho de solução ótima.
 \end{itemize}
 
 \section{Competição de agentes inteligentes}
 
-Um recurso bastante utilizado para pesquisa em inteligência artificial é o desenvolvimento de agentes inteligentes que compitam com outros agentes que utilizem diferentes técnicas. Tais competições são bem comuns nos grandes congressos de computação. 
+Um recurso bastante utilizado para pesquisa em inteligência artificial é o desenvolvimento de agentes inteligentes que compitam com outros agentes que utilizem diferentes técnicas. Tais competições são bem comuns nos grandes congressos de inteligência artificial. 
 
-As competições de inteligência para Start Craft que ocorrem 2010 avançou significamente o campo de inteligência artificial para jogos de estratégia em tempo real segundo \cite{6637024}. Em Star Craft os jogadores tem que se preocupar em construir um exército ao mesmo tempo que gere uma economia bem complexa e o vencedor é definido pelo jogador que derrotar todas as tropas adversárias. Nessa competição dois agentes são colocados para guerrear até que haja um vencedor. A comunicação com o jogo é feito pela BWAPI uma API em C++ que permite comunicação do agente com o jogo, ou seja, através dessa biblioteca é possível realizar comandos que serão executados no jogo.
+As competições de inteligência para Start Craft que ocorrem desde 2010 avançou significamente o campo de inteligência artificial para jogos de estratégia em tempo real segundo \cite{6637024}. Em Star Craft os jogadores tem que se preocupar em construir um exército ao mesmo tempo que gere uma economia bem complexa. Nesse jogo o vencedor é definido pelo jogador que derrotar todas as tropas e estruturas adversárias. Nessa competição dois agentes são colocados para guerrear até que haja um vencedor. A comunicação com o jogo é feito pela BWAPI uma API em C++ que permite comunicação do agente com o jogo, ou seja, através dessa biblioteca é possível realizar comandos que serão executados no jogo.
 
 A figura \ref{fig:starcraftai} mostra a API funcionando. Ele usa o sistema de conversa do jogo para mostrar mensagens do agente.
 
@@ -94,7 +94,7 @@ A figura \ref{fig:starcraftai} mostra a API funcionando. Ele usa o sistema de co
 \label{fig:starcraftai}
 \end{figure}
 
-Outra competição um pouco diferente é a AI Birds \cite{aibirds1}, nessa competição os agentes são submetidos a jogar Angry Birds, o objetivo desse jogo é você destruir objetos(ganhando assim pontos) com passáros que são arremessados por um estilingue. Diferente do Star Craft nessa competição não há um enfretamento direto entre os agentes, eles são submetidos a enfrentar o mesmo cenário e ganha o agente que obtiver mais pontos. A comunicação com o jogo é bastante diferente do Star Craft, nesse caso o jogo roda via navegador de internet(Google Chrome) e um plugin de JavaScript tira fotos do jogo e passa essa imagem via WebSocket para uma linguagem que irá interpretar tal foto.
+Outra competição um pouco diferente é a AI Birds \cite{aibirds1}, nessa competição os agentes são submetidos a jogar Angry Birds, o objetivo desse jogo é você destruir objetos(ganhando assim pontos) com passáros que são arremessados por um estilingue. Diferente do Star Craft nessa competição não há um enfretamento direto entre os agentes, eles são submetidos a enfrentar o mesmo cenário e vence o agente que obtiver mais pontos. A comunicação com o jogo é bastante diferente do Star Craft, nesse caso o jogo roda via navegador de internet(apenas Google Chrome) e um plugin de JavaScript tira fotos do jogo e passa essa imagem via WebSocket para uma linguagem que irá interpretar tal foto.
 
 Na figura \ref{fig:angrybirdsai} pode ser visto como a API se comunica com jogo. Uma imagem é caputrada do navegador e a partir disso é utilizado um algoritmo de reconhecimento de imagem para identificar o que é cada coisa(os quadrados em volta do objeto é o que a API está reconhecendo).
 

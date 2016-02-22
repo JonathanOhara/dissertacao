@@ -15,7 +15,8 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{makeidx}
 \RequirePackage[english,portuges,brazil]{babel}
-\RequirePackage[pdftitle={Universidade Federal do ABC},a4paper,colorlinks=true,filecolor=green]{hyperref}
+\RequirePackage[pdftitle={Universidade Federal do ABC},
+a4paper,colorlinks=true,filecolor=blue,linkcolor=blue,citecolor=blue,]{hyperref}
 \RequirePackage{ifthen}
 
 %
