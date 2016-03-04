@@ -9,14 +9,16 @@ Para atingir os objetivos propostos serão implementados três agentes. Dois desse
 	
 	\item \textbf{Agente 2 com aprendizado por reforço}. Esse agente irá se ajustar através de estímulos positivos e negativos que regularão sua decisão dentro do jogo através do algoritmo de aprendizado por reforço.
 	
-	\item \textbf{Agente 3 baseado em grafo de decisão}. Utilizará uma árvore de decisão onde os possíveis movimentos serão mapeados. O algoritmo tentará prever possíveis incógnitas do adversário assumindo o pior cenário possível para cada variável não conhecida.
+	\item \textbf{Agente 3 baseado em árvore de decisão}. Utilizará uma árvore de decisão (algoritmo baseado em \textit{minimax}) onde os possíveis movimentos serão mapeados. O algoritmo tentará prever possíveis incógnitas do adversário assumindo o pior cenário possível para cada variável não conhecida.
 	
 \end{itemize}
 
 \section{Treino e aprendizado}
 \label{sec:treino}
 
-O primeiro agente que será testado contra jogadores humanos é o agente 3 (grafo). Várias versões do agente serão criadas, cada versão será calibrada com uma profundidade diferente em sua árvore. Cada versão do agente será submetido a uma série de batalhas que terminará quando seu ranqueamento no jogo se estabilizar.
+O primeiro agente que será testado contra jogadores humanos é o agente 3 (árvore). Serão criadas diferentes versões desse agente. Cada diferente versão analisará diferentes profundidades de árvores, ou seja, serão criados $N$ versões do agente, a primeira versão analisará jogadas até a $x$ profundidade da árvore, a próxima versão analisará até a $x + 1$ profunidade. O jogo tem um limite máximo de dois minutos para fazer sua jogada, com base nesse limite de tempo serão reguladas quantas diferentes versões dessa técnica serão criados.
+
+Para executar essa abordagemserá criado uma função de avaliação de heurística baseado nas informações da seção \ref{sec:batalhaspokemon}. Essa técnica será importante para evitar problema de grande tempo de execução. Além disso, poderemos confrontar os outros dois agentes com diferentes versões desse agente para comparar o nível de aprendizado de cada agente.
 
 Os agentes 1 e 2 terão comportamentos semelhantes em como serão treinados. Ambos agentes terão duas versões, cada versão será submetida aos seguintes treinamentos:
 
@@ -24,12 +26,12 @@ Os agentes 1 e 2 terão comportamentos semelhantes em como serão treinados. Ambos
 	
 	\item \textbf{Treino contra humanos}: O agente será submetido a jogar contra jogadores humanos que serão escolhidos pelo próprio jogo, o sistema de pareamento de partidas é feito baseado no ranqueamento dos dois jogadores, ou seja, o adversário sempre vai ter uma pontuação no \textit{rank} semelhante ao agente.
 	
-	\item \textbf{Treino contra agente 3}: Os agentes 1 e 2 jogarão apenas contra o agente 3, sempre que o agente que está treinando conseguir um grande números de vitória sobre o agente 3, será aumentado mais um nível de profundidade na árvore do agente 3.
+	\item \textbf{Treino contra agente 3}: Os agentes 1 e 2 jogarão contra o agente 3, sempre que o agente que está treinando conseguir um grande números de percentagem de vitória sobre o agente 3, será aumentado mais um nível de profundidade na árvore do agente 3.
 
 \end{itemize}
 
 \section{Avaliação de resultado}
 
-Avaliar a situação da batalha será um recurso muito importante, pois o agente 3 precisará avaliar cada nó de sua árvore para fazer a melhor escolha possível, ou a escolha que gere menos boas escolhas para o adversário. Essa avaliação terá como base a quantidade de Pokémons vivos e a situação dele(quantidade de pontos de vida, afetado por alguem efeito negativo entre outros).
+Avaliar a situação da batalha será um recurso muito importante, pois o agente 3 precisará avaliar cada nó de sua árvore para fazer a melhor escolha possível, ou a escolha que gere menos boas escolhas para o adversário. Essa avaliação terá como base a quantidade de Pokémons vivos e a situação deles (quantidade de pontos de vida, afetado por algum efeito negativo entre outros).
 
-Ao fim de cada batalha também será feita uma avaliação do jogo. Com essa avaliação será possível aferir o quão díspar foi à  situação do vencedor, além disso, com essa métrica podemos eliminar possíveis ruídos em resultados de batalhas como desistências ou desconexões por parte dos oponentes.
+Ao fim de cada batalha também será feita uma avaliação do jogo. Com essa avaliação será possível aferir o quão díspar foi à situação do vencedor, além disso, com essa métrica podemos eliminar possíveis ruídos em resultados de batalhas como desistências ou desconexões por parte dos oponentes.

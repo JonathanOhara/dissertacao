@@ -46,7 +46,42 @@ Uma algoritmo muito comum para esse cenário é o \textit{minimax}. Segundo os aut
 	
 \end{itemize}
 
-O trabalho de \cite{campbell1983comparison} descreve o algoritmo de \textit{minimax} do seguinte modo: O algoritmo assume que existem dois jogadores chamados Max e Min, e atribui um valor para cada nó dentro da árvore (de decisão) do jogo (e também para nó raiz) do seguinte modo: Nós folhas ou terminais podem propagar o valor \textit{minimax} recursivamente. Se a jogada p do jogador Max for escolhida, então o valor de p é o máximo valor dos filhos de p. Similarmente, se for a vez do jogador Min será escolhido o menor valor dos sucessores de p.  
+O trabalho de \cite{campbell1983comparison} descreve o algoritmo de \textit{minimax} do seguinte modo: O algoritmo assume que existem dois jogadores chamados Max e Min, e atribui um valor para cada nó dentro da árvore (de decisão) do jogo (e também para nó raiz) do seguinte modo: Nós folhas ou terminais podem propagar o valor \textit{minimax} recursivamente. Se a jogada p do jogador Max for escolhida, então o valor de p é o máximo valor dos filhos de p. Similarmente, se for a vez do jogador Min será escolhido o menor valor dos sucessores de p.
+
+No trecho abaixo é apresentado o algoritmo do \textit{minimax}. O algoritmo analisa todas as possíveis jogadas até que sejam encontrados todos os nós que finalizam o jogo e retorna um valor chamado de heurística representando vitória, derrota ou empate.
+
+\begin{algorithm}
+\caption{Algoritmo Minimax}\label{euclid}
+\begin{algorithmic}[1]
+\Procedure{Minimax}{$node, depth, max$}
+\If {$depth = 0$ \textbf{OR} node is terminal} 
+	\State \Return heuristic
+\EndIf
+\If {$max$}
+	\State $bestValue\gets -\infty$
+	\For{each child \Pisymbol{psy}{206} $node$ }
+		\State $value\gets \textsc{Minimax}(child, depth -1, FALSE)$
+		\State $bestValue\gets \textsc{max}(bestValue, value)$
+	\EndFor
+\Else
+	\State $bestValue\gets +\infty$
+	\For{each child \Pisymbol{psy}{206} $node$ }
+		\State $value\gets \textsc{Minimax}(child, depth -1, TRUE)$
+		\State $bestValue\gets \textsc{min}(bestValue, value)$
+	\EndFor
+\EndIf
+\State \Return bestValue
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Onde:
+
+\begin{itemize}
+	\item \textbf{node} Nó atual da árvore. Na primeira chamada é passado o nó raiz da árvore, ou seja, o estado atual do jogo.
+	\item \textbf{depth} Profundidade do nó. Inicialmente é passado a altura da árvore.
+	\item \textbf{max} Booleano representando se a jogada analisada é do jogador \textbf{Max} ou \textbf{Min}.
+\end{itemize}
 
 Na figura \ref{fig:minimaxjogodavelha} é mostrado a aplicação do algoritmo de \textit{minimax} para um cenário do jogo da velha. Na imagem o jogador Max é representado pelo caractere \textbf{X} e o jogador Min por \textbf{O}. Como dito anteriormente, a análise dessa árvore começou a ser feita pelos nós terminais, em situações vitoriosas foi atribuído o valor de 10, em empates 0 e em derrota o valor -10. Em seguida, os pais desses nós folhas são preenchidos com o mínimo ou o máximo valor dos nós filhos. No primeiro nó de MIN (primeiro nó da segunda fileira), por exemplo, existem dois nós filhos, um com valor 10 e outro com valor -10, por ser um nó MIN é atribuído para esse nó o menor valor (no caso -10). A linha em azul mostra a melhor jogada no momento para o nó raiz.
 
@@ -59,9 +94,11 @@ Na figura \ref{fig:minimaxjogodavelha} é mostrado a aplicação do algoritmo de \t
 
 Repare que a melhor jogada indicada pelo algoritmo gera um empate. Segundo \cite{evoltuinaryneuralnetworks} um dos problemas do \textit{minimax} é presumir que sempre o adversário irá fazer a melhor escolha possível. Muitas vezes, em situações de derrota iminente a melhor jogada pode não ser o valor mais alto de \textit{minimax}, especialmente se ele ainda irá resultar em uma derrota.
 
-Outro problema do \textit{minimax} é a quantidade de nós que ele precisa analisar em jogos com grande número de possíveis jogadas e que duram um grande número de turnos (grande profundidade na árvore). Uma técnica muito utilizada para mitigar esse problema é a chamada poda \textit{alpha-beta}.
+Outro problema do \textit{minimax} é a quantidade de nós que ele precisa analisar, em jogos com grande número de possíveis jogadas ou que duram um grande número de turnos (grande profundidade na árvore) a quantidade de nós que ele precisa analisar é muito grande. 
 
-Segundo \cite{knuth1976analysis} essa é técnica é usada geralmente para aumentar a velocidade de busca sem perder informação. Nessa técnica são ignorados nós e suas sub-árvores de jogadas incapazes de ser melhor que movimentos já conhecidos. Durante a análise das jogadas são definidas duas variáveis \textit{alpha} e \textit{beta}. \textit{Alpha} representa o valor máximo que o jogador Max pode fazer e \textit{beta} a pontuação mínima do jogador Min. A cada avaliação de nó esses limites são verificados, caso o valor da avaliação não estiver entre esses limites o nó e todas suas árvores são cortados.
+Uma solução comum para esse problema é definir um número máximo de profundidade para analisar, ou seja, ao invés do critério de parada do algoritmo recursivo ser nós folhas (terminais) pode-se definir uma profundidade máxima para o \textit{minimax}. Nessa abordagem muitas vezes não serão encontrados nós que representam fim de jogo, então é necessário fazer uma função de avaliação de heurística que analisa o estado do jogo, como foi apresentado na seção \ref{sec:agentesInteligentescontrajogadores}.
+
+Outra técnica muito utilizada para mitigar esse problema é a chamada poda \textit{alpha-beta}. Segundo \cite{knuth1976analysis} essa é técnica é usada geralmente para aumentar a velocidade de busca sem perder informação. Nessa técnica são ignorados nós e suas sub-árvores de jogadas incapazes de ser melhor que movimentos já conhecidos. Durante a análise das jogadas são definidas duas variáveis \textit{alpha} e \textit{beta}. \textit{Alpha} representa o valor máximo que o jogador Max pode fazer e \textit{beta} a pontuação mínima do jogador Min. A cada avaliação de nó esses limites são verificados, caso o valor da avaliação não estiver entre esses limites o nó e todas suas árvores são cortados.
 
 Outra técnica de otimização do \textit{minimax} é a Árvore de Busca de Monte Carlo(MCTS). Segundo \cite{browne12asurvey} o processo de construção da MCTS é feita de modo incremental e assimétrico na seguinte forma: para cada iteração do algoritmo, uma "política de árvore"  é utilizada para definir o nó mais urgente da árvore atual. A política da árvore tenta balancear considerações da exploração (procura áreas que ainda não tenham sido bem amostradas) e aprofundamento (procura áreas que parecem ser promissoras). O nó escolhido é avaliado e todos seus ancestrais são atualizados com suas novas estatísticas.
 
