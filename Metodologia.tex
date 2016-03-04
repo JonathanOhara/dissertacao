@@ -1,13 +1,13 @@
 \chapter{Metodologia}
 \label{cap:metodologia}
 
-Para atingir os objetivos propostos serão implementados três agentes. Dois desses agentes serão submetidos a uma grande quantidade de partidas de treinamento para que possam chegar a patamares estáveis. O terceiro será um agente baseado em grafos com diferentes profundidades, onde será categorizado a evolução no ranquemanto do jogo de acordo com o aumento de profundidade da árvore de decisão.
+Para atingir os objetivos propostos serão implementados três agentes. Dois desses agentes serão submetidos a uma grande quantidade de partidas de treinamento para que possam chegar a patamares estáveis. O terceiro será um agente baseado em grafos com diferentes profundidades, onde será categorizada a evolução no ranquemanto do jogo de acordo com o aumento de profundidade da árvore de decisão.
 
 \begin{itemize}
 
 	\item \textbf{Agente 1 com neuroevolução}. O primeiro agente persiste em uma rede neural onde os pesos de sua rede serão ajustados por um algoritmo evolutivo.
 	
-	\item \textbf{Agente 2 com aprendizado por reforço}. Esse agente irá se ajustar através de estimulos positivos e negativos que regularão sua decisão dentro do jogo através do algoritmo de aprendizado por reforço.
+	\item \textbf{Agente 2 com aprendizado por reforço}. Esse agente irá se ajustar através de estímulos positivos e negativos que regularão sua decisão dentro do jogo através do algoritmo de aprendizado por reforço.
 	
 	\item \textbf{Agente 3 baseado em grafo de decisão}. Utilizará uma árvore de decisão onde os possíveis movimentos serão mapeados. O algoritmo tentará prever possíveis incógnitas do adversário assumindo o pior cenário possível para cada variável não conhecida.
 	
@@ -16,7 +16,7 @@ Para atingir os objetivos propostos serão implementados três agentes. Dois desse
 \section{Treino e aprendizado}
 \label{sec:treino}
 
-O primeiro agente que será testado contra jogadores humanos é o agente 3 (grafo). Várias versões do agente serão criadas, cada versão será cablibrada com uma profundidade diferente em sua árvore. Cada versão do agente será submetido a uma série da batalhas que só terá fim quando seu ranqueamento no jogo se estabilizar.
+O primeiro agente que será testado contra jogadores humanos é o agente 3 (grafo). Várias versões do agente serão criadas, cada versão será calibrada com uma profundidade diferente em sua árvore. Cada versão do agente será submetido a uma série de batalhas que terminará quando seu ranqueamento no jogo se estabilizar.
 
 Os agentes 1 e 2 terão comportamentos semelhantes em como serão treinados. Ambos agentes terão duas versões, cada versão será submetida aos seguintes treinamentos:
 
@@ -30,6 +30,6 @@ Os agentes 1 e 2 terão comportamentos semelhantes em como serão treinados. Ambos
 
 \section{Avaliação de resultado}
 
-Avaliar a situação da batalha será um recurso muito importante pois o agente 3 precisará avaliar cada nó de sua árvore para fazer a melhor escolha possível, ou a escolha que gere menos boas escolhas para o adversário. Essa avaliação terá como base a quantidade de pokémons vivos e a situação dele(quantidade de pontos de vida, afetado por alguem efeito negativo entre outros).
+Avaliar a situação da batalha será um recurso muito importante, pois o agente 3 precisará avaliar cada nó de sua árvore para fazer a melhor escolha possível, ou a escolha que gere menos boas escolhas para o adversário. Essa avaliação terá como base a quantidade de Pokémons vivos e a situação dele(quantidade de pontos de vida, afetado por alguem efeito negativo entre outros).
 
-Ao fim de cada batalha também será feita uma avaliação do jogo. Com essa avaliação será possível aferir o quão dispar foi a situação do vencedor, além disso, com essa métrica podemos eliminar possíveis ruídos em resultados de batalhas como desistências ou desconexões por parte dos oponentes.
+Ao fim de cada batalha também será feita uma avaliação do jogo. Com essa avaliação será possível aferir o quão díspar foi à  situação do vencedor, além disso, com essa métrica podemos eliminar possíveis ruídos em resultados de batalhas como desistências ou desconexões por parte dos oponentes.

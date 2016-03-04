@@ -1,23 +1,23 @@
 \chapter{Sistemas de batalhas Pokémon}
 \label{cap:batalhasPokemon}
 
-Esse capítulo apresentará o sistemas de batalhas dos jogos \textit{Pokémon}. Como dito nos capítulos anterioes é preciso conhecer bem o ambiente que o agente está inserido para poder aferir avaliações e tomar decisões. Este capítulo está organizado da seguinte maneira: na seção \ref{sec:contextualizacaopokemon} é feita uma breve contextualização sobre o jogo e a franquia \textit{Pokémon}. Na seção \ref{sec:ambientepokemonshowdown} é apresentado o simulador \textit{on-line} de batalhas chamado de \textit{Pokémon Showdown!}. No capítulo \ref{sec:batalhaspokemon} será explicado como funciona o sistema de batalha.
+Esse capítulo apresentará o sistemas de batalhas dos jogos \textit{Pokémon}. Como dito nos capítulos anteriores é preciso conhecer bem o ambiente que o agente está inserido para poder aferir avaliações e tomar decisões. Este capítulo está organizado da seguinte maneira: na seção \ref{sec:contextualizacaopokemon} é feita uma breve contextualização sobre o jogo e a franquia \textit{Pokémon}. Na seção \ref{sec:ambientepokemonshowdown} é apresentado o simulador \textit{on-line} de batalhas chamado de \textit{Pokémon Showdown!}. No capítulo \ref{sec:batalhaspokemon} será explicado como funciona o sistema de batalha.
 
 \section{Contextualização}
 \label{sec:contextualizacaopokemon}
 
-Segundo \cite{7336034} Pocket Monsters ou Pokémon é uma série de jogos desenvolvida pela Game Freak and Creatures Inc. e publicada pela Nintendo como parte da franquia Pokémon. O primeiro lançamento foi em 1996 no Japão para o console Game Boy Color, a principal série do jogo é baseada em \textit{Role-Playing-Game} (RPG) e continua a ser lançado para consoles portáteis até hoje.
+Segundo \cite{7336034} \textit{Pocket Monsters} ou Pokémon é uma série de jogos desenvolvida pela \textit{Game Freak and Creatures Inc.} e publicada pela Nintendo como parte da franquia Pokémon. O primeiro lançamento foi em 1996 no Japão para o console Game Boy Color, a principal série do jogo é baseada em \textit{Role-Playing-Game} (RPG) e continua a ser lançado para consoles portáteis até hoje.
 
-Ainda segundo \cite{7336034} o objetivo dos jogos de RPG de Pokémon é capturar monstros chamados de Pokémon e com eles conseguir ganhar insígneas de ginásios (prêmio dado por vencer o líder de ginásio em uma batalha pokémon), para assim ter acesso a liga Pokémon e se tornar o campeão dessa (torneio com os melhores treinadores Pokémon do jogo).
+Ainda segundo \cite{7336034} o objetivo dos jogos de RPG de Pokémon é capturar monstros chamados de Pokémon e com eles conseguir ganhar insígnias de ginásios (prêmio dado por vencer o líder de ginásio em uma batalha Pokémon), para assim ter acesso a liga Pokémon e se tornar o campeão dessa (torneio com os melhores treinadores Pokémon do jogo).
 
 \section{Pokémon Showdown!}
 \label{sec:ambientepokemonshowdown}
 
-Pokémon Showdown é um simulador de batalhas Pokémon. Permitindo jogar batalhas \textit{online}! Jogar com times gerados aleatóriamente, ou construindo seu próprio time (\cite{pokemonshowdown1}).
+Pokémon Showdown é um simulador de batalhas Pokémon. Permitindo jogar batalhas \textit{online}! Jogar com times gerados aleatoriamente, ou construindo seu próprio time (\cite{pokemonshowdown1}).
 
-Esse ambiente é totalmente \textit{on-line} e pode ser jogado via navegador de internet. O jogo é disponiblizado em código aberto sobre a licença MIT. O dono do projeto é Guangcong Luo e todo código fonte do projeto pode ser encontrado no Git Hub.
+Esse ambiente é totalmente \textit{on-line} e pode ser jogado via navegador de internet. O código fonte do jogo é disponibilizado sobre a licença MIT. O dono do projeto é Guangcong Luo e todo código fonte do projeto pode ser encontrado no Git Hub.
 
-O ambiente conta um grande número de jogadores simultâneos. Durante o desenvolvimento do trabalho foi verificado que muitas vezes o número de usuários simultâneos ultrapassou a quantiadde de 10.000.
+O ambiente conta um grande número de jogadores simultâneos. Durante o desenvolvimento do trabalho foi verificado que muitas vezes o número de usuários simultâneos ultrapassou a quantidade de 10.000.
 
 O modo de batalha utilizado durante esse trabalho é o \textit{Random battle} onde o jogo procura um jogador oponente para batalhar e dá para ambos, times aleatórios.
 
@@ -28,13 +28,12 @@ Para poder entender como funciona a mecânica dos jogos Pokémon é preciso apresen
 
 \subsection{Características Pokémon}
 
-Atualmnente existem mais de 720 espécies de Pokémons diferentes disponíveis no jogo. As principais características dos Pokémons são:
+Atualmente existem mais de 720 espécies de Pokémons diferentes disponíveis no jogo. As principais características dos Pokémons são:
 
 \begin{itemize}
-	\item \textbf{Espécie}. Nome do Pokémon (bulbasaur, charmander, squirtle e etc);
+	\item \textbf{Espécie}. Nome do Pokémon (Bulbasaur, Charmander, Squirtle e etc);
 	\item \textbf{Tipo}. Um Pokémon pode ter um ou dois tipos diferentes;
-	\item \textbf{Gênero}. Um Pokémon pode macho ou fêmea(certas espécies só podem ser macho ou apenas fêmea);
-	\item \textbf{Altura}. Altura do Pokémon;
+	\item \textbf{Gênero}. Um Pokémon pode macho, fêmea ou sem gênero;
 	\item \textbf{Peso}. Peso do Pokémon;
 	\item \textbf{Estatísticas base}. As estatística ou atributos são separado em 6 categorias:
 		\subitem \textbf{HP ou PV} Quantidade de pontos de vida Pokémon;
@@ -43,7 +42,7 @@ Atualmnente existem mais de 720 espécies de Pokémons diferentes disponíveis no j
 		\subitem \textbf{Special Attack ou Ataque Especial} Quantidade de ataque mágico do Pokémon;
 		\subitem \textbf{Special Deffense ou Defesa Especial} Quantidade de defesa mágica do Pokémon;
 		\subitem \textbf{Speed ou Velocidade} Velocidade do Pokémon;
-	\item \textbf{Habilidades}. Um Pokémon tem uma habilidade especial (muitas vezes o que diferencia 2 pokémons do mesmo tipo além das estatísticas base, são suas possíveis habilidades);
+	\item \textbf{Habilidades}. Um Pokémon tem uma habilidade especial (muitas vezes o que diferencia 2 Pokémons do mesmo tipo além das estatísticas base, são suas possíveis habilidades);
 \end{itemize}
 
 Para calcular a estatística real do Pokémon alguns outros atributos são necessários. Esses atributos são definidos pelo jogador (com exceção do nível que é definido pelo Pokémon Showdown em alguns modos de jogo):
@@ -52,7 +51,7 @@ Para calcular a estatística real do Pokémon alguns outros atributos são necessár
 	\item \textbf{Level}. Nível do Pokémon. Onde $0 \leq level \leq 100$.
 	\item \textbf{Effort Values ou EV}. Valores de esforço, cada Pokémon tem 510 pontos de EV que podem ser distribuídos em qualquer um dos 6 atributos, com a limitação de que cada atributo pode ter no máximo 252 pontos de EV.
 	\item \textbf{Individual Values ou IV}. Valores individuais, cada estatística do Pokémon tem um valor de IV associado que varia entre 0 e 31. No ambiente Pokémon Showdown todos os Pokémons estão com 31 de IV para todos os 6 atributos.
-	\item \textbf{Nature}. Natureza do Pokémon. Existem 25 diferentes naturezas que um Pokémon pode ter, 21 delas alteram atributos. As naturezas que alteram atributos adicionam 10\% em um determinado atributo e reduzem 10\% em outro atributo. A tabela \ref{table:tabelaNatureza} mostra as possíveis naturezas e as modificações dos atributos.
+	\item \textbf{Nature}. Natureza do Pokémon. Existem 25 diferentes naturezas que um Pokémon pode ter, sendo que 21 delas alteram atributos. As naturezas que alteram atributos adicionam 10\% em um determinado atributo e reduzem 10\% em outro atributo. A tabela \ref{table:tabelaNatureza} mostra as possíveis naturezas e as modificações dos atributos.
 \end{itemize}
 
 \begin{table}[]
@@ -90,13 +89,13 @@ Quirky            & Nenhum                      & Nenhum                      \\
 \end{tabular}
 \end{table}
 
-Finalmente o cálculo da estatística atual é dada pela seguinte equação:
+Finalmente o cálculo da estatística atual é dado pela seguinte equação:
 
 \begin{equation}
 V = \Bigg( \frac{ \Big( ( 2 \times Base + IV + \frac{EV}{4} ) \times level \Big) }{100} + 5 \Bigg) \times Nature
 \end{equation}
 
-Essa equação vale para todos atributos menos para o HP. A Equação do HP tem uma pequena modificação que é mostrado na equação a seguir:
+Essa equação vale para todos os atributos menos para o HP. A Equação do HP tem uma pequena modificação que é mostrada na equação a seguir:
 
 \begin{equation}
 V = \Bigg( \frac{ \Big( ( 2 \times Base + IV + \frac{EV}{4} ) \times level \Big) }{100} + level + 10 \Bigg)
@@ -107,12 +106,12 @@ Onde:
 \begin{itemize}
 	\item \textbf{V} É o valor final, valor que o jogador irá ver no jogo.
 	\item \textbf{Base} É a quantidade básica da estatística.
-	\item \textbf{Nature} Se a natureza do Pokémon favorecer esse atributo o valor é atrbuído 1.1, caso a natureza desfavoreça esse valor é 0.9 e caso a natureza não influa nesse atributo o valor é 1.
+	\item \textbf{Nature} Se a natureza do Pokémon favorecer esse atributo o valor é atribuído 1.1, caso a natureza desfavoreça esse valor é 0.9 e caso a natureza não influa nesse atributo o valor é 1.
 \end{itemize}
 
-EVs, IVs e Natureza do Pokémon são importantes customizações que faz um Pokémon ser diferente de outro Pokémon da mesma espécie. Na batalha esses 3 valores não são disponíveis para o seu adversário. 
+EVs, IVs e Natureza do Pokémon são importantes customizações que fazem um Pokémon ser diferente de outro Pokémon da mesma espécie. Na batalha esses 3 valores não são disponíveis para o seu adversário. 
 
-Para exemplificar e mostrar a diferença que a distribuição de valores pode causar, a seguir será calculado o atributo "Especial Ataque" para 2 Pokémons da espécie Mewtwo ambos no nível 100. O Pokémon Mewtwo tem 154 pontos de Ataque Especial base.
+Para exemplificar e mostrar a diferença que a distribuição de valores pode causar, a seguir será calculado o atributo "Especial Ataque"  para 2 Pokémons da espécie Mewtwo ambos no nível 100. O Pokémon Mewtwo tem 154 pontos de Ataque Especial base.
 
 O primeiro Mewtwo será chamado de Mewtwo A. O Mewtwo A é da natureza Modest e tem 252 pontos de EV em Ataque Especial e 31 pontos de IV no atributo Ataque Especial. Substituindo essas variáveis na equação:
 
@@ -126,17 +125,17 @@ O segundo Mewtwo será chamado de Mewtwo B. O Mewtwo B é da natureza Adamant e te
 281.7 = \Bigg( \frac{ \Big( ( 2 \times 154 + 0 + \frac{0}{4} ) \times 100 \Big) }{100} + 5 \Bigg) \times 0.9
 \end{equation}
 
-A diferença do atributo Especial Ataque do Mewtwo A e do Mewtwo B é de 166 pontos, ou seja, o Mewtwo A tem 66\% mais pontos nesse atributo que o Mewtwo B. 
+A diferença do atributo Especial Ataque do Mewtwo A e do Mewtwo B é de 166 pontos, ou seja, o Mewtwo A tem cerca de 66\% mais pontos nesse atributo que o Mewtwo B. 
 
-\subsubsection{Habilidades, items e golpes dos Pokémons}
+\subsubsection{Habilidades, itens e golpes dos Pokémons}
 
 Esses 3 aspectos são importantes na customização do Pokémon, pois além de ter uma grande variedade de opções, tais aspectos não são visíveis para o seu oponente.
 
 Habilidades são efeitos passivos que podem ajudar dentro de batalha. Pokémons tem entre 1 e 3 possíveis habilidades podendo escolher apenas 1 delas (ficando a cargo do jogador qual escolher). Existem cerca de 200 habilidades diferentes. Um exemplo de habilidade é a \textit{Intimidate}, quando um Pokémon com a habilidade \textit{Intimidate} entra em batalha o Pokémon adversário tem seu ataque reduzido em 50\%.
 
-Cada Pokémon pode carregar consigo um item, esse item também traz certos tipos de benefícios para o Pokémon. Alguns items são ativados quando uma condição ocorre na batalha, outros items são contínuos. Existem cerca de 300 items diferentes. Um exemplo de item é o \textit{Leftovers} que recupera $\frac{1}{16}$ do HP total to Pokémon ao final de cada turno.
+Cada Pokémon pode carregar consigo um item, esse item também traz certos tipos de benefícios para o Pokémon. Alguns itens são ativados quando uma condição ocorre na batalha, outros itens são contínuos. Existem cerca de 300 itens diferentes. Um exemplo de item é o \textit{Leftovers} que recupera $\frac{1}{16}$ do HP total do Pokémon ao final de cada turno.
 
-Uma das customizações mais importantes é quais golpes o Pokémon irá poder utilizar. Cada Pokémon pode escolher 4 golpes entre dezenas de golpes disponíveis. Cada espécie de Pokémon pode aprender um conjunto diferentes de habilidades dependendo do seu tipo e características (por exemplo, apenas Pokémons com chifre conseguem aprender o golpe Mega Horn). Existem cerca de 600 golpes diferentes.
+Uma das customizações mais importantes é quais golpes o Pokémon irá poder utilizar. Cada Pokémon pode escolher 4 golpes entre dezenas de golpes disponíveis. Cada espécie de Pokémon pode aprender um conjunto diferente de habilidades dependendo do seu tipo e características (por exemplo, apenas Pokémons com chifre conseguem aprender o golpe Mega Horn). Existem cerca de 600 golpes diferentes.
 
 As principais características dos golpes são:
 
@@ -144,10 +143,9 @@ As principais características dos golpes são:
 	\item \textbf{Base Power ou Base de Força}. A força base utilizada no cálculo de dano.
 	\item \textbf{Category ou Categoria}. Existem três tipos de categorias:
 		\subitem \textbf{Status ou Condição} Golpes que não infringem dano diretamente, porém tem algum efeito com grande chance de sucesso para compensar.
-		\subitem \textbf{Physical ou Físico} Golpes físicos utilizam o Ataque para 
-		cáculo de dano e Defesa para cáculo da resistência.
-		\subitem \textbf{Special ou Especial} Golpes especiais utilizam o Ataque Especial para cáculo de dano e Defesa Especial para cáculo da resistência.
-	\item \textbf{Tipo}. Se o tipo do golpe for um dos tipos do Pokémon a base de força é aumentada em 50\%(efeito chamado de STAB).
+		\subitem \textbf{Physical ou Físico} Golpes físicos utilizam o Ataque para cálculo de dano e Defesa para cálculo da resistência.
+		\subitem \textbf{Special ou Especial} Golpes especiais utilizam o Ataque Especial para cálculo de dano e Defesa Especial para cálculo da resistência.
+	\item \textbf{Tipo}. Se o tipo do golpe for um dos tipos do Pokémon a base de força é aumentada em 50\% (fenômeno chamado de STAB ou \textit{Same Type Attack Bonus}).
 	\item \textbf{Accuracy ou Precisão}. A chance em percentagem de um golpe acertar.
 	\item \textbf{PP ou Pontos de Poder}. A quantidade de vezes que um Pokémon pode usar um golpe durante uma batalha.
 	\item \textbf{Efeito Secundário}. Um golpe pode ter um efeito secundário, esse efeito tem uma chance de acontecer e pode afetar uma série de coisas como, por exemplo, deixar o oponente paralisado ou aumentar algum atributo.
@@ -155,31 +153,31 @@ As principais características dos golpes são:
 
 \subsection{Composição dos times}
 
-Os dois modos de batalhas mais jogados do Pokémon Showdown são: Random Battles e OU Battles. Em ambos os modos cada time conta com 6 Pokémons.
+Os dois modos de batalhas mais jogados do Pokémon Showdown são: Random Battles e OU Battles. Em ambos os modos cada time conta com 6 Pokémons (grande maioria dos tipos de jogos utilizam 6 Pokémons para compor um time).
 
 Para entender melhor esses 2 modos é preciso entender algumas definições do Pokémon competitivo.
 
-Existe uma comunidade chamada Smogon \cite{smogon}, essa comunidade regula e define as regras que são utilizadas em cada modo de jogo, para que o jogo se torne mais competitivo e balanceado. Um dos principais trabalhos da Smogon é balancear os mais de 720 Pokémons distribuindo eles em faixas schamadas de \textit{tiers}. Do mais fraco para o mais fortes os principais \textit{tiers} são:
+Existe uma comunidade chamada Smogon \cite{smogon}, essa comunidade regula e define as regras que são utilizadas em cada modo de jogo, para que o jogo se torne mais competitivo e balanceado. Um dos principais trabalhos da Smogon é balancear os mais de 720 Pokémons distribuindo eles em faixas chamadas de \textit{tiers}. Do mais fraco para o mais fortes os principais \textit{tiers} são:
 
 \begin{itemize}
-	\item Never Used ou NU;
-	\item Rarely Used ou RU;
-	\item Under Used ou UU;
-	\item Over Used ou OU;
-	\item Ubers.
+	\item \textit{Never Used} ou NU;
+	\item \textit{Rarely Used} ou RU;
+	\item \textit{Under Used} ou UU;
+	\item \textit{Over Used} ou OU;
+	\item \textit{Ubers}.
 \end{itemize}
 
 No modo OU Battles como o próprio nome sugere o jogador pode montar seu time com qualquer Pokémon do \textit{tier} OU e de \textit{tiers} inferiores, nesse modo todos os Pokémons se enfrentarão no mesmo nível.
 
-Em batalhas randômicas, para balancear os Pokémons de diferentes \textit{tiers} é atribuido diferentes níveis de acordo com o \textit{tier} do Pokémon. Pokémons NU batalham no nível 86, RU 82, UU 78, OU 74, Ubers 70.
+Em batalhas randômicas, para balancear os Pokémons de diferentes \textit{tiers} é atribuido diferentes níveis de acordo com o \textit{tier} do Pokémon. Pokémons NU batalham no nível 86, RU 82, UU 78, OU 74, \textit{Ubers} 70.
 
-Em cada diferente modo de jogo o jogador tem sua pontuação de \textbf{elo} que é uma pontuação no ranquemanto geral do jogo. Em cada jogo o jogador ganha ou perde pontos de elo de acordo com o resutlado da partida. A quantidade de pontuação ganha é feita pela diferença do seu elo para o adversário. O jogo sempre tenta parear jogadores com pontuação de elo próximas.
+Em cada diferente modo de jogo o jogador tem sua pontuação de \textbf{Elo} que é uma pontuação no ranquemanto geral do jogo. Em cada jogo o jogador ganha ou perde pontos de Elo de acordo com o resultado da partida. A quantidade de pontuação ganha é feita pela diferença do seu Elo para o adversário. O jogo sempre tenta parear jogadores com pontuação de Elo semelhante.
 
-Por padrão cada jogador inicia com 1000 pontos de elo. Em batalhas com níveis semelhates de elo é comum ganhar/perder 20 pontos por partida. Atualmente os jogadores que lideram o ranqueamento de Random Battles tem cerca de 2.200 pontos.
+Por padrão cada jogador inicia com 1000 pontos de Elo. Em batalhas com níveis parecidos de Elo é comum ganhar/perder 20 pontos por partida. Atualmente os jogadores que lideram o ranqueamento de Random Battles têm cerca de 2.200 pontos.
 
 \subsection{Sistema de batalhas}
 
-Nessa subseção será apresentado os principais aspectos de uma batalha, estes aspectos são vitais para construção dos agentes pois é baseado nesses pontos que as decisões serão tomadas.
+Nessa subseção serão apresentados os principais aspectos de uma batalha, estes aspectos são vitais para construção dos agentes, pois é baseado nesses pontos que as decisões serão tomadas.
 
 O sistema de batalhas é baseado em dois jogadores em um sistema de turno, ou seja, a cada começo de turno, cada jogador escolhe qual ação irá tomar.
 
@@ -187,11 +185,11 @@ No modo Random Battles um de seus Pokémons é escolhido aleatoriamente para começ
 
 Em situações normais, cada turno o jogador pode escolher duas grandes ações. A primeira é utilizar um dos quatro golpes do pokémon. A segunda é trocar o Pokémon em campo para outro Pokémon desde que ele esteja vivo. Ao trocar de Pokémon você perde o seu turno, ou seja, logo que o Pokémon escolhido entrar em batalha ele tomará o golpe que o adversário escolheu no início de seu turno (caso o oponente não tenha escolhida trocar de Pokémon).
 
-Uma das primeira situações onde os atributos do Pokémon são relevantes é para definir quem será o primeiro Pokémon a atacar. Em situações normais o primeiro Pokémon que ataca é aquele com Velocidade entre os dois.
+Uma das primeiras situações onde os atributos do Pokémon são relevantes é para definir quem será o primeiro Pokémon a atacar. Em situações normais o primeiro Pokémon que ataca é aquele com Velocidade entre os dois.
 
 \subsubsection{Sistema de vantagens de tipos}
 
-Alguns tipos de Pokémons tem vantagem sobre outro tipos de Pokémons. A ideia é baseado no sistema papel pedra tesoura, onde o papel ganha de pedra, pedra ganha de tesoura e por sua vez tesoura ganha de papel.
+Alguns tipos de Pokémons tem vantagem sobre outros tipos de Pokémons. A ideia é baseada no sistema papel pedra tesoura, onde o papel ganha de pedra, pedra ganha de tesoura e por sua vez tesoura ganha de papel.
 
 Porém no sistema de batalhas Pokémon essa mecânica é um pouco mais complexa. Além de existir 18 tipos diferentes de Pokémon, um Pokémon pode ter 2 tipos distintos.
 
@@ -204,9 +202,9 @@ A imagem a seguir foi retirada do site \cite{bulbapedia1} e contém uma tabela mo
 \label{fig:pokemontypechart}
 \end{figure}
 
-\subsubsection{Sistema de cáculo de dano}
+\subsubsection{Sistema de cálculo de dano}
 
-Para calcular a quantidade de HP que um Pokémon irá perder é utilizado a seguinte equação:
+Para calcular a quantidade de HP que um Pokémon irá perder é utilizada a seguinte equação:
 
 \begin{equation}
 Dano = \Bigg( \frac{ 2 \times Level + 10 }{ 250 } \times \frac{Attack}{Defense} \times Base + 2 \Bigg) \times Modifier
@@ -215,7 +213,7 @@ Dano = \Bigg( \frac{ 2 \times Level + 10 }{ 250 } \times \frac{Attack}{Defense} 
 Onde:
 \begin{itemize}
 	\item \textbf{Dano}. Quantidade de dano que o Pokémon irá receber.
-	\item \textbf{Attack}. É quantidade de Ataque caso o golpe seja da categoria físico, ou quantidade Ataque Espcial caso o golpe seja da categoria especial.
+	\item \textbf{Attack}. É quantidade de Ataque caso o golpe seja da categoria físico, ou quantidade Ataque Especial caso o golpe seja da categoria especial.
 	\item \textbf{Denfese}. É quantidade de Defesa caso o golpe seja da categoria físico, ou quantidade Defesa Espcial caso o golpe seja da categoria especial.
 	\item \textbf{Base}. Base de força definido no golpe.
 	\item \textbf{Modifier}. É um conjunto de modificadores que são aplicados ao causar dano. Esses modificadores podem ser definidos pela seguinte equação:
@@ -230,7 +228,7 @@ Onde:
 	\item \textbf{STAB} É um bônus que é habilitado quando o golpe tem o mesmo tipo do Pokémon.
 	\item \textbf{Type} É o modificador baseado na vantagem, explicado na subseção anterior, os valores podem variar entre  0, 0.25, 0.5, 1, 2, e 4.
 	\item \textbf{Critical} Normalmente um golpe tem chance de crítico de 6.25\% caso esse acerto crítico ocorra o valor para Critical é de 1.5, caso contrário o valor é 1.
-	\item \textbf{other} São outros modificadores que podem ser adicionados por causa de items ou estados especiais que modifiquem o dano.
+	\item \textbf{other} São outros modificadores que podem ser adicionados por causa de itens ou estados especiais que modifiquem o dano.
 	\item \textbf{random} Por final é adicionado um valor aleatório entre 85\% e 100\%.
 \end{itemize}
 
@@ -238,17 +236,17 @@ Onde:
 
 Existem estados de batalha que pode mudar bastante a tomada de decisão de um agente, pois esses estados modificam bastante o ritmo da batalha.
 
-Os principais estados de batlhas que o Pokémon pode ser submetido são chamdos de Estados primários. Os Pokémons só podem ser afetados por apenas 1 estado primário de batalha, ou seja, caso tente ser aplicado um estado de batalha em um Pokémon que já está sofrendo um estado de batalha esse novo estado falhará. Os principais estados são:
+Os principais estados de batalhas que o Pokémon pode ser submetido são chamados de Estados primários. Os Pokémons só podem ser afetados por apenas 1 estado primário de batalha, ou seja, caso tente ser aplicado um estado de batalha em um Pokémon que já está sofrendo um estado de batalha esse novo estado falhará. Os principais estados são:
 
 \begin{itemize}
 	\item \textbf{BRN} Estado queimado, nesse estado o Ataque do Pokémon é reduzido em 50\% e, ao final de cada turno o Pokémon recebe 12,5\% da vida máxima como dano.
 	\item \textbf{FRZ} Estado congelado, nesse estado o Pokémon não pode utilizar nenhum golpe, a cada turno o Pokémon tem uma chance de 20\% de se descongelar.
-	\item \textbf{PAR} Estado paralizado, nesse estado o Pokémon tem 25\% de chance de errar seu golpe e, sua Velocidade é reduzido para 25\% do valor.
+	\item \textbf{PAR} Estado paralisado, nesse estado o Pokémon tem 25\% de chance de errar seu golpe e, sua Velocidade é reduzido para 25\% do valor.
 	\item \textbf{PSN} Estado envenenado, nesse estado o Pokémon perde $\frac{1}{16}$ de seu HP no final do turno, aumentando em $\frac{1}{16}$ para cada turno que ele continuar envenenado.
 	\item \textbf{SLP} Estado dormindo, nesse estado o Pokémon não pode atacar. Esse efeito tem duração de 1 até 3 turnos.
 \end{itemize}
 
-Existe outra categorias de efeitos chamado de efeitos secundários ou efeitos voláteis. Diferentemente dos estados primários, um Pokémon pode ter N desses efeitos aplicados. Existe uma grande lista de efeitos secundários. Um efeito secundário bastante conhecido é a confusão, onde o Pokémon fica confuso de 1 a 4 turnos, caso o Pokémon esteja confuso ele tem 50\% de chance de bater em si próprio ao invés de usar o golpe no inimigo.
+Existem outras categorias de efeitos chamado de efeitos secundários ou efeitos voláteis. Diferentemente dos estados primários, um Pokémon pode ter N desses efeitos aplicados. Existe uma grande lista de efeitos secundários. Um efeito secundário bastante conhecido é a confusão, onde o Pokémon fica confuso de 1 a 4 turnos, caso o Pokémon esteja confuso ele tem 50\% de chance de bater em si próprio ao invés de usar o golpe no inimigo.
 
 \subsubsection{Final de Batalha}
 
