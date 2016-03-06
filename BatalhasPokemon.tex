@@ -15,7 +15,7 @@ Ainda segundo \cite{7336034} o objetivo dos jogos de RPG de Pokémon é capturar m
 
 Pokémon Showdown é um simulador de batalhas Pokémon. Permitindo jogar batalhas \textit{online}! Jogar com times gerados aleatoriamente, ou construindo seu próprio time (\cite{pokemonshowdown1}).
 
-Esse ambiente é totalmente \textit{on-line} e pode ser jogado via navegador de internet. O código fonte do jogo é disponibilizado sobre a licença MIT. O dono do projeto é Guangcong Luo e todo código fonte do projeto pode ser encontrado no Git Hub.
+Esse ambiente é totalmente \textit{on-line} e pode ser jogado via navegador de internet. O código fonte do jogo é disponibilizado sobre a licença MIT. O dono e principal mantenedor do projeto é Guangcong Luo e todo código fonte do projeto pode ser encontrado no Git Hub.
 
 O ambiente conta um grande número de jogadores simultâneos. Durante o desenvolvimento do trabalho foi verificado que muitas vezes o número de usuários simultâneos ultrapassou a quantidade de 10.000.
 
@@ -95,7 +95,7 @@ Finalmente o cálculo da estatística atual é dado pela seguinte equação:
 V = \Bigg( \frac{ \Big( ( 2 \times Base + IV + \frac{EV}{4} ) \times level \Big) }{100} + 5 \Bigg) \times Nature
 \end{equation}
 
-Essa equação vale para todos os atributos menos para o HP. A Equação do HP tem uma pequena modificação que é mostrada na equação a seguir:
+Essa equação vale para todos os atributos menos para o atributo HP. A Equação do HP tem uma pequena modificação que é mostrada na equação a seguir:
 
 \begin{equation}
 V = \Bigg( \frac{ \Big( ( 2 \times Base + IV + \frac{EV}{4} ) \times level \Big) }{100} + level + 10 \Bigg)
@@ -109,7 +109,7 @@ Onde:
 	\item \textbf{Nature} Se a natureza do Pokémon favorecer esse atributo o valor é atribuído 1.1, caso a natureza desfavoreça esse valor é 0.9 e caso a natureza não influa nesse atributo o valor é 1.
 \end{itemize}
 
-EVs, IVs e Natureza do Pokémon são importantes customizações que fazem um Pokémon ser diferente de outro Pokémon da mesma espécie. Na batalha esses 3 valores não são disponíveis para o seu adversário. 
+EVs, IVs e Natureza do Pokémon são importantes customizações que fazem um Pokémon ser diferente de outro, mesmo eles sendo da mesma espécie. Na batalha esses 3 valores não estão disponíveis para o seu adversário. 
 
 Para exemplificar e mostrar a diferença que a distribuição de valores pode causar, a seguir será calculado o atributo "Especial Ataque"  para 2 Pokémons da espécie Mewtwo ambos no nível 100. O Pokémon Mewtwo tem 154 pontos de Ataque Especial base.
 
@@ -169,11 +169,11 @@ Existe uma comunidade chamada Smogon \cite{smogon}, essa comunidade regula e def
 
 No modo OU Battles como o próprio nome sugere o jogador pode montar seu time com qualquer Pokémon do \textit{tier} OU e de \textit{tiers} inferiores, nesse modo todos os Pokémons se enfrentarão no mesmo nível.
 
-Em batalhas randômicas, para balancear os Pokémons de diferentes \textit{tiers} é atribuido diferentes níveis de acordo com o \textit{tier} do Pokémon. Pokémons NU batalham no nível 86, RU 82, UU 78, OU 74, \textit{Ubers} 70.
+Em batalhas randômicas, para balancear os Pokémons de diferentes \textit{tiers} é atribuído diferentes níveis de acordo com o \textit{tier} do Pokémon. Pokémons NU batalham no nível 86, RU 82, UU 78, OU 74, \textit{Ubers} 70.
 
 Em cada diferente modo de jogo o jogador tem sua pontuação de \textbf{Elo} que é uma pontuação no ranquemanto geral do jogo. Em cada jogo o jogador ganha ou perde pontos de Elo de acordo com o resultado da partida. A quantidade de pontuação ganha é feita pela diferença do seu Elo para o adversário. O jogo sempre tenta parear jogadores com pontuação de Elo semelhante.
 
-Por padrão cada jogador inicia com 1000 pontos de Elo. Em batalhas com níveis parecidos de Elo é comum ganhar/perder 20 pontos por partida. Atualmente os jogadores que lideram o ranqueamento de Random Battles têm cerca de 2.200 pontos.
+Por padrão cada jogador inicia com 1000 pontos de Elo. Em batalhas com níveis parecidos de Elo é comum ganhar/perder 20 pontos por partida. Atualmente os jogadores que lideram as colocações do modo Random Battle têm cerca de 2.200 pontos.
 
 \subsection{Sistema de batalhas}
 
@@ -181,9 +181,9 @@ Nessa subseção serão apresentados os principais aspectos de uma batalha, estes a
 
 O sistema de batalhas é baseado em dois jogadores em um sistema de turno, ou seja, a cada começo de turno, cada jogador escolhe qual ação irá tomar.
 
-No modo Random Battles um de seus Pokémons é escolhido aleatoriamente para começar a batalha. Em modos como OU Battles é possível escolher qual será o primeiro Pokémon em campo.
+No modo Random Battles um de seus Pokémons é escolhido aleatoriamente para começar a batalha. Em modos como OU Battles é possível escolher qual será o primeiro Pokémon em campo. Os Pokémons colocados em primeiro na batalha são chamados de \textit{lead} e são uma peça muito importante para o time.
 
-Em situações normais, cada turno o jogador pode escolher duas grandes ações. A primeira é utilizar um dos quatro golpes do pokémon. A segunda é trocar o Pokémon em campo para outro Pokémon desde que ele esteja vivo. Ao trocar de Pokémon você perde o seu turno, ou seja, logo que o Pokémon escolhido entrar em batalha ele tomará o golpe que o adversário escolheu no início de seu turno (caso o oponente não tenha escolhida trocar de Pokémon).
+Em situações normais, cada turno o jogador pode escolher duas grandes ações. A primeira é utilizar um dos quatro golpes do Pokémon. A segunda é trocar o Pokémon em campo para outro Pokémon desde que ele esteja vivo. Ao trocar de Pokémon você perde o seu turno, ou seja, logo que o Pokémon escolhido entrar em batalha ele tomará o golpe que o adversário escolheu no início de seu turno (caso o oponente não tenha escolhida trocar de Pokémon).
 
 Uma das primeiras situações onde os atributos do Pokémon são relevantes é para definir quem será o primeiro Pokémon a atacar. Em situações normais o primeiro Pokémon que ataca é aquele com Velocidade entre os dois.
 
@@ -191,9 +191,9 @@ Uma das primeiras situações onde os atributos do Pokémon são relevantes é para d
 
 Alguns tipos de Pokémons tem vantagem sobre outros tipos de Pokémons. A ideia é baseada no sistema papel pedra tesoura, onde o papel ganha de pedra, pedra ganha de tesoura e por sua vez tesoura ganha de papel.
 
-Porém no sistema de batalhas Pokémon essa mecânica é um pouco mais complexa. Além de existir 18 tipos diferentes de Pokémon, um Pokémon pode ter 2 tipos distintos.
+Porém no sistema de batalhas Pokémon essa mecânica é um pouco mais complexa. Além de existir 18 tipos diferentes de Pokémon, um Pokémon pode ter dois tipos distintos.
 
-A imagem a seguir foi retirada do site \cite{bulbapedia1} e contém uma tabela mostrando o modificador de dano para cada tipo de golpe em relação ao tipo do adversário. Ao escolher um golpe, o tipo (golpes tem apenas 1 tipo) desse golpe é confrontado nessa tabela de acordo com o tipo do adversário, caso o adversário tenha dois tipos a consulta nessa tabela é feita duas vezes e os modificadores são multiplicados gerando um modificar final.
+A imagem a seguir foi retirada do site \cite{bulbapedia1} e contém uma tabela mostrando o modificador de dano para cada tipo de golpe em relação ao tipo do adversário. Ao escolher um golpe, o tipo (golpes tem apenas um único tipo) desse golpe é confrontado nessa tabela de acordo com o tipo do adversário, caso o adversário tenha dois tipos a consulta nessa tabela é feita duas vezes e os modificadores são multiplicados gerando um modificar final.
 
 \begin{figure}[!h]
 \centering
@@ -233,6 +233,7 @@ Onde:
 \end{itemize}
 
 \subsubsection{Estados especiais de batalha}
+\label{sssec:estadosEspeciais}
 
 Existem estados de batalha que pode mudar bastante a tomada de decisão de um agente, pois esses estados modificam bastante o ritmo da batalha.
 
@@ -246,7 +247,7 @@ Os principais estados de batalhas que o Pokémon pode ser submetido são chamados 
 	\item \textbf{SLP} Estado dormindo, nesse estado o Pokémon não pode atacar. Esse efeito tem duração de 1 até 3 turnos.
 \end{itemize}
 
-Existem outras categorias de efeitos chamado de efeitos secundários ou efeitos voláteis. Diferentemente dos estados primários, um Pokémon pode ter N desses efeitos aplicados. Existe uma grande lista de efeitos secundários. Um efeito secundário bastante conhecido é a confusão, onde o Pokémon fica confuso de 1 a 4 turnos, caso o Pokémon esteja confuso ele tem 50\% de chance de bater em si próprio ao invés de usar o golpe no inimigo.
+Existem outras categorias de efeitos que são chamados de efeitos secundários ou efeitos voláteis. Diferentemente dos estados primários, um Pokémon pode ter N desses efeitos aplicados. Existe uma grande lista de efeitos secundários. Um efeito secundário bastante conhecido é a confusão, onde o Pokémon fica confuso de 1 a 4 turnos, caso o Pokémon esteja confuso ele tem 50\% de chance de bater em si próprio ao invés de usar o golpe no inimigo.
 
 \subsubsection{Final de Batalha}
 

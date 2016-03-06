@@ -10,19 +10,19 @@ O estudo de IA/IC (Inteligência artificial/Inteligência computacional) para jogo
 
 Jogos podem ser usados como cenário desafiador para avaliação de métodos de inteligência computacional, pois eles provêm elementos dinâmicos e competitivos que são pertinentes ao mundo real \cite{cig2014}.
 
-Segundo \cite{panoramaAIGames} durante os seminários em Dagstuhl(centro de pesquisa de ciência da computação na Alemanha) foi possível identificar dez grandes tópicos em IA/AC:
+Segundo \cite{panoramaAIGames} durante os seminários em Dagstuhl (centro de pesquisa de ciência da computação na Alemanha) foi possível identificar dez grandes tópicos em IA/AC:
 
 \begin{itemize}
-	\item  Aprendizado de comportamento para jogadores não humanos (JNH); 
-	\item  Busca e planejamento;
-	\item  Modelagem de personagens;
-	\item  Jogos como avaliação comparativa para Inteligência Artificial (IA);
-	\item  Geração de conteúdo procedural;
-	\item  Narrativa computacional;
-	\item  Agentes críveis;
-	\item  \textit{Game design} assistido por IA;
-	\item  IA para jogos em geral;
-	\item  IA em jogos comerciais.
+	\item Aprendizado de comportamento para jogadores não humanos (JNH); 
+	\item Busca e planejamento;
+	\item Modelagem de personagens;
+	\item Jogos como avaliação comparativa para Inteligência Artificial (IA);
+	\item Geração de conteúdo procedural;
+	\item Narrativa computacional;
+	\item Agentes críveis;
+	\item \textit{Game design} assistido por IA;
+	\item IA para jogos em geral;
+	\item IA em jogos comerciais.
 \end{itemize}
 
 Ainda segundo \cite{panoramaAIGames} todas as áreas de pesquisa podem ser vistas como potenciais influenciadores delas mesmas em algum grau. Essas conexões e interconexões geram outras áreas de pesquisa.
@@ -32,7 +32,7 @@ Nas próximas seções será feito uma revisão dos principais métodos que serão util
 \section{Algoritmos baseados em grafos}
 \label{sec:algoritmoGrafos}
 
-Um dos grandes desafios de um  agente e de um jogador dentro de um jogo é a tomada de decisão, expandindo um pouco essa ideia, pode-se dividir a tomada de decisão em partes menores: levantar opções, avaliar as opções e escolher qual pode conduzir o jogador a vitória dado um determinado cenário.
+Um dos grandes desafios de um agente e de um jogador dentro de um jogo é a tomada de decisão, expandindo um pouco essa ideia, pode-se dividir a tomada de decisão em partes menores: levantar opções, avaliar as opções e escolher qual pode conduzir o jogador a vitória dado um determinado cenário.
 
 Uma algoritmo muito comum para esse cenário é o \textit{minimax}. Segundo os autores \cite{browne12asurvey} jogos do mundo real normalmente envolvem uma estrutura de recompensas em que apenas as recompensas obtidas em estados terminais (jogadas que definem quem é o vencedor) do jogo descrevem com precisão o quão bem cada jogador está se saindo. Os jogos são, portanto, normalmente modelado como as seguintes árvores de decisões:
 
@@ -42,11 +42,11 @@ Uma algoritmo muito comum para esse cenário é o \textit{minimax}. Segundo os aut
 	
 	\item \textbf{Expectimax} generaliza \textit{minimax} para jogos estocásticos em que as transições de estado para estado são probabilística. O valor de um nó é a soma dos valores dos nós filhos ponderados por suas probabilidades (possibilidade de um estado ocorrer). Estratégias de poda de árvore são mais complexas devido à probabilidade de um nó acontecer.
 
-	\item \textbf{Miximax} é semelhante ao \textit{expectimax} de apenas um jogador e é usado principalmente em jogos com informações não precisas. Ele usa uma estratégia  predefinida para tratar a decisão do oponente como nós probabilísticos.
+	\item \textbf{Miximax} é semelhante ao \textit{expectimax} de apenas um jogador e é usado principalmente em jogos com informações não precisas. Ele utiliza uma estratégia predefinida para tratar a decisão do oponente como nós probabilísticos.
 	
 \end{itemize}
 
-O trabalho de \cite{campbell1983comparison} descreve o algoritmo de \textit{minimax} do seguinte modo: O algoritmo assume que existem dois jogadores chamados Max e Min, e atribui um valor para cada nó dentro da árvore (de decisão) do jogo (e também para nó raiz) do seguinte modo: Nós folhas ou terminais podem propagar o valor \textit{minimax} recursivamente. Se a jogada p do jogador Max for escolhida, então o valor de p é o máximo valor dos filhos de p. Similarmente, se for a vez do jogador Min será escolhido o menor valor dos sucessores de p.
+O trabalho de \cite{campbell1983comparison} descreve o algoritmo de \textit{minimax} do seguinte modo: O algoritmo assume que existem dois jogadores chamados Max e Min, e atribui um valor para cada nó dentro da árvore (de decisão) do jogo (e também para nó raiz) do seguinte modo: Nós folhas ou terminais podem propagar o valor \textit{minimax} recursivamente. Se a jogada p do jogador Max for escolhida, então o valor de p é o máximo valor dos filhos de p. Similarmente, se for o turno do jogador Min será escolhido o menor valor dos sucessores de p.
 
 No trecho abaixo é apresentado o algoritmo do \textit{minimax}. O algoritmo analisa todas as possíveis jogadas até que sejam encontrados todos os nós que finalizam o jogo e retorna um valor chamado de heurística representando vitória, derrota ou empate.
 
@@ -79,7 +79,7 @@ Onde:
 
 \begin{itemize}
 	\item \textbf{node} Nó atual da árvore. Na primeira chamada é passado o nó raiz da árvore, ou seja, o estado atual do jogo.
-	\item \textbf{depth} Profundidade do nó. Inicialmente é passado a altura da árvore.
+	\item \textbf{depth} Profundidade do nó. Inicialmente é passada a altura da árvore.
 	\item \textbf{max} Booleano representando se a jogada analisada é do jogador \textbf{Max} ou \textbf{Min}.
 \end{itemize}
 
@@ -98,7 +98,7 @@ Outro problema do \textit{minimax} é a quantidade de nós que ele precisa analisa
 
 Uma solução comum para esse problema é definir um número máximo de profundidade para analisar, ou seja, ao invés do critério de parada do algoritmo recursivo ser nós folhas (terminais) pode-se definir uma profundidade máxima para o \textit{minimax}. Nessa abordagem muitas vezes não serão encontrados nós que representam fim de jogo, então é necessário fazer uma função de avaliação de heurística que analisa o estado do jogo, como foi apresentado na seção \ref{sec:agentesInteligentescontrajogadores}.
 
-Outra técnica muito utilizada para mitigar esse problema é a chamada poda \textit{alpha-beta}. Segundo \cite{knuth1976analysis} essa é técnica é usada geralmente para aumentar a velocidade de busca sem perder informação. Nessa técnica são ignorados nós e suas sub-árvores de jogadas incapazes de ser melhor que movimentos já conhecidos. Durante a análise das jogadas são definidas duas variáveis \textit{alpha} e \textit{beta}. \textit{Alpha} representa o valor máximo que o jogador Max pode fazer e \textit{beta} a pontuação mínima do jogador Min. A cada avaliação de nó esses limites são verificados, caso o valor da avaliação não estiver entre esses limites o nó e todas suas árvores são cortados.
+Outra técnica muito utilizada para mitigar esse problema é a chamada poda \textit{alpha-beta}. Segundo \cite{knuth1976analysis} essa é técnica é usada geralmente para aumentar a velocidade de busca sem perder informação. Nessa técnica são ignorados os nós e suas subárvores de jogadas incapazes de ser melhor do que movimentos já conhecidos. Durante a análise das jogadas são definidas duas variáveis \textit{alpha} e \textit{beta}. \textit{Alpha} representa o valor máximo que o jogador Max pode fazer e \textit{beta} a pontuação mínima do jogador Min. A cada avaliação de nó esses limites são verificados, caso o valor da avaliação não estiver entre esses limites o nó e todas suas árvores são cortados.
 
 Outra técnica de otimização do \textit{minimax} é a Árvore de Busca de Monte Carlo(MCTS). Segundo \cite{browne12asurvey} o processo de construção da MCTS é feita de modo incremental e assimétrico na seguinte forma: para cada iteração do algoritmo, uma "política de árvore"  é utilizada para definir o nó mais urgente da árvore atual. A política da árvore tenta balancear considerações da exploração (procura áreas que ainda não tenham sido bem amostradas) e aprofundamento (procura áreas que parecem ser promissoras). O nó escolhido é avaliado e todos seus ancestrais são atualizados com suas novas estatísticas.
 
@@ -186,7 +186,7 @@ Onde:
 \begin{itemize}
 	\item \textbf{s}. É o estado atual,
 	\item \textbf{a}. É a ação escolhida,
-	\item \textbf{$\gamma$}. É o fator de desconto ou taxa de aprendizagem. Segundo \cite{Mitchell:1997:ML:541177} esse valor pode ser qualquer constante entre $0 \leq \gamma \leq 1$. Se $\gamma$ é próximo de zero, o agente tenderá a considerar mais recompensas imediatas, se for próximo de 1 o agente considerará mais as futuras recompensas,
+	\item \textbf{$\gamma$}. É o fator de desconto ou taxa de aprendizagem. Segundo \cite{Mitchell:1997:ML:541177} esse valor pode ser qualquer constante entre $0 \leq \gamma \leq 1$. Se $\gamma$ é próximo de zero, o agente tenderá a considerar mais recompensas imediatas, se próximo de 1 o agente considerará mais as futuras recompensas,
 	\item \textbf{s'}. O próximo estado.
 	\item \textbf{a*}. Todas as ações do próximo estado.
 \end{itemize}
@@ -204,7 +204,7 @@ Segundo \cite{koehn1994combining} as redes neurais foram inventadas no espírito 
 
 Essas pequenas unidades, conexões e topologias podem ser comparadas a neurônios e sinapses. Um modelo bem comum e bastante utilizado é o chamado \textit{perceptron}. Segundo \cite{beiu2003survey} uma rede neural de \textit{perceptron} é composta por um grafo onde os nós são neurônios e as arestas são as sinapses. Essa rede tem alguns nós de entrada, e alguns (ao menos um) nós de saída.
 
-O modelo simples de perceptron funciona com saídas binárias, sendo muito utilizado para reconhecimento de padrões, ele funciona da seguinte forma:
+O modelo simples de \textit{perceptron} funciona com saídas binárias, sendo muito utilizado para reconhecimento de padrões, ele funciona da seguinte forma:
 
 \begin{itemize}
 	\item Uma vetor de entrada X, onde cada posição do vetor representa uma característica diferente da entrada.
@@ -212,7 +212,7 @@ O modelo simples de perceptron funciona com saídas binárias, sendo muito utiliza
 	\item Bias (b) é um valor de polarização que permite mudar a função de ativação para a esquerda ou para a direita, ou seja, ela permite melhor espalhar os resultados que a função de ativação gera esse valor também é ajustado durante o aprendizado.
 \end{itemize}
 
-A saída do perceptron pode ser definida pela seguinte equação:
+A saída do \textit{perceptron} pode ser definida pela seguinte equação:
 
 \begin{equation}
 y = \sigma( \displaystyle\sum_{j=1}^{n} w_j x_ij + b_i )
@@ -242,12 +242,12 @@ Onde:
 	\item \textbf{$\alpha$} taxa de aprendizagem onde $0 \leq \alpha \leq 1$. Valores baixos para $\alpha$ faz com que os pesos sejam ajustados suavemente.
 	\item \textbf{$t_j$} Resultado esperado.
 	\item \textbf{$x_j$} Resultado atual.
-	\item \textbf{$a_i$} Valor de correção. Se o peso não precisar	 ser ajustado o valor será 0, caso contrário será 1.
+	\item \textbf{$a_i$} Valor de correção. Se o peso não precisar ser ajustado o valor será 0, caso contrário será 1.
 \end{itemize}
 
 \subsection{Algoritmos genéticos}
 
-A primeira pesquisa na área de algoritmos genéticos foi feito por John Holland  no livro \textit{Adaptation in Natural and Artificial Systems}. Segundo \cite{mitchell1995genetic} algoritmos genéticos(GA) é uma abstração da evolução biológica, onde move-se uma população de cromossomos (representando candidatos a soluções de um determinado problema) para uma nova população, usando "seleção"  junto com operadores baseados em genéticas para cruzamentos e mutação. 
+A primeira pesquisa na área de algoritmos genéticos foi feito por John Holland no livro \textit{Adaptation in Natural and Artificial Systems}. Segundo \cite{mitchell1995genetic} algoritmos genéticos(GA) é uma abstração da evolução biológica, onde move-se uma população de cromossomos (representando candidatos a soluções de um determinado problema) para uma nova população, usando "seleção"  junto com operadores baseados em genéticas para cruzamentos e mutação. 
 
 Segundo \cite{485447} antes de aplicar o algoritmo genético, é necessário mapear qual será a arquitetura do cromossomo de modo que ele represente uma solução para o problema. Para usar o modo convencional do algoritmo genético com cromossomos de tamanhos fixos, é preciso:
 
@@ -276,4 +276,4 @@ No trabalho \textit{Combining genetic algorithms and neural networks: The encodi
 
 Existem também outros modos de aplicar algoritmos evolutivos em rede neurais, é comum encontrar abordagens onde o algoritmo genético é utilizado para fazer o treinamento de redes neurais. Segundo \cite{risi2014neuroevolution}, cada indivíduo é codificado em uma rede neural, e submetido para uma determinada tarefa por uma determinada quantidade de tempo. O desempenho da rede ou \textit{fitness} é então guardado e uma vez que os valores de aptidão (\textit{fitness}) para os genótipos (indivíduos) na população atual são determinados, uma nova população é gerada trocando as codificações do genótipo através de mutações e combinando os genótipos através de cruzamentos. Em geral, genótipos com alto \textit{fitness} tem uma alta chance de ser selecionado para reprodução e os seus descendentes substituem genótipos com valores de \textit{fitness} mais baixos, formando assim uma nova geração. 
 
-No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar reversi (jogo de tabuleiro), para isso, foi implementado uma população de 50 rede neurais evoluindo por 1000 gerações, para calcular o \textit{fitness} de cada rede neural a rede era submetida a 244 jogos contra um agente baseado em \textit{minimax}, a percentagem de vitória define o \textit{fitness} do indivíduo.
+No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar Reversi (jogo de tabuleiro), para isso, foi implementado uma população de 50 rede neurais evoluindo por 1000 gerações, para calcular o \textit{fitness} de cada rede neural a rede era submetida a 244 jogos contra um agente baseado em \textit{minimax}, a percentagem de vitória define o \textit{fitness} do indivíduo.

@@ -1,44 +1,44 @@
-	\chapter{Introdução}
-	\label{cap:introducao}
+\chapter{Introdução}
+\label{cap:introducao}
 
-	Com o aumento do poder computacional e a viabilidade de grandes empresas em construírem clusters de máquinas para processamento paralelo fomentou grandes avanços na área de Inteligência Artificial (IA), permitindo construções de algoritmos mais complexos e obtenção de resultados em larga-escala.
+Com o aumento do poder computacional e a viabilidade de grandes empresas em construírem clusters de máquinas para processamento paralelo fomentou grandes avanços na área de Inteligência Artificial (IA), permitindo construções de algoritmos mais complexos e obtenção de resultados em larga-escala.
 
-	Uma das sub-áreas de estudo de interesse em IA é a construção de agentes inteligentes capazes de tomar decisões de maneira autônoma para as mais diversas tarefas. Como exemplo é citado tarefas como geração de conteúdo procedural para jogos \cite{PCGsurvey2013}, geração de missões e desafios \cite{questGenerator2011}, agentes para jogos eletrônicos \cite{iaInGames}, dentre outras.
+Uma das subáreas de estudo de interesse em IA é a construção de agentes inteligentes capazes de tomar decisões de maneira autônoma para as mais diversas tarefas. Como exemplo é citado tarefas como geração de conteúdo procedural para jogos \cite{PCGsurvey2013}, geração de missões e desafios \cite{questGenerator2011}, agentes para jogos eletrônicos \cite{iaInGames}, dentre outras.
 
-	Especificamente sobre os agentes criados para jogos eletrônicos, temos que a tarefa desses agentes é a de vencer desafios lógicos ou de precisão de tal forma a vencer um determinado jogo eletrônico, o que geralmente é desafiador dadas as possíveis entradas e estados de saída, além de múltiplas formas de vencer o desafio.
+Especificamente sobre os agentes criados para jogos eletrônicos, temos que a tarefa desses agentes é a de vencer desafios lógicos ou de precisão de tal forma a vencer um determinado jogo eletrônico, o que geralmente é desafiador dadas as possíveis entradas e estados de saída, além de múltiplas formas de vencer o desafio.
 
-	A indústria de jogos eletrônicos, segundo \cite{gameindustry1}, teve uma receita de cerca de 90 bilhões de dólares em 2015 e de acordo com projeções do site \cite{pwc1} crescerá dentre 5 e 6\% por ano até 2019. Um dos principais interesses dessa indústria é a de criar jogos que capturem a atenção do jogador pelo maior período de tempo possível, para isso os jogos devem apresentar o nível adequado de desafio. Segundo \cite{aiForGames} existe um grande número de jogos em que o diferencial é sua inteligência artificial.
+A indústria de jogos eletrônicos, segundo \cite{gameindustry1}, teve uma receita de cerca de 90 bilhões de dólares em 2015 e de acordo com projeções do site \cite{pwc1} crescerá dentre 5 e 6\% por ano até 2019. Um dos principais interesses dessa indústria é a de criar jogos que capturem a atenção do jogador pelo maior período de tempo possível, para isso os jogos devem apresentar o nível adequado de desafio. Segundo \cite{aiForGames} existe um grande número de jogos em que o diferencial é sua inteligência artificial.
 
-	Nesses pontos, um agente inteligente pode contribuir sendo treinado para evoluir seu desafio juntamente com a evolução do jogador ou para testar a viabilidade em se completar um determinado estágio do jogo.
+Nesses pontos, um agente inteligente pode contribuir sendo treinado para evoluir seu desafio juntamente com a evolução do jogador ou para testar a viabilidade em se completar um determinado estágio do jogo.
 
-	Além da indústria de jogos, o estudo de agentes inteligentes em jogos eletrônicos é de interesse da área acadêmica, pois é possível criar desafios adaptados para diversos interesses e de diversos níveis de dificuldade. Por conta disso, surgiu uma comunidade científica para estudar a construção de agentes inteligentes em jogos eletrônicos (Computational Intelligence in Games - CIG) e foram criadas diversas competições onde técnicas poderiam ser testadas e comparadas.
+Além da indústria de jogos, o estudo de agentes inteligentes em jogos eletrônicos é de interesse da área acadêmica, pois é possível criar desafios adaptados para diversos interesses e de diversos níveis de dificuldade. Por conta disso, surgiu uma comunidade científica para estudar a construção de agentes inteligentes em jogos eletrônicos (Computational Intelligence in Games - CIG) e foram criadas diversas competições onde técnicas poderiam ser testadas e comparadas.
 
-	Um problema que essas competições compartilham é a impossibilidade de treinar esses agentes em um ambiente que contenham muitos jogadores humanos, dificultando assim desenvolver uma IA competitiva contra bons jogadores humanos.
+Um problema que essas competições compartilham é a impossibilidade de treinar esses agentes em um ambiente que contenham muitos jogadores humanos, dificultando assim desenvolver uma IA competitiva contra bons jogadores.
 
-	Para resolver essa questão, esse trabalho propõe a criação de uma API de comunicação com o jogo \textit{Pokémon Showdown!}, um simulador \textit{on-line} de batalhas \textit{Pokémon}.
+Para resolver essa questão, esse trabalho propõe a criação de uma API de comunicação com o jogo \textit{Pokémon Showdown!}, um simulador \textit{on-line} de batalhas \textit{Pokémon}. \textit{Pokémon Showdown!} é um ambiente totalmente \textit{on-line} onde joga-se apenas contra jogadores reais, existem vários modos de jogo, todos eles são um contra um jogador, cada usuário tem uma pontuação nos diferentes modos de jogo e o sistema encontra adversários com pontuação semelhante para realizar as batalhas.
 
-	\section{Motivação}
-	\label{sec:motivacao}
+\section{Motivação}
+\label{sec:motivacao}
 
-	Existem diversas finalidades para criação de agentes inteligentes para jogos. Podemos enumerar algumas como: testar se é possível um agente jogar um jogo tão bem quanto um jogador humano, testar algoritmos de aprendizados para agentes, criar agentes que se comportem como humanos entre outras finalidades.
+Existem diversas finalidades para criação de agentes inteligentes para jogos. Podemos enumerar algumas como: testar se é possível um agente jogar um jogo tão bem quanto um jogador humano, testar algoritmos de aprendizados para agentes, criar agentes que se comportem como humanos entre outras finalidades.
 
-	Esse trabalho explora a criação de agentes inteligentes que compitam em alto nível com jogadores humanos no sistema de batalhas \textit{Pokémon}.
+Esse trabalho explora a criação de agentes inteligentes que compitam em alto nível com jogadores humanos no sistema de batalhas \textit{Pokémon}.
 
-	Um dos grandes desafios na criação desses agentes é a adaptabilidade e a competitividade. Diferentes de jogos como xadrez, damas, \textit{reversi} e outros jogos de tabuleiro, em batalhas \textit{Pokémon} pouco se sabe do adversário até que comece o jogo, ou seja, invalidando qualquer tipo de técnica prevendo possíveis movimentos antes do jogo começar, já que cada time pode ser composto de uma infinidade de maneiras diferentes (no capítulo \ref{cap:batalhasPokemon} é apresentado com detalhes essas possiblidades). Para acentuar ainda mais essas propriedades os agentes irão treinar e competir no modo randômico, nesse modo a escolha do seu time e de seu adversário é feito pelo próprio sistema do jogo.
+Um dos grandes desafios na criação desses agentes é a adaptabilidade e a competitividade. Diferentes de jogos como xadrez, damas, \textit{reversi} e outros jogos de tabuleiro, em batalhas \textit{Pokémon} pouco se sabe do adversário até que comece o jogo, ou seja, invalidando qualquer tipo de técnica prevendo possíveis movimentos antes do jogo começar, já que cada time pode ser composto de uma infinidade de maneiras diferentes (no capítulo \ref{cap:batalhasPokemon} é apresentado com detalhes essas possiblidades). Para acentuar ainda mais essas propriedades os agentes irão treinar e competir no modo randômico, nesse modo a escolha do seu time e de seu adversário é feito pelo próprio sistema do jogo.
 
-	Por causa da característica de desconhecimento do time adversário, a utilização de técnicas de criação de árvores de possíveis jogadas do adversário é bastante prejudicada, pois o agente precisaria predizer os possíveis \textit{Pokémons} adversários assim como suas características, dificultando a utilização da técnica que ficou famosa pelo sistema \textit{Deep Blue} que segundo o trabalho \textit{Deep Blue System Overview} \cite{deepblue1} "O \textit{Deep Blue} é um massivo sistema paralelo para realização de busca em árvores de jogos de xadrez".
+Por causa da característica de desconhecimento do time adversário, a utilização de técnicas de criação de árvores de possíveis jogadas do adversário é bastante prejudicada, pois o agente precisaria predizer os possíveis \textit{Pokémons} adversários assim como suas características, dificultando a utilização da técnica que ficou famosa pelo sistema \textit{Deep Blue} que segundo o trabalho \textit{Deep Blue System Overview} \cite{deepblue1} "O \textit{Deep Blue} é um massivo sistema paralelo para realização de busca em árvores de jogos de xadrez".
 
-	\section{Objetivos}
-	\label{sec:objetivos}
+\section{Objetivos}
+\label{sec:objetivos}
 
-	O Objetivo desse trabalho é o desenvolvimento de agentes inteligentes que joguem e aprendam com milhares de jogadores humanos. Será implementada distintas técnicas para criação e aprendizado desses agentes. Durante o desenvolvimento da pesquisa será sumarizado a evolução dos agentes no sistema de ranqueamento do jogo e, essa posição será confrontada com a quantidade de treinamento que cada agente recebeu, podendo assim observar a curva de melhora em relação a quantidade de treinamento.
+O Objetivo desse trabalho é o desenvolvimento de agentes inteligentes que joguem e aprendam com milhares de jogadores humanos. Serão implementadas distintas técnicas para criação e aprendizado desses agentes. Durante o desenvolvimento da pesquisa será sumarizado a evolução dos agentes no sistema de ranqueamento do jogo e, essa posição será confrontada com a quantidade de treinamento que cada agente recebeu, podendo assim observar a curva de melhora em relação a quantidade de treinamento.
 
-	Para criação desses agentes foi desenvolvida uma API que permitirá a comunicação com o jogo \textit{Pokémon Showdown}. Inicialmente a API está disponibilizada apenas para linguagem JavaScript, mas durante o desenvolvimento do projeto será portada para Java através da tecnologia de WebSockets.
+Para criação desses agentes foi desenvolvida uma API que permitirá a comunicação com o jogo \textit{Pokémon Showdown}. Inicialmente a API está disponibilizada apenas para linguagem JavaScript, mas durante o desenvolvimento do projeto será portada para Java através da tecnologia de WebSockets.
 
-	\section{Principais contribuições}
-	\label{sec:principais}
+\section{Principais contribuições}
+\label{sec:principais}
 
-	O trabalho irá explorar a criação de agentes inteligentes adaptativos, num ambiente que pouco se sabe sobre o adversário. Os agentes terão informações apenas durante a batalha e, essas informações são apenas aquelas que o adversário realizar, por exemplo, o agente só saberá que adversário tem um \textit{Pokémon} até o mesmo usá-lo, os movimentos que o \textit{Pokémon} tem serão apenas conhecidos a medida que o adversário utilizá-los e mesmo assim existirá características que agente não tem como descobrir, como por exemplo a quantidade de ataque e defesa distribuída no monstro.
+O trabalho irá explorar a criação de agentes inteligentes adaptativos, num ambiente que pouco se sabe sobre o adversário. Os agentes terão informações apenas durante a batalha e, essas informações são apenas aquelas que o adversário realizar, por exemplo, o agente só saberá que adversário tem um \textit{Pokémon} até o mesmo usá-lo, os movimentos que o \textit{Pokémon} tem serão apenas conhecidos a medida que o adversário utilizá-los e mesmo assim existirá características que agente não tem como descobrir, como por exemplo a quantidade de ataque e defesa distribuída no monstro.
 
-	Além disso, a construção de uma API para acesso ao jogo contribuirá para que outros pesquisadores também possam desenvolver estudos e criar seus próprios agentes podendo criar-se uma cultura de competição entre agente inteligentes na plataforma \textit{Pokémon Showdown}.
+Além disso, a construção de uma API para acesso ao jogo contribuirá para que outros pesquisadores também possam desenvolver estudos e criar seus próprios agentes podendo criar-se uma cultura de competição entre agente inteligentes na plataforma \textit{Pokémon Showdown}.
 
