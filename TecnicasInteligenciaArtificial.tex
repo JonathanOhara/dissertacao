@@ -228,10 +228,10 @@ Onde:
 
 Até que para todas as entradas, todas saídas estejam corretas o vetor W e o \textit{bias} são atualizados. Segundo \cite{estebon1997perceptrons} ajustando os pesos das conexões entre as camadas, a saída do \textit{perceptron} pode ser "treinada" para corresponder com a saída desejada. O treino é completo quando um conjunto de entradas passa pela rede e os resultados obtidos são os resultados desejados. Se existir alguma diferença entre a saída atual e a saída desejada, os pesos são ajustados na camada de adaptação para produzir um conjunto de saída mais próximo aos valores desejados.
 
-A equação de treinamento pode ser escrita da seguinte forma:
+A equação de treinamento (ajuste de pesos) pode ser escrita da seguinte forma:
 
 \begin{equation}
-w'_ij = w_ij + \alpha(t_j - x_j) \times a_i
+w'_ij = w_ij + \alpha(t_j - e_j) \times x_ij
 \end{equation}
 
 Onde:
@@ -241,9 +241,69 @@ Onde:
 	\item \textbf{$w_ij$} é o valor atual do peso.
 	\item \textbf{$\alpha$} taxa de aprendizagem onde $0 \leq \alpha \leq 1$. Valores baixos para $\alpha$ faz com que os pesos sejam ajustados suavemente.
 	\item \textbf{$t_j$} Resultado esperado.
-	\item \textbf{$x_j$} Resultado atual.
-	\item \textbf{$a_i$} Valor de correção. Se o peso não precisar ser ajustado o valor será 0, caso contrário será 1.
+	\item \textbf{$e_j$} Resultado atual.
+	\item \textbf{$x_ij$} Valor de entrada.
 \end{itemize}
+
+No algoritmo \ref{alg:perceptron} é implementado o \textit{Perceptron} aplicado para reconhecimento de classes famosas em jogos medievais (mago, ladino, guerreiro, clérigo). A entrada do algoritmo é uma matriz 4x6 representando os atributos força, destreza, constituição, inteligência, sabedoria e carisma. Os valores de atributos e definições de classes são do sistema \textit{Dungeons \& Dragons} \cite{dndcs}.
+
+\begin{algorithm}
+\caption{Algoritmo Perceptron \label{alg:perceptron}}
+\begin{algorithmic}[1]
+\State $input\gets 
+ \begin{pmatrix}
+  10	&	16	&	12	&	16	&	13	&	8	\\
+  8		&	16	&	10	&	13	&	12	&	16	\\
+  16	&	9	&	15	&	13	&	11	&	14	\\
+  14	&	8	&	15	&	10	&	16	&	12	\\
+ \end{pmatrix}$ \Comment{Input attributes}
+\State $out\gets \begin{pmatrix}
+  1		&	0	&	0	&	0	\\
+  0		&	1	&	0	&	0	\\
+  0		&	0	&	1	&	0	\\
+  0		&	0	&	0	&	1	\\
+ \end{pmatrix}$ \Comment{Expected output}
+\State $L\gets 0.1$ \Comment{Learning Rate}
+\Procedure{Perceptron}{}
+\State $Neurons[4]\gets initializeNeuronsRandomly()$
+
+\While{ !trainned }
+	\State $trainned\gets true$
+	
+	\For{each neuron $N$ \Pisymbol{psy}{206} $Neurons$ }
+		\State $i\gets 0$
+		
+		\For{ $j=0$ to $4$ } \Comment{Number of classes}
+			\State $total\gets 0$
+			
+			\For{ $k=0$ to $6$ } \Comment{Number of attributes}
+				\State $total\gets total + ( input[j][k] \times N.weights[k] + N.bias ) $
+			\EndFor	
+			
+			\If {$total > 0$} 
+				\State $total\gets 1$
+			\Else
+				\State $total\gets 0$
+			\EndIf
+			
+			\If {$out[i][j] \neq total$} 
+				\State $trainned\gets false$
+				
+				\For{ $k=0$ to $6$ } \Comment{Updating Weights}
+					\State $N.weights[k]\gets N.weights[k] + L \times ( out[j][k] - total ) \times input[j][k] $
+					
+					\State $N.bias\gets N.bias + L \times ( out[j][k] - total ) $
+				\EndFor	
+				
+			\EndIf
+		\EndFor
+		\State $i\gets i + 1$
+	\EndFor
+\EndWhile
+
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
 \subsection{Algoritmos genéticos}
 
