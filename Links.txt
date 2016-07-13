@@ -27,8 +27,11 @@ A Panorama of Artificial and Computational Intelligence in Games -> http://julia
 
 A Survey of Monte Carlo Tree Search Methods -> http://ccg.doc.gold.ac.uk/papers/browne_tciaig12_1.pdf
 
-
-
+Sidekick Agents for Sequential Planning Problems - file:///C:/Users/OHARA/Downloads/868823103-MIT.pdf
+Aircraft Collision Avoidance Using Monte Carlo Real-Time Belief Space Search - https://dspace.mit.edu/bitstream/handle/1721.1/54226/601707491-MIT.pdf?sequence=2
+Agent Based Personalized Information Retrieval - https://dspace.mit.edu/bitstream/handle/1721.1/43539/38277335-MIT.pdf?sequence=2
+Deep Learning for Reward Design to Improve Monte Carlo Tree Search in ATARI Games - https://arxiv.org/pdf/1604.07095v1.pdf
+Mastering the Game of Go with Deep Neural Networks and Tree Search - https://gogameguru.com/i/2016/03/deepmind-mastering-go.pdf
 
 
 

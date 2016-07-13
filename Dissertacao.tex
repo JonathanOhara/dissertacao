@@ -1,0 +1,60 @@
+\documentclass{ufabc}
+
+\usepackage{amscd}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{epsf}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{pifont}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage[only,ninrm,elvrm,twlrm,fivrm,sixrm,sevrm,egtrm,egtit,tenrm,tenit,twlit,frtnrm]{rawfonts}
+
+\instituicao{Universidade Federal do ABC\\Centro de Matemática, Computação e Cognição (CMCC)}
+\curso{Pós-Graduação}{Ciência da Computação}{Mestre}
+\titulo{Agentes inteligentes para batalhas Pokémon}
+\autor{Jonathan Ohara}{de Araujo}
+\orientador{Orientador: Prof. Dr. Fabrício Olivetti de França}
+\coordenador{Prof. Dr. João Paulo Góis}	
+\documento{Qualificação}
+\convidados{Prof. Dr. Fabrício Olivetti de França}{Prof.Dr. João Paulo Gois}{Prof.Dr. André Luiz Brandão}{Prof.Dr. Denise Hideko Goya (Suplente)}
+	
+\date{03}{2016}
+
+% novos comandos para qualificacao
+\newcommand{\kCC}{\emph{kCC}}
+\newcommand{\kCH} {\emph{kCH}}
+\newcommand{\uCC}{\emph{1CC}}
+\newcommand{\uCH} {\emph{1CH}}
+\newcommand{\dCC}{\emph{2CC}}
+\newcommand{\dCH} {\emph{2CH}}
+\newcommand{\PTH}{\mathcal{P}}
+\newcommand{\Tau}{\mathcal{T}}
+\newcommand{\NP}{{\rm NP}}
+
+\begin{document}
+	\maketitle
+
+	\pagenumbering{roman}
+	
+%	\include{Resumo}
+%	\include{Abstract}	
+
+	\tableofcontents
+	
+	\listoffigures
+	
+	\listoftables
+
+	\newpage
+	
+	\pagenumbering{arabic}
+
+	\include{MCTS}
+
+	\bibliographystyle{apalike}	
+	\bibliography{Bibliografia}
+
+\end{document}

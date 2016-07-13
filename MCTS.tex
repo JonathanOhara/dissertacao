@@ -1,0 +1,174 @@
+\chapter{Árvore de busca Monte Carlo}
+\label{chap:arvoreBuscaMonteCarlo}
+
+\section{Introdução}
+
+Nesse capítulo vamos discutir sobre árvore de busca Monte Carlo (MCTS) técnica muito utilizada para resolução de jogos de duas pessoas baseados em turnos. Um dos grandes problemas das árvores de busca é o crescimento exponencial de acordo com o número decisões, pois a construção e a busca nessas árvores podem levar muito tempo. O MCTS funciona muito bem para problemas onde o tempo de resposta é limitado e o espaço de busca da árvore pode crescer muito. Isso ocorre em batalhas Pokémon, pegando dados de 1.000 batalhas de um dos agentes, temos que cada partida dura em média 40 turnos (contando os turnos dos dois jogadores) e, em cada turno é comum ter entre 4 e 9 diferentes escolhas.
+
+O termo Monte Carlo foi utilizado pela primeira em métodos matemáticos para o desenvolvimento de armas nucleares em 1940 (\cite{Kalos:1986:MCM:7050}). Segundo \cite{kleij2010monte} esse método matemático se referia a utilizar amostras aleatórias para estimar soluções de problemas que eram muito difíceis de encontrar analiticamente. Mais tarde esse método foi aplicado na computação e, principalmente, em árvores de busca. O método de Árvore de busca Monte Carlo se refere a encontrar soluções ótimas em um determinado domínio utilizando de amostras aleatórias no espaço de decisão e construindo uma árvore de busca de acordo com os resultados (\cite{browne12asurvey}).
+
+\section{Conceito}
+
+A árvore de busca Monte Carlo é um algoritmo baseado em simulação frequentemente usado em jogos. A ideia principal é iterativamente rodar simulações do nó raiz da árvore até um nó terminal, incrementalmente crescendo uma árvore onde o nó raiz é o estado atual do jogo (\cite{tak2014monte}).
+
+O algoritmo de MCTS é um processo iterativo que ocorre até que um determinado critério de parada seja alcançado. Segundo \cite{browne12asurvey}, geralmente essa iteração é limitada por algum recurso computacional como tempo, memória ou algum contador de iteração. No agente para Pokémon Showdown será aplicado o limite de tempo, uma vez que existe um limite para cada turno.
+
+Pode-se descrever cada iteração do algoritmo em quatro passos básicos:
+
+\begin{itemize}
+	
+	\item \textbf{Seleção} Começando pelo nó raiz da árvore, um nó filho é escolhido de acordo com a \textit{política de árvore} até que seja encontrado um \textit{nó expandível}. Política de árvore é a estratégia de qual nó escolher, segundo \cite{browne12asurvey} essa política tem que balancear escolher nós pouco visitados e aprofundar nós que parecem promissores. Um nó é expandível quando ele não é nó folha e ele ainda não foi visitado.
+	
+	\item \textbf{Expansão} É adicionado um ou mais nós filhos no nó escolhido de acordo com as possíveis ações naquele estado.
+
+	\item \textbf{Simulação} Simula uma ou mais ações dos novos nós de acordo com a política padrão para produzir uma saída. Política padrão é a estratégia de como rodar as simulações até sua conclusão.
+	
+	\item \textbf{Retro propagação} O resultado (valor) da simulação é propagado para todos os pais do nó folha atualizando suas estatísticas.
+	
+\end{itemize}
+
+O algoritmo a seguir mostra o procedimento básico do MCTS:
+
+\begin{algorithm}
+\caption{Algoritmo MCTS}
+\label{alg:mcts}
+\begin{algorithmic}[1]
+\Procedure{MCTS}{$s_{0}$}
+	\State $\upsilon_{0}\gets$ criar nó raiz com estado $s_{0}$
+	\While{recurso computacional}
+		\State $\upsilon_{1}\gets$ \Call{Selecionar}{$\upsilon_{0}$}
+		\State $s_{1}\gets$ \Call{Expandir}{$\upsilon_{1}$}
+		\State $\Delta\gets$ \Call{Simular}{$s_{1}$}
+		\State \Call{RetroPropagar}{$\upsilon_{1}$, $\Delta$}
+	\EndWhile
+	
+	\State \Return $a$(\Call{MelhorFilho}{$\upsilon_{0}$})
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Onde:
+
+\begin{itemize}
+	
+	\item $\upsilon_{0}$: Nó raiz correspondente ao estado $s_{0}$.
+	
+	\item $\upsilon_{1}$: Último nó encontrado durante a política de árvore.
+	
+	\item $s_{1}$: Novo estado após ocorrer a expansão de $\upsilon_{1}$.
+
+	\item $\Delta$: Resultado encontrado em um nó.
+	
+	\item $a$(\Call{MelhorFilho}{$\upsilon_{0}$}: Ação $a$ a ser tomada para alcançar o melhor nó filho a partir de $\upsilon_{0}$. O conceito de melhor filho varia entre as diferentes implementações do MCTS.
+	
+\end{itemize}
+
+Na figura \ref{fig:treePolicy}(\cite{gelly2011monte}) é mostrado cinco simulações do algoritmo MCTS e a relação entre a política de árvore e política padrão. O resultado é igual a 1 se o jogador de cor preta vencer e 0 caso branco vencer. Dentro do nó contém pontuação no formato vitória/visitas.
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=16cm]{figures/politicasMCTS.png}
+\caption[Políticas MCTS]{Política de árvore e política padrão.}
+\label{fig:treePolicy}
+\end{figure}
+
+Segundo \cite{schadd2009monte} ao finalizar o MCTS existe quatro critérios de como escolher o melhor filho:
+
+\begin{itemize}
+	
+	\item \textbf{Filho máximo}: Seleciona o filho com valor mais alto.
+	
+	\item \textbf{Filho robusto}: Seleciona o filho com o maior número de visitas.
+	
+	\item \textbf{Filho máximo-robusto}: Selecione o filho que tem tanto o maior número de visita e o valor mais alto. Se não existir esse filho, é melhor continuar a busca até achar um filho máximo-robusto do que escolher um filho com baixo número de visitas.
+	
+	\item \textbf{Filho seguro}: Selecione o filho com menor chance de ter resultado negativo.
+	
+\end{itemize}
+
+\section{Implementações MCTS}
+
+A implementação mais popular do algoritmo MCTS é o \textit{Upper Confidence Bound for Trees} (UCT) (\cite{browne12asurvey}). Existem outras variações como o Online Outcome Sampling (OOS) (\cite{Lanctot2014}) ou utilizando Regret Matching junto com MCTS (\cite{tak2014monte}).	
+
+Diferente dos jogos de turnos tradicionais onde temos turnos sequenciais uniformes, ou seja, primeiro o jogador A depois o B até que o jogo termine, em batalhas Pokémon as escolhas são feitas simultaneamente e a ordem de execução das ações escolhidas depende de atributos do Pokémon, da ação escolhida e outros efeitos especiais. Segundo \cite{tak2014monte} o algoritmo de MCTS que obteve maior sucesso em jogos com turnos simultâneos é o UCT dissociado.
+
+\section{Upper Confidence Bound for Trees (UCT)}
+
+Um dos grandes dilemas na definição de política de árvore é como balancear as escolhas entre explorar novos nós para fugir de máximos locais e aprofundar de uma subárvore existente podendo achar melhores resultados ou garantindo uma maior robustez na avaliação de um nó. Segundo \cite{auer2002finite} o Upper Confidence Bound for Trees (UCT) resolve essa questão de maneira ótima até um fator constante.
+
+O algoritmo UCT pode ser decomposto em duas partes: MCTS e Upper Confidence Bounds (UCB). Sua primeira implementação formal foi em 2006 por Kocsis e Szepesvari \cite{kocsis2006bandit}. O algoritmo UCB entra como uma política de árvore para implementação de MCTS.
+
+
+\subsection{Upper Confidence Bounds (UCB)}
+
+O algoritmo mais tradicional de Upper Confidence Bounds é o UCB1 (\cite{auer2002finite}) que foi inicialmente aplicado para o problema \textit{multiarmed bandit}. Segundo \cite{auer2002using} o termo \textit{multiarmed bandit problem} ou problema dos caça-níqueis (ou mais precisamente "problema dos K caça-níqueis") reflete o problema de um apostador em uma sala com várias máquinas de caça níqueis. Em cada tentativa o apostador tem que decidir em qual máquina ele quer jogar. Para maximizar o ganho total ou recompensa, sua escolha se baseia em recompensas anteriormente coletadas em cada máquina.
+
+O UCB1 pode ser definido pela seguitne equacao:
+
+\begin{equation}
+UCB1 = \overline{x}_{j} + \sqrt{\frac{2 \ln n}{n_{j}}}
+\end{equation}
+
+Onde $\overline{x}_{j}$ é a média da recompensa paga pela máquina $j$, $n_{j}$ é o numero de vezes em que foi jogado na máquina $j$ e $n$ é a soma de quantas vezes foram em jogadas em todas as máquinas.
+
+\subsection{Política de árvore UCB1}
+
+A aplicação do UCB1 como política de árvore funciona do seguinte modo: no processo de seleção a escolha pode ser modelada com um problema \textit{multiarmed bandit} independente. A utilizicação do MCTS com qualquer política de árvore UCB é chamada de UCT.
+
+Uma variação proposta por \cite{kocsis2006improved} chamada de \textit{plain UCT} provou ter resultados muito superiores ao UCT comum. Ainda segundo \cite{kocsis2006improved} com essa modificação a chance de selecionar o melhor movimento  converge em 1 e, através de testes empíricos foi observado que é mais rápido que outros algoritmos de busca em árvore como o \textit{alpha-beta}.
+
+A equação do \textit{plain UCT} é definida da seguinte forma:
+
+\begin{equation}
+UCT = \overline{x}_{j} + 2C_{p} \sqrt{\frac{2 \ln n}{n_{j}}}
+\end{equation}
+
+Onde $C_{p} > 0$ é uma constante. O valor é sugerido como $C_{p} = \frac{1}{\sqrt{2}}$ e pode ser ajustado para mais ou menos para regular o nível de exploração.
+
+\subsection{Grupos de Movimentos}
+
+Um aprimoramento para o UCT que foi utilizado neste trabalho é chamado de grupos de movimentos. Proposto por \cite{childs2008transpositions} essa melhoria diminui consideravelmente a quantidade de ramos da árvore Monte Carlo. A técnica consiste em criar uma nova camada onde todas as possíveis ações são separadas em grupos e o UCB1 é usado para selecionar qual grupo será escolhido.
+
+No agente utilizando MCTS foi aplicado nas escolhas dos jogadores. Uma vez que não é conhecido quais movimentos o Pokémon adversário tem (cada Pokémon pode ter apenas 4 golpes dentre dezenas de golpes que cada diferente Pokémon pode aprender), ficaria muito custoso criar um ramo para cada possível golpe de cada Pokémon (o Pokémon da Espécie Mew por exemplo, tem disponível mais 120 diferentes movimentos).
+
+Os grupos de movimentos implementados foram os seguintes:
+
+\begin{itemize}
+	
+	\item \textbf{Grupo A}: Utilizar golpe de dano super efetivo. Um golpe super efetivo é um golpe que recebe um acréscimo de $ 2 \times$ ou $ 4 \times$ de sua base de ataque de acordo com o tipo do golpe e do tipo do Pokémon atingido (definido por um sistema de vantagens e desvantagens explicadas no capítulo ???).
+	
+	\item \textbf{Grupo B}: Utilizar outro golpe de dano qualquer.
+	
+	\item \textbf{Grupo C}: Utilizar golpe de alteração de estado. Golpe de alteração de estado podem ser golpes que enfraqueçam o inimigo, fortaleça um aliado ou aplique um estado negativo (paralisar, envenenar e etc).
+	
+	\item \textbf{Grupo D}: Trocar para algum Pokémon que tenha algum golpe super efetivo (Grupo A) contra o atual inimigo.
+	
+	\item \textbf{Grupo E}: Trocar para outro Pokémon qualquer.
+	
+\end{itemize}
+
+Antes de cada possível golpe ser encaixado em cada grupo é verificado a imunidade do Pokémon adversário a esse golpe. Caso o Pokémon adversário seja imune ou o golpe não tenha efeito (como por exemplo, curar quando os pontos de vidas já estão 100\%, tentar aplicar o estado de paralização em um Pokémon já paralisado, entre outros) o movimento é descartado não entrando para nenhum grupo.
+
+Caso um grupo não contenha nenhuma ação o grupo é descartado da fase de seleção e expansão do MCTS. No caso de existir mais de uma ação, a escolha é feita diferente para cada grupo, conforme as seguintes regras:
+
+\begin{itemize}
+	
+	\item \textbf{Grupo A e B}: é definido por qual golpe tem maior dano bruto (dano antes das reduções). Definido pela equação:
+	
+	\begin{equation}
+		danobruto = efetividade \times stab \times baseforca
+	\end{equation}
+	
+	Onde:
+	
+		\subitem \textbf{efetividade}: $\frac{1}{4}$ (super não efetivo), $\frac{1}{2}$ (não efetivo), $1$, $2$ (efetivo) e $4$ (super efetivo).
+		
+		\subitem \textbf{stab}: $1$ caso o tipo do Pokémon seja diferente do tipo do golpe e $2$ caso sejam do mesmo tipo.
+		
+		\subitem \textbf{baseforca}: Força base do golpe.
+	
+	\item \textbf{Grupo C}: Escolhido aleatoriamente.
+	
+	\item \textbf{Grupo D e E}: Maior quantidade de HP e depois a maior quantidade do atributo velocidade.
+	
+\end{itemize}
