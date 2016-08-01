@@ -35,13 +35,37 @@ Ainda na teoria do processo de tomada de decisão, \cite{guidebookDecisionMaking}
 	
 \end{itemize}
 
-Nos jogos, segundo \cite{Millington:2009:AIG:1795711} a entrada da tomada de decisão é o conhecimento que tal personagem tem e a saída é a ação a ser realizada. O conhecimento pode ser dividio em interno e externo. Conhecimento externo é a informação que o personagem tem sobre o ambiente em sua volta: posição dos outros personagens, o leiaute da fase, se um interruptor foi ligado, a direção que um barulho veio, e assim por diante. Conhecimento interno é a informação sobre o estado interno do personagem ou pensamentos internos como: sua saúde, objetivos, seu passado, e assim por diante.
+Nos jogos, segundo \cite{Millington:2009:AIG:1795711} a entrada da tomada de decisão é o conhecimento que tal personagem tem e a saída é a ação a ser realizada. O conhecimento pode ser dividio em interno e externo. Conhecimento externo é a informação que o personagem tem sobre o ambiente em sua volta: posição dos outros personagens, o leiaute da fase, se um interruptor foi ligado, a direção que um barulho veio, e assim por diante. Conhecimento interno é a informação sobre o estado interno do personagem ou pensamentos internos como: sua saúde, objetivos, seu passado, e assim por diante. Ainda segundo \cite{Millington:2009:AIG:1795711} a representação do conhecimento está intrinsecamente ligado com a maioria dos algoritmos de tomada de decisão.
+
+\section{Árvore de decisão}
+\label{sec:tomadaDecisao}
+
+Árvores de decisão é uma maneira muito clara e natural de representar uma cadeia de decisões e suas consequências. Segundo \cite{Millington:2009:AIG:1795711} árvores de decisão são rápidas, facéis de implementar, e simples de entender. Elas são a técnica mais simples de tomada de decisão. Outra vantagem é a questão de ser modular e muito fácil de ser criada.
+
+Um modo muito comum de representar árvores de decisão para estratégias simples é o fluxograma. Segundo \cite{Millington:2009:AIG:1795711} as decisões árvore de decisões representadas por fluxogramas tem normalmente duas resposta (sim e não por exemplo). Na imagem \ref{fig:fluxogramaInimigos} é mostrado um diagrama simples de estratégia para um inimigo, nesse fluxograma o personagem fica patrulhando até achar um inimigo, ao ver um inimigo o personagem se aproxima se necessário e o ataca.
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=16cm]{figures/fluxograma inimigo.png}
+\caption[Fluxograma estratégia inimigo]{Fluxograma Simples de estratégia para inimigos.}
+\label{fig:fluxogramaInimigos}
+\end{figure}
 
 \section{Introdução MCTS}
 
 Nesse capítulo vamos discutir sobre árvore de busca de Monte Carlo (do inglês Monte Carlo Tree Search - MCTS) técnica muito utilizada para resolução de jogos de duas pessoas baseados em turnos. Um dos grandes problemas das árvores de busca é o crescimento exponencial de acordo com o número decisões, pois a construção e a busca nessas árvores podem levar muito tempo. O MCTS funciona muito bem para problemas onde o tempo de resposta é limitado e o espaço de busca da árvore pode crescer muito. Isso ocorre em batalhas Pokémon, pegando dados de 1.000 batalhas de um dos agentes, temos que cada partida dura em média 40 turnos (contando os turnos dos dois jogadores) e, em cada turno é comum ter entre 4 e 9 diferentes escolhas.
 
 O termo Monte Carlo foi utilizado pela primeira em métodos matemáticos para o desenvolvimento de armas nucleares em 1940 (\cite{Kalos:1986:MCM:7050}). Segundo \cite{kleij2010monte} esse método matemático se referia a utilizar amostras aleatórias para estimar soluções de problemas que eram muito difíceis de encontrar analiticamente. Mais tarde esse método foi aplicado na computação e, principalmente, em árvores de busca. O método de árvore de busca de Monte Carlo se refere a encontrar soluções ótimas em um determinado domínio utilizando de amostras aleatórias no espaço de decisão e construindo uma árvore de busca de acordo com os resultados (\cite{browne12asurvey}).
+
+%Falar sobre state Machines%
+
+\section{Minimax}
+
+%
+Minimax:
+- uso dessas árvores na literatura e problemas encontrados
+- soluções para esses problemas
+%
 
 \section{Conceito}
 
