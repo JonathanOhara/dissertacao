@@ -51,13 +51,25 @@ Um modo muito comum de representar árvores de decisão para estratégias simples é
 \label{fig:fluxogramaInimigos}
 \end{figure}
 
-\section{Introdução MCTS}
-
-Nesse capítulo vamos discutir sobre árvore de busca de Monte Carlo (do inglês Monte Carlo Tree Search - MCTS) técnica muito utilizada para resolução de jogos de duas pessoas baseados em turnos. Um dos grandes problemas das árvores de busca é o crescimento exponencial de acordo com o número decisões, pois a construção e a busca nessas árvores podem levar muito tempo. O MCTS funciona muito bem para problemas onde o tempo de resposta é limitado e o espaço de busca da árvore pode crescer muito. Isso ocorre em batalhas Pokémon, pegando dados de 1.000 batalhas de um dos agentes, temos que cada partida dura em média 40 turnos (contando os turnos dos dois jogadores) e, em cada turno é comum ter entre 4 e 9 diferentes escolhas.
-
-O termo Monte Carlo foi utilizado pela primeira em métodos matemáticos para o desenvolvimento de armas nucleares em 1940 (\cite{Kalos:1986:MCM:7050}). Segundo \cite{kleij2010monte} esse método matemático se referia a utilizar amostras aleatórias para estimar soluções de problemas que eram muito difíceis de encontrar analiticamente. Mais tarde esse método foi aplicado na computação e, principalmente, em árvores de busca. O método de árvore de busca de Monte Carlo se refere a encontrar soluções ótimas em um determinado domínio utilizando de amostras aleatórias no espaço de decisão e construindo uma árvore de busca de acordo com os resultados (\cite{browne12asurvey}).
-
 %Falar sobre state Machines%
+
+Outro modo de representar comportamentos de certos elementos é através de máquinas de estados finitos (do inglês Finite State Machine - FSM). \cite{wright2012finite} define o modelo conceitual de FSM da seguinte forma:
+
+\begin{itemize}
+	
+	\item O sistema (objeto que será modelado como uma FSM) deve ser descrevível como uma máquina finita de estados.
+	
+	\item O sistema precisa ter um número finito de entradas e/ou eventos que podem disparar transações entre estados.
+
+	\item O comportamento do sistema dado um ponto no tempo depende do estado atual e da entrada ou evento que ocorrerá naquele tempo.
+	
+	\item Para cada possível estado do sistema, o comportamento é definido para cada entrada ou evento possível.
+	
+	\item O sistema tem um estado inicial particular.
+	
+\end{itemize}
+
+O modo mais comum de representar o processo de decisão de personagens em jogos digitais é através de máquina de estados finitos (\cite{diller2004behavior}). Ainda segundo \cite{diller2004behavior} desenvolvedores de jogos comerciais estão muito mais interessados em uma "ilusão de inteligência" (\cite{diller2004behavior}). Muitas vezes os personagens irão agir de limitados modos diferentes, por isso máquinas de estados finitos funcionam muito bem, como acontece no jogo Halo da Bungie Software, onde os guerreiros da raça Convenant(inimitogs) ficam no estado "patrulha" até perceber (por som ou visão) um jogador, em seguida, ele irá alternar para o modo ataque(\cite{Millington:2009:AIG:1795711}).
 
 \section{Minimax}
 
@@ -66,6 +78,16 @@ Minimax:
 - uso dessas árvores na literatura e problemas encontrados
 - soluções para esses problemas
 %
+
+
+
+
+
+\section{Introdução MCTS}
+
+Nesse capítulo vamos discutir sobre árvore de busca de Monte Carlo (do inglês Monte Carlo Tree Search - MCTS) técnica muito utilizada para resolução de jogos de duas pessoas baseados em turnos. Um dos grandes problemas das árvores de busca é o crescimento exponencial de acordo com o número decisões, pois a construção e a busca nessas árvores podem levar muito tempo. O MCTS funciona muito bem para problemas onde o tempo de resposta é limitado e o espaço de busca da árvore pode crescer muito. Isso ocorre em batalhas Pokémon, pegando dados de 1.000 batalhas de um dos agentes, temos que cada partida dura em média 40 turnos (contando os turnos dos dois jogadores) e, em cada turno é comum ter entre 4 e 9 diferentes escolhas.
+
+O termo Monte Carlo foi utilizado pela primeira em métodos matemáticos para o desenvolvimento de armas nucleares em 1940 (\cite{Kalos:1986:MCM:7050}). Segundo \cite{kleij2010monte} esse método matemático se referia a utilizar amostras aleatórias para estimar soluções de problemas que eram muito difíceis de encontrar analiticamente. Mais tarde esse método foi aplicado na computação e, principalmente, em árvores de busca. O método de árvore de busca de Monte Carlo se refere a encontrar soluções ótimas em um determinado domínio utilizando de amostras aleatórias no espaço de decisão e construindo uma árvore de busca de acordo com os resultados (\cite{browne12asurvey}).
 
 \section{Conceito}
 
