@@ -83,7 +83,7 @@ Onde:
 	\item \textbf{max} Booleano representando se a jogada analisada é do jogador \textbf{Max} ou \textbf{Min}.
 \end{itemize}
 
-Na figura \ref{fig:minimaxjogodavelha} é mostrado a aplicação do algoritmo de \textit{minimax} para um cenário do jogo da velha. Na imagem o jogador Max é representado pelo caractere \textbf{X} e o jogador Min por \textbf{O}. Como dito anteriormente, a análise dessa árvore começou a ser feita pelos nós terminais, em situações vitoriosas foi atribuído o valor de 10, em empates 0 e em derrota o valor -10. Em seguida, os pais desses nós folhas são preenchidos com o mínimo ou o máximo valor dos nós filhos. No primeiro nó de MIN (primeiro nó da segunda fileira), por exemplo, existem dois nós filhos, um com valor 10 e outro com valor -10, por ser um nó MIN é atribuído para esse nó o menor valor (no caso -10). A linha em azul mostra a melhor jogada no momento para o nó raiz.
+Na figura \ref{fig:minimaxjogodavelha} é mostrado a aplicação do algoritmo de \textit{minimax} para um cenário do jogo da velha. Na imagem o jogador $Max$ é representado por \textbf{X} e o jogador Min por \textbf{O}. Como dito anteriormente, primeiramente a árvore é explorada até que se chegue em nós terminais(indicando fim de jogo), em situações vitoriosas foi atribuído o valor de 10, em empates 0 e em derrota o valor -10. Em seguida, os pais desses nós folhas são preenchidos com o mínimo ou o máximo valor dos nós filhos. No primeiro nó de MIN (primeiro nó da segunda fileira), por exemplo, existem dois nós filhos, um com valor 10 e outro com valor -10, por ser um nó MIN é atribuído para esse nó o menor valor (no caso -10). A linha em azul mostra a melhor jogada no momento para o nó raiz.
 
 \begin{figure}[!h]
 \centering
@@ -94,7 +94,7 @@ Na figura \ref{fig:minimaxjogodavelha} é mostrado a aplicação do algoritmo de \t
 
 Repare que a melhor jogada indicada pelo algoritmo gera um empate. Segundo \cite{evoltuinaryneuralnetworks} um dos problemas do \textit{minimax} é presumir que sempre o adversário irá fazer a melhor escolha possível. Muitas vezes, em situações de derrota iminente a melhor jogada pode não ser o valor mais alto de \textit{minimax}, especialmente se ele ainda irá resultar em uma derrota.
 
-Outro problema do \textit{minimax} é a quantidade de nós que ele precisa analisar, em jogos com grande número de possíveis jogadas ou que duram um grande número de turnos (grande profundidade na árvore) a quantidade de nós que ele precisa analisar é muito grande. 
+Outro problema do \textit{minimax} é a quantidade de nós que ele precisa analisar, em jogos com grande número de possíveis jogadas ou que duram um grande número de turnos (grande profundidade na árvore) a quantidade de nós que ele precisa analisar é muito grande. Para a maioria dos jogos geralmente não é viável pesquisar toda a árvore até o nó terminal como especificado pelas regras do jogo (\cite{campbell1983comparison}).
 
 Uma solução comum para esse problema é definir um número máximo de profundidade para analisar, ou seja, ao invés do critério de parada do algoritmo recursivo ser nós folhas (terminais) pode-se definir uma profundidade máxima para o \textit{minimax}. Nessa abordagem muitas vezes não serão encontrados nós que representam fim de jogo, então é necessário fazer uma função de avaliação de heurística que analisa o estado do jogo, como foi apresentado na seção \ref{sec:agentesInteligentescontrajogadores}.
 
