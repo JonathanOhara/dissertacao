@@ -3,15 +3,15 @@
 
 \section{Introdução}
 
-Nesse capítulo vamos discutir sobre tomada de decisão em jogos e árvore de decisões. Em árvores de decisões o foco será em 2 diferentes métodos de buscas: técnicas baseadas em \textit{minimax} e técnicas baseadas em Monte Carlo. O capítulo a seguir está organizado do seguinte modo. Primeiro, a seção \ref{sec:tomadaDecisao} irá explicar o básico da ideia de tomada de decisão e os elementos envolvidos nela. Na seção \ref{sec:arvoreDecisao} é demonstrado como decisões podem ser modeladas em computação. Em \ref{sec:minimax} será discutido o conceito de \textit{minimax}, algumas técnicas e melhorias. A seção \ref{sec:MCTS} irá expor sobre o método de Monte Carlo e sua aplicação em árvores de busca. 
+Nesse capítulo vamos discutir sobre tomada de decisão em jogos e árvore de decisões. Em árvores de decisões o foco será em 2 diferentes métodos de buscas: técnicas baseadas em \textit{minimax} e técnicas baseadas em Monte Carlo. O capítulo a seguir está organizado do seguinte modo: primeiro, a seção \ref{sec:tomadaDecisao} irá explicar o básico da ideia de tomada de decisão e os elementos envolvidos nela. Na seção \ref{sec:arvoreDecisao} é demonstrado como decisões podem ser modeladas em computação. Em \ref{sec:minimax} será discutido o conceito de \textit{minimax}, algumas técnicas e melhorias. A seção \ref{sec:MCTS} irá expor sobre o método de Monte Carlo e sua aplicação em árvores de busca. 
 %Por fim em \ref{sec:asdasd} será discutido alguns trabalhos relacionados a árvore de busca de Monte-Carlo.%
 
 \section{Tomada de decisão}
 \label{sec:tomadaDecisao}
 
-É muito comum associar inteligência para jogos, mais especificamente inteligência artificial para jogos, com a habilidade em que os elementos do jogo (jogadores não humanos aliados ou inimigos, objetos e fases, por exemplo) têm para tomar decisões dados certas situações. Apesar disso, a tomada de decisão não é o único componente de uma inteligência artificial, podem-se enumerar outros elementos como a capacidade de avaliar as ações disponíveis e a estratégia que o personagem segue.
+É muito comum associar inteligência artificial para jogos com a habilidade em que os elementos do jogo (jogadores não humanos aliados ou inimigos, objetos e fases, por exemplo) têm para tomar decisões dadas certas situações. Apesar disso, a tomada de decisão não é o único componente de uma inteligência artificial, podem-se enumerar outros elementos como a capacidade de avaliar as ações disponíveis e a estratégia que o personagem segue.
 
-Tomada de decisão é o processo de escolher uma ação entre diversas possibilidades. Segundo \cite{introductionDecisionMaking} "Tomada de decisão é o estudo do processo de identificar e escolher alternativas baseadas nas preferências do tomador de decisões. Tomar uma decisão implica que existem diferentes escolhas para serem consideradas, e, em tal caso, não queremos apenas identificar quais dessas alternativas são viáveis, mas escolher a decisão que melhor se encaixa com as nossas metas, objetivos, desejos, valores, e assim por diante".
+Tomada de decisão é o processo de escolher uma ação entre diversas possibilidades. Segundo \cite{introductionDecisionMaking}, "Tomada de decisão é o estudo do processo de identificar e escolher alternativas baseadas nas preferências do tomador de decisões. Tomar uma decisão implica que existem diferentes escolhas para serem consideradas, e, em tal caso, não queremos apenas identificar quais dessas alternativas são viáveis, mas escolher a decisão que melhor se encaixa com as nossas metas, objetivos, desejos, valores, e assim por diante".
 
 Ainda na teoria do processo de tomada de decisão, \cite{guidebookDecisionMaking} diz que o primeiro passo na tomada de decisão é estabelecer quem é(são) o(s) tomador(es) de decisão e o(s) \textit{stakeholder(s)} (partes afetadas ou interessadas), de modo a mitigar um possível desacordo sobre a definição do problema, metas e critérios. O processo pode ser definido nos seguintes passos:
 
@@ -35,14 +35,14 @@ Ainda na teoria do processo de tomada de decisão, \cite{guidebookDecisionMaking}
 	
 \end{itemize}
 
-Em jogos (especificamente jogos digitais), segundo \cite{Millington:2009:AIG:1795711} a entrada da tomada de decisão é o conhecimento que tal personagem tem, e a saída é a ação a ser realizada. O conhecimento pode ser dividido em interno e externo. Conhecimento externo é a informação que o personagem tem sobre o ambiente em sua volta: posição dos outros personagens, o leiaute da fase, se um dispositivo foi ligado, a direção que um barulho veio, e assim por diante. Conhecimento interno é a informação sobre o estado interno do personagem ou pensamentos internos como: sua saúde, objetivos, seu passado, e assim por diante. Ainda segundo \cite{Millington:2009:AIG:1795711} a representação do conhecimento está intrinsecamente ligada com a maioria dos algoritmos de tomada de decisão.
+Em jogos (especificamente jogos digitais), segundo \cite{Millington:2009:AIG:1795711} a entrada da tomada de decisão é o conhecimento que tal personagem tem, e a saída é a ação a ser realizada. O conhecimento pode ser dividido em interno e externo. Conhecimento externo é a informação que o personagem tem sobre o ambiente em sua volta: posição dos outros personagens, o leiaute da fase, se um dispositivo foi ligado, a direção que um barulho veio, e assim por diante. Conhecimento interno é a informação sobre o estado interno do personagem ou pensamentos internos como: sua saúde, objetivos, seu passado, e assim por diante. Ainda segundo \cite{Millington:2009:AIG:1795711} a representação do conhecimento está intrinsecamente ligada com algoritmos de tomada de decisão.
 
-\subsection{Árvore de decisão}
+\section{Árvore de decisão}
 \label{sec:arvoreDecisao}
 
-Árvores de decisão é uma maneira muito clara e natural de representar uma cadeia de decisões e suas consequências. Segundo \cite{Millington:2009:AIG:1795711} árvores de decisão são rápidas, fáceis de implementar e simples de entender. Elas são a técnica mais simples de tomada de decisão. Outra vantagem é a questão de ser modular e muito fácil de ser construída.
+Árvores de decisão é forma muito clara e natural de representar uma cadeia de decisões e suas consequências. Segundo \cite{Millington:2009:AIG:1795711} árvores de decisão são rápidas, fáceis de implementar e simples de entender. Algumas vantagens dessa técnica são a fácil construção e a modularização.
 
-Um modo muito comum de representar árvores de decisão para estratégias simples é o fluxograma. Segundo \cite{Millington:2009:AIG:1795711} as árvores de decisões representadas por fluxogramas têm normalmente duas respostas (sim e não, por exemplo). Na imagem \ref{fig:fluxogramaInimigos} é mostrado um diagrama simples de estratégia para um inimigo, nesse fluxograma o personagem fica patrulhando até achar um inimigo, ao ver um inimigo o personagem se aproxima se necessário e o ataca.
+Um modo muito comum de representar árvores de decisão para estratégias simples é o fluxograma. Segundo \cite{Millington:2009:AIG:1795711} as árvores de decisões representadas por fluxogramas têm normalmente duas respostas (sim e não, por exemplo). Na imagem \ref{fig:fluxogramaInimigos} é mostrado um diagrama simples de estratégia para um inimigo, nesse fluxograma o personagem patrulhan o ambiente até achar um inimigo, ao ver um inimigo o personagem se aproxima se necessário e o ataca.
 
 \begin{figure}[!h]
 \centering
@@ -50,9 +50,6 @@ Um modo muito comum de representar árvores de decisão para estratégias simples é
 \caption[Fluxograma estratégia inimigo]{Fluxograma Simples de estratégia para inimigos.}
 \label{fig:fluxogramaInimigos}
 \end{figure}
-
-\subsection{Máquina de estados finitos}
-\label{sec:fsm}
 
 Outro modo de representar comportamentos de certos elementos é através de máquinas de estados finitos (do inglês Finite State Machine - FSM). \cite{wright2012finite} define o modelo conceitual de FSM da seguinte forma:
 
@@ -74,9 +71,11 @@ O modo mais comum de representar o processo de tomada de decisão em personagens 
 
 Essa técnica é muito empregada em jogos comerciais. Segundo \cite{diller2004behavior} desenvolvedores de jogos comerciais pensam em uma inteligência artificial que entretenha o público. Em cenários que o objetivo é fazer a melhor inteligência possível, ou o objetivo é vencer os melhores humanos em um determinado desafio, tais técnicas não funcionam bem. Em cenários competitivos é possível enumerar alguns problemas dessas técnicas como: agir somente pela reatividade e a incapacidade de prever futuros movimentos ou analisar uma cadeia de movimentos em conjunto.
 
-\subsection{Árvore de jogos}
+???? FAZER ILUSTRACAO ???
 
-Apesar da semelhança com árvore de decisão muitos autores como \cite{nijssen2013monte} e \cite{du1995minimax} as tratam como coisas diferentes, mas, com recursos equivalentes. Uma árvore de jogo é uma representação de um estado em um jogo sequencial. Os nós representam as posições do jogo e as arestas representam os possíveis movimentos de um determinado estado. O nó raiz representa a posição inicial e os nós folhas (ou terminais) representam o fim de jogo (\cite{nijssen2013monte}).
+\section{Árvore de jogos}
+
+Apesar da semelhança com árvore de decisão muitos autores como \cite{nijssen2013monte} e \cite{du1995minimax} as tratam como conceitos diferentes, mas, com recursos equivalentes. Uma árvore de jogo é uma representação de um estado em um jogo sequencial. Os nós representam um estado do jogo e as arestas representam os possíveis movimentos de um determinado estado. O nó raiz representa o estado inicial e os nós folhas (ou terminais) representam o fim de jogo (\cite{nijssen2013monte}).
 
 De acordo com \cite{browne12asurvey} os jogos podem ser classificados de acordo com certas propriedades:
 
@@ -84,28 +83,28 @@ De acordo com \cite{browne12asurvey} os jogos podem ser classificados de acordo 
 	
 	\item \textbf{Soma-zero}: A soma das recompensas (positivas ou negativas) de todos os jogadores resulta em zero, ou seja, o que um jogador ganhou é exatamente o que o outro jogador perdeu.
 	
-	\item \textbf{Informação}: Completa ou incompleta, perfeita ou imperfeita. Jogos com informação completa são aqueles que o estado atual do jogo é totalmente observável por todos os jogadores. Informação perfeita se refere se o jogador tem a total informação de tudo que já ocorreu em eventos anteriores.
+	\item \textbf{Informação}: Completa ou incompleta, perfeita ou imperfeita. Jogos com informação completa são aqueles que o estado atual do jogo é totalmente observável por todos os jogadores. Informação perfeita se refere quando o jogador tem a total informação de tudo que já ocorreu em eventos anteriores.
 	
-	\item \textbf{Determinista}: Se existe um fator probabilístico em certas ações (também conhecida como completude, por exemplo: incerteza sobre certas recompensas).
+	\item \textbf{Determinística}: Quando não existe um fator probabilístico em certas ações (também conhecida como completude, por exemplo: incerteza sobre certas recompensas).
 	
 	\item \textbf{Sequencial}: Se as ações escolhidas são aplicadas sequencialmente ou simultaneamente.
 	
-	\item \textbf{Dicreto}: discreto ou contínuo.
+	\item \textbf{Dicreto}: discreto ou contínuo. ??? EXPLICAR ???
 	
 \end{itemize}
 
 Ainda segundo \cite{browne12asurvey} jogos com dois jogadores que são: soma-zero, de informação perfeita, determinísticos, discretos ou sequenciais, podem ser descritos como jogos combinatórios. Essa definição inclui jogos como: Go, Xadrez e Jogo da Velha, assim como muitos outros.
 
-\section{Minimax}
+??? EXEMPLO ??? - mostrar um exemplo de árvore de jogos e explicar sobre estado, recompensas,  ações, ...
+
+\subsection{Algoritmo minimax}
 \label{sec:minimax}
 
-O algoritmo \textit{minimax} é comumente utilizado em jogos de dois jogadores e baseados em turnos. Jogos do mundo real normalmente envolvem uma estrutura de recompensas em que, apenas as recompensas obtidas em estados terminais (jogadas que definem quem é o vencedor) descrevem com precisão o quão bem cada jogador está se saindo (\cite{browne12asurvey}).
+O algoritmo \textit{minimax} é comumente utilizado em jogos de dois jogadores e baseados em turnos. Muitos jogos envolvem uma estrutura de recompensas em que, apenas as recompensas obtidas em estados terminais (jogadas que definem quem é o vencedor) descrevem com precisão o quão bem cada jogador está se saindo (\cite{browne12asurvey}).
 
-\subsection{Conceito e algoritmo}
+Esse algoritmo tenta minimizar a possível perda máxima, para isso ele analisa todos os possíveis movimentos futuros de cada jogador. Segundo os autores \cite{campbell1983comparison} o algoritmo de \textit{minimax} funciona do seguinte modo: o algoritmo assume que existem dois jogadores chamados $Max$ e $Min$, e atribui um valor para cada nó dentro da árvore do jogo (e um particular para o nó raiz) do seguinte modo: nós folhas ou terminais propagam o valor \textit{minimax} recursivamente para todos os outros nós (passando para seu ancestral direto). Se um nó não terminal $p$ do jogador $Max$ for escolhido, então o valor de $p$ é o máximo valor dos filhos de $p$. Similarmente, se for o turno do jogador $Min$ será escolhido o menor valor dos sucessores de $p$.
 
-O algoritmo de \textit{minimax} tenta minimizar a possível perda máxima, para isso ele analisa todos os possíveis movimentos futuros de cada jogador. Segundo os autores \cite{campbell1983comparison} o algoritmo de \textit{minimax} do seguinte modo: o algoritmo assume que existem dois jogadores chamados $Max$ e $Min$, e atribui um valor para cada nó dentro da árvore do jogo (e um particular para nó raiz) do seguinte modo: nós folhas ou terminais propagam o valor \textit{minimax} recursivamente para todos os outros nós (passando para seu ancestral direto). Se um nó não terminal $p$ do jogador $Max$ for escolhido, então o valor de $p$ é o máximo valor dos filhos de $p$. Similarmente, se for o turno do jogador $Min$ será escolhido o menor valor dos sucessores de $p$.
-
-O algoritmo básico do \textit{minimax} pode ser representado por:
+O algoritmo básico do \textit{minimax} é ilustrado no \ref{alg:minimax}.
 
 \begin{algorithm}[H]
 \caption{Algoritmo Minimax}\label{euclid}
@@ -130,8 +129,11 @@ O algoritmo básico do \textit{minimax} pode ser representado por:
 \State \Return bestValue
 \EndProcedure
 \end{algorithmic}
+\label{alg:minimax}
 \end{algorithm}
 
+
+??? REFAZER ???
 Onde:
 
 \begin{itemize}
@@ -180,15 +182,15 @@ Segundo \cite{browne12asurvey} existem duas variações do \textit{minimax} muito 
 	\item \textbf{Miximax} é semelhante ao \textit{expectimax} de apenas um jogador, é usado principalmente em jogos com informações não precisas. Ele utiliza uma estratégia predefinida para tratar a decisão do oponente como nós de probabilidade. 
 \end{itemize}
 
-\subsection{Problemas}
+Esses algoritmos não se mostram muito efetivos em jogos com grande quantidade de escolhas e/ou com um grande número de turnos (altura de árvore), pois cada escolha tem que ser avaliada até que chegue a nós terminais. Para a grande maioria dos jogos não é viável pesquisar toda a árvore até o nó terminal como especificado pelas regras do jogo (\cite{campbell1983comparison}).
 
-Em jogos com grande quantidade de escolhas e/ou com um grande número de turnos (altura de árvore) esses algoritmos não se mostram muito efetivos, pois cada escolha tem que ser avaliada até que chegue a nós terminais. Para a grande maioria dos jogos não é viável pesquisar toda a árvore até o nó terminal como especificado pelas regras do jogo (\cite{campbell1983comparison}).
+Podemos listar dois grandes problemas ao utilizar o \textit{minimax} com uma árvore muito extensa. O primeiro deles é fazer toda a criação da árvore, ou seja, a simulação de possíveis jogadas até que se chegue aos nós folhas (considerando que os caminhos sejam finitos). O segundo problema ocorre quando uma árvore tem um grande número de nós e uma altura muito grande, nesse caso a função de avaliação do \textit{minimax} tem que percorrer muitos nós até chegar à raiz a partir dos nós folhas para atualizar seus valores.
 
-Podemos listar dois grandes problemas ao utilizar o \textit{minimax} com uma árvore muito extensa. O primeiro deles é fazer toda a criação da árvore, ou seja, a simulação de possíveis jogadas até que se chegue a nós folhas (considerando que os caminhos sejam finitos). O segundo problema ocorre quando uma árvore tem um grande número de nós e uma altura muito grande, nesse caso a função de avaliação do \textit{minimax} tem que percorrer muitos nós até chegar à raiz a partir dos nós folhas para atualizar seus valores.
+\subsection{Poda alpha-beta}
 
-\subsection{Variações}
+Uma estratégia para reduzir a quantidade de nós analisados é utilizar técnicas de poda de árvores. A poda de árvore mais conhecida na literatura é a chamada \textit{alpha-beta}. Segundo \cite{knuth1976analysis} essa técnica é usada geralmente para aumentar a velocidade de busca sem perder informação. Nessa técnica são ignorados os nós e suas subárvores de jogadas incapazes de apresentar melhores valores do que movimentos já conhecidos. Durante a análise das jogadas são definidas duas variáveis \textit{alpha} e \textit{beta}. \textit{Alpha} representa o valor máximo que o jogador Max pode fazer e \textit{beta} a pontuação mínima do jogador Min. A cada avaliação de nó esses limites são verificados, caso o valor da avaliação não estiver entre esses limites o nó e todas suas subárvores são removidas (podadas). Esse procedimento pode ser dado pelo algoritmo \ref{alg:alphabeta}.
 
-Uma estratégia para reduzir a quantidade de nós analisados é utilizar técnicas de poda de árvores. A poda de árvore mais conhecida na literatura é a chamada \textit{alpha-beta}. Segundo \cite{knuth1976analysis} essa técnica é usada geralmente para aumentar a velocidade de busca sem perder informação. Nessa técnica são ignorados os nós e suas subárvores de jogadas incapazes de apresentar melhores valores do que movimentos já conhecidos. Durante a análise das jogadas são definidas duas variáveis \textit{alpha} e \textit{beta}. \textit{Alpha} representa o valor máximo que o jogador Max pode fazer e \textit{beta} a pontuação mínima do jogador Min. A cada avaliação de nó esses limites são verificados, caso o valor da avaliação não estiver entre esses limites o nó e todas suas subárvores são removidas (podadas). Esse procedimento pode ser dado pelo seguinte algoritmo (na primeira chamada alpha vale $-\infty$ e beta $+\infty$):
+??? (na primeira chamada alpha vale $-\infty$ e beta $+\infty$) ???
 
 \begin{algorithm}[H]
 \caption{Algoritmo alphabeta}\label{euclid}
@@ -223,11 +225,16 @@ Uma estratégia para reduzir a quantidade de nós analisados é utilizar técnicas d
 \State \Return bestValue
 \EndProcedure
 \end{algorithmic}
+\label{alg:alphabeta}
 \end{algorithm}
+
+??? EXPLICAR PASSO A PASSO TEXTUALMENTE ???
 
 Para resolver o problema de simular um grande número de jogadas e, ao mesmo tempo diminuir a quantidade de nós a serem analisados é possível criar avaliações de heurísticas para nós não terminais e assim delimitar a simulação da árvore até uma determinada altura. Em outras palavras, podemos definir um número máximo de altura que o algoritmo pode alcançar e, ao chegar nesse número, é retornado um valor de acordo com uma heurística.
 
 \subsection{Avaliação de heurística}
+
+??? aqui acho melhor falar ao contrário,  que alguns jogos necessitam de avaliação heurística ???
 
 Em jogos com pequena quantidade de nós na árvore, a avaliação de heurística não é tão importante, um exemplo desse tipo de jogo é o jogo da velha, devido ao reduzido número de nós e a pequena altura da árvore, é mais seguro explorar a árvore até o final do que criar avaliações de heurísticas para nós não terminais.
 
@@ -237,11 +244,11 @@ Segundo \cite{Nielsen:1994:HE:189200.189209} avaliação heurística envolve ter um
 	
 	\item Quando aplicado a um estado final (no caso de uma árvore, um nó folha), a avaliação de heurística tem que devolver o estado corretamente.
 	
-	\item O valor da função de heurística é invariável ao longo de um caminho de solução ótima.
+	\item O valor da função de heurística é invariante ao longo de um caminho de solução ótima.
 	
 \end{itemize}
 
-\subsection{Sistema Deep Blue}
+\subsection{O sistema Deep Blue}
 
 Um dos sistemas mais famosos que utilizou as técnicas citadas foi o Deep Blue da IBM. O Deep Blue é um sistema feito para jogar xadrez com técnicas baseadas em \textit{minimax}. Além de utilizar o buscador alpha-beta, o sistema conta com uma complexa função de avaliação de nós não terminais, o sistema analisava nós com até 12 níveis de profundidade \cite{755469}. O Deep Blue era composto por um \textit{chip} chamado \textit{Chess Chip} que é dividido em três partes \cite{deepblue1}:
 
@@ -271,7 +278,7 @@ O método de Monte Carlo possui diversas variantes, mas todas elas seguem os segu
 
 \subsubsection{Utilizando método de Monte Carlo para calcular $\pi$}
 
-Um exemplo bem difundido para utilização do método de Monte Carlo é para definir o valor de $\pi$. Primeiro é calculado a probabilidade de, ao gerar posições aleatórias dentro de uma área de um quadrado essa posição também estar dentro da área de um círculo (que está dentro desse quadrado) como mostra a figura \ref{fig:quadradoCirculoPi}.
+Um exemplo bem conhecido para utilização do método de Monte Carlo é para definir o valor de $\pi$. Primeiro é calculado a probabilidade de, ao gerar posições aleatórias dentro de uma área de um quadrado essa posição também estar dentro da área de um círculo (inserido no quadrado) como mostra a figura \ref{fig:quadradoCirculoPi}.
 
 \begin{figure}[!h]
 \centering
@@ -283,38 +290,34 @@ Um exemplo bem difundido para utilização do método de Monte Carlo é para definir
 A área de um quadrado é dada pela seguinte equação:
 
 \begin{equation}
-A = l^2
+A = l^2,
 \end{equation}
 
-Onde $l$ é o lado do quadrado.
+onde $l$ é o lado do quadrado.
 
 Já a área do círculo é dada pela seguinte equação:
 
 \begin{equation}
-A = \pi \times r^2
+A = \pi \times r^2,
 \end{equation}
 
-Onde $r$ é o raio do círculo.
+onde $r$ é o raio do círculo.
 
 Substituindo os valores da equação temos que área do quadrado é $4r^2$ e a área do círculo é $\pi r^2$. Logo, a chance de aleatoriamente ser escolhida uma posição dentro do quadrado e essa posição também estar dentro do círculo é dado por:
 
 \begin{equation}
-p = \frac{\pi r^2}{4r^2}
+p = \frac{\pi r^2}{4r^2}.
 \end{equation}
 
 Isolando $\pi$ (valor que queremos descobrir) temos a seguinte equação:
 
 \begin{equation}
-\pi = 4p
+\pi = 4p.
 \end{equation}
 
-Com o auxílio de um computador é gerado 100.000 posições aleatórias. Dessa amostra 78239 ficavam dentro do círculo. Para isso utilizamos a seguinte equação:
+Com o auxílio de um computador é gerado 100.000 posições aleatórias. Dessa amostra 78239 pontos ficaram dentro do círculo. 
 
-\begin{equation}
-x^2 + y^2 \leq r^2
-\end{equation}
-
-Onde $x$ é a posição horizontal e $y$ a posição vertical. A imagem \ref{fig:quadradoCirculoPiAleatoria} faz uma demonstração gráfica desse conjunto de números gerados, os pontos mais escuros mostram posições geradas fora do círculo e os pontos mais claros as posições geradas dentro da área do círculo.
+A imagem \ref{fig:quadradoCirculoPiAleatoria} faz uma demonstração gráfica desse conjunto de números gerados, os pontos mais escuros mostram posições geradas fora do círculo e os pontos mais claros as posições geradas dentro da área do círculo.
 
 \begin{figure}[!h]
 \centering
@@ -323,23 +326,23 @@ Onde $x$ é a posição horizontal e $y$ a posição vertical. A imagem \ref{fig:quad
 \label{fig:quadradoCirculoPiAleatoria}
 \end{figure}
 
-Voltando a definição temos o seguinte: a quantidade de vezes que esse conjunto aleatório disparou o evento (78466) dividido pela quantidade de números (ou conjunto numéricos) aleatórios gerados (100.000) deve ser próximo de $p$ ($\pi = 4p$ ou $p = \frac{\pi}{4}$). Substituindo os valores já conhecidos temos o seguinte:
+A quantidade de vezes que esse conjunto aleatório estava contido na circunferência o evento dividido pela quantidade de pontos aleatórios gerados deve ser próximo de $\frac{\pi}{4}$. Substituindo os valores já conhecidos temos o seguinte:
 
 \begin{equation}
-\frac{\pi}{4} = \frac{78621}{100000}
+\frac{\pi}{4} = \frac{78621}{100000},
 \end{equation}
 
 Isolando $\pi$ e resolvendo a equação temos:
 
 \begin{equation}
-\pi = \frac{314484}{100000}
+\pi = \frac{314484}{100000},
 \end{equation}
 
 Finalmente o valor aproximado de $\pi = 3,14484$.
 
 \subsubsection{Utilizando método de Monte Carlo para probabilidade de uma roleta}
 
-Com o método de Monte Carlo é bem fácil calcular probabilidades mais complexas. A imagem \ref{fig:montecarloroleta} representa uma roleta que pode ser dividida em 4 partes: em duas dessas partes o valor ganho é de $+1$, em uma dessas quatro partes o valor da recompensa é $+2$ e na última parte o valor é de $-2$. Nesse caso, vamos usar o método de Monte Carlo para descobrir qual a probabilidade de após girar 20 vezes a roleta, a soma dos pontos obtidos ser menor que zero.
+Com o método de Monte Carlo é bem fácil estimar probabilidades mais complexas. A imagem \ref{fig:montecarloroleta} representa uma roleta que pode ser dividida em 4 partes: em duas dessas partes o valor ganho é de $+1$, em uma dessas quatro partes o valor da recompensa é $+2$ e na última parte o valor é de $-2$. Nesse caso, vamos usar o método de Monte Carlo para descobrir qual a probabilidade de após girar 20 vezes a roleta, a soma dos pontos obtidos ser menor que zero.
 
 \begin{figure}[!h]
 \centering
@@ -360,13 +363,14 @@ Ou seja, após rodar 20 vezes a roleta da figura \ref{fig:montecarloroleta} a cha
 
 O primeiro contato do método de Monte Carlo com árvore de busca foi na avaliação de nós (\cite{nijssen2013monte}, \cite{Winands2008}). Essa avaliação era chamada de avaliação de Monte Carlo (do inglês Monte Carlo Evaluation - MCE).
 
-Em vez de usar recursos dependentes do domínio, tais como a mobilidade ou vantagem de um material, uma série de \textit{playouts} (chamado também de amostras, lançamentos, reprodução ou simulações) é iniciado a partir da posição a ser avaliada. O \textit{playout} é uma sequência de movimentos (semi-) aleatórios. O \textit{playout} encerra quando o jogo está terminado e um vencedor pode ser determinado de acordo com as regras do jogo. A avaliação de uma posição é determinada por combinação dos resultados de todos os \textit{playouts} usando uma função de agregação estatística. Isso pode ser, por exemplo, a pontuação média do jogo (\cite{nijssen2013monte}).
+Ao invés de usar recursos dependentes do domínio, tais como a mobilidade ou vantagem de um material, uma série de \textit{playouts} (chamado também de amostras, lançamentos, reprodução ou simulações) é iniciado a partir da posição a ser avaliada. O \textit{playout} é uma sequência de movimentos (semi-) aleatórios. O \textit{playout} encerra quando o jogo está terminado e um vencedor pode ser determinado de acordo com as regras do jogo. A avaliação de uma posição é determinada por combinação dos resultados de todos os \textit{playouts} usando uma função de agregação estatística. Isso pode ser, por exemplo, a pontuação média do jogo (\cite{nijssen2013monte}).
 
-Por não exigir muito conhecimento do domínio ela funciona muito bem em jogos onde não existe uma função de avaliação de nós intermediários muito bom (como em Go por exemplo), como no trabalho de \cite{brugmann1993monte} onde o MCE foi aplicado a um tabuleiro de 9x9. A grande desvantagem dessa técnica é a quantidade de tempo que ela leva para avaliar um determinado nó, pois precisa chegar até um nó folha, fazendo a técnica eficaz apenas em árvores com profundidade de nós baixa. Uma derivação direta dessa abordagem é a árvore de busca de Monte Carlo.
+Por não exigir muito conhecimento do domínio ela funciona muito bem em jogos onde não existe uma função de avaliação de nós intermediários muito bom, como no trabalho de \cite{brugmann1993monte} onde o MCE foi aplicado a um tabuleiro de 9x9 do jogo Go. A grande desvantagem dessa técnica é a quantidade de tempo que ela leva para avaliar um determinado nó, pois precisa chegar até um nó folha, fazendo a técnica eficaz apenas em árvores com profundidade de nós baixa. Uma derivação direta dessa abordagem é a árvore de busca de Monte Carlo.
 
 \subsection{Monte Carlo em árvores de busca}
+XXXXXX PAREI A REVISAO AKI XXXXXXXXXXXX
 
-Por décadas a busca alpha-beta tem sido a abordagem padrão usada em programas de jogos soma-zero de dois jogadores como xadrez e damas (entre outros). Ao passar dos anos, muitas melhorias foram propostas para essa solução. Porém, em alguns jogos onde é difícil construir uma função de avaliação precisa (e.g., Go) a abordagem alpha-beta foi mal sucedida (\cite{Winands2008}).
+Por décadas, a busca alpha-beta tem sido a abordagem padrão usada em programas de jogos soma-zero de dois jogadores como xadrez e damas (entre outros). Ao passar dos anos, muitas melhorias foram propostas para essa solução. Porém, em alguns jogos onde é difícil construir uma função de avaliação precisa (e.g., Go) a abordagem alpha-beta foi mal sucedida (\cite{Winands2008}).
 
 O algoritmo de busca de Monte Carlo ganhou muita notoriedade por apresentar uma alta competitividade ao enfrentar os melhores jogadores do jogo Go. Go é um jogo muito difícil para computadores jogar: tem alto fator de ramificação, a uma árvore profunda, e não existe nenhuma função de validação de heurística  confiável para nós não terminais (\cite{browne12asurvey}). Ainda segundo os autores, nos últimos anos MCTS tem alcançado grande sucesso em muitos jogos específicos, jogos generalistas, complexos planejamentos do mundo real, otimização e controle de problemas, e se tornou uma importante ferramenta do pesquisador de inteligência artificial.
 
