@@ -3,7 +3,7 @@
 
 \section{Introdução}
 
-Nesse capítulo vamos discutir sobre tomada de decisão em jogos e árvore de decisões. Em árvores de decisões o foco será em 2 diferentes métodos de buscas: técnicas baseadas em \textit{minimax} e técnicas baseadas em Monte Carlo. O capítulo a seguir está organizado do seguinte modo: primeiro, a seção \ref{sec:tomadaDecisao} irá explicar o básico da ideia de tomada de decisão e os elementos envolvidos nela. Na seção \ref{sec:arvoreDecisao} é demonstrado como decisões podem ser modeladas em computação. Em \ref{sec:minimax} será discutido o conceito de \textit{minimax}, algumas técnicas e melhorias. A seção \ref{sec:MCTS} irá expor sobre o método de Monte Carlo e sua aplicação em árvores de busca. 
+Nesse capítulo vamos discutir sobre tomada de decisão em jogos e árvore de decisões. Em árvores de decisões o foco será dois diferentes métodos de buscas: técnicas baseadas em \textit{minimax} e técnicas baseadas em Monte Carlo. O capítulo a seguir está organizado do seguinte modo: primeiro, a seção \ref{sec:tomadaDecisao} irá explicar o básico da ideia de tomada de decisão e os elementos envolvidos nela. Na seção \ref{sec:arvoreDecisao} é demonstrado como decisões podem ser modeladas em computação. Em \ref{sec:minimax} será discutido o conceito de \textit{minimax}, algumas técnicas e melhorias. A seção \ref{sec:MCTS} irá expor sobre o método de Monte Carlo e sua aplicação em árvores de busca. 
 %Por fim em \ref{sec:asdasd} será discutido alguns trabalhos relacionados a árvore de busca de Monte-Carlo.%
 
 \section{Tomada de decisão}
@@ -40,9 +40,9 @@ Em jogos (especificamente jogos digitais), segundo \cite{Millington:2009:AIG:179
 \section{Árvore de decisão}
 \label{sec:arvoreDecisao}
 
-Árvores de decisão é forma muito clara e natural de representar uma cadeia de decisões e suas consequências. Segundo \cite{Millington:2009:AIG:1795711} árvores de decisão são rápidas, fáceis de implementar e simples de entender. Algumas vantagens dessa técnica são a fácil construção e a modularização.
+Árvores de decisão é uma forma muito clara e natural de representar uma cadeia de decisões e suas consequências. Segundo \cite{Millington:2009:AIG:1795711} árvores de decisão são rápidas, fáceis de implementar e simples de entender. Algumas vantagens dessa técnica são a fácil construção e a modularização.
 
-Um modo muito comum de representar árvores de decisão para estratégias simples é o fluxograma. Segundo \cite{Millington:2009:AIG:1795711} as árvores de decisões representadas por fluxogramas têm normalmente duas respostas (sim e não, por exemplo). Na imagem \ref{fig:fluxogramaInimigos} é mostrado um diagrama simples de estratégia para um inimigo, nesse fluxograma o personagem patrulhan o ambiente até achar um inimigo, ao ver um inimigo o personagem se aproxima se necessário e o ataca.
+Um modo muito comum de representar árvores de decisão para estratégias simples é o fluxograma. Segundo \cite{Millington:2009:AIG:1795711} as árvores de decisões representadas por fluxogramas têm normalmente duas respostas (sim e não, por exemplo). Na imagem \ref{fig:fluxogramaInimigos} é mostrado um diagrama simples de estratégia para um inimigo, nesse fluxograma o personagem patrulha o ambiente até achar um inimigo, ao ver um inimigo o personagem se aproxima se necessário e o ataca.
 
 \begin{figure}[!h]
 \centering
@@ -71,7 +71,14 @@ O modo mais comum de representar o processo de tomada de decisão em personagens 
 
 Essa técnica é muito empregada em jogos comerciais. Segundo \cite{diller2004behavior} desenvolvedores de jogos comerciais pensam em uma inteligência artificial que entretenha o público. Em cenários que o objetivo é fazer a melhor inteligência possível, ou o objetivo é vencer os melhores humanos em um determinado desafio, tais técnicas não funcionam bem. Em cenários competitivos é possível enumerar alguns problemas dessas técnicas como: agir somente pela reatividade e a incapacidade de prever futuros movimentos ou analisar uma cadeia de movimentos em conjunto.
 
-???? FAZER ILUSTRACAO ???
+Um exemplo bem claro de FSM em jogos é o fantasma do clássico jogo do PacMan. No jogo o fantasma começa dentro de uma caixa (caixa de renascimento) por um determinado tempo (estado "esperando para nascer"), quando o tempo acaba ele entra no estado "caçando" indo atrás do PacMan, caso o PacMan coma uma bola de energia o fantasma entra no modo "sendo caçado" permitindo o PacMan derrotar ele, caso o temporizador da bola de energia se esgote o fantasma volta para o estado "caçando", caso o PacMan colida com o fantasma durante o estado "sendo caçado" o fantasma entra no estado "morto" e vai em direção da caixa de renascimento, ao chegar à caixa ele volta para o estado "esperando para nascer", a figura \ref{fig:fantasmaPacManFSM} ilustra essa FSM.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=12cm]{figures/pacManFSM.png}
+\caption[Fantasma PacMan FSM]{Fantasma PacMan FSM.}
+\label{fig:fantasmaPacManFSM}
+\end{figure}
 
 \section{Árvore de jogos}
 
@@ -89,31 +96,37 @@ De acordo com \cite{browne12asurvey} os jogos podem ser classificados de acordo 
 	
 	\item \textbf{Sequencial}: Se as ações escolhidas são aplicadas sequencialmente ou simultaneamente.
 	
-	\item \textbf{Dicreto}: discreto ou contínuo. ??? EXPLICAR ???
+	\item \textbf{Dicreto}: discreto ou contínuo. Jogos discreto são os jogos cujo o estado das variáveis são imediatamente alterados após uma ação ser executada. Jogos conínuos são jogos cujo uma ação pode refletir em muitos estados futuros.
 	
 \end{itemize}
 
-Ainda segundo \cite{browne12asurvey} jogos com dois jogadores que são: soma-zero, de informação perfeita, determinísticos, discretos ou sequenciais, podem ser descritos como jogos combinatórios. Essa definição inclui jogos como: Go, Xadrez e Jogo da Velha, assim como muitos outros.
+Ainda segundo \cite{browne12asurvey} jogos com dois jogadores que são: soma-zero, de informação perfeita, determinísticos, discretos e sequenciais, podem ser descritos como jogos combinatórios. Essa definição inclui jogos como: Go, Xadrez e Jogo da Velha, assim como muitos outros.
 
-??? EXEMPLO ??? - mostrar um exemplo de árvore de jogos e explicar sobre estado, recompensas,  ações, ...
+A figura \ref{fig:arvorejogosjogodavelha} mostra uma árvore reduzida do jogo da velha. Na imagem, os nós ou estados são representados pelo estado do tabuleiro, as arestas representam a ação escolhida pelo jogador, as recompensas são atribuídas nos estados finais do jogo por positivo infinito (no caso de vitória do jogador "O") e infinito negativo (no caso de vitória do jogador "X").
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/gameTree.png}
+\caption[Árvore de jogos]{Árvore de jogos (Jogo da Velha).}
+\label{fig:arvorejogosjogodavelha}
+\end{figure}
 
 \subsection{Algoritmo minimax}
 \label{sec:minimax}
 
-O algoritmo \textit{minimax} é comumente utilizado em jogos de dois jogadores e baseados em turnos. Muitos jogos envolvem uma estrutura de recompensas em que, apenas as recompensas obtidas em estados terminais (jogadas que definem quem é o vencedor) descrevem com precisão o quão bem cada jogador está se saindo (\cite{browne12asurvey}).
+O algoritmo \textit{minimax} é comumente utilizado em jogos de dois jogadores e baseados em turnos. Muitos jogos envolvem uma estrutura de recompensas em que, apenas as recompensas obtidas em estados terminais (jogadas que definem quem é o vencedor) descrevem com precisão o quão bem cada jogador está se saindo (\cite{browne12asurvey}). O algoritmo tenta minimizar a possível perda máxima, para isso ele analisa todos os possíveis movimentos futuros de cada jogador. Segundo os autores \cite{campbell1983comparison}, o algoritmo de \textit{minimax} funciona do seguinte modo: o algoritmo assume que existem dois jogadores chamados $Max$ e $Min$, e atribui um valor para cada nó dentro da árvore do jogo (e um particular para o nó raiz) do seguinte modo: nós folhas ou terminais propagam o valor \textit{minimax} recursivamente para todos os outros nós (passando para seu ancestral direto). Se um nó não terminal $p$ do jogador $Max$ for escolhido, então o valor de $p$ é o máximo valor dos filhos de $p$. Similarmente, se for o turno do jogador $Min$ será escolhido o menor valor dos sucessores de $p$.
 
-Esse algoritmo tenta minimizar a possível perda máxima, para isso ele analisa todos os possíveis movimentos futuros de cada jogador. Segundo os autores \cite{campbell1983comparison} o algoritmo de \textit{minimax} funciona do seguinte modo: o algoritmo assume que existem dois jogadores chamados $Max$ e $Min$, e atribui um valor para cada nó dentro da árvore do jogo (e um particular para o nó raiz) do seguinte modo: nós folhas ou terminais propagam o valor \textit{minimax} recursivamente para todos os outros nós (passando para seu ancestral direto). Se um nó não terminal $p$ do jogador $Max$ for escolhido, então o valor de $p$ é o máximo valor dos filhos de $p$. Similarmente, se for o turno do jogador $Min$ será escolhido o menor valor dos sucessores de $p$.
-
-O algoritmo básico do \textit{minimax} é ilustrado no \ref{alg:minimax}.
+O algoritmo básico do \textit{minimax} é ilustrado no Algoritmo \ref{alg:minimax}. No pseudocódigo, \textbf{node} se refere ao nó atual da árvore. Na primeira vez que \textbf{Minimax} é chamado o valor passado é passado o nó que representa o estado atual do jogo, no caso a raiz da árvore. A variável \textbf{depth} representa a profundidade do nó que está sendo analisado na árvore e, a cada passo do algoritmo esse valor é decrementado em um até chegar a zero, inicialmente o valor de \textbf{depth} é a altura da árvore. Por fim, \textbf{maxPlayer} representa de qual jogador o nó está sendo analisado, os possíveis valores de \textbf{maxPlayer} são TRUE (caso seja o jogador Max) e FALSE (caso seja o jogador Min), repare que a cada passo da recursão ele troca o valor da variável (de TRUE para FALSE e, de FALSE para TRUE).
 
 \begin{algorithm}[H]
-\caption{Algoritmo Minimax}\label{euclid}
+\caption{Algoritmo Minimax}
+\label{alg:minimax}
 \begin{algorithmic}[1]
-\Procedure{Minimax}{$node, depth, max$}
+\Procedure{Minimax}{$node, depth, maxPlayer$}
 \If {$depth = 0$ \textbf{OR} node is terminal} 
 	\State \Return heuristic
 \EndIf
-\If {$max$}
+\If {$maxPlayer$}
 	\State $bestValue\gets -\infty$
 	\For{each child \Pisymbol{psy}{206} $node$ }
 		\State $value\gets \Call{Minimax}{child, depth -1, FALSE}$
@@ -129,22 +142,7 @@ O algoritmo básico do \textit{minimax} é ilustrado no \ref{alg:minimax}.
 \State \Return bestValue
 \EndProcedure
 \end{algorithmic}
-\label{alg:minimax}
 \end{algorithm}
-
-
-??? REFAZER ???
-Onde:
-
-\begin{itemize}
-
-	\item \textbf{node} Nó atual da árvore. Na primeira chamada é passado o nó raiz da árvore, ou seja, o nó que representa o estado atual do jogo.
-	
-	\item \textbf{depth} Profundidade do nó (ou altura da árvore). Inicialmente é passada a altura total da árvore.
-	
-	\item \textbf{max} Valor sim ou não (TRUE ou FALSE) representando se a jogada analisada é do jogador \textbf{Max} ou \textbf{Min}.
-	
-\end{itemize}
 
 Em seu trabalho, \cite{du1995minimax} propuseram uma relação entre árvores \textit{minimax} e árvore de jogos (especificamente jogos de tabuleiros). Essa relação pode ser vista na tabela \ref{tab:minimaxtreegames}.
 
@@ -188,25 +186,26 @@ Podemos listar dois grandes problemas ao utilizar o \textit{minimax} com uma árv
 
 \subsection{Poda alpha-beta}
 
-Uma estratégia para reduzir a quantidade de nós analisados é utilizar técnicas de poda de árvores. A poda de árvore mais conhecida na literatura é a chamada \textit{alpha-beta}. Segundo \cite{knuth1976analysis} essa técnica é usada geralmente para aumentar a velocidade de busca sem perder informação. Nessa técnica são ignorados os nós e suas subárvores de jogadas incapazes de apresentar melhores valores do que movimentos já conhecidos. Durante a análise das jogadas são definidas duas variáveis \textit{alpha} e \textit{beta}. \textit{Alpha} representa o valor máximo que o jogador Max pode fazer e \textit{beta} a pontuação mínima do jogador Min. A cada avaliação de nó esses limites são verificados, caso o valor da avaliação não estiver entre esses limites o nó e todas suas subárvores são removidas (podadas). Esse procedimento pode ser dado pelo algoritmo \ref{alg:alphabeta}.
+Uma estratégia para reduzir a quantidade de nós analisados é utilizar técnicas de poda de árvores. A poda de árvore mais conhecida na literatura é a chamada \textit{alpha-beta}. Segundo \cite{knuth1976analysis} essa técnica é usada geralmente para aumentar a velocidade de busca sem perder informação. Nessa técnica são ignorados os nós e suas subárvores de jogadas incapazes de apresentar melhores valores do que movimentos já conhecidos. Durante a análise das jogadas são definidas duas variáveis \textit{alpha} e \textit{beta}. \textit{Alpha} representa o valor máximo que o jogador Max pode fazer e \textit{beta} a pontuação mínima do jogador Min. A cada avaliação de nó esses limites são verificados, caso o valor da avaliação não estiver entre esses limites o nó e todas suas subárvores são removidas (podadas). 
 
-??? (na primeira chamada alpha vale $-\infty$ e beta $+\infty$) ???
+O procedimento do alpha-beta pode ser dado pelo Algoritmo \ref{alg:alphabeta}. As variáveis \textbf{node}, \textbf{depth} e \textbf{maxPlayer} apresentam o mesmo comportamento do algoritmo \textit{minimax}. Já \textit{alpha} e \textit{beta} representam os limites superiores e inferiores respectivamente, os valores iniciais para essas variáveis são $\alpha = -\infty$ e $\beta = +\infty$ desse modo ao encontrar o primeiro valor de heurística esses valores serão substituídos ( ver \ref{line:max} e \ref{line:min} ).
 
 \begin{algorithm}[H]
-\caption{Algoritmo alphabeta}\label{euclid}
+\caption{Algoritmo alphabeta}
+\label{alg:alphabeta}
 \begin{algorithmic}[1]
-\Procedure{alphabeta}{$node, depth, currentPlayer, alpha, beta$}
+\Procedure{alphabeta}{$node, depth, maxPlayer, alpha, beta$}
 \If {$depth = 0$ \textbf{OR} node is terminal} 
 	\State \Return heuristic
 \EndIf
-\If {$max$}
+\If {$maxPlayer$}
 	
 	\State $bestValue\gets -\infty$
 	\For{each child \Pisymbol{psy}{206} $node$ }
-		\State $bestValue\gets $\Call{max}{bestValue, \Call{alphabeta}{child, depth -1, alpha, beta, FALSE}}
-		\State $alpha\gets \Call{max}{alpha, value}$
+		\State $bestValue\gets $\Call{max}{bestValue, \Call{alphabeta}{child, depth -1, FALSE, alpha, beta}}
+		\State $alpha\gets \Call{max}{alpha, value}$ \label{line:max}
 		\If {$beta \leqslant alpha$} 
-			\State \textbf{break}
+			\State \textbf{break} \Comment{Corte beta}
 		\EndIf
 	\EndFor
 	
@@ -214,10 +213,10 @@ Uma estratégia para reduzir a quantidade de nós analisados é utilizar técnicas d
 
 	\State $bestValue\gets +\infty$
 	\For{each child \Pisymbol{psy}{206} $node$ }		
-		\State $bestValue\gets $\Call{min}{bestValue, \Call{alphabeta}{child, depth -1, alpha, beta, TRUE}}
-		\State $beta\gets \Call{min}{beta, bestValue}$
+		\State $bestValue\gets $\Call{min}{bestValue, \Call{alphabeta}{child, depth -1, TRUE, alpha, beta}}
+		\State $beta\gets \Call{min}{beta, bestValue}$ \label{line:min}
 		\If {$beta \leqslant alpha$} 
-			\State \textbf{break}
+			\State \textbf{break} \Comment{Corte alpha}
 		\EndIf
 	\EndFor
 	
@@ -225,18 +224,13 @@ Uma estratégia para reduzir a quantidade de nós analisados é utilizar técnicas d
 \State \Return bestValue
 \EndProcedure
 \end{algorithmic}
-\label{alg:alphabeta}
 \end{algorithm}
-
-??? EXPLICAR PASSO A PASSO TEXTUALMENTE ???
 
 Para resolver o problema de simular um grande número de jogadas e, ao mesmo tempo diminuir a quantidade de nós a serem analisados é possível criar avaliações de heurísticas para nós não terminais e assim delimitar a simulação da árvore até uma determinada altura. Em outras palavras, podemos definir um número máximo de altura que o algoritmo pode alcançar e, ao chegar nesse número, é retornado um valor de acordo com uma heurística.
 
 \subsection{Avaliação de heurística}
 
-??? aqui acho melhor falar ao contrário,  que alguns jogos necessitam de avaliação heurística ???
-
-Em jogos com pequena quantidade de nós na árvore, a avaliação de heurística não é tão importante, um exemplo desse tipo de jogo é o jogo da velha, devido ao reduzido número de nós e a pequena altura da árvore, é mais seguro explorar a árvore até o final do que criar avaliações de heurísticas para nós não terminais.
+Em jogos com grande quantidade de nós na árvore (altura e largura), avaliar toda a árvore até um nó folha pode requerer muitos recursos (tempo e memória), um exemplo desse tipo de jogo é o xadrez, devido ao grande número de movimentos que se pode fazer em um turno e, a grande quantidade de turnos que um jogo pode durar, é inviável realizar uma busca completa até os nós folhas.
 
 Segundo \cite{Nielsen:1994:HE:189200.189209} avaliação heurística envolve ter um pequeno conjunto de avaliadores examinando a interface e avaliando a sua conformidade em relação ao resultado. Os autores \cite{DBLP:conf/aaai/ChristensenK86} discorrem que, em jogos de tabuleiro de duas pessoas a função de heurística é vagamente caracterizada pela "força" do posicionamento de um jogador contra o outro. Pode-se dizer que uma função de avaliação de heurística tem duas propriedades (\cite{DBLP:conf/aaai/ChristensenK86}):
 
@@ -293,9 +287,7 @@ A área de um quadrado é dada pela seguinte equação:
 A = l^2,
 \end{equation}
 
-onde $l$ é o lado do quadrado.
-
-Já a área do círculo é dada pela seguinte equação:
+onde $l$ é o lado do quadrado. Já a área do círculo é dada pela seguinte equação:
 
 \begin{equation}
 A = \pi \times r^2,
@@ -365,16 +357,13 @@ O primeiro contato do método de Monte Carlo com árvore de busca foi na avaliação
 
 Ao invés de usar recursos dependentes do domínio, tais como a mobilidade ou vantagem de um material, uma série de \textit{playouts} (chamado também de amostras, lançamentos, reprodução ou simulações) é iniciado a partir da posição a ser avaliada. O \textit{playout} é uma sequência de movimentos (semi-) aleatórios. O \textit{playout} encerra quando o jogo está terminado e um vencedor pode ser determinado de acordo com as regras do jogo. A avaliação de uma posição é determinada por combinação dos resultados de todos os \textit{playouts} usando uma função de agregação estatística. Isso pode ser, por exemplo, a pontuação média do jogo (\cite{nijssen2013monte}).
 
-Por não exigir muito conhecimento do domínio ela funciona muito bem em jogos onde não existe uma função de avaliação de nós intermediários muito bom, como no trabalho de \cite{brugmann1993monte} onde o MCE foi aplicado a um tabuleiro de 9x9 do jogo Go. A grande desvantagem dessa técnica é a quantidade de tempo que ela leva para avaliar um determinado nó, pois precisa chegar até um nó folha, fazendo a técnica eficaz apenas em árvores com profundidade de nós baixa. Uma derivação direta dessa abordagem é a árvore de busca de Monte Carlo.
+Por não exigir muito conhecimento do domínio, ela funciona muito bem em jogos onde não existe uma função de avaliação de nós intermediários muito confiável, como no trabalho de \cite{brugmann1993monte} onde o MCE foi aplicado a um tabuleiro de 9x9 do jogo Go. A grande desvantagem dessa técnica é a quantidade de tempo que ela leva para avaliar um determinado nó, pois precisa chegar até um nó folha, fazendo a técnica eficaz apenas em árvores com profundidade de nós baixa. Uma derivação direta dessa abordagem é a árvore de busca de Monte Carlo.
 
-\subsection{Monte Carlo em árvores de busca}
-XXXXXX PAREI A REVISAO AKI XXXXXXXXXXXX
+\subsection{Algoritmo de busca de Monte Carlo}
 
-Por décadas, a busca alpha-beta tem sido a abordagem padrão usada em programas de jogos soma-zero de dois jogadores como xadrez e damas (entre outros). Ao passar dos anos, muitas melhorias foram propostas para essa solução. Porém, em alguns jogos onde é difícil construir uma função de avaliação precisa (e.g., Go) a abordagem alpha-beta foi mal sucedida (\cite{Winands2008}).
+Por décadas, a busca alpha-beta tem sido a abordagem padrão usada em jogos de soma-zero de dois jogadores como xadrez, damas entre outros. Muitas melhorias foram propostas para essa solução porém, em alguns jogos onde é difícil construir uma função de avaliação precisa (e.g., Go) a abordagem alpha-beta foi mal sucedida (\cite{Winands2008}).
 
-O algoritmo de busca de Monte Carlo ganhou muita notoriedade por apresentar uma alta competitividade ao enfrentar os melhores jogadores do jogo Go. Go é um jogo muito difícil para computadores jogar: tem alto fator de ramificação, a uma árvore profunda, e não existe nenhuma função de validação de heurística  confiável para nós não terminais (\cite{browne12asurvey}). Ainda segundo os autores, nos últimos anos MCTS tem alcançado grande sucesso em muitos jogos específicos, jogos generalistas, complexos planejamentos do mundo real, otimização e controle de problemas, e se tornou uma importante ferramenta do pesquisador de inteligência artificial.
-
-Outro grande ponto do algoritmo de busca de Monte Carlo é o resultado positivo que ele obteve em jogos com informação incompleta e/ou imperfeita como nos trabalhos de \cite{Cai:2005:MCA:1066384.1066386} e \cite{misra2013markov}.
+O algoritmo de árvore de busca de Monte Carlo ganhou muita notoriedade por apresentar uma alta competitividade ao enfrentar os melhores jogadores do jogo Go. Esse jogo é particularmente desafiador para os algoritmos de busca em árvore, pois tem alto fator de ramificação, tem uma árvore profunda, e não existe nenhuma função de validação de heurística  confiável para nós não terminais (\cite{browne12asurvey}). Ainda segundo os autores, nos últimos anos o algoritmo de busca de Monte Carlo tem alcançado grande sucesso em muitos jogos específicos, jogos generalistas, complexos planejamentos do mundo real, otimização e controle de problemas, e se tornou uma importante ferramenta do pesquisador de inteligência artificial.
 
 O MCTS é um método para encontrar soluções ótimas em um determinado domínio utilizando de amostras aleatórias no espaço de decisão e construindo uma árvore de busca de acordo com os resultados (\cite{browne12asurvey}). A árvore de busca de Monte Carlo é um algoritmo baseado em simulação, frequentemente usado em jogos. A ideia principal é iterativamente rodar simulações do nó raiz da árvore até um nó terminal, de maneira incremental crescendo a árvore onde o nó raiz é o estado atual do jogo (\cite{tak2014monte}).
 
@@ -418,80 +407,73 @@ A imagem \ref{fig:mctsScheme} mostra o processo completo do MCTS. Na imagem $V$ 
 \label{fig:mctsScheme}
 \end{figure}
 
-Os algoritmos a seguir mostram o algoritmo do método principal, do método selecionar e simular respectivamente.
+O algoritmo MCTS pode ser dado por Algoritmo \ref{alg:mcts}. A variável \textbf{currentNode} representa o nó do estado a analisar. O método \Call{BestChild}{node} escolhe o melhor nó filho. O conceito de melhor filho varia entre as diferentes implementações do MCTS. O algoritmo continua buscando um melhor resultado até que algum limite seja alcançado (\textbf{within computational budget}), geralmente é definido por tempo ou número de iterações.
 
 \begin{algorithm}[H]
 \caption{Algoritmo MCTS - método principal}
 \label{alg:mcts}
 \begin{algorithmic}[1]
 
-\Procedure{MCTS}{$noAtual$}
-	\While{recurso computacional}
-		\State $noSelecao\gets$ \Call{Selecionar}{$noAtual$}
-		\State $noExpansao\gets$ \Call{Expandir}{$noSelecao$}
-		\State $valorResultado\gets$ \Call{Simular}{$noExpansao$}
-		\State \Call{RetroPropagar}{$noExpansao$, $valorResultado$}
+\Procedure{MCTS}{$currentNode$}
+
+	\While{within computational budget}
+		\State $selectedNode\gets$ \Call{Selection}{$currentNode$}
+		\State $expasionNode\gets$ \Call{Expasion}{$selectedNode$}
+		\State $resultValue\gets$ \Call{Simulation}{$expasionNode$}
+		\State \Call{Backpropagation}{$expasionNode$, $resultValue$}
 	\EndWhile
 	
-	\State \Return \Call{MelhorFilho}{noAtual}
+	\State \Return \Call{BestChild}{currentNode}
 \EndProcedure
 
 \end{algorithmic}
 \end{algorithm}
 
+O algoritmo para fazer a seleção do nó para ser analisado pode ser definido por Algoritmo \ref{alg:mctsselection}. Repare que o método busca um \textbf{node} até que ele não tem filhos, dentro do laço \ref{line:selectionloop} a referência de \textbf{node} é trocado de acordo com a política de árvore ou \textbf{TreePolicy}.
 
 \begin{algorithm}[H]
-\caption{Algoritmo MCTS - método Selecionar}
-\label{alg:mcts}
+\caption{Algoritmo MCTS - método Selection}
+\label{alg:mctsselection}
 \begin{algorithmic}[1]
 
-\Procedure{Selecionar}{$no$}
-	\While{ $no.filhos > 0$ }
-		\State $no\gets$ \Call{PoliticaArvore}{$no$}
+\Procedure{Selection}{$node$}
+	\While{ $node.childs > 0$ } \label{line:selectionloop}
+		\State $node\gets$ \Call{TreePolicy}{$node$}
 	\EndWhile	
 	
-	\State \Return $no$
+	\State \Return $node$
 \EndProcedure
 
 \end{algorithmic}
 \end{algorithm}
 
+O algoritmo a simulação do nó pode ser definido por Algoritmo \ref{alg:mctssimulation}. A entrada do método é o \textbf{node} resultado da função de expansão. A partir desse nó são executadas (\textbf{Execute}) ações (\textbf{action}) até que uma ação resulte em fim de jogo (\textbf{action.isEndOfGame}), caso não resulte em fim de jogo é lido as ações disponíveis (\textbf{ReadAvaliableActions}) e entre elas escolhido uma ação (pode ser segundo alguma heurística ou, como no exemplo \textbf{ChooseRandomAction} ser aleatória), caso resulte em fim de jogo o valor da recompensa do fim de jogo é retornado.
 
 \begin{algorithm}[H]
-\caption{Algoritmo MCTS - método Simular}
-\label{alg:mcts}
+\caption{Algoritmo MCTS - método Simulation}
+\label{alg:mctssimulation}
 \begin{algorithmic}[1]
 
-\Procedure{Simular}{$no$}
-	\State $acao\gets no.acao$
-	\While{ \textbf{not} $acao.isFimDeJogo$}
-		\State \Call{Executar}{$acao$}
-		\State $acoes\gets$ \Call{LerAcoes}{ }
-		\State $acao\gets$ \Call{EscolherAcaoAleatoria}{acoes}
+\Procedure{Simulation}{$node$}
+	\State $action\gets node.action$
+	\While{ \textbf{not} $action.isEndOfGame$}
+		\State \Call{Execute}{$action$}
+		\State $actions\gets$ \Call{ReadAvaliableActions}{ }
+		\State $action\gets$ \Call{ChooseRandomAction}{action}
 	\EndWhile
 	
-	\State $valor\gets$ $\frac{1}{2}$
-	\If{ $acao.isVitoria$ }
-		\State $valor\gets$ $1$
-	\ElsIf{ $acao.isDerrota$ }
-		\State $valor\gets$ $0$
+	\State $value\gets$ $\frac{1}{2}$
+	\If{ $action.isVictory$ }
+		\State $value\gets$ $1$
+	\ElsIf{ $action.isDefeat$ }
+		\State $value\gets$ $0$
 	\EndIf
 
-	\State \Return $valor$
+	\State \Return $value$
 \EndProcedure
 
 \end{algorithmic}
 \end{algorithm}
-
-Onde:
-
-\begin{itemize}
-	
-	\item $noAtual$: Nó que representa o estado atual do jogo. No primeiro turno é passado o nó raiz da árvore.
-	
-	\item \Call{MelhorFilho}{no}: Escolhe o melhor nó filho. O conceito de melhor filho varia entre as diferentes implementações do MCTS.
-	
-\end{itemize}
 
 Ao finalizar o MCTS existem quatro critérios de como escolher o melhor filho (\cite{schadd2009monte}):
 
@@ -507,7 +489,7 @@ Ao finalizar o MCTS existem quatro critérios de como escolher o melhor filho (\c
 	
 \end{itemize}
 
-\subsection{Upper Confidence Bound for Trees (UCT)}
+\subsubsection{Upper Confidence Bound for Trees (UCT)}
 
 A implementação mais comum do algoritmo MCTS é o \textit{Upper Confidence Bound for Trees} (UCT) (\cite{browne12asurvey}). 
 
@@ -515,32 +497,17 @@ Um dos grandes dilemas na definição de política de árvore é como balancear as es
 
 O algoritmo UCT pode ser decomposto em duas partes: MCTS e Upper Confidence Bounds (UCB). Sua primeira implementação formal foi em 2006 por Kocsis e Szepesvari \cite{kocsis2006bandit}. O algoritmo UCB entra como uma política de árvore para implementação de MCTS.
 
-
-\subsubsection{Upper Confidence Bounds (UCB)}
-
 O algoritmo mais tradicional de Upper Confidence Bounds é o UCB1 que foi inicialmente aplicado para o problema \textit{multiarmed bandit} (\cite{auer2002finite}). Segundo \cite{auer2002using} o termo \textit{multiarmed bandit problem} ou problema dos caça-níqueis (ou mais precisamente "problema dos K caça-níqueis") reflete o problema de um apostador em uma sala com várias máquinas de caça-níquel. Em cada tentativa o apostador tem que decidir em qual máquina ele vai jogar. Para maximizar o ganho total ou recompensa, sua escolha se baseia em recompensas anteriormente coletadas em cada máquina.
 
 O UCB1 pode ser definido pela seguinte equação:
 
 \begin{equation}
-UCB1 = \overline{x}_{j} + \sqrt{\frac{2 \ln n}{n_{j}}}
+UCB1 = \overline{x}_{j} + \sqrt{\frac{2 \ln n}{n_{j}}},
 \end{equation}
 
-Onde: 
+onde $j$ é a escolha que está sendo analisada (no exemplo uma máquina caça-níquel específica), $\overline{x}_{j}$: a média da recompensa paga pela máquina $j$,$n_{j}$: a quantidade de vezes que foi jogado na máquina $j$ e $n$: A soma de quantas vezes foi jogado em cada máquina.
 
-\begin{itemize}
-	
-	\item: $j$: a escolha que está sendo analisada. No exemplo uma máquina caça-níquel específica.
-	
-	\item: $\overline{x}_{j}$: a média da recompensa paga pela máquina $j$.
-	
-	\item $n_{j}$: a quantidade de vezes que foi jogado na máquina $j$.
-	
-	\item $n$: A soma de quantas vezes foi jogado em cada máquina.
-	
-\end{itemize}
-
-Nessa equação fica claro como está distribuído o fator exploração ($\sqrt{\frac{2 \ln n}{n_{j}}}$) e o fator aprofundamento ($\overline{x}_{j}$). A imagem \ref{fig:exploreandexploitinequation} ilustra essa separação.
+Nessa equação fica claro como estão distribuídos os fatores exploração ($\sqrt{\frac{2 \ln n}{n_{j}}}$) e aprofundamento ($\overline{x}_{j}$). A imagem \ref{fig:exploreandexploitinequation} ilustra essa separação.
 
 \begin{figure}[!h]
 \centering
@@ -552,10 +519,10 @@ Nessa equação fica claro como está distribuído o fator exploração ($\sqrt{\frac{
 Por esse motivo é comum encontrar na literatura a equação UCB1 da seguinte forma:
 
 \begin{equation}
-UCB1 = \overline{x}_{j} + C \sqrt{\frac{2 \ln n}{n_{j}}}
+UCB1 = \overline{x}_{j} + C \sqrt{\frac{2 \ln n}{n_{j}}},
 \end{equation}
 
-Onde $C$ é uma constante que regula o valor da exploração, ou seja, caso queira aumentar a exploração basta $C > 1$, caso queira diminuir a exploração $1 > C > 0$.
+onde $C$ é uma constante que regula o valor da exploração, ou seja, caso queira aumentar a exploração basta $C > 1$, caso queira diminuir a exploração $1 > C > 0$.
 
 \subsubsection{Política de árvore UCB1}
 
@@ -566,82 +533,82 @@ Uma variação proposta por \cite{kocsis2006improved} chamada de \textit{plain UCT
 A equação do \textit{plain UCT} é definida da seguinte forma:
 
 \begin{equation}
-UCT = \overline{x}_{j} + 2C_{p} \sqrt{\frac{2 \ln n}{n_{j}}}
+UCT = \overline{x}_{j} + 2C_{p} \sqrt{\frac{2 \ln n}{n_{j}}},
 \end{equation}
 
-Onde o valor de $C_{p}$ é sugerido como $\frac{1}{\sqrt{2}}$ e pode ser ajustado para mais ou menos para regular o nível de exploração.
+onde o valor de $C_{p}$ é sugerido como $\frac{1}{\sqrt{2}}$ e pode ser ajustado para mais ou menos para regular o nível de exploração.
 
 \subsubsection{Algoritmo UCT}
 
-Baseado no algoritmo MCTS previamente explicado, vamos fazer algumas alterações para implementar o UCT. Primeiro o código do método principal:
+Baseado no algoritmo MCTS previamente explicado, algumas alterações são necessárias para implementar o UCT. O Algoritmo base para o UCT pode ser definido por Algoritmo \ref{alg:uctmain}.
 
 \begin{algorithm}[H]
 \caption{Algoritmo UCT}
-\label{alg:mcts}
+\label{alg:uctmain}
 \begin{algorithmic}[1]
-\Procedure{UCT}{$noAtual$}
-	\While{recurso computacional}
-		\State $noSelecao\gets$ \Call{Selecionar}{$noAtual$}
-		\State $noExpansao\gets$ \Call{Expandir}{$noSelecao$}
-		\State $valorResultado\gets$ \Call{Simular}{$noExpansao$}
-		\State \Call{RetroPropagar}{$noExpansao$, $valorResultado$}
+\Procedure{UCT}{$currentNode$}
+	\While{within computational budget}
+		\State $selectedNode\gets$ \Call{Selection}{$currentNode$}
+		\State $expasionNode\gets$ \Call{Expansion}{$selectedNode$}
+		\State $resultValue\gets$ \Call{Simulation}{$expasionNode$}
+		\State \Call{Backpropagation}{$expasionNode$, $resultValue$}
 	\EndWhile
 	
-	\State \Return \Call{UCB1}{noAtual}
+	\State \Return \Call{UCB1}{currentNode}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
-Método UCB1:
+No fim do algoritmo a escolha do melhor filho é realizado pelo de UCB1 (também utilizado na seleção) descrito em Algoritmo \ref{alg:uctucb1}.
 
 \begin{algorithm}[H]
 \caption{Algoritmo UCT - UCB1}
-\label{alg:mcts}
+\label{alg:uctucb1}
 \begin{algorithmic}[1]
-\Procedure{UCB1}{$no$}
-	\State $melhorValor\gets -\infty$ 
-	\State $melhorFilho\gets$ \textbf{null}
-	\For{each child \Pisymbol{psy}{206} $no$ }
-		\State $valor\gets child.value + C \sqrt{\frac{2 \ln no.visitas}{child.visitas}}$
-		\If{ $valor > melhorValor$ }
-			\State $melhorValor\gets valor$
-			\State $melhorFilho\gets child$
+\Procedure{UCB1}{$node$}
+	\State $bestValue\gets -\infty$ 
+	\State $bestChild\gets$ \textbf{null}
+	\For{each child \Pisymbol{psy}{206} $node$ }
+		\State $value\gets child.value + C \sqrt{\frac{2 \ln node.visits}{child.visits}}$
+		\If{ $value > bestValue$ }
+			\State $bestValue\gets value$
+			\State $bestChild\gets child$
 		\EndIf
 	\EndFor
 	
-	\State \Return $melhorFilho$
+	\State \Return $bestChild$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
-Método Selecionar:
+O método selecionar do UCT é descrito em Algoritmo \ref{alg:uctselecionar}. A política de árvore utilizada é o próprio algoritmo de UCB1 (Algoritmo \ref{alg:uctucb1}).
 
 \begin{algorithm}[H]
 \caption{Algoritmo UCT - Selecionar}
-\label{alg:mcts}
+\label{alg:uctselecionar}
 \begin{algorithmic}[1]
-\Procedure{Selecionar}{$no$}
-	\While{ $no.filhos > 0$ }
-		\State $no\gets$ \Call{UCB1}{$no$}
+\Procedure{Selecionar}{$node$}
+	\While{ $node.filhos > 0$ }
+		\State $node\gets$ \Call{UCB1}{$node$}
 	\EndWhile
 	
-	\State \Return $no$
+	\State \Return $node$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
-E por fim o retropropagar:
+O pseudocódigo do método retroproapagar é definido por Algoritmo \ref{alg:uctbackpropagation}. No método ele atualiza tanto o valor (\textbf{value}) do nó quanto a quantidade de visitas (\textbf{visits}) até o nó raiz, ou seja, até que o pai (\textbf{father}) seja nulo.
 
 \begin{algorithm}[H]
 \caption{Algoritmo UCT - Retropropagar}
-\label{alg:mcts}
+\label{alg:uctbackpropagation}
 \begin{algorithmic}[1]
-\Procedure{Retropropagar}{$no$, $valor$}
-	\State $no.visitas\gets no.visitas + 1$ 
-	\State $no.valor\gets no.valor + valor$
+\Procedure{Backpropagation}{$node$, $value$}
+	\State $node.visits\gets node.visits + 1$ 
+	\State $node.value\gets node.value + value$
 
-	\If{ no.pai \textbf{not} null }
-		\State \Call{Retropropagar}{$no.pai$, $valor$}
+	\If{ node.father \textbf{not} null }
+		\State \Call{Backpropagation}{$node.father$, $node$}
 	\EndIf
 
 \EndProcedure
@@ -700,17 +667,10 @@ Um aprimoramento para o UCT para quando se tem muitas ações parecidas é a chamad
 \label{fig:movegroups}
 \end{figure}
 
-\section{Algoritmos de busca em árvore}
+\section{Considerações finais}
 
 O algoritmo de \textit{minimax} por décadas foi a melhor opção para criar agentes competitivos em jogos combinatórios. Com o grande número de pesquisadores estudando o tema diversos aprimoramentos e técnicas foram criadas para melhorar diversos pontos da técnica base (como o alpha-beta). O grande ponto de notoriedade do \textit{minimax} foi em 1997 quando o sistema Deep Blue venceu o Kasparov (campeão mundial) no xadrez, o que na época parecia muito difícil devido a alta complexidade do xadrez.
 
 Apesar do sucesso, o \textit{minimax} nunca teve muito sucesso competitivamente em jogos com ainda mais possibilidades de jogadas como o Reversi ou Go. O MCTS vem ganhando bastante espaço na área de pesquisa, pois ele não tem a necessidade de uma função de heurística precisa como o alpha-beta e apresentam resultados quase tão bons quanto ele (\cite{kocsis2006improved}). O grande feito do MCTS foi em outubro de 2015 quando o AlphaGo sistema de desenvolvido pela Google DeepMind derrotou o campeão mundial Lee Sedol no Go (tabuleiro de 19x19) (\cite{googledeepmindalphago}). O AlphaGo utiliza MCTS combinado com redes neurais para reduzir a profundidade e largura efetiva da árvore de busca \cite{silver2016mastering}.
 
-Na imagem \ref{fig:dificuldadejogoscomputador} (adaptado de \cite{xkcd}) mostra a relação da dificuldade dos jogos com capacidade do computador derrotar profissionais em alguns jogos.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=10cm]{figures/dificuldadejogoscomputador.pdf}
-\caption[Dificuldade dos jogos e IA]{Dificuldade dos jogos e IA (adaptado de \cite{xkcd}).}
-\label{fig:dificuldadejogoscomputador}
-\end{figure}
+Outro grande ponto do algoritmo de busca de Monte Carlo é o resultado positivo que ele obteve em jogos com informação incompleta e/ou imperfeita como nos trabalhos de \cite{Cai:2005:MCA:1066384.1066386} e \cite{misra2013markov}.
