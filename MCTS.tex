@@ -502,6 +502,7 @@ O algoritmo mais tradicional de Upper Confidence Bounds é o UCB1 que foi inicial
 O UCB1 pode ser definido pela seguinte equação:
 
 \begin{equation}
+\label{eq:ucb1}
 UCB1 = \overline{x}_{j} + \sqrt{\frac{2 \ln n}{n_{j}}},
 \end{equation}
 
@@ -656,7 +657,15 @@ O último passo da nossa iteração é a retropropagação. A imagem \ref{fig:mctsexam
 
 Após isso voltamos para o início do laço e, caso ainda tenha recurso computacional, começamos novamente utilizando a árvore atualizada.
 
-\subsection{Grupos de movimentos}
+\subsection{Aprimoramentos para o MCTS}
+
+Existem muitos aprimoramentos que alteram em partes o funcionamento do MCTS para aprimorar resultados ou para se adaptar a diferentes tipos de jogos. A seguir veremos algumas importantes técnicas e modificações.
+
+\subsubsection{Urgência de primeira jogada}
+
+A técnica urgência de primeira jogada (do inglês First Play Urgency - FPU) de \cite{gelly2006exploration} sugere melhorias para a fase de seleção do algoritmo. Segundo os autores o UCT não dá nenhuma solução para escolher entre movimentos que ainda não foram explorados, ou seja, a equação UCB1 (\ref{eq:ucb1}) não é valido para nós com nenhuma visita. Em seu trabalho o autor sugere iniciar a avaliação dos nós com o valor de 10000, e após serem visitados ao menos uma vez a sua avaliação ocorre normalmente pela fórmula de UCB1.
+
+\subsubsection{Grupos de movimentos}
 
 Um aprimoramento para o UCT para quando se tem muitas ações parecidas é a chamada grupos de movimentos. Proposto por \cite{childs2008transpositions} essa melhoria diminui consideravelmente a quantidade de ramos da árvore Monte Carlo. A técnica consiste em criar uma nova camada onde todas as possíveis ações são separadas em grupos e o UCB1 é usado para selecionar qual grupo será escolhido. A imagem a \ref{fig:movegroups} ilustra esse processo.
 
@@ -666,6 +675,27 @@ Um aprimoramento para o UCT para quando se tem muitas ações parecidas é a chamad
 \caption[MCTS grupos de movimentos]{MCTS grupos de movimentos.}
 \label{fig:movegroups}
 \end{figure}
+
+\subsection{Jogos de movimentos simultâneos}
+
+Jogos de movimentos simultâneos são jogos onde ambos os jogadores escolhem suas jogadas ao mesmo tempo e, após os dois terem escolhidos seus movimentos, as duas escolhas são reveladas juntas.	Os trabalhos \cite{lanctot2013monteI}, \cite{lanctot2013monteII} e \cite{lisy2013convergence} esutdam a aplicação do MCTS para jogos com movimento simultâneos. Nesses trabalhos as principais técnicas estudadas são: Decoupled UCT, Exp3, Regret Matching e Outline Outcome Sampling.
+
+\subsubsection{UCT desacoplado}
+
+O UCT desacoplado (do inglês Decoupled UCT - DUCT) foi proposto por \cite{finnsson2007cadia} para a competição General Game Playing para resolver problemas de jogos com movimentos simultâneos. no DUCT cada nó representa uma escolha para cada jogador, ou seja, os nós que estão na mesma altura na árvore representam todas as combinações de movimentos dos dois ou mais jogadores, esses nós são chamados de articulações. Cada jogador mantém uma variáveis próprias para representar a recompensa (número de vitórias e derrotas) e visitas para cada nó (\cite{lanctot2013monteI}), ou seja, como o trabalho de \cite{lanctot2013monteII} diz: "na seleção, DUCT aplica o algoritmo UCB1 com as estastísticas da perspectativa de cada jogador independentemente". 
+
+A imagem \ref{fig:ductcomparing} compara uma árvore MCTS de jogos sequenciais (Árvore a esquerda) com uma árvore DUCT (Árvore a direita). Nas imagens é ilustrado o mesmo cenário onde o jogador 1 tem o conjunto de movimentos {A, B, C} e o jogador 2 tem o conjunto de movimentos {a, b, c}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{figures/ductcomparing.pdf}
+\caption[DUCT e UCT]{DUCT e UCT.}
+\label{fig:ductcomparing}
+\end{figure}
+
+Após a simulação de ambos os jogadores terminar a melhor jogada é escolhida de dois diferentes modos \ref{lanctot2013monteII}. O primeiro, DUCT(max) seleciona o movimento que teve mais visitas. Já DUCT(mix) normaliza a quantidade de visitas de cada movimento e escolhe o movimento de acordo com a distribuição.
+
+Uma das grandes vantagens dessa abordagem é a facilidade de paralelizar o código, uma vez que no DUCT é rodado o algoritmo UCB1 independente para cada jogador como mostra no trabalho de \cite{finnsson2007cadia}.
 
 \section{Considerações finais}
 
