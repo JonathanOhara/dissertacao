@@ -701,7 +701,38 @@ Uma das grandes vantagens dessa abordagem é a facilidade de paralelizar o código
 
 O MMCTS (do Inglês Multiple Monte Carlo Tree Search) foi proposto por \cite{DBLP:journals/corr/abs-1102-1580} para jogos com informações imperfeitas. Nesse algoritmo é criado uma árvore para cada jogador e essas árvore são buscadas e atualizadas simultaneamnete. Em sua pesquisa \cite{DBLP:journals/corr/abs-1102-1580} aplicou essa técnica para resolver o problema do jogo da velha fantasma. Diferente do tradicional jogo da velha, nesse jogo os jogadores não podem ver a ação do oponente, o único modo de um jogador saber onde o outro jogou é se ao tentar fazer uma jogada aquela posição já estar preenchida pelo adversário.
 
-O Exp3 (do Inglês Exponential-weight algorithm for Exploration and Exploitation) foi proposto por \cite{auer1995gambling} .
+No MMCTS a seleção é feita atravé do algoritmo chamado Exp3 (do Inglês Exponential-weight algorithm for Exploration and Exploitation) que foi proposto por \cite{auer1995gambling} para também resolver o problema dos caça-níqueis. O algoritmo está ilustrado em \ref{alg:exp3}. 
+
+http://www.dklevine.com/archive/refs4462.pdf
+https://hal.archives-ouvertes.fr/hal-00563480/file/auger.pdf
+https://jeremykun.com/2013/11/08/adversarial-bandits-and-the-exp3-algorithm/
+https://github.com/j2kun/exp3
+
+\begin{algorithm}[H]
+\caption{Algoritmo Exp3}
+\label{alg:exp3}
+\begin{algorithmic}[1]
+\Procedure{Minimax}{$node, depth, maxPlayer$}
+\If {$depth = 0$ \textbf{OR} node is terminal} 
+	\State \Return heuristic
+\EndIf
+\If {$maxPlayer$}
+	\State $bestValue\gets -\infty$
+	\For{each child \Pisymbol{psy}{206} $node$ }
+		\State $value\gets \Call{Minimax}{child, depth -1, FALSE}$
+		\State $bestValue\gets \Call{max}{bestValue, value}$
+	\EndFor
+\Else
+	\State $bestValue\gets +\infty$
+	\For{each child \Pisymbol{psy}{206} $node$ }
+		\State $value\gets \Call{Minimax}{child, depth -1, TRUE}$
+		\State $bestValue\gets \Call{min}{bestValue, value}$
+	\EndFor
+\EndIf
+\State \Return bestValue
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
 \section{Considerações finais}
 
