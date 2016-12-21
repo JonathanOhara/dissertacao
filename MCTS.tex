@@ -701,35 +701,33 @@ Uma das grandes vantagens dessa abordagem é a facilidade de paralelizar o código
 
 O MMCTS (do Inglês Multiple Monte Carlo Tree Search) foi proposto por \cite{DBLP:journals/corr/abs-1102-1580} para jogos com informações imperfeitas. Nesse algoritmo é criado uma árvore para cada jogador e essas árvore são buscadas e atualizadas simultaneamnete. Em sua pesquisa \cite{DBLP:journals/corr/abs-1102-1580} aplicou essa técnica para resolver o problema do jogo da velha fantasma. Diferente do tradicional jogo da velha, nesse jogo os jogadores não podem ver a ação do oponente, o único modo de um jogador saber onde o outro jogou é se ao tentar fazer uma jogada aquela posição já estar preenchida pelo adversário.
 
-No MMCTS a seleção é feita atravé do algoritmo chamado Exp3 (do Inglês Exponential-weight algorithm for Exploration and Exploitation) que foi proposto por \cite{auer1995gambling} para também resolver o problema dos caça-níqueis. O algoritmo está ilustrado em \ref{alg:exp3}. 
-
-http://www.dklevine.com/archive/refs4462.pdf
-https://hal.archives-ouvertes.fr/hal-00563480/file/auger.pdf
-https://jeremykun.com/2013/11/08/adversarial-bandits-and-the-exp3-algorithm/
-https://github.com/j2kun/exp3
+No MMCTS a seleção é feita atravé do algoritmo chamado Exp3 (do Inglês Exponential-weight algorithm for Exploration and Exploitation) que foi proposto por \cite{auer1995gambling} para também resolver o problema dos caça-níqueis. O algoritmo está ilustrado em \ref{alg:exp3}. No pseudocódigo $\gamma \in [0;1]$ irá fazer o controle entre explorar novas ações e validar resultados de ações bem avaliadas anteriormente, $weights$ é a matriz com o peso que cada ação tem em cada turno, é preciso iniciar os valores de peso para o primeiro turno do jogo, que pode ser feito com um valor igualitário ou sofrer influência de alguma heurística conhecida (método $InitializeWeights$), após isso a matrix de probabilidade $p$ de escolha de escolha de uma ação $i$ no turno $t$ é definido baseado na distruibuição de pesos entre todas as escolhas. Após isso, uma ação $c$ é escolhida aleatoriamente baseada na distruibuição de $p_t$ (através do método $GetRandomActionAccordingTheProbabilty$). Com a ação escolhida calculamos a recompensa observada $reward_tc$ da ação $c$ e a recompensa estimada $estimatedReward_t^c$. Por fim $weights_{t+1}$ é atualizado com o mesmo valor $weights_t$ para todas as ações não escolhidas e, para a ação escolhida, o peso $weights_{t+1}^c$ da ação é atualizado com base na recompensa estimada.
 
 \begin{algorithm}[H]
 \caption{Algoritmo Exp3}
 \label{alg:exp3}
 \begin{algorithmic}[1]
-\Procedure{Minimax}{$node, depth, maxPlayer$}
-\If {$depth = 0$ \textbf{OR} node is terminal} 
-	\State \Return heuristic
-\EndIf
-\If {$maxPlayer$}
-	\State $bestValue\gets -\infty$
-	\For{each child \Pisymbol{psy}{206} $node$ }
-		\State $value\gets \Call{Minimax}{child, depth -1, FALSE}$
-		\State $bestValue\gets \Call{max}{bestValue, value}$
+\Procedure{Exp3}{}
+	\State $gamma\gets \Call{Randomize}{0, 1}$
+	\State $weights\gets \Call{InitializeWeights}{}$
+	\State $k\gets \Call{CountNumberOfActions}{}$
+
+	\For{each round $t$}
+		\For{each action $i$}
+			\State $p_t^i\gets (1 - \gamma) \frac{weights_t^i}{ (\sum\limits_{j=1}^{k} weights_t^j) } + \frac{\gamma}{k}$
+		\EndFor
+
+		\State $c\gets \Call{GetRandomActionAccordingTheProbabilty}{p_t}$
+		\State $reward_t^c\gets \Call{GetActionReward}{c}$
+		\State $estimatedReward_t^c\gets \frac{x_t^c}{p_t^c}$
+		
+		\For{each action $i$}
+			\State $weights_{t+1}^i\gets weights_t^i$
+		\EndFor
+		
+		\State $weights_{t+1}^c\gets weights_t^c e^{\gamma \frac{estimatedReward_t^c}{k}}$
 	\EndFor
-\Else
-	\State $bestValue\gets +\infty$
-	\For{each child \Pisymbol{psy}{206} $node$ }
-		\State $value\gets \Call{Minimax}{child, depth -1, TRUE}$
-		\State $bestValue\gets \Call{min}{bestValue, value}$
-	\EndFor
-\EndIf
-\State \Return bestValue
+
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
