@@ -20,8 +20,55 @@ No trabalho de \cite{schunk1996learning}, a aprendizagem, na perspectiva filosóf
 
 \end{itemize}
 
+Fora do campo de psicologia e filosofia pode-se encontrar outras definições para o aprendizado, como no trabalho de \cite{carbonell1983overview} que define a aprendizagem como um fenômeno de múltiplas faces. O proceso de aprendizado inclue a aquisição de novos conhecimentos, o desenvolvimento de habilidades motoras e coginitivas através de instruções ou práticas, a organização do conhecimento, e a descoberta de novos fatos e teorias através da observação e experimentação.
+
 \subsection{Aprendizado de máquina}
 \label{sec:minimax}
+
+O aprendizado de máquina são modelos matemáticos para representar o processo de aprendizado com máquinas, entre outras palavras, o estudo do processo de aprendizado e a modelagem computacional desse processo define o aprendizado de máquina.
+
+Segundo \cite{carbonell1983overview} o aprendizado de máquina é organizado em três amplos campos de pesquisa:
+
+\begin{itemize}
+
+	\item \textbf{Estudos orientados a tarefas}. Desenvolvimento e análise de sistemas de aprendizado em um predeterminado conjunto de tarefas.
+	
+	\item \textbf{Simulação cognitiva}. Investigação e simulação do processo de aprendizado humano.
+	
+	\item \textbf{Análise teórica}. Exploração teórica do espaço dos possíveis métodos de aprendizado e algoritmos indenpendentes do domínio da aplicação.
+
+\end{itemize}
+
+%http://stpk.cs.rtu.lv/sites/all/files/stpk/materiali/MI/Artificial%20Intelligence%20A%20Modern%20Approach.pdf%
+
+Segundo \cite{russell1995modern} um agente que utiliza aprendizado de máquina pode ser descrito pelo seguinte diagrama da \ref{fig:modelLearningAgents}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/modelLearningAgents.pdf}
+\caption[Minimax]{\textit{Minimax} aplicado ao Jogo da Velha.}
+\label{fig:modelLearningAgents}
+\end{figure}
+
+O \textbf{elemento de aprendizado} é responsável por ajustar a inteligência do agente. O elemento pega o conhecimento adquirido e um pouco do \textit{feedback} da performance do agente, e determina como o elemento de desempenho deverá ser modificado.
+
+O \textbf{elemento de desempenho} avalia todas as entradas que recebe (sensores, aprendizado e gerador de problema) e escolhe a ação.
+
+O componente \textbf{crítica} avalia quão bem o agente está desempenhando. A crítica aplica um padrão fixo de desempenho, isso é necessário porque as próprias percepções não fornecem nenhuma indicação do sucesso do agente.
+
+Por último, o \textbf{gerador de problema} é responsável por sugerir ações que podem levar a novas experiências que tragam algo novo pro agente. Esse elemento faz com que o agente não fique transitando em um pequeno conjunto de ações julgadas como boas, e avalie outras ações que não foram exploradas ou que foram pouco exploradas.
+
+É muito comum na literatura classificar aprendizado de máquina de acordo com a avaliação do \textit{feedback} que o agente faz. As classificações são:
+
+\begin{itemize}
+
+	\item \textbf{Aprendizagem supervisionada}. Em situação onde as entradas e saídas do componente são conhecidas (o elemento que fornece esse mapeamento de saída e entrada é chamado de professor).
+	
+	\item \textbf{Aprendizagem não supervisionada}. Situação onde a saída correta não é conhecida .
+	
+	\item \textbf{Aprendizagem por reforço}. Nessa abordagem cada ação escolhida pelo agente recebe um reforço ou punição porém, sem nunca falar qual é a ação correta ou a melhor ação.
+
+\end{itemize}
 
 \section{Redes Neurais}
 \label{sec:redesNeurais}
