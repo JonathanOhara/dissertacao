@@ -1,4 +1,339 @@
 \chapter{Inteligência Artificial}
 \label{cap:inteligenciaArtificial}
 
+Neste capítulo é feito uma revisão das técnicas de inteligência artificial que serão utilizadas nesse trabalho. Algoritmos baseados em grafos \ref{sec:algoritmoGrafos}, aprendizado por reforço \ref{sec:aprendizadoReforco} e neuroevolução \ref{sec:neuroevolucao}.
 
+\section{Inteligência para jogos}
+\label{sec:inteligenciaJogos}
+
+O estudo de IA/IC (Inteligência artificial/Inteligência computacional) para jogos é uma área de estudo que vem crescendo muito na última década. Grandes conferências como o IEEE \textit{Conference on Computational Intelligence and Games} (CIG), AAAI \textit{Aritificial Intelligence and Interactive Digital Entertainment} (AIIDE) e IEEE \textit{Transactions on Computational Intelligence and AI in Games} (TCAIG) já contam com mais de dez edições.
+
+Jogos podem ser usados como cenário desafiador para avaliação de métodos de inteligência computacional, pois eles provêm elementos dinâmicos e competitivos que são pertinentes ao mundo real \cite{cig2014}.
+
+Segundo \cite{panoramaAIGames} durante os seminários em Dagstuhl (centro de pesquisa de ciência da computação na Alemanha) foi possível identificar dez grandes tópicos em IA/AC:
+
+\begin{itemize}
+	\item Aprendizado de comportamento para jogadores não humanos (JNH); 
+	\item Busca e planejamento;
+	\item Modelagem de personagens;
+	\item Jogos como avaliação comparativa para Inteligência Artificial (IA);
+	\item Geração de conteúdo procedural;
+	\item Narrativa computacional;
+	\item Agentes críveis;
+	\item \textit{Game design} assistido por IA;
+	\item IA para jogos em geral;
+	\item IA em jogos comerciais.
+\end{itemize}
+
+Ainda segundo \cite{panoramaAIGames} todas as áreas de pesquisa podem ser vistas como potenciais influenciadores delas mesmas em algum grau. Essas conexões e interconexões geram outras áreas de pesquisa.
+
+Nas próximas seções será feito uma revisão dos principais métodos que serão utilizados nos agentes deste trabalho.
+
+\section{Algoritmos baseados em grafos}
+\label{sec:algoritmoGrafos}
+
+Um dos grandes desafios de um agente e de um jogador dentro de um jogo é a tomada de decisão, expandindo um pouco essa ideia, pode-se dividir a tomada de decisão em partes menores: levantar opções, avaliar as opções e escolher qual pode conduzir o jogador a vitória dado um determinado cenário.
+
+Uma algoritmo muito comum para esse cenário é o \textit{minimax}. Segundo os autores \cite{browne12asurvey} jogos do mundo real normalmente envolvem uma estrutura de recompensas em que apenas as recompensas obtidas em estados terminais (jogadas que definem quem é o vencedor) do jogo descrevem com precisão o quão bem cada jogador está se saindo. Os jogos são, portanto, normalmente modelado como as seguintes árvores de decisões:
+
+\begin{itemize}
+	
+	\item \textbf{Minimax} tenta minimizar recompensa máxima do oponente em cada estado, e é a abordagem tradicional para pesquisa de jogos combinatórios em dois jogadores.
+	
+	\item \textbf{Expectimax} generaliza \textit{minimax} para jogos estocásticos em que as transições de estado para estado são probabilística. O valor de um nó é a soma dos valores dos nós filhos ponderados por suas probabilidades (possibilidade de um estado ocorrer). Estratégias de poda de árvore são mais complexas devido à probabilidade de um nó acontecer.
+
+	\item \textbf{Miximax} é semelhante ao \textit{expectimax} de apenas um jogador e é usado principalmente em jogos com informações não precisas. Ele utiliza uma estratégia predefinida para tratar a decisão do oponente como nós probabilísticos.
+	
+\end{itemize}
+
+O trabalho de \cite{campbell1983comparison} descreve o algoritmo de \textit{minimax} do seguinte modo: O algoritmo assume que existem dois jogadores chamados Max e Min, e atribui um valor para cada nó dentro da árvore (de decisão) do jogo (e também para nó raiz) do seguinte modo: Nós folhas ou terminais podem propagar o valor \textit{minimax} recursivamente. Se a jogada p do jogador Max for escolhida, então o valor de p é o máximo valor dos filhos de p. Similarmente, se for o turno do jogador Min será escolhido o menor valor dos sucessores de p.
+
+No trecho abaixo é apresentado o algoritmo do \textit{minimax}. O algoritmo analisa todas as possíveis jogadas até que sejam encontrados todos os nós que finalizam o jogo e retorna um valor chamado de heurística representando vitória, derrota ou empate.
+
+\begin{algorithm}
+\caption{Algoritmo Minimax}\label{euclid}
+\begin{algorithmic}[1]
+\Procedure{Minimax}{$node, depth, max$}
+\If {$depth = 0$ \textbf{OR} node is terminal} 
+	\State \Return heuristic
+\EndIf
+\If {$max$}
+	\State $bestValue\gets -\infty$
+	\For{each child \Pisymbol{psy}{206} $node$ }
+		\State $value\gets \textsc{Minimax}(child, depth -1, FALSE)$
+		\State $bestValue\gets \textsc{max}(bestValue, value)$
+	\EndFor
+\Else
+	\State $bestValue\gets +\infty$
+	\For{each child \Pisymbol{psy}{206} $node$ }
+		\State $value\gets \textsc{Minimax}(child, depth -1, TRUE)$
+		\State $bestValue\gets \textsc{min}(bestValue, value)$
+	\EndFor
+\EndIf
+\State \Return bestValue
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Onde:
+
+\begin{itemize}
+	\item \textbf{node} Nó atual da árvore. Na primeira chamada é passado o nó raiz da árvore, ou seja, o estado atual do jogo.
+	\item \textbf{depth} Profundidade do nó. Inicialmente é passada a altura da árvore.
+	\item \textbf{max} Booleano representando se a jogada analisada é do jogador \textbf{Max} ou \textbf{Min}.
+\end{itemize}
+
+Na figura \ref{fig:minimaxjogodavelha} é mostrado a aplicação do algoritmo de \textit{minimax} para um cenário do jogo da velha. Na imagem o jogador $Max$ é representado por \textbf{X} e o jogador Min por \textbf{O}. Como dito anteriormente, primeiramente a árvore é explorada até que se chegue em nós terminais(indicando fim de jogo), em situações vitoriosas foi atribuído o valor de 10, em empates 0 e em derrota o valor -10. Em seguida, os pais desses nós folhas são preenchidos com o mínimo ou o máximo valor dos nós filhos. No primeiro nó de MIN (primeiro nó da segunda fileira), por exemplo, existem dois nós filhos, um com valor 10 e outro com valor -10, por ser um nó MIN é atribuído para esse nó o menor valor (no caso -10). A linha em azul mostra a melhor jogada no momento para o nó raiz.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=16cm]{figures/minimax.png}
+\caption[Minimax]{\textit{Minimax} aplicado a um cenário de jogo da velha.}
+\label{fig:minimaxjogodavelha}
+\end{figure}
+
+Repare que a melhor jogada indicada pelo algoritmo gera um empate. Segundo \cite{evoltuinaryneuralnetworks} um dos problemas do \textit{minimax} é presumir que sempre o adversário irá fazer a melhor escolha possível. Muitas vezes, em situações de derrota iminente a melhor jogada pode não ser o valor mais alto de \textit{minimax}, especialmente se ele ainda irá resultar em uma derrota.
+
+Outro problema do \textit{minimax} é a quantidade de nós que ele precisa analisar, em jogos com grande número de possíveis jogadas ou que duram um grande número de turnos (grande profundidade na árvore) a quantidade de nós que ele precisa analisar é muito grande. Para a maioria dos jogos geralmente não é viável pesquisar toda a árvore até o nó terminal como especificado pelas regras do jogo (\cite{campbell1983comparison}).
+
+Uma solução comum para esse problema é definir um número máximo de profundidade para analisar, ou seja, ao invés do critério de parada do algoritmo recursivo ser nós folhas (terminais) pode-se definir uma profundidade máxima para o \textit{minimax}. Nessa abordagem muitas vezes não serão encontrados nós que representam fim de jogo, então é necessário fazer uma função de avaliação de heurística que analisa o estado do jogo, como foi apresentado na seção \ref{sec:agentesInteligentescontrajogadores}.
+
+Outra técnica muito utilizada para mitigar esse problema é a chamada poda \textit{alpha-beta}. Segundo \cite{knuth1976analysis} essa é técnica é usada geralmente para aumentar a velocidade de busca sem perder informação. Nessa técnica são ignorados os nós e suas subárvores de jogadas incapazes de ser melhor do que movimentos já conhecidos. Durante a análise das jogadas são definidas duas variáveis \textit{alpha} e \textit{beta}. \textit{Alpha} representa o valor máximo que o jogador Max pode fazer e \textit{beta} a pontuação mínima do jogador Min. A cada avaliação de nó esses limites são verificados, caso o valor da avaliação não estiver entre esses limites o nó e todas suas árvores são cortados.
+
+Outra técnica de otimização do \textit{minimax} é a Árvore de Busca de Monte Carlo(MCTS). Segundo \cite{browne12asurvey} o processo de construção da MCTS é feita de modo incremental e assimétrico na seguinte forma: para cada iteração do algoritmo, uma "política de árvore"  é utilizada para definir o nó mais urgente da árvore atual. A política da árvore tenta balancear considerações da exploração (procura áreas que ainda não tenham sido bem amostradas) e aprofundamento (procura áreas que parecem ser promissoras). O nó escolhido é avaliado e todos seus ancestrais são atualizados com suas novas estatísticas.
+
+Uma das grandes vantagens do MCTS é a possibilidade de utilizar de maneira incremental, ou seja, é possível delimitar um tempo ou número máximo de iterações que o algoritmo irá rodar, facilitando a aplicação em ambientes que exigem baixo tempo de resposta (jogos de tempo real) ou tempo de resposta fixado (jogos baseados em turno).
+
+\section{Aprendizado por reforço}
+\label{sec:aprendizadoReforco}
+
+Uma técnica bastante utilizada em aprendizado de máquina é o aprendizado por reforço (RL). Segundo \cite{Sutton:1998:IRL:551283} a ideia de aprender interagindo com nosso ambiente provavelmente é a primeira coisa que nos ocorre quando pensamos sobre aprendizado natural.
+
+Segundo \cite{kaelbling1996reinforcement} o algoritmo de aprendizado por reforço é um modo de programar agentes por um sistema de punição e recompensa sem precisar especificar como a tarefa precisa ser realizada.
+
+Segundo \cite{Mitchell:1997:ML:541177} o aprendizado por reforço pode resolver tarefas como aprender a controlar um robô móvel, aprender a otimizar operações em fábricas, e aprender a jogar jogos de tabuleiros.
+
+Novamente segundo \cite{kaelbling1996reinforcement} existem duas principais estratégias para resolver problemas com aprendizado por reforço. A primeira é uma busca entre os possíveis comportamentos para achar aquele que se adequa melhor ao ambiente. O Segundo modo é utilizar métodos estocásticos e métodos de programação dinâmica para estimar a utilidade de tomar ações em estados do mundo.
+
+A figura a \ref{fig:aprendizadoporreforco} mostra o funcionamento básico do algoritmo. O agente está em um determinado estado e executa uma ação recebendo uma recompensa ou punição e vai para um novo estado.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=12cm]{figures/basicrl.png}
+\caption[Funcionamento aprendizado por reforço]{Esquema padrão do aprendizado por reforço.}
+\label{fig:aprendizadoporreforco}
+\end{figure}
+
+Existe uma série de alterações nessa abordagem para abranger uma maior gama de problemas. Segundo \cite{Mitchell:1997:ML:541177} existe alguns aspectos diferentes ao considerar utilizar aprendizado por reforço para alguns problemas:
+
+\begin{itemize}
+	
+	\item \textbf{Recompensa atrasada}. Grandes recompensas podem estar somente em estados que serão apenas alcançados num futuro longínquo.
+	
+	\item \textbf{Exploração}. No aprendizado por reforço, o agente influencia a distribuição do treino pela sequência de ações que escolhe. Com isso surge a dúvida, qual das estratégias produz o mais efetivo aprendizado (para colher novas informações). Explorar todas as possíveis ações, ou explorar estados e ações já conhecidos com alta recompensa (para maximizar a sua recompensa cumulativa)?
+
+	\item \textbf{Estados parcialmente observáveis}. Em muitos casos os sensores do agente não consegue observar o estado inteiro do ambiente. Por exemplo, um robô com câmera frontal não pode enxergar o ambiente que está atrás dele.
+	
+	\item \textbf{Aprendizagem ao longo da vida}. Possibilidade de utilizar conhecimentos obtidos anteriormente para reduzir a complexidade de aprender novas Tarefas.
+	
+\end{itemize}
+
+Uma das técnicas que resolve alguns desses problemas é a chamada processo de decisão de Markov(MDP). Segundo \cite{kaelbling1996reinforcement} consiste em:
+
+\begin{itemize}
+	
+	\item Um conjunto de estados chamado S,
+	\item Um conjunto de ações chamado A,
+	\item Uma função de recompensa onde $R: S\times A \rightarrow \mathbb{R}$,
+	\item Uma função de transição entre os estados onde $T: S\times A \rightarrow II(S)$.
+	
+\end{itemize}
+
+A função de transição de estados específica o próximo estado como uma função do estado atual e a ação do agente. Para que isso seja válido o ambiente tem que satisfazer a propriedade de Markov, que diz que a transição de estados tem que ser independente de qualquer informação de estados e ações dos agentes anteriores.
+
+Com essas propriedades é possível calcular qualquer estado futuro pela função de transição de estados resolvendo o problema de recompensa atrasada, como é possível calcular todos os possíveis futuros e estados e ações também é possível calcular futuras recompensas.
+
+Uma técnica muito utilizada para melhorar o processo de escolher qual política de ações é o Q-Learning. Segundo \cite{kaelbling1996reinforcement} no Q-Learning os valores de Q (valor de escolher uma ação a em um estado s) irá convergir para valores ideais, independente de como o agente se comporta enquanto os dados estão sendo coletados (desde que todas ações/estados sejam julgados uma boa quantidade de vezes).
+
+O Q-Learning geralmente é implementado como duas matrizes de tamanhos $n\times n$ onde n é o número de estados. 
+
+Na matriz a seguir \ref{eq:rmatrix} é mostrado a matriz de recompensa ou \textbf{R} onde as linhas são os estados e as colunas são ações. Nesse exemplo a matriz é iniciada com 0, o estado objetivo (estado 5) é marcado como 100 e os estados que não podem ser alcançados são marcados com -1(por exemplo $R(0,1) = -1$ quer dizer que é impossível ao estar no estado 0 ir ao estado 1). 
+
+\begin{equation}
+R_{n,n} = 
+ \begin{pmatrix}
+  -1	&	-1	&	-1	&	-1	&	0	&	-1	\\
+  -1	&	-1	&	-1	&	0	&	-1	&	100	\\
+  -1	&	-1	&	-1	&	0	&	-1	&	-1	\\
+  -1	&	0	&	0	&	-1	&	0	&	-1	\\
+	0	&	-1	&	-1	&	0	&	-1	&	100	\\
+  -1	&	0	&	-1	&	-1	&	0	&	100	\\
+ \end{pmatrix}
+ \label{eq:rmatrix}
+\end{equation}
+
+A segunda matriz é a matriz de aprendizagem do Q-Learning chamada de \textbf{Q}. A matriz é iniciada com zero em todos os valores e durante o algoritmo esses valores serão ajustados.
+
+Conhecidos as duas matrizes o procedimento de aprendizagem pode ser definido pela seguinte equação \ref{eq:qlearningequation}:
+
+\begin{equation}
+	Q(s, a) = R(s, a) + \gamma \times Max[Q(s', a*)]
+	\label{eq:qlearningequation}
+\end{equation}
+
+Onde:
+
+\begin{itemize}
+	\item \textbf{s}. É o estado atual,
+	\item \textbf{a}. É a ação escolhida,
+	\item \textbf{$\gamma$}. É o fator de desconto ou taxa de aprendizagem. Segundo \cite{Mitchell:1997:ML:541177} esse valor pode ser qualquer constante entre $0 \leq \gamma \leq 1$. Se $\gamma$ é próximo de zero, o agente tenderá a considerar mais recompensas imediatas, se próximo de 1 o agente considerará mais as futuras recompensas,
+	\item \textbf{s'}. O próximo estado.
+	\item \textbf{a*}. Todas as ações do próximo estado.
+\end{itemize}
+
+O treinamento consiste em realizar diversas vezes essa equação até que a matriz Q convirja para valores sólidos.
+
+\section{Neuroevolução}
+\label{sec:neuroevolucao}
+
+Uma técnica bastante comum e bastante utilizada na pesquisa de inteligência para jogos é a neuroevolução. Segundo \cite{risi2014neuroevolution} neuroevolução se refere a geração de redes neurais (pesos de suas conexões e/ou topologias) usando algoritmos evolutivos. Além de poder ser utilizada para um grande número de propósitos em jogos, os jogos são excelentes ambientes de testes para pesquisa de neuroevolução.
+
+\subsection{Redes Neurais}
+
+Segundo \cite{koehn1994combining} as redes neurais foram inventadas no espírito de ser uma metáfora biológica. A metáfora biológica para redes neurais é o cérebro humano. Como o cérebro, esse modelo computacional consiste em pequenas unidades interconectadas. Essas unidades (ou nós) têm habilidades bem simples. Assim, a força desse modelo deriva da interação dessas unidades. Ela depende da sua estrutura (topologia) e suas conexões.
+
+Essas pequenas unidades, conexões e topologias podem ser comparadas a neurônios e sinapses. Um modelo bem comum e bastante utilizado é o chamado \textit{perceptron}. Segundo \cite{beiu2003survey} uma rede neural de \textit{perceptron} é composta por um grafo onde os nós são neurônios e as arestas são as sinapses. Essa rede tem alguns nós de entrada, e alguns (ao menos um) nós de saída.
+
+O modelo simples de \textit{perceptron} funciona com saídas binárias, sendo muito utilizado para reconhecimento de padrões, ele funciona da seguinte forma:
+
+\begin{itemize}
+	\item Uma vetor de entrada X, onde cada posição do vetor representa uma característica diferente da entrada.
+	\item Uma vetor W chamado de vetor de pesos sinápticos, para cada característica de entrada um peso é associado. Nesse vetor ocorrerão ajustes de valor até que a saída fique correta.
+	\item Bias (b) é um valor de polarização que permite mudar a função de ativação para a esquerda ou para a direita, ou seja, ela permite melhor espalhar os resultados que a função de ativação gera esse valor também é ajustado durante o aprendizado.
+\end{itemize}
+
+A saída do \textit{perceptron} pode ser definida pela seguinte equação:
+
+\begin{equation}
+y = \sigma( \displaystyle\sum_{j=1}^{n} w_j x_ij + b_i )
+\end{equation}
+
+Onde:
+
+\begin{itemize}
+	\item \textbf{y} é o valor de saída(0 ou 1).
+	\item \textbf{$\sigma$} é a função de ativação. Retorna 1 para valores maiores que zero, e retorna 0 para valores menores ou iguais a zero.
+	\item \textbf{n} é o tamanho do vetor de entrada.
+\end{itemize}
+
+Até que para todas as entradas, todas saídas estejam corretas o vetor W e o \textit{bias} são atualizados. Segundo \cite{estebon1997perceptrons} ajustando os pesos das conexões entre as camadas, a saída do \textit{perceptron} pode ser "treinada" para corresponder com a saída desejada. O treino é completo quando um conjunto de entradas passa pela rede e os resultados obtidos são os resultados desejados. Se existir alguma diferença entre a saída atual e a saída desejada, os pesos são ajustados na camada de adaptação para produzir um conjunto de saída mais próximo aos valores desejados.
+
+A equação de treinamento (ajuste de pesos) pode ser escrita da seguinte forma:
+
+\begin{equation}
+w'_ij = w_ij + \alpha(t_j - e_j) \times x_ij
+\end{equation}
+
+Onde:
+
+\begin{itemize}
+	\item \textbf{$w'_ij$} é o novo valor do peso.
+	\item \textbf{$w_ij$} é o valor atual do peso.
+	\item \textbf{$\alpha$} taxa de aprendizagem onde $0 \leq \alpha \leq 1$. Valores baixos para $\alpha$ faz com que os pesos sejam ajustados suavemente.
+	\item \textbf{$t_j$} Resultado esperado.
+	\item \textbf{$e_j$} Resultado atual.
+	\item \textbf{$x_ij$} Valor de entrada.
+\end{itemize}
+
+No algoritmo \ref{alg:perceptron} é implementado o \textit{Perceptron} aplicado para reconhecimento de classes famosas em jogos medievais (mago, ladino, guerreiro, clérigo). A entrada do algoritmo é uma matriz 4x6 representando os atributos força, destreza, constituição, inteligência, sabedoria e carisma. Os valores de atributos e definições de classes são do sistema \textit{Dungeons \& Dragons} \cite{dndcs}.
+
+\begin{algorithm}
+\caption{Algoritmo Perceptron \label{alg:perceptron}}
+\begin{algorithmic}[1]
+\State $input\gets 
+ \begin{pmatrix}
+  10	&	16	&	12	&	16	&	13	&	8	\\
+  8		&	16	&	10	&	13	&	12	&	16	\\
+  16	&	9	&	15	&	13	&	11	&	14	\\
+  14	&	8	&	15	&	10	&	16	&	12	\\
+ \end{pmatrix}$ \Comment{Input attributes}
+\State $out\gets \begin{pmatrix}
+  1		&	0	&	0	&	0	\\
+  0		&	1	&	0	&	0	\\
+  0		&	0	&	1	&	0	\\
+  0		&	0	&	0	&	1	\\
+ \end{pmatrix}$ \Comment{Expected output}
+\State $L\gets 0.1$ \Comment{Learning Rate}
+\Procedure{Perceptron}{}
+\State $Neurons[4]\gets initializeNeuronsRandomly()$
+
+\While{ !trainned }
+	\State $trainned\gets true$
+	
+	\For{each neuron $N$ \Pisymbol{psy}{206} $Neurons$ }
+		\State $i\gets 0$
+		
+		\For{ $j=0$ to $4$ } \Comment{Number of classes}
+			\State $total\gets 0$
+			
+			\For{ $k=0$ to $6$ } \Comment{Number of attributes}
+				\State $total\gets total + ( input[j][k] \times N.weights[k] + N.bias ) $
+			\EndFor	
+			
+			\If {$total > 0$} 
+				\State $total\gets 1$
+			\Else
+				\State $total\gets 0$
+			\EndIf
+			
+			\If {$out[i][j] \neq total$} 
+				\State $trainned\gets false$
+				
+				\For{ $k=0$ to $6$ } \Comment{Updating Weights}
+					\State $N.weights[k]\gets N.weights[k] + L \times ( out[j][k] - total ) \times input[j][k] $
+					
+					\State $N.bias\gets N.bias + L \times ( out[j][k] - total ) $
+				\EndFor	
+				
+			\EndIf
+		\EndFor
+		\State $i\gets i + 1$
+	\EndFor
+\EndWhile
+
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Algoritmos genéticos}
+
+A primeira pesquisa na área de algoritmos genéticos foi feito por John Holland no livro \textit{Adaptation in Natural and Artificial Systems}. Segundo \cite{mitchell1995genetic} algoritmos genéticos(GA) é uma abstração da evolução biológica, onde move-se uma população de cromossomos (representando candidatos a soluções de um determinado problema) para uma nova população, usando "seleção"  junto com operadores baseados em genéticas para cruzamentos e mutação. 
+
+Segundo \cite{485447} antes de aplicar o algoritmo genético, é necessário mapear qual será a arquitetura do cromossomo de modo que ele represente uma solução para o problema. Para usar o modo convencional do algoritmo genético com cromossomos de tamanhos fixos, é preciso:
+
+\begin{itemize}
+	\item Determinar o esquema de representação.
+	\item Determinar como mensurar o \textit{fitness}. Segundo \cite{mitchell1995genetic} o \textit{fitness} é definido por uma função que atribui uma nota (\textit{fitness}) para cada cromossomo da população atual. O \textit{fitness} do cromossomo depende de quão bem o cromossomo resolve o problema.
+	\item Determinar os parâmetros e variáveis para controlar o algoritmo.
+	\item Determinar um modo de mostrar o resultado e um critério de parada para o algoritmo.
+\end{itemize}
+
+Segundo \cite{485447} O algoritmo evolutivo pode ser separados em três passos:
+
+\begin{itemize}
+	\item Randomicamente criar uma população inicial de cromossomos (soluções para o problema).
+	\item Executar os seguintes sub-passos na população até que o critério de parada seja satisfeito:
+		\subitem \textbf{1:} Determinar para cada indivíduo um \textit{fitness} através da função avaliadora de \textit{fitness}.
+		\subitem \textbf{2:} Selecionar quais indivíduos passarão para a próxima geração por uma probabilidade baseada em seu \textit{fitness}. Aplicar na nova população de indivíduos as 3 seguintes operações genéticas: copiar um indivíduo para a nova população; criar dois novos indivíduos combinando seus cromossomos através de alguma operação de cruzamento (\textit{crossover}); fazer a mutação de algumas características de um cromossomo aleatoriamente.
+	\item Pegar o melhor indivíduo já criado (aquele com melhor \textit{fitness}) para utilizar na resolução do problema.
+\end{itemize}
+ 
+O resultado de algoritmo genético muitas vezes não é o melhor resultado possível, porém gera um resultado excelente em cenários onde não se sabe como resolver um problema, ou em cenários onde a solução ótima demora muito tempo para ser calculada.
+
+\subsection{Neuroevolução}
+
+No trabalho \textit{Combining genetic algorithms and neural networks: The encoding problem} de \cite{koehn1994combining} é levantado a seguinte questão: Se ambas técnicas são autônomas, porque então combiná-las? Ainda segundo \cite{koehn1994combining} a resposta curta para essa questão diz que o problema de redes neurais é o número de parâmetros que precisam ser atribuídos antes de qualquer treino começar, nesse ponto entra o algoritmo genético. O autor do trabalho completa dizendo que a inspiração vem da natureza, o sucesso de um indivíduo não é determinado apenas pelo conhecimento e habilidades que ele ganha através da experiência, também depende de sua herança genética.
+
+Existem também outros modos de aplicar algoritmos evolutivos em rede neurais, é comum encontrar abordagens onde o algoritmo genético é utilizado para fazer o treinamento de redes neurais. Segundo \cite{risi2014neuroevolution}, cada indivíduo é codificado em uma rede neural, e submetido para uma determinada tarefa por uma determinada quantidade de tempo. O desempenho da rede ou \textit{fitness} é então guardado e uma vez que os valores de aptidão (\textit{fitness}) para os genótipos (indivíduos) na população atual são determinados, uma nova população é gerada trocando as codificações do genótipo através de mutações e combinando os genótipos através de cruzamentos. Em geral, genótipos com alto \textit{fitness} tem uma alta chance de ser selecionado para reprodução e os seus descendentes substituem genótipos com valores de \textit{fitness} mais baixos, formando assim uma nova geração. 
+
+No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar Reversi (jogo de tabuleiro), para isso, foi implementado uma população de 50 rede neurais evoluindo por 1000 gerações, para calcular o \textit{fitness} de cada rede neural a rede era submetida a 244 jogos contra um agente baseado em \textit{minimax}, a percentagem de vitória define o \textit{fitness} do indivíduo.

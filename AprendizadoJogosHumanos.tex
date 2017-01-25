@@ -46,7 +46,7 @@ Segundo \cite{russell1995modern} um agente que utiliza aprendizado de máquina po
 \begin{figure}[H]
 \centering
 \includegraphics[width=\columnwidth]{figures/modelLearningAgents.pdf}
-\caption[Minimax]{\textit{Minimax} aplicado ao Jogo da Velha.}
+\caption[Modelo de agente com aprendizagem]{Modelo de agente com aprendizagem.}
 \label{fig:modelLearningAgents}
 \end{figure}
 
@@ -75,17 +75,140 @@ Por último, o \textbf{gerador de problema} é responsável por sugerir ações que p
 
 Segundo \cite{koehn1994combining} as redes neurais foram inventadas no espírito de ser uma metáfora biológica. A metáfora biológica para redes neurais é o cérebro humano. Como o cérebro, esse modelo computacional consiste em pequenas unidades interconectadas. Essas unidades (ou nós) têm habilidades bem simples. Assim, a força desse modelo deriva da interação dessas unidades. Ela depende da sua estrutura (topologia) e suas conexões.
 
-Essas pequenas unidades, conexões e topologias podem ser comparadas a neurônios e sinapses. Um modelo bem comum e bastante utilizado é o chamado \textit{perceptron}. Segundo \cite{beiu2003survey} uma rede neural de \textit{perceptron} é composta por um grafo onde os nós são neurônios e as arestas são as sinapses. Essa rede tem alguns nós de entrada, e alguns (ao menos um) nós de saída.
+Uma rede neural é composta por um conjunto de nós, ou \textbf{unidades}, conectadas por \textbf{ligações}. Cada ligação tem um valor númerico chamado de \textbf{peso} associado a ele. Os pesos são o principal meio de armazenamento de longo prazo em redes neurais e, a aprendizagem geralmente ocorre através da atualização desses pesos. Algumas dessas unidades são conectadas com o ambiente externo, e pode ser desenhada como unidades de entrada ou saída. Os pesos são modificados para tentar trazer a relação de entrada e saída da rede seja ajustada de acordo com o ambiente (\cite{russell1995modern}).
 
-\section{Implementações redes neurais}
+\subsection{Implementações de redes neurais}
 \label{sec:implementacoesRN}
 
+Essas pequenas unidades, conexões e topologias podem ser comparadas a neurônios e sinapses. Redes neurais de apenas uma camada são chamadas de \textit{perceptron}. Segundo \cite{beiu2003survey} uma rede neural de \textit{perceptron} é composta por um grafo onde os nós são neurônios e as arestas são as sinapses. Essa rede tem alguns nós de entrada, e alguns (ao menos um) nós de saída.
 
+Pelo fato de o \textit{perceptron} ter apenas uma camada ele se torna muito limitado para resolver diferentes tipos de problemas, ou seja, o percetron apenas resolve problemas linearmente separáveis. O modelo \textit{perceptron} de múltiplas camadas (do inglês multilayer perceptron - MLP) apresenta uma ou mais camadas chamadas de unidades escondidas.
+
+\subsubsection{Perceptron}
+
+A imagem ilustra \ref{fig:percetronModel} ilustra o funcionamento de um perceptron.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/perceptron.pdf}
+\caption[Perceptron]{\textit{Perceptron}.}
+\label{fig:percetronModel}
+\end{figure}
+
+O modelo simples de \textit{perceptron} funciona com saídas binárias, sendo muito utilizado para reconhecimento de padrões, ele funciona da seguinte forma:
+
+\begin{itemize}
+	\item Uma vetor de entrada X, onde cada posição do vetor representa uma característica diferente da entrada.
+	\item Uma vetor W chamado de vetor de pesos sinápticos, para cada característica de entrada um peso é associado. Nesse vetor ocorrerão ajustes de valor até que a saída fique correta.
+	\item Bias (b) é um valor de polarização que permite mudar a função de ativação para a esquerda ou para a direita, ou seja, ela permite melhor espalhar os resultados que a função de ativação gera esse valor também é ajustado durante o aprendizado.
+\end{itemize}
+
+A saída do \textit{perceptron} pode ser definida pela seguinte equação:
+
+\begin{equation}
+y = \sigma( \displaystyle\sum_{j=1}^{n} w_j x_ij + b_i ),
+\end{equation}
+
+onde \textbf{y} é o valor de saída(0 ou 1), \textbf{$\sigma$} é a função de ativação. Retorna 1 para valores maiores que zero, e retorna 0 para valores menores ou iguais a zero e \textbf{n} é o tamanho do vetor de entrada.
+
+Até que para todas as entradas, todas saídas estejam corretas o vetor W e o \textit{bias} são atualizados. Segundo \cite{estebon1997perceptrons} ajustando os pesos das conexões entre as camadas, a saída do \textit{perceptron} pode ser "treinada" para corresponder com a saída desejada. O treino é completo quando um conjunto de entradas passa pela rede e os resultados obtidos são os resultados desejados. Se existir alguma diferença entre a saída atual e a saída desejada, os pesos são ajustados na camada de adaptação para produzir um conjunto de saída mais próximo aos valores desejados.
+
+A equação de treinamento (ajuste de pesos) pode ser escrita da seguinte forma:
+
+\begin{equation}
+w'_ij = w_ij + \alpha(t_j - e_j) \times x_ij,
+\end{equation}
+
+onde \textbf{$w'_ij$} é o novo valor do peso, \textbf{$w_ij$} é o valor atual do peso, \textbf{$\alpha$} taxa de aprendizagem onde $0 \leq \alpha \leq 1$. Valores baixos para $\alpha$ faz com que os pesos sejam ajustados suavemente. A variável \textbf{$t_j$} representa resultado esperado, \textbf{$e_j$} resultado atual e \textbf{$x_ij$} o valor de entrada.
+
+O percetron resolve qualquer problema linearmente separável como calcular o "E" lógico de duas entradas. A imagem \ref{fig:perceptronE} mostra um plano cartersiano onde conseguimos com uma reta separar entradas cuja a saída é igual 0 das entradas cuja saída é igual a 1.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/perceptronE.pdf}
+\caption[Perceptron E lógico]{\textit{Perceptron} E lógico.}
+\label{fig:perceptronE}
+\end{figure}
+
+Em casos onde não o problema não é linearmente separável o perceptron falha. Como mostra a imagem  \ref{fig:perceptronXOR} não é possível separar linearmente o problema do ou excluisivo (XOR).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/perceptronXOR.pdf}
+\caption[Perceptron XOR]{\textit{Perceptron} XOR.}
+\label{fig:perceptronXOR}
+\end{figure}
+
+\subsubsection{Perceptron de múltiplas camadas}
+
+Um \textit{perceptron} de múltiplas camadas modifica um pouco o desenho de como funciona o \textit{perceptron}. A imagem \ref{fig:multilayerperceptron} mostra como funciona o MLP. Conforme mostra na imagem, o MLP tem uma camada de entrada, uma ou mais camadas escondidas (a quantidade de neurônios nas camadas escondidas não precisa ser uniforme, ou seja, ter a quantidade de neurônios igual a camada de entrada/saída) e uma camada de saída.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/multilayerPerceptron.pdf}
+\caption[Perceptron de múltiplas camadas]{\textit{Perceptron} de múltiplas camadas.}
+\label{fig:percetronModel}
+\end{figure}
+
+O MLP é uma rede fortemente conectada, ou seja, é uma rede onde as camadas estão em uma certa ordem e os neurônios de uma camada estimulam todos os neurônios da camada subsequente. Essas conexões são chamadas de \textit{feedfoward}.
+
+O funcionamento do MLP é bem semelhante ao do \textit{perceptron}. O aloritmo de treino mais simples para MLP é chamado de retro-propagação. Essa equação pode ser escrita da seguinte maneira:
+
+\begin{equation}
+\delta w^k_ij = \eta \times \frac{\partial E}{\partial w^k_ij},
+\end{equation}
+
+onde \textbf{$k$} é a camada que está sendo atualizada, \textbf{$\eta$} é a taxa de aprendizado, \textbf{$\partial$} representa a derivada parcial, \textbf{$E$} representa o valor de erro.
+
+O valor de erro é representado pela seguinte equação:
+
+\begin{equation}
+E = \frac{1}{2} \times \displaystyle\sum_{i}{} (d_i - y_i)^2,
+\end{equation}
+
+onde \textbf{$d_i$} é o valor desejado de saída e \textbf{$y_i$} é a saída obtida.
+
+É possível resolver o problema do XOR utilizando um MLP simples com uma camada escondida. A ilustração \ref{fig:MLPXOR} mostra como ficaria a solução.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/MLPXOR.pdf}
+\caption[MLP XOR]{\textit{MLP} XOR.}
+\label{fig:MLPXOR}
+\end{figure}
+
+\section{Algoritmos genéticos}
+
+A primeira pesquisa na área de algoritmos genéticos foi feito por John Holland no livro \textit{Adaptation in Natural and Artificial Systems}. Segundo \cite{mitchell1995genetic} algoritmos genéticos(GA) é uma abstração da evolução biológica, onde move-se uma população de cromossomos (representando candidatos a soluções de um determinado problema) para uma nova população, usando "seleção"  junto com operadores baseados em genéticas para cruzamentos e mutação. 
+
+Segundo \cite{485447} antes de aplicar o algoritmo genético, é necessário mapear qual será a arquitetura do cromossomo de modo que ele represente uma solução para o problema. Para usar o modo convencional do algoritmo genético com cromossomos de tamanhos fixos, é preciso:
+
+\begin{itemize}
+	\item Determinar o esquema de representação.
+	\item Determinar como mensurar o \textit{fitness}. Segundo \cite{mitchell1995genetic} o \textit{fitness} é definido por uma função que atribui uma nota (\textit{fitness}) para cada cromossomo da população atual. O \textit{fitness} do cromossomo depende de quão bem o cromossomo resolve o problema.
+	\item Determinar os parâmetros e variáveis para controlar o algoritmo.
+	\item Determinar um modo de mostrar o resultado e um critério de parada para o algoritmo.
+\end{itemize}
+
+Segundo \cite{485447} O algoritmo evolutivo pode ser separados em três passos:
+
+\begin{itemize}
+	\item Randomicamente criar uma população inicial de cromossomos (soluções para o problema).
+	\item Executar os seguintes sub-passos na população até que o critério de parada seja satisfeito:
+		\subitem \textbf{1:} Determinar para cada indivíduo um \textit{fitness} através da função avaliadora de \textit{fitness}.
+		\subitem \textbf{2:} Selecionar quais indivíduos passarão para a próxima geração por uma probabilidade baseada em seu \textit{fitness}. Aplicar na nova população de indivíduos as 3 seguintes operações genéticas: copiar um indivíduo para a nova população; criar dois novos indivíduos combinando seus cromossomos através de alguma operação de cruzamento (\textit{crossover}); fazer a mutação de algumas características de um cromossomo aleatoriamente.
+	\item Pegar o melhor indivíduo já criado (aquele com melhor \textit{fitness}) para utilizar na resolução do problema.
+\end{itemize}
+ 
+O resultado de algoritmo genético muitas vezes não é o melhor resultado possível, porém gera um resultado excelente em cenários onde não se sabe como resolver um problema, ou em cenários onde a solução ótima demora muito tempo para ser calculada.
 
 \section{Neuroevolução}
-\label{sec:neuroevolucao}
 
+No trabalho \textit{Combining genetic algorithms and neural networks: The encoding problem} de \cite{koehn1994combining} é levantado a seguinte questão: Se ambas técnicas são autônomas, porque então combiná-las? Ainda segundo \cite{koehn1994combining} a resposta curta para essa questão diz que o problema de redes neurais é o número de parâmetros que precisam ser atribuídos antes de qualquer treino começar, nesse ponto entra o algoritmo genético. O autor do trabalho completa dizendo que a inspiração vem da natureza, o sucesso de um indivíduo não é determinado apenas pelo conhecimento e habilidades que ele ganha através da experiência, também depende de sua herança genética.
 
+Existem também outros modos de aplicar algoritmos evolutivos em rede neurais, é comum encontrar abordagens onde o algoritmo genético é utilizado para fazer o treinamento de redes neurais. Segundo \cite{risi2014neuroevolution}, cada indivíduo é codificado em uma rede neural, e submetido para uma determinada tarefa por uma determinada quantidade de tempo. O desempenho da rede ou \textit{fitness} é então guardado e uma vez que os valores de aptidão (\textit{fitness}) para os genótipos (indivíduos) na população atual são determinados, uma nova população é gerada trocando as codificações do genótipo através de mutações e combinando os genótipos através de cruzamentos. Em geral, genótipos com alto \textit{fitness} tem uma alta chance de ser selecionado para reprodução e os seus descendentes substituem genótipos com valores de \textit{fitness} mais baixos, formando assim uma nova geração. 
+
+No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar Reversi (jogo de tabuleiro), para isso, foi implementado uma população de 50 rede neurais evoluindo por 1000 gerações, para calcular o \textit{fitness} de cada rede neural a rede era submetida a 244 jogos contra um agente baseado em \textit{minimax}, a percentagem de vitória define o \textit{fitness} do indivíduo.
 
 \section{Aprendizado com Humanos}
 \label{sec:aprendizadoComHumanos}
