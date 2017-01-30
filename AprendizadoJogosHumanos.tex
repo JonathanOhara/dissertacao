@@ -1,4 +1,4 @@
-\chapter{Aprendizado de jogos com humanos}
+\chapter{Redes neurais e aprendizado de jogos com humanos}
 \label{chap:aprendizadoJogosComHumanos}
 
 \section{Introdução}
@@ -125,7 +125,7 @@ O percetron resolve qualquer problema linearmente separável como calcular o "E" 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\columnwidth]{figures/perceptronE.pdf}
+\includegraphics[width=10cm]{figures/perceptronE.pdf}
 \caption[Perceptron E lógico]{\textit{Perceptron} E lógico.}
 \label{fig:perceptronE}
 \end{figure}
@@ -134,7 +134,7 @@ Em casos onde não o problema não é linearmente separável o perceptron falha. Com
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\columnwidth]{figures/perceptronXOR.pdf}
+\includegraphics[width=10cm]{figures/perceptronXOR.pdf}
 \caption[Perceptron XOR]{\textit{Perceptron} XOR.}
 \label{fig:perceptronXOR}
 \end{figure}
@@ -172,7 +172,7 @@ onde \textbf{$d_i$} é o valor desejado de saída e \textbf{$y_i$} é a saída obtid
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\columnwidth]{figures/MLPXOR.pdf}
+\includegraphics[width=10cm]{figures/MLPXOR.pdf}
 \caption[MLP XOR]{\textit{MLP} XOR.}
 \label{fig:MLPXOR}
 \end{figure}
@@ -206,9 +206,68 @@ O resultado de algoritmo genético muitas vezes não é o melhor resultado possível
 
 No trabalho \textit{Combining genetic algorithms and neural networks: The encoding problem} de \cite{koehn1994combining} é levantado a seguinte questão: Se ambas técnicas são autônomas, porque então combiná-las? Ainda segundo \cite{koehn1994combining} a resposta curta para essa questão diz que o problema de redes neurais é o número de parâmetros que precisam ser atribuídos antes de qualquer treino começar, nesse ponto entra o algoritmo genético. O autor do trabalho completa dizendo que a inspiração vem da natureza, o sucesso de um indivíduo não é determinado apenas pelo conhecimento e habilidades que ele ganha através da experiência, também depende de sua herança genética.
 
-Existem também outros modos de aplicar algoritmos evolutivos em rede neurais, é comum encontrar abordagens onde o algoritmo genético é utilizado para fazer o treinamento de redes neurais. Segundo \cite{risi2014neuroevolution}, cada indivíduo é codificado em uma rede neural, e submetido para uma determinada tarefa por uma determinada quantidade de tempo. O desempenho da rede ou \textit{fitness} é então guardado e uma vez que os valores de aptidão (\textit{fitness}) para os genótipos (indivíduos) na população atual são determinados, uma nova população é gerada trocando as codificações do genótipo através de mutações e combinando os genótipos através de cruzamentos. Em geral, genótipos com alto \textit{fitness} tem uma alta chance de ser selecionado para reprodução e os seus descendentes substituem genótipos com valores de \textit{fitness} mais baixos, formando assim uma nova geração. 
+O trabalho de \cite{risi2014neuroevolution} define o algoritmo básico de neuroevolução da seguinte forma: uma população de genótipos que codificam redes neurais artificiais é evoluida para encontrar uma rede (pesos e/ou topologia) que resolvam um problema computactional. Normalmente cada genótipo é codificado em uma rede neural, que então é testada para uma específica tarefa por um determinado período de tempo. O desempenho ou \textit{fitness} da rede é guardado e, uma vez que o valores de \textit{fitness} para os genótipos da população são determinados, uma nova população é gerada pela alteração ligeira dos genótipos que codificam a rede neural artificial (mutação) ou pela combinação de vários genótipos (\textit{crossover}). Em geral, genótipos com alto \textit{fitness} tem uma alta chance de ser selecionado para reprodução e os seus descendentes substituem genótipos com valores de \textit{fitness} mais baixos, formando assim uma nova geração. 
+
+Segundo \cite{miikkulainen2006computational} existem vários métodos para a evolução das redes neurais. A maneira mais direta é formar a codificação genética para a rede pela concatenação dos valores numéricos de seus pesos, e evoluir uma população de tais codificações usando \textit{crossover} e mutação. 
+
+Embora esta abordagem padrão seja fácil de implementar e prática em muitos domínios, métodos mais sofisticados podem resolver problemas muito mais difíceis. Dois métodos bem comuns para evoluir redes neurais artificiais são eles, sub-populações forçadas (do inglês Enforced sub-populations - ESP) e neuroevolução de topologias de aumento (do inglês Neuroevolution of augmenting topologies - NEAT).
+
+\subsection{ESP}
+
+No ESP \cite{gomez1997incremental} a população consiste de neurônios individuais em vez de redes completas, e um subconjunto de neurônios são reunidos para formar uma rede completa. No entanto, o ESP aloca uma população separada para cada uma das unidades na rede, e um neurônio só pode ser recombinado com membros de sua própria subpopulação. Entre outras palavras, o foco dessa abordagem é a evolução dos neurônios ao invés das redes.
+
+A imagem \ref{fig:espModel} esquematiza o modelo ESP. A população de neurônios é reunida em sub-populações mostrada na ilustração como círculos. E finalmente a rede neural é formada escolhendo aleatoriamente um neurônio de cada sub-população.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/ESP.pdf}
+\caption[Modelo ESP]{Modelo \textit{ESP}.}
+\label{fig:espModel}
+\end{figure}
+
+
+\subsection{NEAT}
+
+O NEAT baseia-se na ideia de evoluir a topologia de rede, ou seja, adicionando novos neurônios, conexões na rede neural artificial. Os autores \cite{stanley2003evolving} dizem que o espaço de parâmetros pesquisado no espaço de redes adaptativas (como as redes geradas pelo NEAT) é muito maior do que para redes estáticas (topologias que nunca mudam). Além dos pesos de conexão, vários parâmetros de aprendizado devem ser evoluídos para cada regra de aprendizado em cada conexão. Assim, é importante minimizar o número de conexões otimizadas pela evolução. Além disso, a topologia da rede tem de ser optimizada. É necessário ter conexões entre os nós \textit{corretos}, para que as conexões possam ser fortalecidas ou enfraquecidas para alterar a relação entre os conceitos computacionais que eles representam.
+
+
+A imagem \ref{fig:neatModel} esquematiza o modelo NEAT. No exemplo cada gene contém uma conexão de neurônios (X,Y se refere a conexão do neurônio X com o Y), além da conexão é guardado o peso, o número acima do gene é chamado de \textbf{número de inovação}. Os genes com fundos de cor mais escura mostra que ele está desabilitado. Na evolução da parte superior da imagem é adicionado uma nova conexão (número de inovação 7), e na parte inferior da imagem mostra a adição de um novo nó (desabilitando o gene de número de inovação 3, e adicionando gene de número de inovação 7 e 8).
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/NEAT.pdf}
+\caption[Modelo NEAT]{Modelo \textit{NEAT}.}
+\label{fig:neatModel}
+\end{figure}
+
+\subsection{Vantagens e Desvntagens}
+
+Segundo \cite{risi2014neuroevolution} existe uma série de motivos para usar a neuroevolução e alguns motivos onde utilizar neurovolução não é tão interessante. As principais vantagens de utilizá-la é:
+
+\begin{itemize}
+
+	\item \textbf{Performance para bater recordes}. Para alguns problemas, neuroevolução simplesmente fornece o melhor desempenho em concorrência com outros métodos de aprendizagem ("desempenho" é, naturalmente, definido de forma variada para diferentes problemas).
+	
+	\item \textbf{Ampla aplicabilidade}. Outro benefício da neuroevolução é que ela pode ser usado para tarefas de aprendizagem supervisionadas, não supervisionadas e reforçadas. Neuroevolução só requer algum tipo de avaliação numérica da qualidade das suas redes.
+
+	\item \textbf{Escalabilidade}. Comparado com muitos outros tipos de aprendizado por reforço neuroevolução parece lidar muito bem com grandes espaços de ação/estado.
+	
+	\item \textbf{Diversidade}. A neuroevolução pode se basear na rica família de métodos de preservação da diversidade e métodos multiobjetivos que foram desenvolvidos dentro da comunidade de computação evolutiva.
+	
+	\item \textbf{Aprendizagem aberta}. Enquanto neuroevolução pode ser usado para aprendizado por reforço, pode-se argumentar que poderia ir além desta formulação relativamente restrita de aprendizagem de reforço. Em particular, nos casos em que a topologia da rede também evolui, a neuroevolução poderia, em princípio, apoiar a evolução aberta, onde o comportamento de complexidade arbitrária e sofisticação poderia emergir. Concretamente, os algoritmos de neuroevolução costumam procurar em um espaço muito grande.
+	
+	\item \textbf{Permitir novos tipos de jogos}. Em jogos que o jogador humano pode evoluir os seus personagens, os equipamentos de seus personagens, seu time e outras customizações, seria muito díficil resolver com os tradicionais métodos de aprendizado. Computação evolutiva aqui fornece qualidades exclusivas para o \textit{design} do jogo e, alguns projetos dependem especificamente da neuroevolução.
+	
+\end{itemize}
+
+Em contrapartida também existe situações que neuroevolução não é tão interessante, seja pelos resultados esperados ou por ter outras técnicas que teriam melhor desempenho. O principal problemaé que as redes neurais evoluídas tendem a ter características de "caixa preta", o que significa que um humano não pode facilmente descobrir o que faz olhando para elas. Em jogos comerciais por exemplo, seria muito díficil predizer e/ou depurar uma determinada escolhada de um agente que utiliza neuroevolução.
 
 No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar Reversi (jogo de tabuleiro), para isso, foi implementado uma população de 50 rede neurais evoluindo por 1000 gerações, para calcular o \textit{fitness} de cada rede neural a rede era submetida a 244 jogos contra um agente baseado em \textit{minimax}, a percentagem de vitória define o \textit{fitness} do indivíduo.
+
+\subsection{Neuroevolução em jogos}
+
+
 
 \section{Aprendizado com Humanos}
 \label{sec:aprendizadoComHumanos}
