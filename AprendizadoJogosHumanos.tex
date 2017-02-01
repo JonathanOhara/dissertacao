@@ -268,6 +268,8 @@ Em contrapartida também existe situações que neuroevolução não é tão interessant
 
 Nesta subseção vamos ver um pouco de como foi implementado a neuroevolução em diferentes jogos, especificamente vamos analisar os jogos digitais: The Open Racing Car Simulator ou TORCS \cite{cardamone2009line}, Galatic Arms Race ou GAR \cite{hastings2009automatic}, Creatures \cite{grand1997creatures}, Neuroevolving Robotic Operatives ou NERO \cite{stanley2005real} e, por fim, neuroevolução aplicado ao jogo de tabuleiro Reversi \cite{evoltuinaryneuralnetworks}.
 
+\subsubsection{Neuroevolução no jogo TORCS}
+
 Começando pelo jogo TORCS \cite{cardamone2009line}, ele é um jogo digital de corrida de carros em três dimensões de código fonte aberto. Ele utiliza a técnica de neuroevolução NEAT detalhada em \ref{sec:neat}. A rede neural tem acesso a uma série de informações cedidas por sensores, entre elas: 
 
 \begin{itemize}
@@ -296,6 +298,8 @@ Para fazer o aprendizado das redes neurais todas elas começavam sem conhecimento
 \label{fig:resultsTorcs}
 \end{figure}
 
+\subsubsection{Neuroevolução no jogo GAR}
+
 Outro estudo de neuroevolução em jogos é estudo de \cite{hastings2009automatic} com o jogo GAR. O jogo consiste em um batalha de naves com grande variedade de armas e cenários. A principal abordagem dessa pesquisa é que nesse jogo a neuroevolução foi usada para criação de conteúdo automátivo ao invés de controlar um carro. A principal ideia é estender a experiência de jogo do usuário criando novos conteúdos baseado nas preferências dos jogadores.
 
 O GAR utiliza um agente chamado cgNEAT (do inglês Content Generation Neuroevolution of Augmenting Topologies) com uma variação de redes neurais artificias chamadas de CPPN (do inglês Compositional Pattern Producing Networks) que difere principalmente no seu conjunto de funções ativadoras e como elas são aplicadas.
@@ -321,20 +325,80 @@ O algoritmo de evolução é separado em sete passos:
 	
 \end{itemize}
 
+\subsubsection{Neuroevolução no jogo Creatures}
+
 No jogo Creatures \cite{grand1997creatures} existem agentes que são bichos de estimação virtuais que são chamados de criaturas. A arquitetura das criaturas são baseadas em biologia animal. Cada criatura tem uma rede neural responsável pela coordenação sensório-motora e seleção de comportamento, e uma "bioquímica artificial" que modela um metabolismo energético simples.
 
-Cada rede neural é subdividia em lóbulos que definem as características elétricas, químicas e morfológicas de um grupo de células. Ao todo cada rede neural tem aproximadamente 1000 neurônios agrupados em 9 lóbulos e interconectados por 5000 sinapses. A imagem de \ref{fig:creatureNeuros} de \cite{grand1997creatures} mostra como está disposto esses elementos.
+Cada rede neural é subdividia em lóbulos que definem as características elétricas, químicas e morfológicas de um grupo de células. Ao todo cada rede neural tem aproximadamente 1000 neurônios agrupados em 9 lóbulos e interconectados por 5000 sinapses. A imagem de \ref{fig:creatureNeurons} de \cite{grand1997creatures} mostra como estão dispostos esses elementos.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=10cm]{figures/CreaturesNeurons.png}
 \caption[Rede neural Creatures]{Rede neural Creatures.}
-\label{fig:creatureNeuros}
+\label{fig:creatureNeurons}
 \end{figure}
 
 A evolução nesse se jogo acontece no nascimento de uma nova criatura, ou seja, quando duas criaturas cruzam. O genoma forma um único cromossoma haplóide. Durante a reprodução, os genes parentais são cruzados e emendados nos limites dos genes. Erros ocasionais de cruzamento  podem introduzir omissões de genes e duplicações. Um pequeno número de mutações aleatórias para os corpos genéticos é também aplicado. Para evitar uma taxa de falha excessiva devido a erros de reprodução em genes críticos, cada gene é precedido por um cabeçalho que especifica que operações (omissão, duplicação e mutação) podem ser realizadas sobre ele. O cruzamento é realizado de tal maneira que a ligação do gene é proporcional à distância de separação, permitindo características ligadas como seria de esperar (por exemplo, temperamento com tipo facial). Como o genoma é haplóide, temos que evitar que as características úteis ligadas ao sexo sejam erradicadas simplesmente porque elas foram herdadas por uma criatura do sexo oposto. Portanto, cada gene contém as instruções genéticas para ambos os sexos, mas apenas os genes não sexuados e apropriadamente sexuados são expressos no fenótipo.
 
-No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar Reversi (jogo de tabuleiro), para isso, foi implementado uma população de 50 rede neurais evoluindo por 1000 gerações, para calcular o \textit{fitness} de cada rede neural a rede era submetida a 244 jogos contra um agente baseado em \textit{minimax}, a percentagem de vitória define o \textit{fitness} do indivíduo.
+\subsubsection{Neuroevolução no jogo NERO}
+
+No trabalho de \cite{stanley2005real} com o jogo NERO a neuroevolução tem papel muito interessante. Nesse estudo é apresentado o jogo NERO, onde o jogador tem um exército de robôs e com esse exércite tem que enfrentar uma série de desafios. No NERO a neuroevolução é aplicada no exército, ou seja, o jogador humano pode treinar seus robôs para que eles evoluam durante o jogo.
+
+Para os autores um dos grandes problemas dos jogos é que, em maioria deles a inteligência aplicada é feito através de um algoritmo estático, ou seja, uma vez que o jogador descobre uma fraqueza de um inimigo, não importa quantas vezes o jogador explore a fraqueza ela sempre irá existir. Outra contriubuição muito interessante destacada pelos autores é a possibilidade de abrir novas possiblidades de tipos de jogos, onde o jogador customiza e treina seu time para realizar desafios ou para duelar com times treinados por outras pessoas.
+
+O NERO utiliza umaa variação de NEAT para ambientes de tempo real, chamado pelos autores de rtNEAT (do inglês Real-time NEAT). O modelo do NEAT empreagado é semelhante a figura \ref{neatModel}.
+
+O algoritmo empregado funciona da seguinte forma:
+
+\begin{itemize}
+	\item \textbf{1}. Calcular o \textit{fitness} ajustado: Sendo $f_i$ o \textit{fitness} original do indivíduo $i$ e, $|S|$ é a quantidade de indivíduos na população. O \textit{fitness} ajustado dele é dado por: $frac{f_i}{|S|}$.
+	
+	\item \textbf{2}. Removendo o pior agente: O objetivo desta etapa é remover um agente de desemepnho muito abaixo do jogo, esperançosamente para ser substituído por algo melhor. O agente deve ser cuidadosamente escolhido para preservar a dinâmica de especiação. Se o agente com a maior \textit{fitness} não ajustado fosse escolhido, o compartilhamento do \textit{fitness} não poderia mais proteger a inovação porque novas topologias seriam removidas assim que aparecerem.
+	
+	\item \textbf{3}. Criando descendentes: os descendentes são criados um por vez e, a probabilidade de escolher uma dada espécie progenitora é proporcional à seu \textit{fitness} médio em comparação com a média de \textit{fitness} total de todas as espécies.
+	
+	\item \textbf{4}. Reatribuindo Agentes a espécies: O limiar de compatibilidade dinâmica mantém o número de espécies relativamente estável ao longo da evolução. Essa estabilidade é particularmente importante em um jogo de tempo real, uma vez que a população pode precisar ser consistentemente pequena para acomodar recursos de CPU dedicados ao processamento gráfico.
+	
+	\item \textbf{5}. Substituir um agente velhor por um agente novo: uma vez que um indivíduo foi removido no passo 2, a nova prole precisa substituí-lo. Como os agentes são substituídos depende do jogo. Em alguns jogos (como o NERO), a rede neural pode ser removida de um corpo e substituída sem fazer nada ao corpo. Em outros, o corpo pode ter sido destruído e precisa ser substituído também. O algoritmo rtNEAT pode trabalhar com qualquer um desses esquemas, desde que uma antiga rede neural seja substituída por uma nova.
+	
+\end{itemize}
+
+
+\subsubsection{Neuroevolução no jogo Reversi}
+
+No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar Reversi (jogo de tabuleiro). Diferentes dos outros exemplos nesse estudo a neuroevolução foi utilizada em conjunto com busca em árvore de decisões. 
+
+Nesse estudo as redes neurais são chamados de redes de foco. Dado uma árvore de escolhas essas redes definiam \textbf{janelas} dentro dessa árvore, ou seja, dentro da árvore ela definia quais nós são interessantes de ser explorados. Na figura \ref{fig:focusedMinimax} as janelas são definidas pela área com o fundo mais escuro.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{figures/focusedMinimax.png}
+\caption[Janelas dentro da árvore de decisão]{Janelas dentro da árvore de decisão.}
+\label{fig:focusedMinimax}
+\end{figure}
+
+No algoritmo apenas nós dentro de janelas são avaliados. Outra vantagem dessa abordagem é que ela torna a tomada de decisão de um agente mais orgânica, ou seja, algoritmos comuns de busca em árvore podem muitas vezes escolher jogadas não muito comum para jogadores humanos uma vez que ele está analisando um grande número de possíveis próximas jogadas.
+
+Os autores enumeram duas grandes vantegens de utilizar essa técnica: 
+
+\begin{itemize}
+	
+	\item Reduzir o número de nós avaliados: O fator de ramificação é reduzido o que acelera consideravelmente a procura. Com esse resutlado, a busca pode fazer pesquisas mais profundas nas árvores em caminhos mais promissores.
+	
+	\item As redes de foco são forçadas a decidir quais movimentos a pesquisa minimax (ténica de busca em árvore utilizada pelos autores) deve avaliar e, a fim de jogar bem, eles devem desenvolver uma compreensão do algoritmo minimax. É possível que eles também descubram as limitações do minimax e da função de avaliação, e aprendem a compensar não permitindo que o minimax veja certos movimentos.
+
+\end{itemize}
+
+A gráfico \ref{fig:focusedNetworkdsResults} mostra o resultado obtido de um minimax com rede de foco comparado a um simples minimax. O gráfico mostra o resultado analisando árvores que analisavam até 6 níveis de profundidade. Para coletar esses dados foram jogados 244 jogos após evoluir a rede de foco.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{figures/focusedNetworksResults.png}
+\caption[Resultados da rede de foco]{Resultados da rede de foco com minimax contra um simples minimax.}
+\label{fig:focusedNetworkdsResults}
+\end{figure}
+
+Para isso chegar nesse ponto foi implementado uma população de 50 rede neurais evoluindo por 1000 gerações, para calcular o \textit{fitness} de cada rede neural a rede era submetida a 244 jogos contra um agente baseado em \textit{minimax}, a percentagem de vitória define o \textit{fitness} do indivíduo.
 
 \section{Aprendizado com Humanos}
 \label{sec:aprendizadoComHumanos}
