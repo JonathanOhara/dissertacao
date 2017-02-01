@@ -227,6 +227,7 @@ A imagem \ref{fig:espModel} esquematiza o modelo ESP. A população de neurônios é
 
 
 \subsection{NEAT}
+\label{sec:neat}
 
 O NEAT baseia-se na ideia de evoluir a topologia de rede, ou seja, adicionando novos neurônios, conexões na rede neural artificial. Os autores \cite{stanley2003evolving} dizem que o espaço de parâmetros pesquisado no espaço de redes adaptativas (como as redes geradas pelo NEAT) é muito maior do que para redes estáticas (topologias que nunca mudam). Além dos pesos de conexão, vários parâmetros de aprendizado devem ser evoluídos para cada regra de aprendizado em cada conexão. Assim, é importante minimizar o número de conexões otimizadas pela evolução. Além disso, a topologia da rede tem de ser optimizada. É necessário ter conexões entre os nós \textit{corretos}, para que as conexões possam ser fortalecidas ou enfraquecidas para alterar a relação entre os conceitos computacionais que eles representam.
 
@@ -263,16 +264,69 @@ Segundo \cite{risi2014neuroevolution} existe uma série de motivos para usar a ne
 
 Em contrapartida também existe situações que neuroevolução não é tão interessante, seja pelos resultados esperados ou por ter outras técnicas que teriam melhor desempenho. O principal problemaé que as redes neurais evoluídas tendem a ter características de "caixa preta", o que significa que um humano não pode facilmente descobrir o que faz olhando para elas. Em jogos comerciais por exemplo, seria muito díficil predizer e/ou depurar uma determinada escolhada de um agente que utiliza neuroevolução.
 
-No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar Reversi (jogo de tabuleiro), para isso, foi implementado uma população de 50 rede neurais evoluindo por 1000 gerações, para calcular o \textit{fitness} de cada rede neural a rede era submetida a 244 jogos contra um agente baseado em \textit{minimax}, a percentagem de vitória define o \textit{fitness} do indivíduo.
-
 \subsection{Neuroevolução em jogos}
 
+Nesta subseção vamos ver um pouco de como foi implementado a neuroevolução em diferentes jogos, especificamente vamos analisar os jogos digitais: The Open Racing Car Simulator ou TORCS \cite{cardamone2009line}, Galatic Arms Race ou GAR \cite{hastings2009automatic}, Creatures \cite{grand1997creatures}, Neuroevolving Robotic Operatives ou NERO \cite{stanley2005real} e, por fim, neuroevolução aplicado ao jogo de tabuleiro Reversi \cite{evoltuinaryneuralnetworks}.
 
+Começando pelo jogo TORCS \cite{cardamone2009line}, ele é um jogo digital de corrida de carros em três dimensões de código fonte aberto. Ele utiliza a técnica de neuroevolução NEAT detalhada em \ref{sec:neat}. A rede neural tem acesso a uma série de informações cedidas por sensores, entre elas: 
+
+\begin{itemize}
+	\item \textbf{Sensores das bordas da pista}. Existem seis sensores laterais que marcam a distância para os limites da pista. Em relação ao carro esses sensores estão localizados a: $-90^{\circ}$, $-60^{\circ}$, $30^{\circ}$, $60^{\circ}$ e $90^{\circ}$. 
+	
+	\item \textbf{Sensores agregrados}. Existem três sensores frontais (que simulariam a visão periférica do motorista) que também marcam a distância para os limites da pista: $-10^{\circ}$, $0^{\circ}$ e $10^{\circ}$. Em algumas situações como em grandes retas esses sensores podem não conseguir estimar a distância.
+	
+	\item \textbf{Velocidade}. A velocidade que o veículo está se movendo.
+\end{itemize}
+
+A imagem \ref{fig:sensoresTorcs} de \cite{cardamone2009line} mostra como os sensores de distância funcionam.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{figures/sensoresTORCS.png}
+\caption[Sensores TORCS]{Sensores do jogo \textit{Torcs} \cite{cardamone2009line}.}
+\label{fig:sensoresTorcs}
+\end{figure}
+
+Para fazer o aprendizado das redes neurais todas elas começavam sem conhecimento algum e, as redes neurais não tinham camadas escondidas, ou seja, a camada de entrada era diretamente conectada a camada de saída. O tamanho da população era de 100 indivíduos que corriam 10 vezes em uma mesma pista fazendo 2000 voltas na pista. Como mostra a imagem \ref{fig:resultsTorcs} de \cite{cardamone2009line} ele já tinha excelente resutados utilizando técnicas diferentes após 300 voltas.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{figures/resultsTorcs.png}
+\caption[Desempenho Neuroevolução TORCS]{Desempenho da neuroevolução no TORCS.}
+\label{fig:resultsTorcs}
+\end{figure}
+
+Outro estudo de neuroevolução em jogos é estudo de \cite{hastings2009automatic} com o jogo GAR. O jogo consiste em um batalha de naves com grande variedade de armas e cenários. A principal abordagem dessa pesquisa é que nesse jogo a neuroevolução foi usada para criação de conteúdo automátivo ao invés de controlar um carro. A principal ideia é estender a experiência de jogo do usuário criando novos conteúdos baseado nas preferências dos jogadores.
+
+O GAR utiliza um agente chamado cgNEAT (do inglês Content Generation Neuroevolution of Augmenting Topologies) com uma variação de redes neurais artificias chamadas de CPPN (do inglês Compositional Pattern Producing Networks) que difere principalmente no seu conjunto de funções ativadoras e como elas são aplicadas.
+
+A premissa para avaliação de \textit{fitness} das CPPNs é que os usuários experimentam conteúdos novos e, após experimentar pela primeira vez, voltam a visitar esse conteúdo caso gostaram e, caso não gostaram, visitam ou muito pouco ou não visitam mais esses conteúdo.
+
+O algoritmo de evolução é separado em sete passos:
+
+\begin{itemize}
+	\item \textbf{1}. Canda novo conteúdo é representado por uma CPPN. Diferentes tipo de conteúdos (armas, cenários, entre outros) podem ser representados por diferentes tipos de CPPPN (configurações de entrada/saída diferentes).
+	
+	\item \textbf{2}. Durante o jogo, para cada conteúdo é atribuído um valor de \textit{fitness} baseado no quão frequente os jogadores escolhem ou usam aquele conteúdo.
+	
+	\item \textbf{3}. Jogadores podem começar com conteúdo aleatório ou com um conteúdo chamado de conjunto inicial predefinido.
+	
+	\item \textbf{4}. Conteúdos são espalhadas pelo mundo. Esses conteúdos só estarão elegíveis para reprodução somente se jogadores testarem.
+	
+	\item \textbf{5}. O conteúdo é reproduzido pelo cgNEAT da seguinte maneira: o algoritmo escolhe alguns conteúdos gerados pelo passo 4. Esses conteúdos são selecionados por métodod de roleta e, a mutação e o cruzamento acontece de acordo com o algoritmo de NEAT.
+	
+	\item \textbf{6}. Para qualquer novo conteúdo gerado, existe uma probabilidade (selecionada pelo designer) de ser escolhida de um conjunto de desova, que é uma coleção de conteúdo pré-evoluído, em vez de ser reproduzida dos pais. Esta piscina garante que a diversidade não é perdida e que os bons tipos de conteúdos do passado possam reaparecer.
+	
+	\item \textbf{7}. Conteúdos com \textit{fitness} muito alto (muito popular entre os jogadores) podem ser salvo como conteúdo arquivado.
+	
+\end{itemize}
+
+No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar Reversi (jogo de tabuleiro), para isso, foi implementado uma população de 50 rede neurais evoluindo por 1000 gerações, para calcular o \textit{fitness} de cada rede neural a rede era submetida a 244 jogos contra um agente baseado em \textit{minimax}, a percentagem de vitória define o \textit{fitness} do indivíduo.
 
 \section{Aprendizado com Humanos}
 \label{sec:aprendizadoComHumanos}
 
-
+%INPUT REPRESENTATION%
 
 \section{Considerações Finais}
 \label{sec:conclusaoAprendizadoJogosComHumanos}
