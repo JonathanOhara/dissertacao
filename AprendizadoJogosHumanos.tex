@@ -321,6 +321,19 @@ O algoritmo de evolução é separado em sete passos:
 	
 \end{itemize}
 
+No jogo Creatures \cite{grand1997creatures} existem agentes que são bichos de estimação virtuais que são chamados de criaturas. A arquitetura das criaturas são baseadas em biologia animal. Cada criatura tem uma rede neural responsável pela coordenação sensório-motora e seleção de comportamento, e uma "bioquímica artificial" que modela um metabolismo energético simples.
+
+Cada rede neural é subdividia em lóbulos que definem as características elétricas, químicas e morfológicas de um grupo de células. Ao todo cada rede neural tem aproximadamente 1000 neurônios agrupados em 9 lóbulos e interconectados por 5000 sinapses. A imagem de \ref{fig:creatureNeuros} de \cite{grand1997creatures} mostra como está disposto esses elementos.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{figures/CreaturesNeurons.png}
+\caption[Rede neural Creatures]{Rede neural Creatures.}
+\label{fig:creatureNeuros}
+\end{figure}
+
+A evolução nesse se jogo acontece no nascimento de uma nova criatura, ou seja, quando duas criaturas cruzam. O genoma forma um único cromossoma haplóide. Durante a reprodução, os genes parentais são cruzados e emendados nos limites dos genes. Erros ocasionais de cruzamento  podem introduzir omissões de genes e duplicações. Um pequeno número de mutações aleatórias para os corpos genéticos é também aplicado. Para evitar uma taxa de falha excessiva devido a erros de reprodução em genes críticos, cada gene é precedido por um cabeçalho que especifica que operações (omissão, duplicação e mutação) podem ser realizadas sobre ele. O cruzamento é realizado de tal maneira que a ligação do gene é proporcional à distância de separação, permitindo características ligadas como seria de esperar (por exemplo, temperamento com tipo facial). Como o genoma é haplóide, temos que evitar que as características úteis ligadas ao sexo sejam erradicadas simplesmente porque elas foram herdadas por uma criatura do sexo oposto. Portanto, cada gene contém as instruções genéticas para ambos os sexos, mas apenas os genes não sexuados e apropriadamente sexuados são expressos no fenótipo.
+
 No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar Reversi (jogo de tabuleiro), para isso, foi implementado uma população de 50 rede neurais evoluindo por 1000 gerações, para calcular o \textit{fitness} de cada rede neural a rede era submetida a 244 jogos contra um agente baseado em \textit{minimax}, a percentagem de vitória define o \textit{fitness} do indivíduo.
 
 \section{Aprendizado com Humanos}
