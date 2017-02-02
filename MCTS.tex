@@ -13,7 +13,7 @@ Nesse capítulo vamos discutir sobre tomada de decisão em jogos e árvore de decis
 
 Tomada de decisão é o processo de escolher uma ação entre diversas possibilidades. Segundo \cite{introductionDecisionMaking}, "Tomada de decisão é o estudo do processo de identificar e escolher alternativas baseadas nas preferências do tomador de decisões. Tomar uma decisão implica que existem diferentes escolhas para serem consideradas, e, em tal caso, não queremos apenas identificar quais dessas alternativas são viáveis, mas escolher a decisão que melhor se encaixa com as nossas metas, objetivos, desejos, valores, e assim por diante".
 
-Ainda na teoria do processo de tomada de decisão, \cite{guidebookDecisionMaking} diz que o primeiro passo na tomada de decisão é estabelecer quem é(são) o(s) tomador(es) de decisão e o(s) \textit{stakeholder(s)} (partes afetadas ou interessadas), de modo a mitigar um possível desacordo sobre a definição do problema, metas e critérios. O processo pode ser definido nos seguintes passos:
+Ainda na teoria do processo de tomada de decisão, \cite{guidebookDecisionMaking} diz que o primeiro passo na tomada de decisão é estabelecer quem é (são) o (s) tomador (es) de decisão e o (s) \textit{stakeholder (s)} (partes afetadas ou interessadas), de modo a mitigar um possível desacordo sobre a definição do problema, metas e critérios. O processo pode ser definido nos seguintes passos:
 
 \begin{itemize}
 	
@@ -96,7 +96,7 @@ De acordo com \cite{browne12asurvey} os jogos podem ser classificados de acordo 
 	
 	\item \textbf{Sequencial}: Se as ações escolhidas são aplicadas sequencialmente ou simultaneamente.
 	
-	\item \textbf{Dicreto}: discreto ou contínuo. Jogos discreto são os jogos cujo o estado das variáveis são imediatamente alterados após uma ação ser executada. Jogos conínuos são jogos cujo uma ação pode refletir em muitos estados futuros.
+	\item \textbf{Discreto}: discreto ou contínuo. Jogos discretos são os jogos cujo estado das variáveis são imediatamente alterados após uma ação ser executada. Jogos contínuos são jogos cujo uma ação pode refletir em muitos estados futuros.
 	
 \end{itemize}
 
@@ -185,6 +185,7 @@ Esses algoritmos não se mostram muito efetivos em jogos com grande quantidade de
 Podemos listar dois grandes problemas ao utilizar o \textit{minimax} com uma árvore muito extensa. O primeiro deles é fazer toda a criação da árvore, ou seja, a simulação de possíveis jogadas até que se chegue aos nós folhas (considerando que os caminhos sejam finitos). O segundo problema ocorre quando uma árvore tem um grande número de nós e uma altura muito grande, nesse caso a função de avaliação do \textit{minimax} tem que percorrer muitos nós até chegar à raiz a partir dos nós folhas para atualizar seus valores.
 
 \subsection{Poda alpha-beta}
+\label{sec:podaAlphaBeta}
 
 Uma estratégia para reduzir a quantidade de nós analisados é utilizar técnicas de poda de árvores. A poda de árvore mais conhecida na literatura é a chamada \textit{alpha-beta}. Segundo \cite{knuth1976analysis} essa técnica é usada geralmente para aumentar a velocidade de busca sem perder informação. Nessa técnica são ignorados os nós e suas subárvores de jogadas incapazes de apresentar melhores valores do que movimentos já conhecidos. Durante a análise das jogadas são definidas duas variáveis \textit{alpha} e \textit{beta}. \textit{Alpha} representa o valor máximo que o jogador Max pode fazer e \textit{beta} a pontuação mínima do jogador Min. A cada avaliação de nó esses limites são verificados, caso o valor da avaliação não estiver entre esses limites o nó e todas suas subárvores são removidas (podadas). 
 
@@ -361,7 +362,7 @@ Por não exigir muito conhecimento do domínio, ela funciona muito bem em jogos on
 
 \subsection{Algoritmo de busca de Monte Carlo}
 
-Por décadas, a busca alpha-beta tem sido a abordagem padrão usada em jogos de soma-zero de dois jogadores como xadrez, damas entre outros. Muitas melhorias foram propostas para essa solução porém, em alguns jogos onde é difícil construir uma função de avaliação precisa (e.g., Go) a abordagem alpha-beta foi mal sucedida (\cite{Winands2008}).
+Por décadas, a busca alpha-beta tem sido a abordagem padrão usada em jogos de soma-zero de dois jogadores como xadrez, damas entre outros. Muitas melhorias foram propostas para essa solução, porém em alguns jogos onde é difícil construir uma função de avaliação precisa (e.g., Go) a abordagem alpha-beta foi mal sucedida (\cite{Winands2008}).
 
 O algoritmo de árvore de busca de Monte Carlo ganhou muita notoriedade por apresentar uma alta competitividade ao enfrentar os melhores jogadores do jogo Go. Esse jogo é particularmente desafiador para os algoritmos de busca em árvore, pois tem alto fator de ramificação, tem uma árvore profunda, e não existe nenhuma função de validação de heurística  confiável para nós não terminais (\cite{browne12asurvey}). Ainda segundo os autores, nos últimos anos o algoritmo de busca de Monte Carlo tem alcançado grande sucesso em muitos jogos específicos, jogos generalistas, complexos planejamentos do mundo real, otimização e controle de problemas, e se tornou uma importante ferramenta do pesquisador de inteligência artificial.
 
@@ -392,7 +393,7 @@ Pode-se descrever cada iteração do algoritmo em quatro passos básicos:
 	
 	\item \textbf{Expansão} É adicionado um ou mais nós filhos no nó escolhido de acordo com as possíveis ações naquele estado.
 
-	\item \textbf{Simulação} Simula o jogo a partir dos novos nós gerados (geralmente é apenas um nó) na fase de expansão até que se alcance o fim de jogo. As escolhas das ações a partir desse novo nó é definido pela \textbf{política padrão}. Conhecimentos sobre o jogo podem ser adicionados para a escolha dessas ações fazendo a simulação mais realística (\cite{nijssen2013monte}).
+	\item \textbf{Simulação} Simula o jogo a partir dos novos nós gerados (geralmente é apenas um nó) na fase de expansão até que se alcance o fim de jogo. As escolhas das ações a partir desse novo nó são definidas pela \textbf{política padrão}. Conhecimentos sobre o jogo podem ser adicionados para a escolha dessas ações fazendo a simulação mais realística (\cite{nijssen2013monte}).
 	
 	\item \textbf{Retropropagação} O resultado (valor) da simulação é propagado para todos os pais do nó gerado até o nó raiz, atualizando as estatísticas de todos seus ancestrais. Normalmente os valores para os resultados do jogo são: vitória 1, empate $\frac{1}{2}$ e derrota 0.
 	
@@ -663,7 +664,7 @@ Existem muitos aprimoramentos que alteram em partes o funcionamento do MCTS para
 
 \subsubsection{Urgência de primeira jogada}
 
-A técnica urgência de primeira jogada (do inglês First Play Urgency - FPU) de \cite{gelly2006exploration} sugere melhorias para a fase de seleção do algoritmo. Segundo os autores o UCT não dá nenhuma solução para escolher entre movimentos que ainda não foram explorados, ou seja, a equação UCB1 (\ref{eq:ucb1}) não é valido para nós com nenhuma visita. Em seu trabalho o autor sugere iniciar a avaliação dos nós com o valor de 10000, e após serem visitados ao menos uma vez a sua avaliação ocorre normalmente pela fórmula de UCB1.
+A técnica urgência de primeira jogada (do inglês First Play Urgency - FPU) de \cite{gelly2006exploration} sugere melhorias para a fase de seleção do algoritmo. Segundo os autores o UCT não dá nenhuma solução para escolher entre movimentos que ainda não foram explorados, ou seja, a equação UCB1 (\ref{eq:ucb1}) não é valida em nós com nenhuma visita. Em seu trabalho o autor sugere iniciar a avaliação dos nós com o valor de 10000, e após serem visitados ao menos uma vez a sua avaliação ocorre normalmente pela fórmula de UCB1.
 
 \subsubsection{Grupos de movimentos}
 
@@ -678,30 +679,32 @@ Um aprimoramento para o UCT para quando se tem muitas ações parecidas é a chamad
 
 \subsection{Jogos de movimentos simultâneos}
 
-Jogos de movimentos simultâneos são jogos onde ambos os jogadores escolhem suas jogadas ao mesmo tempo e, após os dois terem escolhidos seus movimentos, as duas escolhas são reveladas juntas.	Os trabalhos \cite{lanctot2013monteI}, \cite{lanctot2013monteII} e \cite{lisy2013convergence} esutdam a aplicação do MCTS para jogos com movimento simultâneos. Nesses trabalhos as principais técnicas estudadas são: Decoupled UCT, Exp3, Regret Matching e Outline Outcome Sampling.
+Jogos de movimentos simultâneos são jogos onde ambos os jogadores escolhem suas jogadas ao mesmo tempo e, após os dois terem escolhidos seus movimentos, as duas escolhas são reveladas juntas.	Os trabalhos \cite{lanctot2013monteI}, \cite{lanctot2013monte2} e \cite{lisy2013convergence} estudam a aplicação do MCTS para jogos com movimento simultâneos. Nesses trabalhos as principais técnicas estudadas são: UCT desacoplado e Exp3.
+
+%, Regret Matching e Outline Outcome Sampling.%
 
 \subsubsection{UCT desacoplado}
 
-O UCT desacoplado (do inglês Decoupled UCT - DUCT) foi proposto por \cite{finnsson2007cadia} para a competição General Game Playing para resolver problemas de jogos com movimentos simultâneos. no DUCT cada nó representa uma escolha para cada jogador, ou seja, os nós que estão na mesma altura na árvore representam todas as combinações de movimentos dos dois ou mais jogadores, esses nós são chamados de articulações. Cada jogador mantém uma variáveis próprias para representar a recompensa (número de vitórias e derrotas) e visitas para cada nó (\cite{lanctot2013monteI}), ou seja, como o trabalho de \cite{lanctot2013monteII} diz: "na seleção, DUCT aplica o algoritmo UCB1 com as estastísticas da perspectativa de cada jogador independentemente". 
+O UCT desacoplado (do inglês Decoupled UCT - DUCT) foi proposto por \cite{finnsson2007cadia} para a competição General Game Playing para resolver problemas de jogos com movimentos simultâneos. No DUCT cada nó representa uma escolha para cada jogador, ou seja, os nós que estão na mesma altura na árvore representam todas as combinações de movimentos dos dois ou mais jogadores, esses nós são chamados de articulações. Cada jogador mantém uma variáveis próprias para representar a recompensa (número de vitórias e derrotas) e visitas para cada nó (\cite{lanctot2013monteI}), ou seja, como o trabalho de \cite{lanctot2013monte2} diz: "na seleção, DUCT aplica o algoritmo UCB1 com as estatísticas da perspectiva de cada jogador independentemente". 
 
-A imagem \ref{fig:ductcomparing} compara uma árvore MCTS de jogos sequenciais (Árvore a esquerda) com uma árvore DUCT (Árvore a direita). Na imagen é ilustrado o mesmo cenário onde o jogador 1 tem o conjunto de movimentos {A, B, C} e o jogador 2 tem o conjunto de movimentos {a, b, c}. Esses nós com a combinação de escolhas entre os $N$ jogadores é chamado de articulação (do Inglês joint).
+A imagem \ref{fig:ductcomparing} compara uma árvore MCTS de jogos sequenciais (Árvore a esquerda) com uma árvore DUCT (Árvore a direita). Na imagem é ilustrado o mesmo cenário onde o jogador 1 tem o conjunto de movimentos {A, B, C} e o jogador 2 tem o conjunto de movimentos {a, b, c}. Esses nós com a combinação de escolhas entre os $N$ jogadores é chamado de articulação (do Inglês joint).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\columnwidth]{figures/ductcomparing.pdf}
-\caption[DUCT e UCT]{DUCT e UCT.}
+\caption[UCT e DUCT]{UCT e DUCT.}
 \label{fig:ductcomparing}
 \end{figure}
 
-Após a simulação de ambos os jogadores terminar a melhor jogada é escolhida de dois diferentes modos \ref{lanctot2013monteII}. O primeiro, DUCT(max) seleciona o movimento que teve mais visitas. Já DUCT(mix) normaliza a quantidade de visitas de cada movimento e escolhe o movimento de acordo com a distribuição.
+Após a simulação de ambos os jogadores terminar, a melhor jogada é escolhida de dois diferentes modos \cite{lanctot2013monte2}. O primeiro, DUCT(max) seleciona o movimento que teve mais visitas. Já DUCT(mix) normaliza a quantidade de visitas de cada movimento e escolhe o movimento de acordo com a distribuição.
 
 Uma das grandes vantagens dessa abordagem é a facilidade de paralelizar o código, uma vez que no DUCT é rodado o algoritmo UCB1 independente para cada jogador como mostra no trabalho de \cite{finnsson2007cadia}.
 
 \subsubsection{MCTS Múltiplo}
 
-O MMCTS (do Inglês Multiple Monte Carlo Tree Search) foi proposto por \cite{DBLP:journals/corr/abs-1102-1580} para jogos com informações imperfeitas. Nesse algoritmo é criado uma árvore para cada jogador e essas árvore são buscadas e atualizadas simultaneamnete. Em sua pesquisa \cite{DBLP:journals/corr/abs-1102-1580} aplicou essa técnica para resolver o problema do jogo da velha fantasma. Diferente do tradicional jogo da velha, nesse jogo os jogadores não podem ver a ação do oponente, o único modo de um jogador saber onde o outro jogou é se ao tentar fazer uma jogada aquela posição já estar preenchida pelo adversário.
+O MMCTS (do Inglês Multiple Monte Carlo Tree Search) foi proposto por \cite{DBLP:journals/corr/abs-1102-1580} para jogos com informações imperfeitas. Nesse algoritmo é criada uma árvore para cada jogador e essas árvore são buscadas e atualizadas simultaneamente. Em sua pesquisa \cite{DBLP:journals/corr/abs-1102-1580} aplicou essa técnica para resolver o problema do jogo da velha fantasma. Diferente do tradicional jogo da velha, nesse jogo os jogadores não podem ver a ação do oponente, o único modo de um jogador saber onde o outro fez uma jogada é, se ao tentar fazer uma jogada a posição já estar preenchida pelo adversário, desse modo o jogador é avisado que não pode fazer a jogada pois o local já está preenchido.
 
-No MMCTS a seleção é feita atravé do algoritmo chamado Exp3 (do Inglês Exponential-weight algorithm for Exploration and Exploitation) que foi proposto por \cite{auer1995gambling} para também resolver o problema dos caça-níqueis. O algoritmo está ilustrado em \ref{alg:exp3}. No pseudocódigo $\gamma \in [0;1]$ irá fazer o controle entre explorar novas ações e validar resultados de ações bem avaliadas anteriormente, $weights$ é a matriz com o peso que cada ação tem em cada turno, é preciso iniciar os valores de peso para o primeiro turno do jogo, que pode ser feito com um valor igualitário ou sofrer influência de alguma heurística conhecida (método $InitializeWeights$), após isso a matrix de probabilidade $p$ de escolha de escolha de uma ação $i$ no turno $t$ é definido baseado na distruibuição de pesos entre todas as escolhas. Após isso, uma ação $c$ é escolhida aleatoriamente baseada na distruibuição de $p_t$ (através do método $GetRandomActionAccordingTheProbabilty$). Com a ação escolhida calculamos a recompensa observada $reward_tc$ da ação $c$ e a recompensa estimada $estimatedReward_t^c$. Por fim $weights_{t+1}$ é atualizado com o mesmo valor $weights_t$ para todas as ações não escolhidas e, para a ação escolhida, o peso $weights_{t+1}^c$ da ação é atualizado com base na recompensa estimada.
+No MMCTS a seleção é feita através do algoritmo chamado Exp3 (do Inglês Exponential-weight algorithm for Exploration and Exploitation) que foi proposto por \cite{auer1995gambling} para também resolver o problema dos caça-níqueis. O algoritmo está ilustrado em \ref{alg:exp3}. No pseudocódigo $\gamma \in [0;1]$ irá fazer o controle entre explorar novas ações e validar resultados de ações bem avaliadas anteriormente, $weights$ é a matriz com o peso que cada ação tem em cada turno, é preciso iniciar os valores de peso para o primeiro turno do jogo, que pode ser feito com um valor igualitário ou sofrer influência de alguma heurística conhecida (método $InitializeWeights$), após isso a matriz de probabilidade $p$ de escolha de escolha de uma ação $i$ no turno $t$ é definido baseado na distribuição de pesos entre todas as escolhas. Após isso, uma ação $c$ é escolhida aleatoriamente baseada na distribuição  de $p_t$ (através do método $GetRandomActionAccordingTheProbabilty$). Com a ação escolhida calculamos a recompensa observada $reward_tc$ da ação $c$ e a recompensa estimada $estimatedReward_t^c$. Por fim $weights_{t+1}$ é atualizado com o mesmo valor $weights_t$ para todas as ações não escolhidas e, para a ação escolhida, o peso $weights_{t+1}^c$ da ação é atualizado com base na recompensa estimada.
 
 \begin{algorithm}[H]
 \caption{Algoritmo Exp3}

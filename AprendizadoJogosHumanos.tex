@@ -1,31 +1,31 @@
-\chapter{Redes neurais e aprendizado de jogos com humanos}
+\chapter{Aprendizado de jogos com humanos}
 \label{chap:aprendizadoJogosComHumanos}
 
 \section{Introdução}
 
-Nesse capítulo vamos discutir sobre aprendizagem de máquina e as tentativas de aprender com humanos. O capítulo está organizado da seguinte forma: primeiro, na seção \ref{sec:aprendizado} será falado sobre aprendizado e, o que isso representa. Na seção \ref{sec:redesNeurais} será apresentado sobre redes neurais. Na seção \ref{sec:implementacoesRN} é apresentado algumas das principais técnicas de redes neurais. Na seção \ref{sec:neuroevolucao} será apresentado o algoritmo de neuroevolução. Na seção \ref{sec:aprendizadoComHumanos} será visto como essas técnicas são aplicadas para aprender contra humanos. Finalmente, na seção \ref{sec:conclusaoAprendizadoJogosComHumanos}, são apresentadas as consideração finais deste capítulo.
+Nesse capítulo vamos discutir sobre aprendizagem de máquina, modos de aprendizado e estudos que utilizam humanos de alguma forma durante o treinamento das redes neurais. O capítulo está organizado da seguinte forma: a primeira seção \ref{sec:aprendizado} é discutido sobre o processo  de aprendizado e o que isso representa. Na seção \ref{sec:redesNeurais} será apresentado sobre redes neurais e as principais técnicas de redes neurais. Em \ref{sec:algoritmogenetico} é apresentado o algoritmo genético (algoritmo evolutivo). Na seção \ref{sec:neuroevolucao} é analisado o algoritmo de neuroevolução e apresentado um estudo sobre diferentes trabalhos que utilizam neuroevolução. Na seção \ref{sec:aprendizadoComHumanos} é feito um estudo de pesquisas onde os humanos estão diretamente ou indiretamente envolvidos com o processo de treinamento de uma rede neural artificial. Finalmente, na seção \ref{sec:conclusaoAprendizadoJogosComHumanos}, são apresentadas as consideração finais deste capítulo.
 
 \section{Aprendizagem}
 \label{sec:aprendizado}
 
-Um dos processos mais naturais e comuns dos seres humanos é o processo de aprender. Segundo \cite{holt2012psychology} existem duas definições para aprendizagem que geralmente são usadas por psicólogos: "a mudança relativamente permanente no comportamento devido à experiência passada" ou, "o processo pelo qual ocorrem mudanças relativamente permanentes no potencial comportamental como resultado da experiência". Já \cite{de2013learning} afirma que tais definições clássicas são problemáticas e define o processo de aprendizado como adaptação ontogenética, ou seja, como mudanças no comportamento de um organismo resulta de regularidades no ambiente do organismo. Esta definição funcional não só resolve os problemas de outras definições, mas também tem importantes vantagens para a pesquisa de aprendizagem cognitiva.
+Um dos processos mais naturais e comuns dos seres humanos é o processo de aprender. Segundo \cite{holt2012psychology} existem duas definições para aprendizagem que geralmente são usadas por psicólogos: "a mudança relativamente permanente no comportamento devido à experiência passada"  ou, "o processo pelo qual ocorrem mudanças relativamente permanentes no potencial comportamental como resultado da experiência". Já \cite{de2013learning} afirma que tais definições clássicas são problemáticas e define o processo de aprendizado como adaptação ontogenética, ou seja, como mudanças no comportamento de um organismo resultam de regularidades no ambiente do organismo. Esta definição funcional não só resolve os problemas de outras definições, mas também tem importantes vantagens para a pesquisa de aprendizagem cognitiva.
 
 No trabalho de \cite{schunk1996learning}, a aprendizagem, na perspectiva filosófica, pode ser discutida sob o título de epistemologia, que se refere ao estudo da origem, natureza, limites e métodos de conhecimento. Ainda segundo o autor a origem do conhecimento é obtida de dois modos: 
 
 \begin{itemize}
 
-	\item \textbf{Racionalismo}. Refere-se à idéia de que o conhecimento é derivado da razão sem recorrer aos sentidos.
+	\item \textbf{Racionalismo}. Refere-se à ideia de que o conhecimento é derivado da razão sem recorrer aos sentidos.
 	
 	\item \textbf{Empirismo}. No contraste ao racionalismo, o empirismo se refere a ideia que a experiência é a fonte de conhecimento.
 
 \end{itemize}
 
-Fora do campo de psicologia e filosofia pode-se encontrar outras definições para o aprendizado, como no trabalho de \cite{carbonell1983overview} que define a aprendizagem como um fenômeno de múltiplas faces. O proceso de aprendizado inclue a aquisição de novos conhecimentos, o desenvolvimento de habilidades motoras e coginitivas através de instruções ou práticas, a organização do conhecimento, e a descoberta de novos fatos e teorias através da observação e experimentação.
+Fora do campo de psicologia e filosofia pode-se encontrar outras definições para o aprendizado, como no trabalho de \cite{carbonell1983overview} que define a aprendizagem como um fenômeno de múltiplas faces. O processo de aprendizado inclui a aquisição de novos conhecimentos, o desenvolvimento de habilidades motoras e cognitivas através de instruções ou práticas, a organização do conhecimento, e a descoberta de novos fatos e teorias através da observação e experimentação.
 
 \subsection{Aprendizado de máquina}
 \label{sec:minimax}
 
-O aprendizado de máquina são modelos matemáticos para representar o processo de aprendizado com máquinas, entre outras palavras, o estudo do processo de aprendizado e a modelagem computacional desse processo define o aprendizado de máquina.
+O aprendizado de máquina são modelos matemáticos para representar o processo de aprendizado com máquinas, entre outras palavras, o estudo do processo de aprendizado e a modelagem computacional desse processo definem o aprendizado de máquina.
 
 Segundo \cite{carbonell1983overview} o aprendizado de máquina é organizado em três amplos campos de pesquisa:
 
@@ -35,13 +35,11 @@ Segundo \cite{carbonell1983overview} o aprendizado de máquina é organizado em tr
 	
 	\item \textbf{Simulação cognitiva}. Investigação e simulação do processo de aprendizado humano.
 	
-	\item \textbf{Análise teórica}. Exploração teórica do espaço dos possíveis métodos de aprendizado e algoritmos indenpendentes do domínio da aplicação.
+	\item \textbf{Análise teórica}. Exploração teórica do espaço dos possíveis métodos de aprendizado e algoritmos independentes do domínio da aplicação.
 
 \end{itemize}
 
-%http://stpk.cs.rtu.lv/sites/all/files/stpk/materiali/MI/Artificial%20Intelligence%20A%20Modern%20Approach.pdf%
-
-Segundo \cite{russell1995modern} um agente que utiliza aprendizado de máquina pode ser descrito pelo seguinte diagrama da \ref{fig:modelLearningAgents}.
+Segundo \cite{russell1995modern} um agente que utiliza aprendizado de máquina pode ser generalizado pelo seguinte diagrama da \ref{fig:modelLearningAgents}.
 
 \begin{figure}[H]
 \centering
@@ -54,9 +52,9 @@ O \textbf{elemento de aprendizado} é responsável por ajustar a inteligência do a
 
 O \textbf{elemento de desempenho} avalia todas as entradas que recebe (sensores, aprendizado e gerador de problema) e escolhe a ação.
 
-O componente \textbf{crítica} avalia quão bem o agente está desempenhando. A crítica aplica um padrão fixo de desempenho, isso é necessário porque as próprias percepções não fornecem nenhuma indicação do sucesso do agente.
+O componente chamado \textbf{crítica} avalia quão bem o agente está desempenhando. A crítica aplica um padrão fixo de desempenho, isso é necessário porque as próprias percepções não fornecem nenhuma indicação do sucesso do agente.
 
-Por último, o \textbf{gerador de problema} é responsável por sugerir ações que podem levar a novas experiências que tragam algo novo pro agente. Esse elemento faz com que o agente não fique transitando em um pequeno conjunto de ações julgadas como boas, e avalie outras ações que não foram exploradas ou que foram pouco exploradas.
+Por último, o \textbf{gerador de problema} é responsável por sugerir ações que podem levar a novas experiências que tragam algo novo para o agente. Esse elemento faz com que o agente não fique transitando em um pequeno conjunto de ações julgadas como boas, e avalie outras ações que não foram exploradas ou que foram pouco exploradas.
 
 É muito comum na literatura classificar aprendizado de máquina de acordo com a avaliação do \textit{feedback} que o agente faz. As classificações são:
 
@@ -66,7 +64,7 @@ Por último, o \textbf{gerador de problema} é responsável por sugerir ações que p
 	
 	\item \textbf{Aprendizagem não supervisionada}. Situação onde a saída correta não é conhecida .
 	
-	\item \textbf{Aprendizagem por reforço}. Nessa abordagem cada ação escolhida pelo agente recebe um reforço ou punição porém, sem nunca falar qual é a ação correta ou a melhor ação.
+	\item \textbf{Aprendizagem por reforço}. Nessa abordagem cada ação escolhida pelo agente recebe um reforço ou punição sem nunca falar qual é a ação correta ou a melhor ação.
 
 \end{itemize}
 
@@ -75,31 +73,31 @@ Por último, o \textbf{gerador de problema} é responsável por sugerir ações que p
 
 Segundo \cite{koehn1994combining} as redes neurais foram inventadas no espírito de ser uma metáfora biológica. A metáfora biológica para redes neurais é o cérebro humano. Como o cérebro, esse modelo computacional consiste em pequenas unidades interconectadas. Essas unidades (ou nós) têm habilidades bem simples. Assim, a força desse modelo deriva da interação dessas unidades. Ela depende da sua estrutura (topologia) e suas conexões.
 
-Uma rede neural é composta por um conjunto de nós, ou \textbf{unidades}, conectadas por \textbf{ligações}. Cada ligação tem um valor númerico chamado de \textbf{peso} associado a ele. Os pesos são o principal meio de armazenamento de longo prazo em redes neurais e, a aprendizagem geralmente ocorre através da atualização desses pesos. Algumas dessas unidades são conectadas com o ambiente externo, e pode ser desenhada como unidades de entrada ou saída. Os pesos são modificados para tentar trazer a relação de entrada e saída da rede seja ajustada de acordo com o ambiente (\cite{russell1995modern}).
+Uma rede neural é composta por um conjunto de nós, ou \textbf{unidades}, conectadas por \textbf{ligações}. Cada ligação tem um valor numérico chamado de \textbf{peso} associado a ele. Os pesos são o principal meio de armazenamento de longo prazo em redes neurais e, a aprendizagem geralmente ocorre através da atualização desses pesos. Algumas dessas unidades são conectadas com o ambiente externo, e pode ser desenhada como unidades de entrada ou saída. Os pesos são modificados para tentar trazer a relação de entrada e saída da rede seja ajustada de acordo com o ambiente (\cite{russell1995modern}).
 
 \subsection{Implementações de redes neurais}
 \label{sec:implementacoesRN}
 
 Essas pequenas unidades, conexões e topologias podem ser comparadas a neurônios e sinapses. Redes neurais de apenas uma camada são chamadas de \textit{perceptron}. Segundo \cite{beiu2003survey} uma rede neural de \textit{perceptron} é composta por um grafo onde os nós são neurônios e as arestas são as sinapses. Essa rede tem alguns nós de entrada, e alguns (ao menos um) nós de saída.
 
-Pelo fato de o \textit{perceptron} ter apenas uma camada ele se torna muito limitado para resolver diferentes tipos de problemas, ou seja, o percetron apenas resolve problemas linearmente separáveis. O modelo \textit{perceptron} de múltiplas camadas (do inglês multilayer perceptron - MLP) apresenta uma ou mais camadas chamadas de unidades escondidas.
+Pelo fato de o \textit{perceptron} ter apenas uma camada ele se torna muito limitado para resolver diferentes tipos de problemas, ou seja, o perceptron apenas resolve problemas linearmente separáveis. O modelo \textit{perceptron} de múltiplas camadas (do inglês Multilayer Perceptron - MLP) apresenta uma ou mais camadas chamadas de unidades escondidas.
 
 \subsubsection{Perceptron}
 
-A imagem ilustra \ref{fig:percetronModel} ilustra o funcionamento de um perceptron.
+A imagem ilustra \ref{fig:perceptronModel} ilustra o funcionamento de um perceptron.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\columnwidth]{figures/perceptron.pdf}
 \caption[Perceptron]{\textit{Perceptron}.}
-\label{fig:percetronModel}
+\label{fig:perceptronModel}
 \end{figure}
 
 O modelo simples de \textit{perceptron} funciona com saídas binárias, sendo muito utilizado para reconhecimento de padrões, ele funciona da seguinte forma:
 
 \begin{itemize}
-	\item Uma vetor de entrada X, onde cada posição do vetor representa uma característica diferente da entrada.
-	\item Uma vetor W chamado de vetor de pesos sinápticos, para cada característica de entrada um peso é associado. Nesse vetor ocorrerão ajustes de valor até que a saída fique correta.
+	\item Um vetor de entrada X, onde cada posição do vetor representa uma característica diferente da entrada.
+	\item Um vetor W chamado de vetor de pesos sinápticos, para cada característica de entrada um peso é associado. Nesse vetor ocorrerão ajustes de valor até que a saída fique correta.
 	\item Bias (b) é um valor de polarização que permite mudar a função de ativação para a esquerda ou para a direita, ou seja, ela permite melhor espalhar os resultados que a função de ativação gera esse valor também é ajustado durante o aprendizado.
 \end{itemize}
 
@@ -111,7 +109,7 @@ y = \sigma( \displaystyle\sum_{j=1}^{n} w_j x_ij + b_i ),
 
 onde \textbf{y} é o valor de saída(0 ou 1), \textbf{$\sigma$} é a função de ativação. Retorna 1 para valores maiores que zero, e retorna 0 para valores menores ou iguais a zero e \textbf{n} é o tamanho do vetor de entrada.
 
-Até que para todas as entradas, todas saídas estejam corretas o vetor W e o \textit{bias} são atualizados. Segundo \cite{estebon1997perceptrons} ajustando os pesos das conexões entre as camadas, a saída do \textit{perceptron} pode ser "treinada" para corresponder com a saída desejada. O treino é completo quando um conjunto de entradas passa pela rede e os resultados obtidos são os resultados desejados. Se existir alguma diferença entre a saída atual e a saída desejada, os pesos são ajustados na camada de adaptação para produzir um conjunto de saída mais próximo aos valores desejados.
+Até que para todas as entradas, todas saídas estejam corretas o vetor W e o \textit{bias} são atualizados. Segundo \cite{estebon1997perceptrons} ajustando os pesos das conexões entre as camadas, a saída do \textit{perceptron} pode ser "treinada" para corresponder com a saída desejada. O treino é completo quando um conjunto de entradas passa pela rede e os resultados obtidos são os resultados desejados. Se existir alguma diferença entre a saída atual e a saída desejada, os pesos são ajustados para produzir um conjunto de saída mais próximo aos valores desejados.
 
 A equação de treinamento (ajuste de pesos) pode ser escrita da seguinte forma:
 
@@ -121,7 +119,7 @@ w'_ij = w_ij + \alpha(t_j - e_j) \times x_ij,
 
 onde \textbf{$w'_ij$} é o novo valor do peso, \textbf{$w_ij$} é o valor atual do peso, \textbf{$\alpha$} taxa de aprendizagem onde $0 \leq \alpha \leq 1$. Valores baixos para $\alpha$ faz com que os pesos sejam ajustados suavemente. A variável \textbf{$t_j$} representa resultado esperado, \textbf{$e_j$} resultado atual e \textbf{$x_ij$} o valor de entrada.
 
-O percetron resolve qualquer problema linearmente separável como calcular o "E" lógico de duas entradas. A imagem \ref{fig:perceptronE} mostra um plano cartersiano onde conseguimos com uma reta separar entradas cuja a saída é igual 0 das entradas cuja saída é igual a 1.
+O perceptron resolve qualquer problema linearmente separável como calcular o \textbf{E} lógico de duas entradas. A imagem \ref{fig:perceptronE} mostra um plano cartesiano onde conseguimos com uma reta separar entradas cujo valor esperado de saída é igual 0 das entradas que o valor saída é igual a 1.
 
 \begin{figure}[H]
 \centering
@@ -130,7 +128,7 @@ O percetron resolve qualquer problema linearmente separável como calcular o "E" 
 \label{fig:perceptronE}
 \end{figure}
 
-Em casos onde não o problema não é linearmente separável o perceptron falha. Como mostra a imagem  \ref{fig:perceptronXOR} não é possível separar linearmente o problema do ou excluisivo (XOR).
+Em casos onde não o problema não é linearmente separável o perceptron falha. Como mostra a imagem  \ref{fig:perceptronXOR} não é possível separar linearmente o problema do ou exclusivo (XOR).
 
 \begin{figure}[H]
 \centering
@@ -141,18 +139,18 @@ Em casos onde não o problema não é linearmente separável o perceptron falha. Com
 
 \subsubsection{Perceptron de múltiplas camadas}
 
-Um \textit{perceptron} de múltiplas camadas modifica um pouco o desenho de como funciona o \textit{perceptron}. A imagem \ref{fig:multilayerperceptron} mostra como funciona o MLP. Conforme mostra na imagem, o MLP tem uma camada de entrada, uma ou mais camadas escondidas (a quantidade de neurônios nas camadas escondidas não precisa ser uniforme, ou seja, ter a quantidade de neurônios igual a camada de entrada/saída) e uma camada de saída.
+Um \textit{perceptron} de múltiplas camadas modifica um pouco o desenho de como funciona o \textit{perceptron}. A imagem \ref{fig:multilayerperceptron} mostra como funciona o MLP. Conforme mostra na imagem, o MLP tem uma camada de entrada, uma ou mais camadas escondidas (a quantidade de neurônios nas camadas escondidas não precisa ser uniforme, ou seja, ter a mesma quantidade de neurônios da camada de entrada/saída) e uma camada de saída.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\columnwidth]{figures/multilayerPerceptron.pdf}
 \caption[Perceptron de múltiplas camadas]{\textit{Perceptron} de múltiplas camadas.}
-\label{fig:percetronModel}
+\label{fig:multilayerperceptron}
 \end{figure}
 
-O MLP é uma rede fortemente conectada, ou seja, é uma rede onde as camadas estão em uma certa ordem e os neurônios de uma camada estimulam todos os neurônios da camada subsequente. Essas conexões são chamadas de \textit{feedfoward}.
+O MLP é uma rede fortemente conectada, ou seja, é uma rede onde as camadas estão em certa ordem e os neurônios de uma camada estimulam todos os neurônios da camada subsequente. Essas conexões são chamadas de \textit{feedfoward}.
 
-O funcionamento do MLP é bem semelhante ao do \textit{perceptron}. O aloritmo de treino mais simples para MLP é chamado de retro-propagação. Essa equação pode ser escrita da seguinte maneira:
+O funcionamento do MLP é bem semelhante ao do \textit{perceptron}. O algoritmo de treino mais simples para MLP é chamado de retro-propagação. Essa equação pode ser escrita da seguinte maneira:
 
 \begin{equation}
 \delta w^k_ij = \eta \times \frac{\partial E}{\partial w^k_ij},
@@ -178,45 +176,59 @@ onde \textbf{$d_i$} é o valor desejado de saída e \textbf{$y_i$} é a saída obtid
 \end{figure}
 
 \section{Algoritmos genéticos}
+\label{sec:algoritmogenetico}
 
-A primeira pesquisa na área de algoritmos genéticos foi feito por John Holland no livro \textit{Adaptation in Natural and Artificial Systems}. Segundo \cite{mitchell1995genetic} algoritmos genéticos(GA) é uma abstração da evolução biológica, onde move-se uma população de cromossomos (representando candidatos a soluções de um determinado problema) para uma nova população, usando "seleção"  junto com operadores baseados em genéticas para cruzamentos e mutação. 
+A primeira pesquisa na área de algoritmos genéticos foi feito por John Holland no livro \textit{Adaptation in Natural and Artificial Systems}. Segundo \cite{mitchell1995genetic} algoritmos genéticos (GA) é uma abstração da evolução biológica, onde se move uma população de cromossomos (representando candidatos a soluções de um determinado problema) para uma nova população, usando "seleção"  junto com operadores baseados em genéticas para cruzamentos e mutação. 
 
 Segundo \cite{485447} antes de aplicar o algoritmo genético, é necessário mapear qual será a arquitetura do cromossomo de modo que ele represente uma solução para o problema. Para usar o modo convencional do algoritmo genético com cromossomos de tamanhos fixos, é preciso:
 
 \begin{itemize}
+
 	\item Determinar o esquema de representação.
+	
 	\item Determinar como mensurar o \textit{fitness}. Segundo \cite{mitchell1995genetic} o \textit{fitness} é definido por uma função que atribui uma nota (\textit{fitness}) para cada cromossomo da população atual. O \textit{fitness} do cromossomo depende de quão bem o cromossomo resolve o problema.
+	
 	\item Determinar os parâmetros e variáveis para controlar o algoritmo.
+	
 	\item Determinar um modo de mostrar o resultado e um critério de parada para o algoritmo.
+	
 \end{itemize}
 
-Segundo \cite{485447} O algoritmo evolutivo pode ser separados em três passos:
+Segundo \cite{485447} o algoritmo evolutivo pode ser separado em três passos:
 
 \begin{itemize}
-	\item Randomicamente criar uma população inicial de cromossomos (soluções para o problema).
+	
+	\item Aleatoriamente criar uma população inicial de cromossomos (soluções para o problema).
+	
 	\item Executar os seguintes sub-passos na população até que o critério de parada seja satisfeito:
+		
 		\subitem \textbf{1:} Determinar para cada indivíduo um \textit{fitness} através da função avaliadora de \textit{fitness}.
+		
 		\subitem \textbf{2:} Selecionar quais indivíduos passarão para a próxima geração por uma probabilidade baseada em seu \textit{fitness}. Aplicar na nova população de indivíduos as 3 seguintes operações genéticas: copiar um indivíduo para a nova população; criar dois novos indivíduos combinando seus cromossomos através de alguma operação de cruzamento (\textit{crossover}); fazer a mutação de algumas características de um cromossomo aleatoriamente.
+	
 	\item Pegar o melhor indivíduo já criado (aquele com melhor \textit{fitness}) para utilizar na resolução do problema.
+	
 \end{itemize}
  
 O resultado de algoritmo genético muitas vezes não é o melhor resultado possível, porém gera um resultado excelente em cenários onde não se sabe como resolver um problema, ou em cenários onde a solução ótima demora muito tempo para ser calculada.
 
 \section{Neuroevolução}
+\label{sec:neuroevolucao}
 
-No trabalho \textit{Combining genetic algorithms and neural networks: The encoding problem} de \cite{koehn1994combining} é levantado a seguinte questão: Se ambas técnicas são autônomas, porque então combiná-las? Ainda segundo \cite{koehn1994combining} a resposta curta para essa questão diz que o problema de redes neurais é o número de parâmetros que precisam ser atribuídos antes de qualquer treino começar, nesse ponto entra o algoritmo genético. O autor do trabalho completa dizendo que a inspiração vem da natureza, o sucesso de um indivíduo não é determinado apenas pelo conhecimento e habilidades que ele ganha através da experiência, também depende de sua herança genética.
 
-O trabalho de \cite{risi2014neuroevolution} define o algoritmo básico de neuroevolução da seguinte forma: uma população de genótipos que codificam redes neurais artificiais é evoluida para encontrar uma rede (pesos e/ou topologia) que resolvam um problema computactional. Normalmente cada genótipo é codificado em uma rede neural, que então é testada para uma específica tarefa por um determinado período de tempo. O desempenho ou \textit{fitness} da rede é guardado e, uma vez que o valores de \textit{fitness} para os genótipos da população são determinados, uma nova população é gerada pela alteração ligeira dos genótipos que codificam a rede neural artificial (mutação) ou pela combinação de vários genótipos (\textit{crossover}). Em geral, genótipos com alto \textit{fitness} tem uma alta chance de ser selecionado para reprodução e os seus descendentes substituem genótipos com valores de \textit{fitness} mais baixos, formando assim uma nova geração. 
+No trabalho \textit{Combining genetic algorithms and neural networks: The encoding problem} de \cite{koehn1994combining} é levantado a seguinte questão: Se ambas as técnicas são autônomas, porque então combiná-las? Ainda segundo \cite{koehn1994combining} a resposta curta para essa questão diz que o problema de redes neurais é o número de parâmetros que precisam ser atribuídos antes que qualquer treino começe, nesse ponto entra o algoritmo genético. O autor do trabalho completa dizendo que a inspiração vem da natureza, o sucesso de um indivíduo não é determinado apenas pelo conhecimento e habilidades que ele ganha através da experiência, também depende de sua herança genética.
+
+O trabalho de \cite{risi2014neuroevolution} define o algoritmo básico de neuroevolução da seguinte forma: uma população de genótipos que codificam redes neurais artificiais é evoluída para encontrar uma rede (pesos e/ou topologia) que resolvam um problema computacional. Normalmente cada genótipo é codificado em uma rede neural, que então é testada para uma específica tarefa por um determinado período de tempo. O desempenho ou \textit{fitness} da rede é guardado e, uma vez que os valores de \textit{fitness} para os genótipos da população são determinados, uma nova população é gerada pela alteração ligeira dos genótipos que codificam a rede neural artificial (mutação) ou pela combinação de vários genótipos (\textit{crossover}). Em geral, genótipos com alto \textit{fitness} tem uma alta chance de ser selecionado para reprodução e os seus descendentes substituem genótipos com valores de \textit{fitness} mais baixos, formando assim uma nova geração. 
 
 Segundo \cite{miikkulainen2006computational} existem vários métodos para a evolução das redes neurais. A maneira mais direta é formar a codificação genética para a rede pela concatenação dos valores numéricos de seus pesos, e evoluir uma população de tais codificações usando \textit{crossover} e mutação. 
 
-Embora esta abordagem padrão seja fácil de implementar e prática em muitos domínios, métodos mais sofisticados podem resolver problemas muito mais difíceis. Dois métodos bem comuns para evoluir redes neurais artificiais são eles, sub-populações forçadas (do inglês Enforced sub-populations - ESP) e neuroevolução de topologias de aumento (do inglês Neuroevolution of augmenting topologies - NEAT).
-
+Embora esta abordagem padrão seja fácil de implementar e prática em muitos domínios, métodos mais sofisticados podem resolver problemas muito mais difíceis. Dois métodos bem comuns para evoluir redes neurais artificiais são: subpopulações  forçadas (do inglês Enforced Sub-Populations - ESP) e neuroevolução de topologias de aumento (do inglês Neuroevolution of Augmenting Topologies - NEAT).
+ 
 \subsection{ESP}
 
-No ESP \cite{gomez1997incremental} a população consiste de neurônios individuais em vez de redes completas, e um subconjunto de neurônios são reunidos para formar uma rede completa. No entanto, o ESP aloca uma população separada para cada uma das unidades na rede, e um neurônio só pode ser recombinado com membros de sua própria subpopulação. Entre outras palavras, o foco dessa abordagem é a evolução dos neurônios ao invés das redes.
+No ESP \cite{gomez1997incremental} a população consiste de neurônios individuais ao invés de redes completas, e um subconjunto de neurônios é reunido para formar uma rede completa. No entanto, o ESP aloca uma população separada para cada uma das unidades na rede, e um neurônio só pode ser recombinado com membros de sua própria subpopulação. Entre outras palavras, o foco dessa abordagem é a evolução dos neurônios ao invés das redes.
 
-A imagem \ref{fig:espModel} esquematiza o modelo ESP. A população de neurônios é reunida em sub-populações mostrada na ilustração como círculos. E finalmente a rede neural é formada escolhendo aleatoriamente um neurônio de cada sub-população.
+A imagem \ref{fig:espModel} esquematiza o modelo ESP. A população de neurônios é reunida em subpopulações  mostrada na ilustração como grandes círculos. E finalmente a rede neural é formada escolhendo aleatoriamente um neurônio de cada subpopulação.
 
 \begin{figure}[H]
 \centering
@@ -229,11 +241,12 @@ A imagem \ref{fig:espModel} esquematiza o modelo ESP. A população de neurônios é
 \subsection{NEAT}
 \label{sec:neat}
 
-O NEAT baseia-se na ideia de evoluir a topologia de rede, ou seja, adicionando novos neurônios, conexões na rede neural artificial. Os autores \cite{stanley2003evolving} dizem que o espaço de parâmetros pesquisado no espaço de redes adaptativas (como as redes geradas pelo NEAT) é muito maior do que para redes estáticas (topologias que nunca mudam). Além dos pesos de conexão, vários parâmetros de aprendizado devem ser evoluídos para cada regra de aprendizado em cada conexão. Assim, é importante minimizar o número de conexões otimizadas pela evolução. Além disso, a topologia da rede tem de ser optimizada. É necessário ter conexões entre os nós \textit{corretos}, para que as conexões possam ser fortalecidas ou enfraquecidas para alterar a relação entre os conceitos computacionais que eles representam.
+O NEAT baseia-se na ideia de evoluir a topologia de rede, ou seja, adicionando novos neurônios, camadas e conexões na rede neural artificial. Os autores \cite{stanley2003evolving} dizem que o espaço de parâmetros pesquisado no espaço de redes adaptativas (como as redes geradas pelo NEAT) é muito maior do que para redes estáticas (topologias que nunca mudam). Além dos pesos de conexão, vários parâmetros de aprendizado devem ser evoluídos para cada regra de aprendizado em cada conexão. Assim, é importante minimizar o número de conexões otimizadas pela evolução. Além disso, a topologia também precisa ser optimizada. É necessário ter conexões entre os nós \textit{corretos}, para que as conexões possam ser fortalecidas ou enfraquecidas para alterar a relação entre os conceitos computacionais que elas representam.
 
 
-A imagem \ref{fig:neatModel} esquematiza o modelo NEAT. No exemplo cada gene contém uma conexão de neurônios (X,Y se refere a conexão do neurônio X com o Y), além da conexão é guardado o peso, o número acima do gene é chamado de \textbf{número de inovação}. Os genes com fundos de cor mais escura mostra que ele está desabilitado. Na evolução da parte superior da imagem é adicionado uma nova conexão (número de inovação 7), e na parte inferior da imagem mostra a adição de um novo nó (desabilitando o gene de número de inovação 3, e adicionando gene de número de inovação 7 e 8).
+A imagem \ref{fig:neatModel} esquematiza o modelo NEAT. No exemplo cada gene contém uma conexão de neurônios (X, Y se refere a conexão do neurônio X com o Y), além da conexão é guardado o peso, o número acima do gene é chamado de \textbf{número de inovação}. Os genes com fundos de cor mais escura mostra que ele está desabilitado. 
 
+Ainda na imagem \ref{fig:neatModel}, é mostrado 2 evoluções, a evolução da parte superior da imagem acontece adicionando uma nova conexão (número de inovação 7), e a parte inferior da imagem mostra a adição de um novo nó (desabilitando o gene de número de inovação 3, e adicionando gene de número de inovação 7 e 8).
 
 \begin{figure}[H]
 \centering
@@ -242,27 +255,27 @@ A imagem \ref{fig:neatModel} esquematiza o modelo NEAT. No exemplo cada gene con
 \label{fig:neatModel}
 \end{figure}
 
-\subsection{Vantagens e Desvntagens}
+\subsection{Vantagens e Desvantagens}
 
-Segundo \cite{risi2014neuroevolution} existe uma série de motivos para usar a neuroevolução e alguns motivos onde utilizar neurovolução não é tão interessante. As principais vantagens de utilizá-la é:
+Segundo \cite{risi2014neuroevolution} existe uma série de motivos para usar a neuroevolução e alguns motivos onde utilizar neuroevolução não é tão interessante. As principais vantagens de utilizá-la é:
 
 \begin{itemize}
 
-	\item \textbf{Performance para bater recordes}. Para alguns problemas, neuroevolução simplesmente fornece o melhor desempenho em concorrência com outros métodos de aprendizagem ("desempenho" é, naturalmente, definido de forma variada para diferentes problemas).
+	\item \textbf{Desempenho para bater recordes}. Para alguns problemas, neuroevolução simplesmente fornece o melhor desempenho em concorrência com outros métodos de aprendizagem ("desempenho" é, naturalmente, definido de forma variada para diferentes problemas).
 	
-	\item \textbf{Ampla aplicabilidade}. Outro benefício da neuroevolução é que ela pode ser usado para tarefas de aprendizagem supervisionadas, não supervisionadas e reforçadas. Neuroevolução só requer algum tipo de avaliação numérica da qualidade das suas redes.
+	\item \textbf{Ampla aplicabilidade}. Outro benefício da neuroevolução é que ela pode ser usada para tarefas de aprendizagem supervisionadas, não supervisionadas e reforçadas. Neuroevolução só requer algum tipo de avaliação numérica da qualidade das suas redes.
 
-	\item \textbf{Escalabilidade}. Comparado com muitos outros tipos de aprendizado por reforço neuroevolução parece lidar muito bem com grandes espaços de ação/estado.
+	\item \textbf{Escalabilidade}. Comparado com muitos outros tipos de aprendizado por reforço, neuroevolução parece lidar muito bem com grandes espaços de ação/estado.
 	
-	\item \textbf{Diversidade}. A neuroevolução pode se basear na rica família de métodos de preservação da diversidade e métodos multiobjetivos que foram desenvolvidos dentro da comunidade de computação evolutiva.
+	\item \textbf{Diversidade}. A neuroevolução pode se basear na rica família de métodos de preservação da diversidade e métodos multiobjectivos que foram desenvolvidos dentro da comunidade de computação evolutiva.
 	
-	\item \textbf{Aprendizagem aberta}. Enquanto neuroevolução pode ser usado para aprendizado por reforço, pode-se argumentar que poderia ir além desta formulação relativamente restrita de aprendizagem de reforço. Em particular, nos casos em que a topologia da rede também evolui, a neuroevolução poderia, em princípio, apoiar a evolução aberta, onde o comportamento de complexidade arbitrária e sofisticação poderia emergir. Concretamente, os algoritmos de neuroevolução costumam procurar em um espaço muito grande.
+	\item \textbf{Aprendizagem aberta}. Enquanto neuroevolução pode ser usado para aprendizado por reforço, pode-se argumentar que poderia ir além desta formulação relativamente restrita de aprendizagem de reforço. Em particular, nos casos em que a topologia da rede também evolui, a neuroevolução poderia, em princípio, apoiar a evolução aberta, onde o comportamento de complexidade arbitrária e sofisticação poderiam emergir. Concretamente, os algoritmos de neuroevolução costumam buscar em um espaço muito grande.
 	
-	\item \textbf{Permitir novos tipos de jogos}. Em jogos que o jogador humano pode evoluir os seus personagens, os equipamentos de seus personagens, seu time e outras customizações, seria muito díficil resolver com os tradicionais métodos de aprendizado. Computação evolutiva aqui fornece qualidades exclusivas para o \textit{design} do jogo e, alguns projetos dependem especificamente da neuroevolução.
+	\item \textbf{Permitir novos tipos de jogos}. Em jogos que o jogador humano pode evoluir os seus personagens, os equipamentos de seus personagens, seu time e outras customizações, seria muito difícil resolver com os tradicionais métodos de aprendizado. Computação evolutiva aqui fornece qualidades exclusivas para o \textit{design} do jogo e, alguns projetos dependem especificamente da neuroevolução.
 	
 \end{itemize}
 
-Em contrapartida também existe situações que neuroevolução não é tão interessante, seja pelos resultados esperados ou por ter outras técnicas que teriam melhor desempenho. O principal problemaé que as redes neurais evoluídas tendem a ter características de "caixa preta", o que significa que um humano não pode facilmente descobrir o que faz olhando para elas. Em jogos comerciais por exemplo, seria muito díficil predizer e/ou depurar uma determinada escolhada de um agente que utiliza neuroevolução.
+Em contrapartida também existe situações que neuroevolução não é tão interessante, seja pelos resultados esperados ou por ter outras técnicas que teriam melhor desempenho. O principal problema apontado por \cite{risi2014neuroevolution} é que, as redes neurais evoluídas tendem a ter características de "caixa preta", o que significa que um humano não pode facilmente descobrir o que ela faz e como ela funciona olhando para elas. Em jogos comerciais, por exemplo, seria muito difícil predizer e/ou depurar uma determinada escolha de um agente que utiliza neuroevolução.
 
 \subsection{Neuroevolução em jogos}
 
@@ -275,7 +288,7 @@ Começando pelo jogo TORCS \cite{cardamone2009line}, ele é um jogo digital de cor
 \begin{itemize}
 	\item \textbf{Sensores das bordas da pista}. Existem seis sensores laterais que marcam a distância para os limites da pista. Em relação ao carro esses sensores estão localizados a: $-90^{\circ}$, $-60^{\circ}$, $30^{\circ}$, $60^{\circ}$ e $90^{\circ}$. 
 	
-	\item \textbf{Sensores agregrados}. Existem três sensores frontais (que simulariam a visão periférica do motorista) que também marcam a distância para os limites da pista: $-10^{\circ}$, $0^{\circ}$ e $10^{\circ}$. Em algumas situações como em grandes retas esses sensores podem não conseguir estimar a distância.
+	\item \textbf{Sensores agregados}. Existem três sensores frontais (que simulariam a visão periférica do motorista) que também marcam a distância para os limites da pista: $-10^{\circ}$, $0^{\circ}$ e $10^{\circ}$. Em algumas situações como em grandes retas esses sensores podem não conseguir estimar a distância.
 	
 	\item \textbf{Velocidade}. A velocidade que o veículo está se movendo.
 \end{itemize}
@@ -289,7 +302,7 @@ A imagem \ref{fig:sensoresTorcs} de \cite{cardamone2009line} mostra como os sens
 \label{fig:sensoresTorcs}
 \end{figure}
 
-Para fazer o aprendizado das redes neurais todas elas começavam sem conhecimento algum e, as redes neurais não tinham camadas escondidas, ou seja, a camada de entrada era diretamente conectada a camada de saída. O tamanho da população era de 100 indivíduos que corriam 10 vezes em uma mesma pista fazendo 2000 voltas na pista. Como mostra a imagem \ref{fig:resultsTorcs} de \cite{cardamone2009line} ele já tinha excelente resutados utilizando técnicas diferentes após 300 voltas.
+Para fazer o aprendizado das redes neurais todas elas começavam sem conhecimento algum e, as redes neurais não tinham camadas escondidas, ou seja, a camada de entrada era diretamente conectada a camada de saída. O tamanho da população era de 100 indivíduos que corriam 10 vezes em uma mesma pista fazendo 2000 voltas na pista. Como mostra a imagem \ref{fig:resultsTorcs} de \cite{cardamone2009line} as redes já tinham excelentes resultados após 300 voltas (ainda na imagem é comparado o desempenho de 3 técnicas diferentes: softmax, e-greedy e offiline).
 
 \begin{figure}[H]
 \centering
@@ -298,26 +311,28 @@ Para fazer o aprendizado das redes neurais todas elas começavam sem conhecimento
 \label{fig:resultsTorcs}
 \end{figure}
 
+Um dos problemas relatados pelos autores é avaliação de \textit{fitness}, como o agente estava trabalhando com o jogo em funcionamento não era possível fazer cálculos muito demorados para não comprometer o andamento da volta. Como o \textit{fitness} só era avaliado no final da volta, trechos muito bem feitos dentro de uma volta muito lenta podiam ser descartados.
+
 \subsubsection{Neuroevolução no jogo GAR}
 
-Outro estudo de neuroevolução em jogos é estudo de \cite{hastings2009automatic} com o jogo GAR. O jogo consiste em um batalha de naves com grande variedade de armas e cenários. A principal abordagem dessa pesquisa é que nesse jogo a neuroevolução foi usada para criação de conteúdo automátivo ao invés de controlar um carro. A principal ideia é estender a experiência de jogo do usuário criando novos conteúdos baseado nas preferências dos jogadores.
+Outro estudo de neuroevolução em jogos é estudo de \cite{hastings2009automatic} com o jogo GAR. O jogo consiste em um batalha de naves com grande variedade de armas e cenários. A principal abordagem dessa pesquisa é que nesse jogo a neuroevolução foi usada para criação de conteúdo automático ao invés de controlar um personagem ou objeto. A principal ideia é estender a experiência de jogo do usuário criando novos conteúdos baseado nas preferências dos jogadores.
 
 O GAR utiliza um agente chamado cgNEAT (do inglês Content Generation Neuroevolution of Augmenting Topologies) com uma variação de redes neurais artificias chamadas de CPPN (do inglês Compositional Pattern Producing Networks) que difere principalmente no seu conjunto de funções ativadoras e como elas são aplicadas.
 
-A premissa para avaliação de \textit{fitness} das CPPNs é que os usuários experimentam conteúdos novos e, após experimentar pela primeira vez, voltam a visitar esse conteúdo caso gostaram e, caso não gostaram, visitam ou muito pouco ou não visitam mais esses conteúdo.
+A premissa para avaliação de \textit{fitness} das CPPNs é que os usuários experimentam conteúdos novos e, após experimentar pela primeira vez, voltam a visitar esse conteúdo caso gostem e, caso não gostem, visitam muito pouco ou não visitam mais esses conteúdos.
 
 O algoritmo de evolução é separado em sete passos:
 
 \begin{itemize}
-	\item \textbf{1}. Canda novo conteúdo é representado por uma CPPN. Diferentes tipo de conteúdos (armas, cenários, entre outros) podem ser representados por diferentes tipos de CPPPN (configurações de entrada/saída diferentes).
+	\item \textbf{1}. Cada novo conteúdo é representado por uma CPPN. Diferentes tipos de conteúdos (armas, cenários, entre outros) podem ser representados por diferentes tipos de CPPPN (configurações de entrada/saída diferentes).
 	
 	\item \textbf{2}. Durante o jogo, para cada conteúdo é atribuído um valor de \textit{fitness} baseado no quão frequente os jogadores escolhem ou usam aquele conteúdo.
 	
 	\item \textbf{3}. Jogadores podem começar com conteúdo aleatório ou com um conteúdo chamado de conjunto inicial predefinido.
 	
-	\item \textbf{4}. Conteúdos são espalhadas pelo mundo. Esses conteúdos só estarão elegíveis para reprodução somente se jogadores testarem.
+	\item \textbf{4}. Conteúdos são espalhados pelo mundo. Esses conteúdos só estarão elegíveis para reprodução somente se jogadores o testarem.
 	
-	\item \textbf{5}. O conteúdo é reproduzido pelo cgNEAT da seguinte maneira: o algoritmo escolhe alguns conteúdos gerados pelo passo 4. Esses conteúdos são selecionados por métodod de roleta e, a mutação e o cruzamento acontece de acordo com o algoritmo de NEAT.
+	\item \textbf{5}. O conteúdo é reproduzido pelo cgNEAT da seguinte maneira: o algoritmo escolhe alguns conteúdos gerados pelo passo 4. Esses conteúdos são selecionados por método de roleta e, a mutação e o cruzamento acontecem de acordo com o algoritmo de NEAT.
 	
 	\item \textbf{6}. Para qualquer novo conteúdo gerado, existe uma probabilidade (selecionada pelo designer) de ser escolhida de um conjunto de desova, que é uma coleção de conteúdo pré-evoluído, em vez de ser reproduzida dos pais. Esta piscina garante que a diversidade não é perdida e que os bons tipos de conteúdos do passado possam reaparecer.
 	
@@ -327,7 +342,7 @@ O algoritmo de evolução é separado em sete passos:
 
 \subsubsection{Neuroevolução no jogo Creatures}
 
-No jogo Creatures \cite{grand1997creatures} existem agentes que são bichos de estimação virtuais que são chamados de criaturas. A arquitetura das criaturas são baseadas em biologia animal. Cada criatura tem uma rede neural responsável pela coordenação sensório-motora e seleção de comportamento, e uma "bioquímica artificial" que modela um metabolismo energético simples.
+No jogo Creatures \cite{grand1997creatures} existem agentes que são bichos de estimação virtuais que são chamados de criaturas. A arquitetura das criaturas é baseada na biologia animal. Cada criatura tem uma rede neural responsável pela coordenação sensório-motora e seleção de comportamento, e uma "bioquímica artificial" que modela um metabolismo energético simples.
 
 Cada rede neural é subdividia em lóbulos que definem as características elétricas, químicas e morfológicas de um grupo de células. Ao todo cada rede neural tem aproximadamente 1000 neurônios agrupados em 9 lóbulos e interconectados por 5000 sinapses. A imagem de \ref{fig:creatureNeurons} de \cite{grand1997creatures} mostra como estão dispostos esses elementos.
 
@@ -338,37 +353,39 @@ Cada rede neural é subdividia em lóbulos que definem as características elétrica
 \label{fig:creatureNeurons}
 \end{figure}
 
-A evolução nesse se jogo acontece no nascimento de uma nova criatura, ou seja, quando duas criaturas cruzam. O genoma forma um único cromossoma haplóide. Durante a reprodução, os genes parentais são cruzados e emendados nos limites dos genes. Erros ocasionais de cruzamento  podem introduzir omissões de genes e duplicações. Um pequeno número de mutações aleatórias para os corpos genéticos é também aplicado. Para evitar uma taxa de falha excessiva devido a erros de reprodução em genes críticos, cada gene é precedido por um cabeçalho que especifica que operações (omissão, duplicação e mutação) podem ser realizadas sobre ele. O cruzamento é realizado de tal maneira que a ligação do gene é proporcional à distância de separação, permitindo características ligadas como seria de esperar (por exemplo, temperamento com tipo facial). Como o genoma é haplóide, temos que evitar que as características úteis ligadas ao sexo sejam erradicadas simplesmente porque elas foram herdadas por uma criatura do sexo oposto. Portanto, cada gene contém as instruções genéticas para ambos os sexos, mas apenas os genes não sexuados e apropriadamente sexuados são expressos no fenótipo.
+A evolução nesse se jogo acontece no nascimento de uma nova criatura, ou seja, quando duas criaturas cruzam. O genoma forma um único cromossoma haploide. Durante a reprodução, os genes parentais são cruzados e emendados nos limites dos genes. Erros ocasionais de cruzamento  podem introduzir omissões de genes e duplicações. Um pequeno número de mutações aleatórias para os corpos genéticos é também aplicado. Para evitar uma taxa de falha excessiva devido a erros de reprodução em genes críticos, cada gene é precedido por um cabeçalho que especifica que operações (omissão, duplicação e mutação) podem ser realizadas sobre ele. O cruzamento é realizado de tal maneira que a ligação do gene é proporcional à distância de separação, permitindo características ligadas como seria de esperar (por exemplo, temperamento da criatura com tipo facial). Como o genoma é haploide, temos que evitar que as características úteis ligadas ao sexo sejam erradicadas simplesmente porque elas foram herdadas por uma criatura do sexo oposto. Portanto, cada gene contém as instruções genéticas para ambos os sexos, mas apenas os genes não sexuados e apropriadamente sexuados são expressos no fenótipo.
 
 \subsubsection{Neuroevolução no jogo NERO}
 
-No trabalho de \cite{stanley2005real} com o jogo NERO a neuroevolução tem papel muito interessante. Nesse estudo é apresentado o jogo NERO, onde o jogador tem um exército de robôs e com esse exércite tem que enfrentar uma série de desafios. No NERO a neuroevolução é aplicada no exército, ou seja, o jogador humano pode treinar seus robôs para que eles evoluam durante o jogo.
+Para os autores \cite{stanley2005real} um dos grandes problemas dos jogos é que, em maioria deles a inteligência aplicada é feito através de um algoritmo estático, ou seja, uma vez que o jogador descobre uma fraqueza de um inimigo, não importa quantas vezes o jogador explore a fraqueza ela sempre irá existir.
 
-Para os autores um dos grandes problemas dos jogos é que, em maioria deles a inteligência aplicada é feito através de um algoritmo estático, ou seja, uma vez que o jogador descobre uma fraqueza de um inimigo, não importa quantas vezes o jogador explore a fraqueza ela sempre irá existir. Outra contriubuição muito interessante destacada pelos autores é a possibilidade de abrir novas possiblidades de tipos de jogos, onde o jogador customiza e treina seu time para realizar desafios ou para duelar com times treinados por outras pessoas.
+No trabalho de \cite{stanley2005real} com o jogo NERO a neuroevolução tem papel muito interessante. Nesse estudo é apresentado o jogo NERO, onde o jogador tem um exército de robôs e com esse exército tem que enfrentar uma série de desafios. No NERO a neuroevolução é aplicada no exército, ou seja, o jogador humano pode treinar seus robôs para que eles evoluam durante o jogo.
 
-O NERO utiliza umaa variação de NEAT para ambientes de tempo real, chamado pelos autores de rtNEAT (do inglês Real-time NEAT). O modelo do NEAT empreagado é semelhante a figura \ref{neatModel}.
+O NERO utiliza uma variação de NEAT para ambientes de tempo real, chamado pelos autores de rtNEAT (do inglês Real-time NEAT). O modelo do NEAT empregado é semelhante a figura \ref{fig:neatModel}.
 
 O algoritmo empregado funciona da seguinte forma:
 
 \begin{itemize}
-	\item \textbf{1}. Calcular o \textit{fitness} ajustado: Sendo $f_i$ o \textit{fitness} original do indivíduo $i$ e, $|S|$ é a quantidade de indivíduos na população. O \textit{fitness} ajustado dele é dado por: $frac{f_i}{|S|}$.
+	\item \textbf{1}. Calcular o \textit{fitness} ajustado: $f_i$ representa \textit{fitness} original do indivíduo $i$ e, $|S|$ a quantidade de indivíduos na população. O \textit{fitness} ajustado dele é dado por: $\frac{f_i}{|S|}$.
 	
-	\item \textbf{2}. Removendo o pior agente: O objetivo desta etapa é remover um agente de desemepnho muito abaixo do jogo, esperançosamente para ser substituído por algo melhor. O agente deve ser cuidadosamente escolhido para preservar a dinâmica de especiação. Se o agente com a maior \textit{fitness} não ajustado fosse escolhido, o compartilhamento do \textit{fitness} não poderia mais proteger a inovação porque novas topologias seriam removidas assim que aparecerem.
+	\item \textbf{2}. Removendo o pior agente: O objetivo desta etapa é remover um agente de desempenho muito abaixo do jogo, esperançosamente para ser substituído por algo melhor. O agente deve ser cuidadosamente escolhido para preservar a dinâmica de especiação. Se o agente com a maior \textit{fitness} não ajustado fosse escolhido, o compartilhamento do \textit{fitness} não poderia mais proteger a inovação porque novas topologias seriam removidas assim que aparecerem.
 	
-	\item \textbf{3}. Criando descendentes: os descendentes são criados um por vez e, a probabilidade de escolher uma dada espécie progenitora é proporcional à seu \textit{fitness} médio em comparação com a média de \textit{fitness} total de todas as espécies.
+	\item \textbf{3}. Criando descendentes: os descendentes são criados um por vez e, a probabilidade de escolher uma dada espécie progenitora é proporcional à seu \textit{fitness} ajustado em comparação com a média de \textit{fitness} total de todas as espécies.
 	
-	\item \textbf{4}. Reatribuindo Agentes a espécies: O limiar de compatibilidade dinâmica mantém o número de espécies relativamente estável ao longo da evolução. Essa estabilidade é particularmente importante em um jogo de tempo real, uma vez que a população pode precisar ser consistentemente pequena para acomodar recursos de CPU dedicados ao processamento gráfico.
+	\item \textbf{4}. Atribuir novamente agentes a espécies: O limiar de compatibilidade dinâmica mantém o número de espécies relativamente estável ao longo da evolução. Essa estabilidade é particularmente importante em um jogo de tempo real, uma vez que a população pode precisar ser consistentemente pequena para acomodar recursos de CPU/GPU dedicados ao processamento gráfico.
 	
-	\item \textbf{5}. Substituir um agente velhor por um agente novo: uma vez que um indivíduo foi removido no passo 2, a nova prole precisa substituí-lo. Como os agentes são substituídos depende do jogo. Em alguns jogos (como o NERO), a rede neural pode ser removida de um corpo e substituída sem fazer nada ao corpo. Em outros, o corpo pode ter sido destruído e precisa ser substituído também. O algoritmo rtNEAT pode trabalhar com qualquer um desses esquemas, desde que uma antiga rede neural seja substituída por uma nova.
+	\item \textbf{5}. Substituir um agente velho por um agente novo: uma vez que um indivíduo foi removido no passo 2, a nova prole precisa substituí-lo. Como os agentes são substituídos depende do jogo. Em alguns jogos (como o NERO), a rede neural pode ser removida de um corpo e substituída sem fazer nada ao corpo. Em outros, o corpo pode ter sido destruído e precisa ser substituído também. O algoritmo rtNEAT pode trabalhar com qualquer um desses esquemas, desde que uma antiga rede neural seja substituída por uma nova.
 	
 \end{itemize}
 
+Outra contribuição muito interessante destacada pelos autores é a possibilidade de abrir novas possiblidades de tipos de jogos, onde o jogador customiza e treina seu time para realizar desafios ou para duelar com times treinados por outras pessoas.
 
 \subsubsection{Neuroevolução no jogo Reversi}
+\label{sec:neuroReversi}
 
-No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar Reversi (jogo de tabuleiro). Diferentes dos outros exemplos nesse estudo a neuroevolução foi utilizada em conjunto com busca em árvore de decisões. 
+No trabalho de \cite{evoltuinaryneuralnetworks} foi criado uma rede neuroevolutiva para jogar Reversi (jogo de tabuleiro). Diferentes dos outros exemplos nesse estudo a neuroevolução foi utilizada em conjunto com busca em árvore de decisões (minimax e alpha-beta). 
 
-Nesse estudo as redes neurais são chamados de redes de foco. Dado uma árvore de escolhas essas redes definiam \textbf{janelas} dentro dessa árvore, ou seja, dentro da árvore ela definia quais nós são interessantes de ser explorados. Na figura \ref{fig:focusedMinimax} as janelas são definidas pela área com o fundo mais escuro.
+Nesse estudo as redes neurais são chamadas de redes de foco. Dado uma árvore de escolhas essas redes definem \textbf{janelas} dentro dessa árvore, ou seja, dentro da árvore ela define quais nós são interessantes de ser explorados. Na figura \ref{fig:focusedMinimax} as janelas são definidas pela área com o fundo mais escuro.
 
 \begin{figure}[H]
 \centering
@@ -379,17 +396,17 @@ Nesse estudo as redes neurais são chamados de redes de foco. Dado uma árvore de 
 
 No algoritmo apenas nós dentro de janelas são avaliados. Outra vantagem dessa abordagem é que ela torna a tomada de decisão de um agente mais orgânica, ou seja, algoritmos comuns de busca em árvore podem muitas vezes escolher jogadas não muito comum para jogadores humanos uma vez que ele está analisando um grande número de possíveis próximas jogadas.
 
-Os autores enumeram duas grandes vantegens de utilizar essa técnica: 
+Os autores enumeram duas grandes vantagens de utilizar essa técnica: 
 
 \begin{itemize}
 	
-	\item Reduzir o número de nós avaliados: O fator de ramificação é reduzido o que acelera consideravelmente a procura. Com esse resutlado, a busca pode fazer pesquisas mais profundas nas árvores em caminhos mais promissores.
+	\item Reduzir o número de nós avaliados: O fator de ramificação é reduzido o que acelera consideravelmente a procura. Com esse resultado, a busca pode fazer pesquisas mais profundas nas árvores em caminhos mais promissores.
 	
-	\item As redes de foco são forçadas a decidir quais movimentos a pesquisa minimax (ténica de busca em árvore utilizada pelos autores) deve avaliar e, a fim de jogar bem, eles devem desenvolver uma compreensão do algoritmo minimax. É possível que eles também descubram as limitações do minimax e da função de avaliação, e aprendem a compensar não permitindo que o minimax veja certos movimentos.
+	\item As redes de foco são forçadas a decidir quais movimentos a pesquisa minimax deve avaliar e, a fim de jogar bem, eles devem desenvolver uma compreensão do algoritmo minimax. É possível que eles também descubram as limitações do minimax e da função de avaliação, e aprendam a compensar não permitindo que o minimax veja certos movimentos.
 
 \end{itemize}
 
-A gráfico \ref{fig:focusedNetworkdsResults} mostra o resultado obtido de um minimax com rede de foco comparado a um simples minimax. O gráfico mostra o resultado analisando árvores que analisavam até 6 níveis de profundidade. Para coletar esses dados foram jogados 244 jogos após evoluir a rede de foco.
+O gráfico \ref{fig:focusedNetworkdsResults} mostra o resultado obtido de um minimax com rede de foco comparado a um simples minimax. O gráfico mostra o resultado analisando árvores que analisavam até 6 níveis de profundidade. Para coletar esses dados foram jogados 244 jogos após evoluir a rede de foco.
 
 \begin{figure}[H]
 \centering
@@ -398,16 +415,65 @@ A gráfico \ref{fig:focusedNetworkdsResults} mostra o resultado obtido de um mini
 \label{fig:focusedNetworkdsResults}
 \end{figure}
 
-Para isso chegar nesse ponto foi implementado uma população de 50 rede neurais evoluindo por 1000 gerações, para calcular o \textit{fitness} de cada rede neural a rede era submetida a 244 jogos contra um agente baseado em \textit{minimax}, a percentagem de vitória define o \textit{fitness} do indivíduo.
+Para chegar nesse ponto, foi implementado uma população de 50 redes neurais. A rede neural era empregado uma árvore de busca minimax analisando nós com profundidade até 2. Seu oponente no treinamento utilizava a técnica \textit{alpha-beta} (apresentada em \ref{sec:podaAlphaBeta}) avaliando todos os nós até o terceiro nível de profundidade (um a mais que a rede utilizando neuroevolução). Para avaliação de heurística, ambos os jogadores utilizam a mesma técnica baseada na estratégia posicional de \cite{rosenbloom1982world}. O \textit{fitness} de cada indivíduo era baseado na percentagem de vitórias após 244 jogos entre essas redes. Essas redes evoluíram por 1000 gerações que levou cerca de uma semana.
 
-\section{Aprendizado com Humanos}
+\section{Treinamento com humanos}
 \label{sec:aprendizadoComHumanos}
 
-%INPUT REPRESENTATION%
+Até o momento vimos sobre redes neurais, técnicas, utilidade e exemplos de utilização. Outro segmento importante de pesquisa dentro de rede neural é a entradas de dados por meio de jogadores humanos, ou seja, estudo de técnicas e ambientes que permitam que redes neurais tenham o aprendizado feito totalmente ou guiado por humanos.
 
-\section{Considerações Finais}
+Os autores \cite{karpov2015evaluating} em sua pesquisa, também utilizando o jogo NERO, avaliaram a influência e a importância de um ambiente de aprendizagem guiado por humanos. No ambiente proposto, cada humano poderia treinar seu exército de robôs especificando os desafios que o agente teria que realizar. 
+
+Ainda sobre o trabalho de \cite{karpov2015evaluating} foi realizado um torneio entre exércitos treinados por diferentes jogadores e os autores concluem que os resultados demonstram que os comportamentos bem sucedidos em um complexo jogo multi-agente podem ser altamente diversos, que é exatamente o que torna o treinamento dessas equipes um componente interessante do jogo. Os resultados também mostram que comportamentos complexos podem ser construídos utilizando neuroevolução, demonstrando seu poder como uma abordagem para a construção de NPCs para jogos complexos. Finalmente, esse torneio e os dados gerados são uma ferramenta experimental promissora no estudo de métodos de aprendizagem de máquinas guiadas por humanos. Em geral, os jogos de aprendizagem de máquina são um gênero viável para desenvolvedores de jogos e uma ferramenta útil para pesquisadores de inteligência artificial.
+
+\subsection{Agentes Jogadores}
+
+Um dos modos mais comuns de se aplicar inteligência artificial em jogos é para criação de agentes jogadores (também chamado de \textit{bots}). Esses agentes podem ter como objetivo: ganhar de todos os jogadores, criar desafios mais adaptados aos jogadores e imitar jogadores humanos. Nessa subseção será apresentado estudos onde os humanos influem no treinamento dos agentes.
+
+Um famoso agente que utiliza rede neural e que treina com dados de humanos é o AlphaGo \cite{silver2016mastering}. O agente treina com uma base de dados coletados de jogadores profissionais com mais de 30 milhões de jogadas. Segundo os autores do artigo o agente pode predizer corretamente o movimento de um jogador profissional com uma precisão de 57\% de acerto.
+
+O jogo Forza Motorsport da Microsoft tem integrado um módulo chamado Drivatar \cite{microsoft:drivatar}. Por ser um jogo comercial não existem muitos detalhes de como ele funciona. Basicamente, esse módulo cria um agente jogador com as mesmas características que o jogador humano e, esse agente é compartilhando entre seus amigos para integrar esse avatar no jogo deles e vice-versa. O jogo utiliza uma rede neural para cada avatar e, segundo \cite{ign:drivatar} o Drivatar está preocupado principalmente como o jogador se comporta em momentos chaves de uma corrida, como por exemplo: em uma ultrapassagem ou em uma curva muito acentuada. Características como o quão rápido o jogador vira o volante e o quão forte ele pisa nos aceleradores e freios também são analisados para geração desses agentes.
+
+\subsubsection{Teste de Turing para bots}
+
+Outro ramo onde a neuroevolução pode ser empregada é no chamado Teste de Turing para agentes jogadores \cite{hingston2009turing} que, entre outras palavras, testa a habilidade de agentes (\textit{bots}) de imitar comportamento humano. 
+
+Esse teste se tornou um desafio em 2008 com o jogo Unreal Tournament. Em cada partida um número igual de jogadores e \textit{bots} competem em times. Cada jogador humano recebe um equipamento chamado de arma do julgamento (do inglês Judging Gun) que é usado para marcar um personagem como \textit{bot} ou humano. Sempre que um jogador acerta o julgamento os humanos recebem 10 pontos e o \textit{bot} é eliminado da partida. Se o palpite estiver errado eles perdem 10 pontos e o humano é eliminado da partida. Os dois primeiros agentes considerados vencedores dessa competição foi o agente UT\textasciicircum2 proposto por \cite{schrum2011ut} e o agente MirrorBot proposto por \cite{polceanu2013mirrorbot}.
+
+O agente UT2 segmentou o comportamento do agente em módulos que modelavam vestígios humanos, pegar uma arma jogada no chão, pegar itens, disparar a arma de julgamento, observar, etc. A maioria dos módulos é executado como uma reprodução baseada em regras de ações humanas reais gravadas de diferentes partidas. O módulo de batalha foi treinado através do uso de uma neuroevolução multiobjetiva combinando algoritmos NSGA-II (\cite{deb2000fast}) e NEAT, maximizando o dano causado e minimizando danos recebidos e colisões com objetos (humanos dificilmente colidem com objetos de cenário).
+
+O agente MirrorBot implementa dois módulos: padrão e espelho. O módulo padrão é um módulo de base de regras que permite ao agente navegar pelo mapa, julgar um determinado jogador como sendo humano ou bot e atacar jogadores inimigos. Sempre que o agente encontra um jogador amigável, ele troca para o modo de espelho onde ele vai começar a gravar os movimentos do outro jogador e ele vai replicar de volta depois de um curto atraso.
+
+\subsection{Criação de conteúdo}
+
+Criação de conteúdo pode trazer vários aspectos positivos para um jogo. Aumentar o fator de \textit{replay} (vontade que o jogador tem de jogar novamente um jogo), estender a vida útil do jogo criando mais mapas, desafios e equipamentos entre outros benefícios.
+
+O trabalho de \cite{hastings2009automatic} exemplifica a criação de conteúdo utilizando como entradas dados de humanos. O agente foi desenvolvido para criar novas armas para as naves de combate do jogo GAR. Um fator interessante desse agente é que, todo o treinamento é feito em tempo real enquanto o jogo está funcionando. Algumas características faz o treinamento das redes serem bem diferentes do convencional. Armas geradas não são descartadas a não ser que o jogador faça isso manualmente, o jogador não informa diretamente se gostou da arma, isso é avaliado conforme a utilização de acordo com as opções do usuário.
+
+\subsection{Outros}
+
+Técnicas como neuroevolução podem permitir novos tipos de jogo como sugerem os autores \cite{stanley2005real}. No jogo NERO o treinamento é feito em um modo de jogo separado chamado treinamento. Nesse modo de jogo o jogador humano posicionava seu exército em um campo e definia alguns objetivos para seus robôs completarem, a figura \ref{fig:NEROObjectives} mostra como o jogador humano controla os objetivos do treinamento. Como pode ser visto na imagem, podem ser definidos um ou mais objetivos para o exército e, o objetivo pode ser fazer algo ou não fazer algo (como por exemplo, se aproximar e não se aproximar), isso é indicado pela cor da barra (verde ou vermelha). Da esquerda para direita na imagem os objetivos são: aproximar dos inimigos, atacar os inimigos, evitar tomar tiro, mover-se para uma posição, ficar agrupado e ficar em pé.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{figures/NEROObjectives.png}
+\caption[Objetivos de treino NERO]{Objetivos de treino NERO.}
+\label{fig:NEROObjectives}
+\end{figure}
+
+Após o treinamento as redes eram salvas e durante o modo batalha seu exército era colocado em diferentes desafios e em diferentes tipos de mapa e o jogador não podia atuar sobre os robôs.
+
+\section{Considerações finais}
 \label{sec:conclusaoAprendizadoJogosComHumanos}
 
+Nesse capítulo foi apresentado um dos ramos mais conhecidos dentro de Inteligência Artificial, o aprendizado de máquina. Também foram mostradas aplicações de aprendizado de máquina envolvendo humanos.
 
+O termo aprendizado transita entre diversas áreas de pesquisa, foram mostradas algumas definições sobre a perspectiva da psicologia, filosofia e computação.
 
---------------------------------------------------------------------------------------
+Em seguida, foi mostrado como esse processo humano foi modelado matematicamente e aplicado em algoritmos de computador como, por exemplo, o perceptron.
+
+Na sequência foi apresentado sobre evolução de espécies, outro processo biológico e seu modelo matemático aplicado à computação.
+
+Utilizando desses dois processos (aprendizagem e evolução) surge uma nova técnica chamada neuroevolução. Foi apresentado seu funcionamento, algumas técnicas, suas principais características, vantagens e desvantagens e foi mostrado a sua versatilidade analisando a aplicação dela em diferentes tipos de problemas. Entre os diferentes modos de como a neuroevolução foi empregado vimos: criação de agente jogador, criação de novo conteúdo, criação de personagem e criação de estratégias de jogo.
+
+Por fim foram analisados diversos estudos onde os humanos estão envolvidos dentro do aprendizado de uma rede neural. Nesses estudos podemos ver alguns modos indiretos de usar humanos, como no AlphaGo onde os dados humanos estão formatados como base de dados, e algumas aplicações mais diretas e em tempo real, como no jogo GAR onde o próprio jogo gera conteúdo novo de acordo com a aceitação dos jogadores.
