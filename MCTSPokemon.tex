@@ -70,7 +70,7 @@ A figura \ref{fig:pokemonmewto} de \cite{pokedex} mostra um exemplo de uma espéc
 
 Existem 18 tipos de Pokémon entre eles: planta, fogo, água, inseto, normal, venenoso, elétrico, terra, lutador, psíquico, pedra, voador, fantasma, gelo, dragão, metálico, noturno e fada.
 
-Alguns tipos de Pokémon tem vantagem sobre outros tipos de Pokémon. A ideia é baseada no sistema papel pedra tesoura, onde o papel ganha de pedra, pedra ganha de tesoura e por sua vez tesoura ganha de papel. Porém no sistema de batalhas Pokémon essa mecânica é um pouco mais complexa uma vez que existem 2 tipos para cada Pokémon.
+Alguns tipos de Pokémon tem vantagem sobre outros tipos de Pokémon. A ideia é baseada no sistema papel pedra tesoura, onde o papel ganha de pedra, pedra ganha de tesoura e por sua vez tesoura ganha de papel. Porém no sistema de batalhas Pokémon essa mecânica é um pouco mais complexa, uma vez que podem existir até 2 tipos para cada Pokémon.
 
 \subsubsection{Características únicas}
 
@@ -186,7 +186,7 @@ A decisão de quem irá a executar a ação primeira ocorre de maneira complexa. Sim
 
 \subsection{Golpes do Pokémon}
 
-Uma das customizações mais importantes é quais golpes o Pokémon irá poder utilizar. Cada Pokémon pode escolher 4 golpes entre dezenas de golpes disponíveis para sua espécie. Cada espécie de Pokémon pode aprender um conjunto diferente de habilidades dependendo do seu tipo e características (por exemplo, apenas Pokémon com chifre conseguem aprender o golpe \textit{Mega Horn}). Existem mais de 600 golpes diferentes.
+Uma das customizações mais importantes são quais golpes o Pokémon irá poder utilizar. Cada Pokémon pode escolher 4 golpes entre dezenas de golpes disponíveis para sua espécie. Cada espécie de Pokémon pode aprender um conjunto diferente de habilidades dependendo do seu tipo e características (por exemplo, apenas Pokémon com chifre conseguem aprender o golpe \textit{Mega Horn}). Existem mais de 600 golpes diferentes.
 
 As principais características dos golpes são:
 
@@ -274,7 +274,7 @@ Existem outras categorias de efeitos que são chamados de efeitos secundários ou 
 \section{Pokémon Showdown!}
 \label{sec:pokemonshowdown}
 
-Pokémon Showdown é um simulador de batalhas Pokémon. Permitindo jogar batalhas \textit{online}! com times gerados aleatoriamente, times predefinidos, ou construindo seu próprio time (\cite{pokemonshowdown1}).
+Pokémon Showdown é um simulador de batalhas Pokémon. Permitindo jogar batalhas \textit{online} com times gerados aleatoriamente, times predefinidos, ou construindo seu próprio time (\cite{pokemonshowdown1}).
 
 Esse ambiente é totalmente \textit{on-line} e pode ser jogado via navegador de internet. O código fonte do jogo é disponibilizado sobre a licença MIT. O projeto é construído em Html5, JavaScript 6 e Css3. O dono e principal mantenedor do projeto é Guangcong Luo e todo código fonte do projeto pode ser encontrado no Git Hub.
 
@@ -284,7 +284,7 @@ O ambiente conta um grande número de jogadores simultâneos. Durante o desenvolvi
 
 Competitivamente falando Pokémon tem uma série de problemas de balanceamento. Diferente dos jogos da franquia principal, o Pokémon Showdown! aplica algumas restrições para tornar as batalhas Pokémon ainda mais competitivas.
 
-Como existem Pokémon com atributos muitos mais altos e com movimentos muito melhores que outros algumas regras foram definidas para tornar as batalhas mais justas.
+Como existem vários Pokémon com atributos muitos mais altos e com movimentos muito melhores que outros algumas regras foram definidas para tornar as batalhas mais justas.
 
 O jogo Pokémon Showdown! segue as regras definida por uma comunidade de jogadores competitivos chamada Smogon \cite{smogon}, essa comunidade regula e define as regras que são utilizadas em cada modo de jogo, para que o jogo se torne mais competitivo e balanceado. Um dos principais trabalhos da Smogon é balancear os mais de 800 Pokémon distribuindo eles em faixas chamadas de \textit{tiers}. Do mais fraco para o mais forte, os principais \textit{tiers} são:
 
@@ -318,17 +318,33 @@ O jogo Pokémon Showdown! tem algumas dezenas de modos de batalhas diferentes com
 \label{fig:modobatalhaspokemonshowdown}
 \end{figure}
 
-\subsection{Sistema de ranqueamento Pokémon Showdown}
+\subsection{Sistema de ranqueamento Pokémon Showdown!}
 
-Em cada diferente modo de jogo o jogador tem sua pontuação de \textbf{Elo} que é uma pontuação no ranquemanto geral do jogo. Em cada jogo o jogador ganha ou perde pontos de Elo de acordo com o resultado da partida. A quantidade de pontuação ganha é feita pela diferença do seu Elo para o adversário. O jogo sempre tenta parear jogadores com pontuação de Elo semelhante.
+O Pokémon Showdown! utiliza o sistema de ranqueamento chamado \textbf{Elo}. O sistema Elo foi criado por Arpad Elo em 1950 como uma evolução do sistema de ranqueamento utilizada pela federação de xadrez dos Estados Unidos (\cite{glickman1999rating}). Segundo \cite{coulom2007computing} O princípio da classificação de Elo é que cada jogador recebe uma estimativa de força numérica, calculada a partir da observação de resultados do jogo passado.
 
-Por padrão cada jogador inicia com 1000 pontos de Elo. Em batalhas com níveis parecidos de Elo é comum ganhar/perder 20 pontos por partida. Atualmente os jogadores que lideram as colocações do modo Random Battle têm cerca de 2.200 pontos.
+É muito comum associar Elo a xadrez, porém muitos jogos digitais, como Pokémon Showdown!,  e de tabuleiro, como Go, adotam esse mesmo sistema.
 
+Elo também tem outras funções além de definir um ranqueamento para um jogador. Ele pode predizer quem tem mais chance de vencer uma partida. Pode ser usado para escolher o adversário mais apropriado para um jogo. Segundo \cite{glickman1999rating} o Elo também é utilizado para definir elegibilidade para torneios e para definição de prêmios.
 
+A pontuação de Elo de um jogador normalmente varia entre 0 e 3000 que pode ser modificada dependendo do resultado de um campeonato (\cite{coulom2007computing}).
 
+No Pokémon Showdown! cada jogador tem uma pontuação de Elo diferente em cada modo de jogo, o sistema de pareamento tenta buscar um adversário com semelhante pontuação de Elo. Cada jogador começa com 1000 pontos de Elo em todos os modos e, a cada partida, o Elo é atualizado. 
 
+A equação para variação do Elo após a partida é dado por:
 
+\begin{equation}
+V = K \times \Big( score - \frac{ 1 }{ 10^{(foeElo - elo) / 400 } } \Big),
+\end{equation}
 
+onde \textbf{V} é a variação do Elo. A constante \textbf{K} regula a variação do Elo, ou seja, valores grandes para K fará com que cada partida a variação de Elo seja maior (para mais e para menos), o Pokémon Showdown utiliza o valor de K como 50. A variável \textbf{score} resultado da partida, é usado valor 0 para derrotas, 0.5 para empates e 1 para vitória. Já \textbf{foeElo} e \textbf{elo} são os valores de Elo do adversário e seu respectivamente.
+
+Como exemplo, vamos considerar dois jogadores iniciantes chamados \textbf{A} e \textbf{B}. Ambos os jogadores tem 1000 pontos de Elo. Substituindo a equação de variação do Elo, supondo que o jogador \textbf{A} venceu, se tem:
+
+\begin{equation}
+25 = 50 \times \Big( 1 - \frac{ 1 }{ 10^{(1000 - 1000) / 400 } } \Big),
+\end{equation}
+
+onde o jogador \textbf{A} totalizaria mais 1025 pontos de Elo.
 
 \section{API para Pokémon Showdown!}
 \label{sec:apipokemonshowdown}
