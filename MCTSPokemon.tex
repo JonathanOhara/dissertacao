@@ -5,7 +5,7 @@
 
 Nos capítulos anteriores sobre árvore de jogos e aprendizagem de jogos com humanos. Nesse capítulo o foco será a implementação de um agente para o jogo Pokémon Showdown!. O interesse em fazer agente para esse jogo são quatro fatores. Alto nível de competitividade, dezenas de milhares de pessoas jogam diariamente o jogo, além da existência de diversos campeonatos. Jogo de informações imperfeitas com grande nível de ramificação de escolhas. Jogo totalmente \textit{online}, podendo explorar o aprendizado com jogadores humanos num ambiente difícil de identificar se o adversário é um \textit{bot} ou não. Possibilidade de criar uma API para possibilitar outros pesquisadores criar agentes e a possibilidade de se criar uma competição entre agentes jogadores.
 
-O capítulo está organizado da seguinte forma: a primeira seção \ref{sec:pokemon} é apresentado a franquia de jogos Pokémon. Na próxima seção \ref{sec:batalhaspokemon} é apresentado as mecânicas e as regras das batalhas Pokémon. Na seção \ref{sec:pokemonshowdown} será apresentado a plataforma Pokémon Showdown!, como ela funciona e suas regras competitivas especiais. Na seção \ref{sec:apipokemonshowdown} será apresentado a API para se comunicar com o jogo Pokémonm Showdown!. Em \ref{sec:mctsPokemonShowdown} é mostrado alguns a implementação de agentes utilizando MCTS para o Pokémon Showdown!.
+O capítulo está organizado da seguinte forma: a primeira seção \ref{sec:pokemon} é apresentada a franquia de jogos Pokémon. Na próxima seção \ref{sec:batalhaspokemon} é apresentado as mecânicas e as regras das batalhas Pokémon. Na seção \ref{sec:pokemonshowdown} será apresentado a plataforma Pokémon Showdown!, como ela funciona e suas regras competitivas especiais. Na seção \ref{sec:apipokemonshowdown} será apresentado a API para se comunicar com o jogo Pokémonm Showdown!. Em \ref{sec:mctsPokemonShowdown} é mostrado alguns a implementação de agentes utilizando MCTS para o Pokémon Showdown!.
 
 \section{Pokémon}
 \label{sec:pokemon}
@@ -32,12 +32,12 @@ A espécie é qual modelo aquele Pokémon representa. Existem atualmente mais de 80
 	
 	\item \textbf{Tipo}. Cada Pokémon ter um ou dois tipos associados a sua espécie.
 	
-	\item \textbf{Estatísticas base}. As estatística ou atributos base são separado em 6 categorias:
+	\item \textbf{Estatística base}. As estatística ou atributos base são separado em 6 categorias:
 		\subitem \textbf{HP ou PS}. Quantidade de pontos de vida Pokémon;
 		\subitem \textbf{Attack ou Ataque}. Quantidade de ataque físico do Pokémon;
 		\subitem \textbf{Defense ou Defesa}. Quantidade de defesa física do Pokémon;
 		\subitem \textbf{Special Attack ou Ataque Especial}. Quantidade de ataque mágico do Pokémon;
-		\subitem \textbf{Special Deffense ou Defesa Especial}. Quantidade de defesa mágica do Pokémon;
+		\subitem \textbf{Special Defense ou Defesa Especial}. Quantidade de defesa mágica do Pokémon;
 		\subitem \textbf{Speed ou Velocidade}. Quantidade de Velocidade do Pokémon;
 	
 	\item \textbf{Gama de habilidades}. Uma espécie de Pokémon tem três habilidades, sendo que o Pokémon daquela espécie terá apenas uma delas.
@@ -164,7 +164,7 @@ Existem diversos tipos de batalhas dentro do jogo Pokémon. Nessa seção é apresen
 
 \subsection{Modo Single Battle}
 
-As batalhas acontecem em maioria dos momentos do jogo, onde um treinador desafia um outro treinador, podendo o vencedor levar um pouco de dinheiro virtual ou uma medalha (também chamada de insígnia).
+As batalhas acontecem em maioria dos momentos do jogo, onde um treinador desafia outro treinador, podendo o vencedor levar um pouco de dinheiro virtual ou uma medalha (também chamada de insígnia).
 
 Cada treinador pode utilizar até 6 Pokémon sem quaisquer restrições. Vence o treinador que desmaiar todos os Pokémon do adversário primeiro, ou seja, quando todos os Pokémon de um treinador estiverem com o HP igual a zero.
 
