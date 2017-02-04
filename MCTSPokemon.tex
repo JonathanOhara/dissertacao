@@ -369,8 +369,9 @@ onde o jogador \textbf{A} totalizaria mais 1025 pontos de Elo.
 \section{API para Pokémon Showdown!}
 \label{sec:apipokemonshowdown}
 
-Umas das principais contribuições desse trabalho é a criação de duas APIs para permitir escrever agentes para jogar o Pokémon Showdown!. A primeira delas é chamada de \textit{showdownAI} e serve como uma camada para facilitar a realização de ações dentro do jogo. A segunda API é chamada de \textit{showdownSimulation} e sua função é simular em memória uma ação para poder estimar resultados, essa API é de extrema importância em algoritmos que precisam prever próximas jogadas como em árvores de decisão.
+Umas das principais contribuições desse trabalho é a criação de duas APIs para permitir escrever agentes para jogar o Pokémon Showdown!. A primeira delas é chamada de \textit{showdownAI} e serve como uma camada para facilitar a realização de ações dentro do jogo. A segunda API é chamada de \textit{showdownSimulation} e sua função é simular em memória uma ação para poder estimar resultados, essa API é imprescindível em algoritmos que precisam prever próximas jogadas como em árvores de decisão.
 
+Na imagem \ref{fig:APIsDiagram} mostra como um agente para Pokémon Showdown! trabalha com as APIs, e como elas trabalham com o jogo.
 
 \begin{figure}[H]
 \centering
@@ -378,6 +379,171 @@ Umas das principais contribuições desse trabalho é a criação de duas APIs para p
 \caption[APIs e Pokémon Showdown!]{APIs e Pokémon Showdown!.}
 \label{fig:APIsDiagram}
 \end{figure}
+
+\subsection{showdownAI}
+
+A API showdownAI é feita em JavaScript e entregue em formato de \textit{plugin} para o Google Chrome para facilitar a instalação. Todo o código fonte da API é escrito também e JavaScript. A figura \ref{fig:showdownAIplugin} mostra o \textit{plugin} instalado. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{figures/showdownAIplugin.png}
+\caption[showdownAI \textit{plugin}]{showdownAI \textit{plugin}.}
+\label{fig:showdownAIplugin}
+\end{figure}
+
+Apesar de ser feito todo em JavaScript, a API showdownAI pode se comunicar com qualquer linguagem que tenha a tecnologia de Sockets através do recurso de WebSocket (\cite{mdn:websocket}). Com esse recurso o navegador pode se comunicar com um IP (incluindo \textit{localhost}) utilizando Socket.
+
+\subsubsection{Métodos showdownAI}
+
+Os métodos estão separados em três blocos: métodos utilitários, métodos para o menu inicial do jogo (\textit{lobby}) e métodos para batalhas (\textit{gameplay}). Os métodos utilitários são métodos mais relacionados a API (dados internos), os métodos para o menu do jogo permitem buscar batalhas e aceitar batalhas e os métodos de \textit{gameplay} fazem alguma ação dentro da batalha.
+
+A figura \ref{fig:showdownAIutilityMethods} mostra os métodos classificados como de utilidade. Com mais detalhes, os principais métodos são:
+
+\begin{itemize}
+
+	\item \textbf{init}. Método não recebe argumentos nem retorna algum dado. Método para inicializar a API.
+	
+	\item \textbf{log}. Método recebe uma mensagem (String) como argumento. Esse método guarda mensagens dentro da API.
+
+	\item \textbf{getLogs}. Método retorna um vetor de mensagens (String). Com esse método é possível pegar as mensagens da API.
+	
+	\item \textbf{getOpponentMessages}. Método retorna um vetor de mensagens (String). Com esse método é se pode pegar as mensagens do \textit{chat} do jogo. O \textit{chat} do jogo é o único meio de comunicação entre os dois jogadores.
+	
+	\item \textbf{pause}. Método não recebe argumentos nem retorna algum dado. Esse método faz com que a API para de ler e enviar dados para o Pokémon Shwodown!.
+	
+	\item \textbf{pause}. Método não recebe argumentos nem retorna algum dado. Esse método faz com que a API volte a ler e enviar dados para o Pokémon Shwodown!.
+	
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/showdownAIutilityMethods.png}
+\caption[showdownAI métodos utilitários]{showdownAI métodos utilitários.}
+\label{fig:showdownAIutilityMethods}
+\end{figure}
+
+A figura \ref{fig:showdownAILobbyMethods} mostra os métodos utilizados no menu inicial. Com mais detalhes, os principais métodos são:
+
+\begin{itemize}
+
+	\item \textbf{login} Método recebe como argumento nome do usuário, senha e função para ser chamada após o \textit{login} ser efetuado. Método náo contém retorno.
+	
+	\item \textbf{searchRandomBattle}. Método recebe como argumento uma função para ser executada após achar uma partida no modo Random Battle. Método náo contém retorno.
+	
+	\item \textbf{searchBattleFactoryBattle}. Método recebe como argumento uma função para ser executada após achar uma partida no modo Battle Factory. Método náo contém retorno.
+	
+	\item \textbf{challengeUser}. Método recebe como argumento o nome de um usuário específico para desafiar e uma função para ser executada quando a batalha começar. Método náo contém retorno.
+	
+	\item \textbf{waitForBattleRequest}. Método para ficar no menu incial aceitando qualquer batalha, ele recebe como argumento uma função para ser executada quando a batalha começar. Método náo contém retorno.
+	
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/showdownAILobbyMethods.png}
+\caption[showdownAI métodos para o menu inicial]{showdownAI métodos para o menu inicial.}
+\label{fig:showdownAILobbyMethods}
+\end{figure}
+
+Por fim, a figura \ref{fig:showdownAIBattleMethods1} mostra os métodos utilizados dentro da batalha. Com mais detalhes, os principais métodos são:
+
+\begin{itemize}
+
+	\item \textbf{getBattleSummary}. Método não recebe argumentos e retorna um texto com resumo da batalha (nome, quantidade de HP de cada Pokémon, entre outras informações suas e de seu adversário ).
+	
+	\item \textbf{getBattleCommands}. Método não recebe como argumentose e retorna um objeto do tipo \textit{BattleCommands}. Esse objeto pode conter 3 propriedades/objetos:
+		
+		\subitem \textbf{getStatus}. Método que retorna um objeto do tipo \textit{BattleStatus};
+		
+		\subitem \textbf{result}. Propriedade contendo o resultado da partida (valores possíveis: WIN, LOST e DRAW);
+		
+		\subitem \textbf{goToMainMenu}. Método que fecha a janela da batalha terminado e volta para o menu principal. O método não tem argumentos ou retorno.
+	
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/showdownAIBattleMethods1.png}
+\caption[showdownAI métodos de batalha parte 1]{showdownAI métodos de batalha parte 1.}
+\label{fig:showdownAIBattleMethods1}
+\end{figure}
+
+O objeto \textit{BattleStatus} tem mais 3 grandes objetos dentro dele como mostra a figura \ref{fig:showdownAIBattleMethods2}. Os objetos retornado por esse método são:
+
+\begin{itemize}
+
+	\item \textbf{actions}. Retorna um objetos com os movimentos que o jogador pode utilizar e os Pokémons disponíveis para usar.
+	
+	\item \textbf{opponent}. Retorna informações do adversário como: Pokémon ativo, quantidade restante de Pokémon. Esse objeto só retorna informações conhecidas sobre o oponente.
+	
+	\item \textbf{activePokemon}. Retorna um objeto com informações do Pokémon ativo do jogador.
+	
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/showdownAIBattleMethods2.png}
+\caption[showdownAI métodos de batalha parte 2]{showdownAI métodos de batalha parte 2.}
+\label{fig:showdownAIBattleMethods2}
+\end{figure}
+
+O objeto \textbf{actions} tem as duas possíveis ações do turno, são elas: 
+
+\begin{itemize}
+
+	\item \textbf{attacks}. Retorna um vetor com apenas os golpes habilitados. Em cada objeto do vetor existem as seguintes propriedades e métodos:
+		\subitem \textbf{name}. Propriedade que retorna o nome do golpe.
+		\subitem \textbf{info}. Propriedade que retorna informações completas do golpe (tipo, dano, entre outros).
+		\subitem \textbf{use}. Método para utilizar o golpe. Esse método recebe como argumento uma função que executará quando o próximo turno começar.
+	
+	\item \textbf{pokemons}. Retorna um vetor com apenas os Pokémon que podem entrar na luta. Em cada objeto do vetor existem as seguintes propriedades e métodos:
+		\subitem \textbf{name}. Propriedade que o nome do Pokémon.
+		\subitem \textbf{info}. Propriedade que retorna informações completas do Pokémon (tipo, atributos, habilidade, item, entre outros).
+		\subitem \textbf{use}. Método para utilizar o Pokémon. Esse método recebe como argumento uma função que executará quando o próximo turno começar.
+	
+\end{itemize}
+
+Por fim, o objeto \textbf{opponent} tem todas as informações sobre os Pokémon do adversário, as propriedades são
+
+\begin{itemize}
+	
+	\item \textbf{activePokemon}. Retorna um objeto com todas as informações conhecidas do Pokémon ativo do adversário.
+	
+	\item \textbf{activePokemon}. Retorna um vetor de objeto com todas as informações conhecidas dos outros Pokémon.
+	
+\end{itemize}
+
+\subsubsection{Utilizando showdownAI}
+
+Para exemplificar a utilização da API, na figura \ref{fig:showdownAPISimples} é mostrado um agente para Random Battle que segue os seguintes passos:
+
+\begin{itemize}
+	
+	\item \textbf{1}. Inicia a API (linha 27) e faz o \textit{login} com uma conta e senha (linha 28).
+	
+	\item \textbf{2}. Após o login acontecer. É chamado o método de buscar batalha no modo Random Battle (linha 29).
+	
+	\item \textbf{3}. A cada turno se verifica se a partida não terminou (linha 2). Se a partida terminou, a partida é finalizada (linha 4), e é buscado novamente uma partida no modo Random Battle (linha 5). Caso não tenha terminado, é executado os seguintes subpassos:
+	
+		\item \textbf{3.1}. Se não existe nenhum golpe disponível as ações possíveis são trocar de Pokémon (linha 12);
+		
+		\item \textbf{3.2}. Se não existe nenhum Pokémon disponível as ações possíveis são utilizar um golpe (linha 14);
+		
+		\item \textbf{3.3}. Caso 3.1 e 3.2 não aconteçam (linha 16), ações possíveis é aleatoriamente escolhido entre utilizar golpes e trocar de Pokémon (linha 19).
+		
+		\item \textbf{3.4}. Aleatoriamente é escolhido entre as ações diponíveis (linha 23).
+	
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/showdownAPISimples.png}
+\caption[Agente simples utilizando showdownAI]{Agente simples utilizando showdownAI.}
+\label{fig:showdownAPISimples}
+\end{figure}
+
+\subsection{showdownSimulation}
+
 
 \section{Agentes MCTS para Pokémon}
 \label{sec:mctsPokemonShowdown}
