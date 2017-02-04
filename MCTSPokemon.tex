@@ -296,7 +296,7 @@ O jogo Pokémon Showdown! segue as regras definida por uma comunidade de jogadore
 	\item \textit{Ubers}.
 \end{itemize}
 
-\subsection{Modos de batalhas Pokémon Showdown}
+\subsection{Modos de batalhas Pokémon Showdown!}
 
 O jogo Pokémon Showdown! tem algumas dezenas de modos de batalhas diferentes como mostra a imagem
 \ref{fig:modobatalhaspokemonshowdown}. Os modos de batalhas são altamente influenciados pelas regras da Smogon. Os modos de batalha mais utilizados são:
@@ -316,6 +316,26 @@ O jogo Pokémon Showdown! tem algumas dezenas de modos de batalhas diferentes com
 \includegraphics[width=\columnwidth]{figures/modobatalhaspokemonshowdown.png}
 \caption[Modos de batalha Pokémon Showdown!]{Modos de batalha Pokémon Showdown!.}
 \label{fig:modobatalhaspokemonshowdown}
+\end{figure}
+
+\subsection{Temporizador de batalha}
+
+Todos os modos de jogo do Pokémon Showdown! contam com um temporizador opcional, ou seja, está disponível para um dos dois jogadores pedirem para ligar o temporizador. A figura \ref{fig:showdownTimer} mostra a localização do temporizador.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{figures/showdownTimer.png}
+\caption[Botão de ligar temporizador de batalha]{Botão de ligar temporizador de batalha.}
+\label{fig:showdownTimer}
+\end{figure}
+
+Uma vez ligado, cada jogador recebe 150 segundos (2 minutos e meio) em seu banco de tempo para ser usado durante toda partida. A cada novo turno cada jogador recebe mais 20 segundos. O jogador que fez a escolha mais rápida também ganha 10 segundos adicionais. O tempo máximo que se pode ter no banco é de 150 segundos. A figura \ref{fig:showdownTimeLeft} mostra um indicador do tempo restante para realizar sua jogada.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{figures/showdownTimeLeft.png}
+\caption[Quantidade de tempo restante para realizar a jogada]{Quantidade de tempo restante para realizar a jogada.}
+\label{fig:showdownTimeLeft}
 \end{figure}
 
 \subsection{Sistema de ranqueamento Pokémon Showdown!}
@@ -349,6 +369,15 @@ onde o jogador \textbf{A} totalizaria mais 1025 pontos de Elo.
 \section{API para Pokémon Showdown!}
 \label{sec:apipokemonshowdown}
 
+Umas das principais contribuições desse trabalho é a criação de duas APIs para permitir escrever agentes para jogar o Pokémon Showdown!. A primeira delas é chamada de \textit{showdownAI} e serve como uma camada para facilitar a realização de ações dentro do jogo. A segunda API é chamada de \textit{showdownSimulation} e sua função é simular em memória uma ação para poder estimar resultados, essa API é de extrema importância em algoritmos que precisam prever próximas jogadas como em árvores de decisão.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/APIsDiagram.pdf}
+\caption[APIs e Pokémon Showdown!]{APIs e Pokémon Showdown!.}
+\label{fig:APIsDiagram}
+\end{figure}
 
 \section{Agentes MCTS para Pokémon}
 \label{sec:mctsPokemonShowdown}
