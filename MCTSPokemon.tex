@@ -160,9 +160,10 @@ Cada também Pokémon pode carregar consigo um item, esse item também traz certos 
 \section{Batalhas Pokémon}
 \label{sec:batalhaspokemon}
 
-Existem diversos tipos de batalhas dentro do jogo Pokémon. Nessa seção é apresentado o modo padrão de batalha chamado \textit{Single Battle}. Existem outros modos apresentados no jogo como:  \textit{Double Batles}, \textit{Tripple Battles} e \textit{Rotation Battle}.
+Existem diversos tipos de batalhas dentro do jogo Pokémon. Nessa seção é apresentado o modo padrão de batalha chamado \textit{Single Battle}. Existem outros modos disponíveis no jogo como:  \textit{Double Batles}, \textit{Tripple Battles} e \textit{Rotation Battle}.
 
 \subsection{Modo Single Battle}
+\label{sec:modoShowdown}
 
 As batalhas acontecem em maioria dos momentos do jogo, onde um treinador desafia outro treinador, podendo o vencedor levar um pouco de dinheiro virtual ou uma medalha (também chamada de insígnia).
 
@@ -537,7 +538,7 @@ Para exemplificar a utilização da API, na figura \ref{fig:showdownAPISimples} é 
 		
 		\subitem \textbf{3.3}. Caso 3.1 e 3.2 não aconteçam (linha 16), ações possíveis são aleatoriamente escolhidas entre utilizar golpes e trocar de Pokémon (linha 19).
 		
-		\item \textbf{3.4}. Aleatoriamente é escolhido entre as ações disponíveis (linha 23).
+		\subitem \textbf{3.4}. Aleatoriamente é escolhido entre as ações disponíveis (linha 23).
 	
 \end{itemize}
 
@@ -550,6 +551,106 @@ Para exemplificar a utilização da API, na figura \ref{fig:showdownAPISimples} é 
 
 \subsection{showdownSimulation}
 
+Em adição da API de \`{gameplay} foi desenvolvido uma API para simular situações e, ações em deterimanado cenários. Isso pode ser feito pois o código fonte do Pokémon Showdown! (servidor e cliente) é aberto.
+
+Analisando as classes do código de servidor do Pokémon Showdown! foi possível isolar o trecho onde são criados os times e onde são executados as ações e, com isso, criar a API de simulação de jogadas.
+
+\subsubsection{Criando uma batalha}
+
+A primeira grande função dessa API é criar uma batalha completa. A imagem \ref{fig:showdownSimulation1} mostra a utilização da API para criar uma batalha.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/showdownSimulation1.png}
+\caption[Criação de batalha simulada]{Criação de batalha simulada.}
+\label{fig:showdownSimulation1}
+\end{figure}
+
+O método \textbf{myCreateBattle} recebe dois argumentos. O primeiro é chamado de \textbf{preview}, se \textbf{true}, ele define que o primeiro turno da batalha será para escolha do Pokémon inicial, se \textbf{false}, a ordem do vetor do time decidirá qual Pokémon irá começar na batalha. O segundo argumento é um vetor de times, a primeira posição do vetor é o time 1 que é um vetor de objetos Pokémon, a segunda posição do vetor é o time 2 que também é um vetor de objetos Pokémon.
+
+Não é necesseário um vetor completo de times para criar uma batalha, ou seja, é possível simular um jogo onde cada time só tem um Pokémon (na imagem \ref{fig:showdownSimulation1} são criados dois times com apenas 3 Pokémon). Também não é necessário preencher todos os atributos do objeto Pokémon para criar uma batalha.
+
+A imagem \ref{fig:showdownSimulation2} mostra dois exemplos de funções que criam objetos Pokémon com todos atributos para criação de batalha.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/showdownSimulation2.png}
+\caption[Criação de objetos Pokémon para simulação]{Criação de objetos Pokémon para simulação.}
+\label{fig:showdownSimulation2}
+\end{figure}
+
+O retorno do método \textbf{myCreateBattle} é um objeto chamado \textbf{AITools} com todas as informações da batalha que está sendo simulada. A figura \ref{fig:showdownSimulation3} mostra todos os atributos desse objeto.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/showdownSimulation3.png}
+\caption[Objeto de simulação AITools]{Objeto de simulação AITools.}
+\label{fig:showdownSimulation3}
+\end{figure}
+
+Os objetos mais importantes dessa classe são:
+
+\begin{itemize}
+	
+	\item \textbf{currentRequest}. É o tipo de turno. Existem três possívels valores para essa propriedade:
+		
+		\subitem \textbf{move}. É o turno padrão, onde os dois jogadores tem um Pokémon em campo. Ambos os jogadores podem escolher entre golpes e trocar de Pokémon.
+		
+		\subitem \textbf{switch}. É um turno apenas para troca de Pokémon, normalmente acontece quando um Pokémon é derrotado e um dos jogadores tem que escolher um novo Pokémon para entrar em batalha. Alguns golpes também podem forçar a troca de Pokémon, se enquadrando também nessa situação.
+		
+		\subitem \textbf{teampreview}. Acontece apenas no primeiro turno em batalhas criadas parâmetro \textbf{preview} com valor verdadeiro.
+	
+	\item \textbf{log}. Um vetor de \textit{String} com todas as mensagens do Pokémon Showdown sobre o que está acontecendo na simulação. Informações sobre composição de cada time, turno atual, movimentos utilizados, entre outras informações sobre a batalha estão disponiveís nessa propriedade.
+	
+	\item \textbf{p1} e \textbf{p2}. Objetos com todas as informações do jogador1 e jogador2 respectivamente da simulação.
+	
+\end{itemize}
+
+Após criada a batalha ainda é possível alterar valores do objeto de batalha para melhor refletir a situação atual. Algumas propriedades que normalmente são necessarios fazer ajustes: quantidade de HP atual de cada Pokémon, adicionar estados especiais de batalhas.
+
+\subsubsection{Simulando ações}
+
+A simulação de ações é feita dos objetos \textbf{p1} e \textbf{p2} da batalha simulada. A figura \ref{fig:showdownSimulation4} mostra todos os atributos desse objeto.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/showdownSimulation4.png}
+\caption[Objetos de simulação p1 e p2]{Objetos de simulação p1 e p2.}
+\label{fig:showdownSimulation4}
+\end{figure}
+
+As propriedades mais importantes dessa classe são:
+
+\begin{itemize}
+
+	\item \textbf{active}. Retorna um vetor com os Pokémon ativos do jogador (como explicado em \ref{sec:batalhaspokemon}, existem lutas de duplas e trios).
+	
+	\item \textbf{pokemon}. Vetor com todos os Pokémon disponíveis e suas informações.
+	
+	\item \textbf{sideConditions}. Alguns golpes podem criar modificadores de terreno (também chamado de \textit{hazards} de batalha) dando vantagem ou desvantagem ao Pokémon. Esse objeto contém essas informações.
+	
+\end{itemize}
+
+Além dessas propriedades, existem três métodos muito importantes, que fazem as ações da simulação:
+
+\begin{itemize}
+
+	\item \textbf{chooseMove}. Esse método recebe como argumento um inteiro com valor de 1 a 4 relacionado ao golpe que o Pokémon ativo irá utilizar. Entre outras palavras ao chamar \textbf{chooseMove} passando 1 como argumento, será utilizado o golpe de ordem 1 do Pokémon ativo do jogador.
+	
+	\item \textbf{chooseSwitch}. Esse método recebe como argumento um inteiro com valor de 1 a 6 relacionado para qual Pokémon será efetuado a trca.
+	
+	\item \textbf{chooseTeam}. Semelhante ao \textbf{chooseSwitch}, esse método também recebe como argumento um inteiro com valor de 1 a 6, porém, esse método só funciona para o primeiro turno quando existe o \textbf{preview} com valor verdadeiro.
+	
+\end{itemize}.
+
+A figura \ref{fig:showdownSimulation5} mostra um exemplo de realização de ações os jogadores. Como a imagem mostra não é necessário nenhum comando para o turno avançar, assim que todos os jogadores façam suas escolhas o turno é avançado automaticamente. Existem situações em que apenas um dos dois jogadores tem que responder como a figura exemplifica.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/showdownSimulation5.png}
+\caption[Escolhendo ações para p1 e p2]{Escolhendo ações para p1 e p2.}
+\label{fig:showdownSimulation5}
+\end{figure}
 
 \section{Agentes MCTS para Pokémon}
 \label{sec:mctsPokemonShowdown}
