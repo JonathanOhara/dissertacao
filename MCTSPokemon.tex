@@ -303,7 +303,7 @@ O jogo Pokémon Showdown! tem algumas dezenas de modos de batalhas diferentes com
 
 \begin{itemize}
 
-	\item \textbf{Random battle} os dois jogadores são pareados com times totalmente aleatórios. Para balancear esse modo são atribuídos diferentes níveis de acordo com o \textit{tier} do Pokémon. Pokémon NU batalham no nível 86, RU 82, UU 78, OU 74 e \textit{Ubers} no 70.
+	\item \textbf{Random battle} os dois jogadores são pareados com times totalmente aleatórios. Para balancear esse modo são atribuídos diferentes níveis de acordo com o \textit{tier} do Pokémon. Pokémon NU batalham no nível 86, RU 82, UU 78, OU 74 e \textit{Ubers} no nível 70.
 	
 	\item \textbf{OU Battle} O jogador monta seu time com Pokémon de no máximo \textit{tier} OU e são pareados com outro jogador também com time de Pokémon de \textit{tier} máximo OU. Nesse modo todos Pokémon batalham no mesmo nível.
 
@@ -371,7 +371,7 @@ onde o jogador \textbf{A} totalizaria mais 1025 pontos de Elo.
 
 Umas das principais contribuições desse trabalho é a criação de duas APIs para permitir escrever agentes para jogar o Pokémon Showdown!. A primeira delas é chamada de \textit{showdownAI} e serve como uma camada para facilitar a realização de ações dentro do jogo. A segunda API é chamada de \textit{showdownSimulation} e sua função é simular em memória uma ação para poder estimar resultados, essa API é imprescindível em algoritmos que precisam prever próximas jogadas como em árvores de decisão.
 
-Na imagem \ref{fig:APIsDiagram} mostra como um agente para Pokémon Showdown! trabalha com as APIs, e como elas trabalham com o jogo.
+Na imagem \ref{fig:APIsDiagram} mostra como um agente para Pokémon Showdown! pode trabalhar junto com as APIs, e como elas trabalham com o jogo.
 
 \begin{figure}[H]
 \centering
@@ -407,7 +407,7 @@ A figura \ref{fig:showdownAIutilityMethods} mostra os métodos classificados como
 
 	\item \textbf{getLogs}. Método retorna um vetor de mensagens (String). Com esse método é possível pegar as mensagens da API.
 	
-	\item \textbf{getOpponentMessages}. Método retorna um vetor de mensagens (String). Com esse método é se pode pegar as mensagens do \textit{chat} do jogo. O \textit{chat} do jogo é o único meio de comunicação entre os dois jogadores.
+	\item \textbf{getOpponentMessages}. Método retorna um vetor de mensagens (String). Com esse método é possível obter as mensagens do \textit{chat} do jogo. O \textit{chat} do jogo é o único meio de comunicação entre os dois jogadores.
 	
 	\item \textbf{pause}. Método não recebe argumentos nem retorna algum dado. Esse método faz com que a API para de ler e enviar dados para o Pokémon Shwodown!.
 	
@@ -426,15 +426,15 @@ A figura \ref{fig:showdownAILobbyMethods} mostra os métodos utilizados no menu i
 
 \begin{itemize}
 
-	\item \textbf{login} Método recebe como argumento nome do usuário, senha e função para ser chamada após o \textit{login} ser efetuado. Método náo contém retorno.
+	\item \textbf{login} Método recebe como argumento nome do usuário, senha e função para ser chamada após o \textit{login} ser efetuado. Método não contém retorno.
 	
-	\item \textbf{searchRandomBattle}. Método recebe como argumento uma função para ser executada após achar uma partida no modo Random Battle. Método náo contém retorno.
+	\item \textbf{searchRandomBattle}. Método recebe como argumento uma função para ser executada após achar uma partida no modo Random Battle. Método não contém retorno.
 	
-	\item \textbf{searchBattleFactoryBattle}. Método recebe como argumento uma função para ser executada após achar uma partida no modo Battle Factory. Método náo contém retorno.
+	\item \textbf{searchBattleFactoryBattle}. Método recebe como argumento uma função para ser executada após achar uma partida no modo Battle Factory. Método não contém retorno.
 	
-	\item \textbf{challengeUser}. Método recebe como argumento o nome de um usuário específico para desafiar e uma função para ser executada quando a batalha começar. Método náo contém retorno.
+	\item \textbf{challengeUser}. Método recebe como argumento o nome de um usuário específico para desafiar e uma função para ser executada quando a batalha começar. Método não contém retorno.
 	
-	\item \textbf{waitForBattleRequest}. Método para ficar no menu incial aceitando qualquer batalha, ele recebe como argumento uma função para ser executada quando a batalha começar. Método náo contém retorno.
+	\item \textbf{waitForBattleRequest}. Método para ficar no menu inicial aceitando qualquer batalha, ele recebe como argumento uma função para ser executada quando a batalha começar. Método não contém retorno.
 	
 \end{itemize}
 
@@ -451,13 +451,13 @@ Por fim, a figura \ref{fig:showdownAIBattleMethods1} mostra os métodos utilizado
 
 	\item \textbf{getBattleSummary}. Método não recebe argumentos e retorna um texto com resumo da batalha (nome, quantidade de HP de cada Pokémon, entre outras informações suas e de seu adversário ).
 	
-	\item \textbf{getBattleCommands}. Método não recebe como argumentose e retorna um objeto do tipo \textit{BattleCommands}. Esse objeto pode conter 3 propriedades/objetos:
+	\item \textbf{getBattleCommands}. Método não recebe como argumentos e retorna um objeto do tipo \textit{BattleCommands}. Esse objeto pode conter 3 propriedades/objetos:
 		
 		\subitem \textbf{getStatus}. Método que retorna um objeto do tipo \textit{BattleStatus};
 		
 		\subitem \textbf{result}. Propriedade contendo o resultado da partida (valores possíveis: WIN, LOST e DRAW);
 		
-		\subitem \textbf{goToMainMenu}. Método que fecha a janela da batalha terminado e volta para o menu principal. O método não tem argumentos ou retorno.
+		\subitem \textbf{goToMainMenu}. Método que encerra o jogo atual e volta para o menu principal. O método não tem argumentos ou retorno.
 	
 \end{itemize}
 
@@ -472,7 +472,7 @@ O objeto \textit{BattleStatus} tem mais 3 grandes objetos dentro dele como mostr
 
 \begin{itemize}
 
-	\item \textbf{actions}. Retorna um objetos com os movimentos que o jogador pode utilizar e os Pokémons disponíveis para usar.
+	\item \textbf{actions}. Retorna um objeto com os movimentos que o Poklémon ativo pode utilizar e os Pokémons disponíveis para usar.
 	
 	\item \textbf{opponent}. Retorna informações do adversário como: Pokémon ativo, quantidade restante de Pokémon. Esse objeto só retorna informações conhecidas sobre o oponente.
 	
@@ -492,13 +492,19 @@ O objeto \textbf{actions} tem as duas possíveis ações do turno, são elas:
 \begin{itemize}
 
 	\item \textbf{attacks}. Retorna um vetor com apenas os golpes habilitados. Em cada objeto do vetor existem as seguintes propriedades e métodos:
+		
 		\subitem \textbf{name}. Propriedade que retorna o nome do golpe.
+		
 		\subitem \textbf{info}. Propriedade que retorna informações completas do golpe (tipo, dano, entre outros).
+		
 		\subitem \textbf{use}. Método para utilizar o golpe. Esse método recebe como argumento uma função que executará quando o próximo turno começar.
 	
 	\item \textbf{pokemons}. Retorna um vetor com apenas os Pokémon que podem entrar na luta. Em cada objeto do vetor existem as seguintes propriedades e métodos:
+		
 		\subitem \textbf{name}. Propriedade que o nome do Pokémon.
+		
 		\subitem \textbf{info}. Propriedade que retorna informações completas do Pokémon (tipo, atributos, habilidade, item, entre outros).
+		
 		\subitem \textbf{use}. Método para utilizar o Pokémon. Esse método recebe como argumento uma função que executará quando o próximo turno começar.
 	
 \end{itemize}
@@ -521,17 +527,17 @@ Para exemplificar a utilização da API, na figura \ref{fig:showdownAPISimples} é 
 	
 	\item \textbf{1}. Inicia a API (linha 27) e faz o \textit{login} com uma conta e senha (linha 28).
 	
-	\item \textbf{2}. Após o login acontecer. É chamado o método de buscar batalha no modo Random Battle (linha 29).
+	\item \textbf{2}. Após o \textit{login} acontecer. É chamado o método de buscar batalha no modo Random Battle (linha 29).
 	
-	\item \textbf{3}. A cada turno se verifica se a partida não terminou (linha 2). Se a partida terminou, a partida é finalizada (linha 4), e é buscado novamente uma partida no modo Random Battle (linha 5). Caso não tenha terminado, é executado os seguintes subpassos:
+	\item \textbf{3}. A cada turno se verifica se a partida não terminou (linha 2). Se a partida terminou, a partida é finalizada (linha 4), e é buscado novamente uma partida no modo Random Battle (linha 5). Caso não tenha terminado, é executado os seguintes sub-passos:
 	
-		\item \textbf{3.1}. Se não existe nenhum golpe disponível as ações possíveis são trocar de Pokémon (linha 12);
+		\subitem \textbf{3.1}. Se não existe nenhum golpe disponível as ações possíveis são trocar de Pokémon (linha 12);
 		
-		\item \textbf{3.2}. Se não existe nenhum Pokémon disponível as ações possíveis são utilizar um golpe (linha 14);
+		\subitem \textbf{3.2}. Se não existe nenhum Pokémon disponível as ações possíveis são utilizar um golpe (linha 14);
 		
-		\item \textbf{3.3}. Caso 3.1 e 3.2 não aconteçam (linha 16), ações possíveis é aleatoriamente escolhido entre utilizar golpes e trocar de Pokémon (linha 19).
+		\subitem \textbf{3.3}. Caso 3.1 e 3.2 não aconteçam (linha 16), ações possíveis são aleatoriamente escolhidas entre utilizar golpes e trocar de Pokémon (linha 19).
 		
-		\item \textbf{3.4}. Aleatoriamente é escolhido entre as ações diponíveis (linha 23).
+		\item \textbf{3.4}. Aleatoriamente é escolhido entre as ações disponíveis (linha 23).
 	
 \end{itemize}
 
