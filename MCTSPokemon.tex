@@ -452,7 +452,7 @@ Por fim, a figura \ref{fig:showdownAIBattleMethods1} mostra os métodos utilizado
 
 	\item \textbf{getBattleSummary}. Método não recebe argumentos e retorna um texto com resumo da batalha (nome, quantidade de HP de cada Pokémon, entre outras informações suas e de seu adversário ).
 	
-	\item \textbf{getBattleCommands}. Método não recebe como argumentos e retorna um objeto do tipo \textit{BattleCommands}. Esse objeto pode conter 3 propriedades/objetos:
+	\item \textbf{getBattleCommands}. Método não recebe como argumentos e retorna um objeto do tipo \textit{BattleCommands}. Esse objeto pode conter 3 propriedades/métododos:
 		
 		\subitem \textbf{getStatus}. Método que retorna um objeto do tipo \textit{BattleStatus};
 		
@@ -469,11 +469,11 @@ Por fim, a figura \ref{fig:showdownAIBattleMethods1} mostra os métodos utilizado
 \label{fig:showdownAIBattleMethods1}
 \end{figure}
 
-O objeto \textit{BattleStatus} tem mais 3 grandes objetos dentro dele como mostra a figura \ref{fig:showdownAIBattleMethods2}. Os objetos retornado por esse método são:
+O objeto \textit{BattleStatus} tem mais 3 grandes objetos dentro dele como mostra a figura \ref{fig:showdownAIBattleMethods2}. As propriedades dele são:
 
 \begin{itemize}
 
-	\item \textbf{actions}. Retorna um objeto com os movimentos que o Poklémon ativo pode utilizar e os Pokémons disponíveis para usar.
+	\item \textbf{actions}. Retorna um objeto com os movimentos que o Poklémon ativo pode utilizar e os Pokémon disponíveis para usar.
 	
 	\item \textbf{opponent}. Retorna informações do adversário como: Pokémon ativo, quantidade restante de Pokémon. Esse objeto só retorna informações conhecidas sobre o oponente.
 	
@@ -551,13 +551,13 @@ Para exemplificar a utilização da API, na figura \ref{fig:showdownAPISimples} é 
 
 \subsection{showdownSimulation}
 
-Em adição da API de \`{gameplay} foi desenvolvido uma API para simular situações e, ações em deterimanado cenários. Isso pode ser feito pois o código fonte do Pokémon Showdown! (servidor e cliente) é aberto.
+Em adição da API de \textit{gameplay} foi desenvolvido uma API para simular situações e, ações em deterimanado cenários. Isso pode ser feito, pois o código fonte do Pokémon Showdown! (servidor e cliente) é aberto.
 
 Analisando as classes do código de servidor do Pokémon Showdown! foi possível isolar o trecho onde são criados os times e onde são executados as ações e, com isso, criar a API de simulação de jogadas.
 
 \subsubsection{Criando uma batalha}
 
-A primeira grande função dessa API é criar uma batalha completa. A imagem \ref{fig:showdownSimulation1} mostra a utilização da API para criar uma batalha.
+A primeira grande função da API é criar uma batalha completa. A imagem \ref{fig:showdownSimulation1} mostra a utilização da API para criar uma batalha.
 
 \begin{figure}[H]
 \centering
@@ -568,9 +568,9 @@ A primeira grande função dessa API é criar uma batalha completa. A imagem \ref{f
 
 O método \textbf{myCreateBattle} recebe dois argumentos. O primeiro é chamado de \textbf{preview}, se \textbf{true}, ele define que o primeiro turno da batalha será para escolha do Pokémon inicial, se \textbf{false}, a ordem do vetor do time decidirá qual Pokémon irá começar na batalha. O segundo argumento é um vetor de times, a primeira posição do vetor é o time 1 que é um vetor de objetos Pokémon, a segunda posição do vetor é o time 2 que também é um vetor de objetos Pokémon.
 
-Não é necesseário um vetor completo de times para criar uma batalha, ou seja, é possível simular um jogo onde cada time só tem um Pokémon (na imagem \ref{fig:showdownSimulation1} são criados dois times com apenas 3 Pokémon). Também não é necessário preencher todos os atributos do objeto Pokémon para criar uma batalha.
+Não é necessário um vetor completo de times (seis Pokémon em cada time) para criar uma batalha, ou seja, é possível simular um jogo onde cada time só tem um Pokémon (na imagem \ref{fig:showdownSimulation1} são criados dois times com apenas 3 Pokémon). Também não é necessário preencher todos os atributos do objeto Pokémon para criar uma batalha.
 
-A imagem \ref{fig:showdownSimulation2} mostra dois exemplos de funções que criam objetos Pokémon com todos atributos para criação de batalha.
+A imagem \ref{fig:showdownSimulation2} mostra dois exemplos de funções que criam objetos Pokémon com todos os atributos para criação de batalha.
 
 \begin{figure}[H]
 \centering
@@ -592,7 +592,7 @@ Os objetos mais importantes dessa classe são:
 
 \begin{itemize}
 	
-	\item \textbf{currentRequest}. É o tipo de turno. Existem três possívels valores para essa propriedade:
+	\item \textbf{currentRequest}. É o tipo de turno. Existem três possíveis valores para essa propriedade:
 		
 		\subitem \textbf{move}. É o turno padrão, onde os dois jogadores tem um Pokémon em campo. Ambos os jogadores podem escolher entre golpes e trocar de Pokémon.
 		
@@ -600,13 +600,13 @@ Os objetos mais importantes dessa classe são:
 		
 		\subitem \textbf{teampreview}. Acontece apenas no primeiro turno em batalhas criadas parâmetro \textbf{preview} com valor verdadeiro.
 	
-	\item \textbf{log}. Um vetor de \textit{String} com todas as mensagens do Pokémon Showdown sobre o que está acontecendo na simulação. Informações sobre composição de cada time, turno atual, movimentos utilizados, entre outras informações sobre a batalha estão disponiveís nessa propriedade.
+	\item \textbf{log}. Um vetor de \textit{String} com todas as mensagens do Pokémon Showdown sobre o que está acontecendo na simulação. Informações sobre composição de cada time, turno atual, movimentos utilizados, entre outras informações sobre a batalha estão disponíveis nessa propriedade.
 	
 	\item \textbf{p1} e \textbf{p2}. Objetos com todas as informações do jogador1 e jogador2 respectivamente da simulação.
 	
 \end{itemize}
 
-Após criada a batalha ainda é possível alterar valores do objeto de batalha para melhor refletir a situação atual. Algumas propriedades que normalmente são necessarios fazer ajustes: quantidade de HP atual de cada Pokémon, adicionar estados especiais de batalhas.
+Depois de criada a batalha ainda é possível alterar valores do objeto de batalha para melhor refletir a situação atual. Algumas propriedades que normalmente são necessários fazer ajustes: quantidade de HP atual de cada Pokémon, adicionar estados especiais de batalhas.
 
 \subsubsection{Simulando ações}
 
@@ -637,7 +637,7 @@ Além dessas propriedades, existem três métodos muito importantes, que fazem as a
 
 	\item \textbf{chooseMove}. Esse método recebe como argumento um inteiro com valor de 1 a 4 relacionado ao golpe que o Pokémon ativo irá utilizar. Entre outras palavras ao chamar \textbf{chooseMove} passando 1 como argumento, será utilizado o golpe de ordem 1 do Pokémon ativo do jogador.
 	
-	\item \textbf{chooseSwitch}. Esse método recebe como argumento um inteiro com valor de 1 a 6 relacionado para qual Pokémon será efetuado a trca.
+	\item \textbf{chooseSwitch}. Esse método recebe como argumento um inteiro com valor de 1 a 6 relacionado para qual Pokémon será efetuado a troca.
 	
 	\item \textbf{chooseTeam}. Semelhante ao \textbf{chooseSwitch}, esse método também recebe como argumento um inteiro com valor de 1 a 6, porém, esse método só funciona para o primeiro turno quando existe o \textbf{preview} com valor verdadeiro.
 	
