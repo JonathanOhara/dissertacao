@@ -3,22 +3,22 @@
 
 \section{Introdução}
 
-Nos capítulos anteriores sobre árvore de jogos e aprendizagem de jogos com humanos. Nesse capítulo o foco será a implementação de um agente para o jogo Pokémon Showdown!. O interesse em fazer agente para esse jogo são quatro fatores. Alto nível de competitividade, dezenas de milhares de pessoas jogam diariamente o jogo, além da existência de diversos campeonatos. Jogo de informações imperfeitas com grande nível de ramificação de escolhas. Jogo totalmente \textit{online}, podendo explorar o aprendizado com jogadores humanos num ambiente difícil de identificar se o adversário é um \textit{bot} ou não. Possibilidade de criar uma API para possibilitar outros pesquisadores criar agentes e a possibilidade de se criar uma competição entre agentes jogadores.
+Os capítulos anteriores discutiram sobre árvore de jogos e aprendizagem de jogos com humanos. Nesse capítulo o foco será a implementação de um agente para o jogo Pokémon Showdown!. O interesse em fazer agente para esse jogo são quatro fatores. Alto nível de competitividade, dezenas de milhares de pessoas jogam diariamente o jogo, além da existência de diversos campeonatos. Jogo de informações imperfeitas com grande nível de ramificação de escolhas. Jogo totalmente \textit{online}, podendo explorar o aprendizado com jogadores humanos num ambiente difícil de identificar se o adversário é um \textit{bot} ou não. Possibilidade de criar uma API para possibilitar outros pesquisadores criar agentes e a possibilidade de se criar uma competição entre agentes jogadores.
 
-O capítulo está organizado da seguinte forma: a primeira seção \ref{sec:pokemon} é apresentada a franquia de jogos Pokémon. Na próxima seção \ref{sec:batalhaspokemon} é apresentado as mecânicas e as regras das batalhas Pokémon. Na seção \ref{sec:pokemonshowdown} será apresentado a plataforma Pokémon Showdown!, como ela funciona e suas regras competitivas especiais. Na seção \ref{sec:apipokemonshowdown} será apresentado a API para se comunicar com o jogo Pokémonm Showdown!. Em \ref{sec:mctsPokemonShowdown} é mostrado os agentes criados utilizando MCTS para o Pokémon Showdown!. Finalmente em \ref{sec:experimentosResutlados} o resultados obtidos pelos agentes propostos.
+O capítulo está organizado da seguinte forma: a primeira seção \ref{sec:pokemon} é apresentada a franquia de jogos Pokémon. Na próxima seção \ref{sec:batalhaspokemon} é apresentado as mecânicas e as regras das batalhas Pokémon. Na seção \ref{sec:pokemonshowdown} será apresentado a plataforma Pokémon Showdown!, como ela funciona e suas regras competitivas especiais. Na seção \ref{sec:apipokemonshowdown} será apresentado a API para se comunicar com o jogo Pokémon Showdown!. Em \ref{sec:mctsPokemonShowdown} é mostrado os agentes criados utilizando MCTS para o Pokémon Showdown!. Finalmente em \ref{sec:experimentosResutlados} o resultados obtidos pelos agentes propostos.
 
 \section{Pokémon}
 \label{sec:pokemon}
 
 \textit{Pocket Monsters} ou Pokémon é uma série de jogos desenvolvida pela \textit{Game Freak and Creatures Inc.} e publicada pela Nintendo como parte da franquia Pokémon. O primeiro lançamento foi em 1996 no Japão para o console Game Boy Color, a principal série do jogo é baseada em \textit{Role-Playing-Game} (RPG) e continua a ser lançado para consoles portáteis até hoje (\cite{7336034}).
 
-Ainda segundo \cite{7336034} o objetivo dos jogos de RPG de Pokémon é capturar monstros chamados de Pokémon e com eles conseguir ganhar insígnias de ginásios (prêmio dado por vencer o líder de ginásio em uma batalha Pokémon), para assim ter acesso a liga Pokémon e se tornar o campeão dessa (torneio com os melhores treinadores Pokémon do jogo).
+Ainda segundo \cite{7336034} o objetivo dos jogos de RPG de Pokémon é capturar monstros chamados de Pokémon, e com eles conseguir ganhar insígnias de ginásios (prêmio dado por vencer o líder de ginásio em uma batalha Pokémon), para assim ter acesso a liga Pokémon e se tornar o campeão dessa (torneio com os melhores treinadores Pokémon do jogo).
 
 Em 2016 a franquia completou 20 anos desde o lançamento de seu primeiro jogo. Os últimos jogos da franquia principal foram lançados no final de 2016 chamados de Pokémon Sun e Pokémon Moon.
 
 \subsection{Características de um Pokémon}
 
-Nos jogos, um Pokémon é um monstro virtual semelhante a um animal ou objeto com superpoderes. A característica final do Pokémon é baseada na característica de sua espécie e de suas características únicas. Essa combinação possibilita ter um grande nível de customização em cada Pokémon.
+Nos jogos, um Pokémon é um monstro virtual semelhante a um animal ou objeto com superpoderes. Cada Pokémon tem uma grande variedade de características. A característica final do Pokémon é baseada na característica de sua espécie e de suas características únicas. Essa combinação possibilita ter um grande nível de customização em cada Pokémon.
 
 \subsubsection{Espécie}
 
@@ -28,21 +28,21 @@ A espécie é qual modelo aquele Pokémon representa. Existem atualmente mais de 80
 	
 	\item \textbf{Número}. Identificação numérica única.
 	
-	\item \textbf{Nome}. Nome do Pokémon.
+	\item \textbf{Nome}. Nome da espécie Pokémon.
 	
 	\item \textbf{Tipo}. Cada Pokémon ter um ou dois tipos associados a sua espécie.
 	
-	\item \textbf{Estatística base}. As estatística ou atributos base são separado em 6 categorias:
+	\item \textbf{Estatística base}. As estatística ou atributos base são separados em 6 categorias:
 		\subitem \textbf{HP ou PS}. Quantidade de pontos de vida Pokémon;
 		\subitem \textbf{Attack ou Ataque}. Quantidade de ataque físico do Pokémon;
 		\subitem \textbf{Defense ou Defesa}. Quantidade de defesa física do Pokémon;
 		\subitem \textbf{Special Attack ou Ataque Especial}. Quantidade de ataque mágico do Pokémon;
 		\subitem \textbf{Special Defense ou Defesa Especial}. Quantidade de defesa mágica do Pokémon;
-		\subitem \textbf{Speed ou Velocidade}. Quantidade de Velocidade do Pokémon;
+		\subitem \textbf{Speed ou Velocidade}. Quantidade de Velocidade do Pokémon.
 	
-	\item \textbf{Gama de habilidades}. Uma espécie de Pokémon tem três habilidades, sendo que o Pokémon daquela espécie terá apenas uma delas.
+	\item \textbf{Gama de habilidades}. Uma espécie de Pokémon tem até três habilidades, sendo que um Pokémon daquela espécie terá apenas uma delas.
 	
-	\item \textbf{Gama de movimentos}. Uma espécie de Pokémon pode aprender dezenas de golpes diferentes (baseado no tipo e nas características do Pokémon), sendo que o Pokémon daquela espécie terá apenas quatro delas.
+	\item \textbf{Gama de movimentos}. Uma espécie de Pokémon pode aprender dezenas de golpes diferentes (baseado no tipo e nas características do Pokémon), sendo que um Pokémon daquela espécie terá apenas quatro delas.
 	
 	\item \textbf{Altura base}. Altura base da espécie.
 	
@@ -59,7 +59,7 @@ A espécie é qual modelo aquele Pokémon representa. Existem atualmente mais de 80
 \label{fig:pokemonespecie}
 \end{figure}
 
-A figura \ref{fig:pokemonmewto} de \cite{pokedex} mostra um exemplo de uma espécie Pokémon e suas características.
+A figura \ref{fig:pokemonmewto} de \cite{pokedex} mostra um exemplo da espécie Pokémon Mewtwo e suas características.
 
 \begin{figure}[H]
 \centering
@@ -68,9 +68,9 @@ A figura \ref{fig:pokemonmewto} de \cite{pokedex} mostra um exemplo de uma espéc
 \label{fig:pokemonmewto}
 \end{figure}
 
-Existem 18 tipos de Pokémon entre eles: planta, fogo, água, inseto, normal, venenoso, elétrico, terra, lutador, psíquico, pedra, voador, fantasma, gelo, dragão, metálico, noturno e fada.
+Existem 18 tipos de Pokémon, entre eles: planta, fogo, água, inseto, normal, venenoso, elétrico, terra, lutador, psíquico, pedra, voador, fantasma, gelo, dragão, metálico, noturno e fada.
 
-Alguns tipos de Pokémon tem vantagem sobre outros tipos de Pokémon. A ideia é baseada no sistema papel pedra tesoura, onde o papel ganha de pedra, pedra ganha de tesoura e por sua vez tesoura ganha de papel. Porém no sistema de batalhas Pokémon essa mecânica é um pouco mais complexa, uma vez que podem existir até 2 tipos para cada Pokémon.
+Alguns tipos de Pokémon tem vantagem sobre outros tipos de Pokémon. A ideia é baseada no sistema papel pedra tesoura, onde o papel ganha de pedra, pedra ganha de tesoura e por sua vez tesoura ganha de papel. Porém no sistema de batalhas Pokémon essa mecânica é um pouco mais complexa, uma vez que podem existir até 2 tipos para cada Pokémon. Essa mecânica será abordada com mais detalhes em \ref{sec:golpesPokemon}.
 
 \subsubsection{Características únicas}
 
@@ -137,20 +137,20 @@ já o resto dos atributos é dado pela seguinte equação:
 V = \Bigg( \frac{ \Big( ( 2 \times Base + IV + \frac{EV}{4} ) \times level \Big) }{100} + 5 \Bigg) \times Nature,
 \end{equation}
 
-onde \textbf{V} É o valor final, valor que o jogador irá ver no jogo. \textbf{Base} É a quantidade básica da estatística definido pela espécie. \textbf{Nature} Se a natureza do Pokémon favorecer esse atributo o valor é atribuído 1.1, caso a natureza desfavoreça esse valor é 0.9 e caso a natureza não influa nesse atributo o valor é 1.
+onde \textbf{V} É o valor final, valor que o jogador irá ver no jogo. \textbf{Base} é a quantidade básica da estatística definido pela espécie. \textbf{Nature} é o valor que, caso a natureza do Pokémon favorecer esse atributo o valor é atribuído 1.1, caso a natureza desfavoreça esse valor é 0.9 e caso a natureza não influa nesse atributo o valor é 1.
 
-Para exemplificar esse cálculo de atributos mostrar como é importante a customização dentro do jogo do Pokémon, a seguir será calculado o atributo "Especial Ataque"  para 2 Pokémon da espécie Mewtwo ambos no nível 100. O Pokémon Mewtwo tem 154 pontos de Ataque Especial base.
+Para exemplificar esse cálculo de atributos e mostrar como é importante a customização dentro do jogo do Pokémon, a seguir será calculado o atributo "Especial Ataque"  para 2 Pokémon da espécie Mewtwo ambos no nível 100. O Pokémon Mewtwo tem 154 pontos de Ataque Especial base.
 
-O primeiro Mewtwo será chamado de Mewtwo A. O Mewtwo A é da natureza Modest e tem 252 pontos de EV em Ataque Especial e 31 pontos de IV no atributo Ataque Especial. Substituindo essas variáveis na equação:
+O primeiro Mewtwo será chamado de Mewtwo A. O Mewtwo A é da natureza Modest e tem 252 pontos de EV em Ataque Especial e 31 pontos de IV no atributo Ataque Especial. Substituindo essas variáveis na equação, se tem:
 
 \begin{equation}
-447.7 = \Bigg( \frac{ \Big( ( 2 \times 154 + 31 + \frac{252}{4} ) \times 100 \Big) }{100} + 5 \Bigg) \times 1.1
+447.7 = \Bigg( \frac{ \Big( ( 2 \times 154 + 31 + \frac{252}{4} ) \times 100 \Big) }{100} + 5 \Bigg) \times 1.1.
 \end{equation}
 
-O segundo Mewtwo será chamado de Mewtwo B. O Mewtwo B é da natureza Adamant e tem 0 pontos de EV em Ataque Especial e 0 pontos de IV no atributo Ataque Especial. Substituindo essas variáveis na equação:
+O segundo Mewtwo será chamado de Mewtwo B. O Mewtwo B é da natureza Adamant e tem 0 pontos de EV em Ataque Especial e 0 pontos de IV no atributo Ataque Especial. Substituindo essas variáveis na equação, se tem:
 
 \begin{equation}
-281.7 = \Bigg( \frac{ \Big( ( 2 \times 154 + 0 + \frac{0}{4} ) \times 100 \Big) }{100} + 5 \Bigg) \times 0.9
+281.7 = \Bigg( \frac{ \Big( ( 2 \times 154 + 0 + \frac{0}{4} ) \times 100 \Big) }{100} + 5 \Bigg) \times 0.9.
 \end{equation}
 
 A diferença do atributo Especial Ataque do Mewtwo A e do Mewtwo B é de 166 pontos, ou seja, o Mewtwo A tem cerca de 66\% mais pontos nesse atributo que o Mewtwo B. 
@@ -169,34 +169,34 @@ As batalhas acontecem em maioria dos momentos do jogo, onde um treinador desafia
 
 Cada treinador pode utilizar até 6 Pokémon sem quaisquer restrições. Vence o treinador que desmaiar todos os Pokémon do adversário primeiro, ou seja, quando todos os Pokémon de um treinador estiverem com o HP igual a zero.
 
-A batalha é realizada por turnos simultâneos. Ao começar a batalha ambos os jogadores colocam um Pokémon no campo de batalha, chamado de Pokémon ativo. Para ambos os jogadores é mostrado as opções de golpes e as opções para trocar de Pokémon.
+A batalha é realizada por turnos simultâneos. Ao começar a batalha, ambos os jogadores colocam um Pokémon no campo de batalha, o Pokémon que está atualmente no campo de batalha é chamado de Pokémon ativo. Quando ambos jogadores tem um Pokémon ativo, é mostrado as opções de golpes e as opções para trocar de Pokémon. Quando um dos jogadores não tem Pokémon ativo, aquele jogador vai escolher um Pokémon enquanto o outro jogador apenas espera.
 
-A decisão de quem irá a executar a ação primeira ocorre de maneira complexa. Simplificando a ordem de qual ação acontece primeiro é dado pelo seguinte (números menores mais prioridade):
+Quando ambos jogadores escolhem uma ação, a decisão de quem irá a executar a ação primeiro ocorre de maneira complexa. Simplificando, a ordem de qual ação acontece primeiro é dado pela seguinte prioridade (números menores mais prioridade):
 
 \begin{itemize}
 	
 	\item \textbf{1}. Ação de trocar de Pokémon.
 	
-	\item \textbf{2}. Golpes de prioridade positiva. Existe um pequeno conjunto de golpes que faz o Pokémon atacar primeiro independente do critério 3. Se ambos o Pokémon utilizarem golpes de prioridade o critério 3 decidirá quem realiza a ação primeiro.
+	\item \textbf{2}. Golpes de prioridade positiva. Existe um pequeno conjunto de golpes que faz o Pokémon atacar primeiro independente do critério \textbf{3}. Se ambos Pokémon utilizarem golpes de prioridade o critério \textbf{3} decidirá quem realiza a ação primeiro.
 	
 	\item \textbf{3}. O Pokémon com maior atributo de velocidade ataca primeiro.
 	
-	\item \textbf{4}. Golpes de prioridade negativa. Existe também um pequeno conjunto de golpes que faz o Pokémon atacar por último independente do critério 3. Se ambos o Pokémon utilizarem golpes de prioridade negativa o critério 3 decidirá quem realiza a ação primeiro.
+	\item \textbf{4}. Golpes de prioridade negativa. Existe também um pequeno conjunto de golpes que faz o Pokémon atacar por último independente do critério \textbf{3}. Se ambos Pokémon utilizarem golpes de prioridade negativa o critério \textbf{3} decidirá quem realiza a ação primeiro.
 	
 \end{itemize}
 
 \subsection{Golpes do Pokémon}
 \label{sec:golpesPokemon}
 
-Uma das customizações mais importantes são quais golpes o Pokémon irá poder utilizar. Cada Pokémon pode escolher 4 golpes entre dezenas de golpes disponíveis para sua espécie. Cada espécie de Pokémon pode aprender um conjunto diferente de habilidades dependendo do seu tipo e características (por exemplo, apenas Pokémon com chifre conseguem aprender o golpe \textit{Mega Horn}). Existem mais de 600 golpes diferentes.
+Uma das customizações mais importantes são quais golpes o Pokémon pode utilizar. Cada Pokémon pode escolher 4 golpes entre dezenas de golpes disponíveis para sua espécie. Cada espécie de Pokémon pode aprender um conjunto diferente de habilidades dependendo do seu tipo e características (por exemplo, apenas Pokémon com chifre conseguem aprender o golpe \textit{Mega Horn}). Existem mais de 600 golpes diferentes.
 
-As principais características dos golpes são:
+As principais características de um golpe são:
 
 \begin{itemize}
 
 	\item \textbf{Category ou Categoria}. Existem três tipos de categorias:
 		
-		\subitem \textbf{Status ou Condição}. Golpes que não infringem dano diretamente, porém tem algum efeito com grande chance de sucesso para compensar.
+		\subitem \textbf{Status ou Condição}. Golpes que não infringem dano diretamente, porém tem algum grande efeito para compensar.
 		
 		\subitem \textbf{Physical ou Físico}. Golpes físicos utilizam o Ataque para cálculo de dano e Defesa para cálculo da resistência.
 		
@@ -204,7 +204,7 @@ As principais características dos golpes são:
 
 	\item \textbf{Base Power ou Força base}. A força base ou dano base do golpe. Golpes de condição não tem força base
 	
-	\item \textbf{Tipo}. Se o tipo do golpe (cada golpe tem apenas um tipo) for um dos tipos do Pokémon que está usando o golpe a base de força é aumentada em 50\% (chamado de STAB ou \textit{Same Type Attack Bonus}).
+	\item \textbf{Tipo}. O tipo do golpe (cada golpe tem apenas um tipo). Se o tipo do golpe for um dos tipos do Pokémon que está usando a base de força é aumentada em 50\% (bônus chamado de STAB ou \textit{Same Type Attack Bonus}).
 	
 	\item \textbf{Accuracy ou Precisão}. A chance em percentagem de um golpe acertar.
 	
@@ -220,9 +220,9 @@ As principais características dos golpes são:
 
 	\item \textbf{Imune}. O Pokémon adversário é imune ao golpe.
 
-	\item \textbf{Não muito efetivo}. Quando um golpe \textbf{A} é aplicado a um Pokémon do tipo \textbf{B} e \textbf{C}, e tanto \textbf{B} quanto \textbf{C} tem vantagem sobre \textbf{A}. Modificador de dano: 0.25.
+	\item \textbf{Não muito efetivo}. Quando um golpe \textbf{A} é aplicado a um Pokémon do tipo \textbf{B} e \textbf{C}, e tanto \textbf{B} quanto \textbf{C} tem vantagem sobre \textbf{A}. Modificador de dano: 0,25.
 	
-	\item \textbf{Não efetivo}. Quando um golpe \textbf{A} é aplicado a um Pokémon do tipo \textbf{B} e \textbf{C}, e \textbf{B} ou \textbf{C} tem vantagem sobre \textbf{A}. Modificador de dano: 0.5.
+	\item \textbf{Não efetivo}. Quando um golpe \textbf{A} é aplicado a um Pokémon do tipo \textbf{B} e \textbf{C}, e \textbf{B} ou \textbf{C} tem vantagem sobre \textbf{A}. Modificador de dano: 0,5.
 	
 	\item \textbf{Normal}. O golpe não tem vantagem ou desvantagem sobre o Pokémon atingido. Modificador de dano: 1.
 	
@@ -231,7 +231,7 @@ As principais características dos golpes são:
 	\item \textbf{Muito efetivo}. Quando um golpe \textbf{A} é aplicado a um Pokémon do tipo \textbf{B} e \textbf{C}, e \textbf{A} tem vantagem sobre \textbf{B} e \textbf{C}. Modificador de dano: 4.
 \end{itemize}
 
-A imagem a seguir foi retirada do site \cite{bulbapedia1} e contém uma tabela mostrando o modificador de dano para cada tipo de golpe em relação ao tipo do adversário. Ao escolher um golpe, o tipo (golpes tem apenas um único tipo) desse golpe é confrontado nessa tabela de acordo com o tipo do adversário, caso o adversário tenha dois tipos a consulta nessa tabela é feita duas vezes e os modificadores são multiplicados gerando um modificar final.
+A imagem a seguir foi retirada do site \cite{bulbapedia1} e contém uma tabela mostrando o modificador de dano para cada tipo de golpe em relação ao tipo do adversário. Ao escolher um golpe, o tipo desse golpe é confrontado nessa tabela de acordo com o tipo do adversário, caso o adversário tenha dois tipos a consulta nessa tabela é feita duas vezes e os modificadores são multiplicados gerando um modificar final.
 
 \begin{figure}[H]
 \centering
@@ -246,7 +246,7 @@ A equação de modificadores de dano é dado por:
 Modifier = STAB \times Type \times Critical \times other \times (random[0.85, 1]),
 \end{equation}
 
-onde \textbf{Type} É o modificador baseado na vantagem, explicado na subseção anterior, os valores podem variar entre  0, 0.25, 0.5, 1, 2, e 4. \textbf{Critical} Normalmente um golpe tem chance de crítico de 6.25\% caso esse acerto crítico ocorra o valor para Critical é de 1.5, caso contrário o valor é 1. \textbf{Other} São outros modificadores que podem ser adicionados por causa de itens ou estados especiais que modifiquem o dano. \textbf{random} Por final é adicionado um valor aleatório entre 85\% e 100\%.
+onde \textbf{Type} é o modificador baseado na vantagem, explicado na subseção anterior, os valores podem variar entre  0, 0.25, 0.5, 1, 2, e 4. \textbf{Critical} é modificador caso o golpse seja crítico, normalmente um golpe tem chance de crítico de 6.25\%, caso esse acerto crítico ocorra o valor para \textbf{Critical} é de 1.5, caso contrário o valor é 1. \textbf{Other} são outros modificadores que podem ser adicionados por causa de itens ou estados especiais que modifiquem o dano. \textbf{Random} é um valor aleatório entre 85\% e 100\%.
 
 Para calcular a quantidade de HP que um Pokémon irá perder após sofrer um golpe é denotado pela seguinte equação:
 
@@ -254,7 +254,7 @@ Para calcular a quantidade de HP que um Pokémon irá perder após sofrer um golpe 
 Dano = \Bigg( \frac{ 2 \times Level + 10 }{ 250 } \times \frac{Attack}{Defense} \times Base + 2 \Bigg) \times Modifier,
 \end{equation}
 
-onde \textbf{Dano}. Quantidade de dano total que o Pokémon irá receber. \textbf{Attack}. É quantidade de Ataque caso o golpe seja da categoria físico, ou quantidade Ataque Especial caso o golpe seja da categoria especial. \textbf{Defense}. É quantidade de Defesa caso o golpe seja da categoria físico, ou quantidade Defesa Especial caso o golpe seja da categoria especial. \textbf{Base}. Base de força definido no golpe.
+onde \textbf{Dano} é a quantidade de dano total que o Pokémon irá receber. \textbf{Attack} é a quantidade do atributo Ataque caso o golpe seja da categoria físico, ou quantidade de Ataque Especial caso o golpe seja da categoria especial. \textbf{Defense} é a quantidade do atributo Defesa caso o golpe seja da categoria físico, ou a quantidade Defesa Especial caso o golpe seja da categoria especial. \textbf{Base} é a força base definida no golpe.
 
 \subsubsection{Estados especiais de batalha}
 \label{sssec:estadosEspeciais}
@@ -264,21 +264,21 @@ Existem diferentes estados especiais de batalha que um Pokémon está sujeito, den
 Os estados especiais primários de batalhas são: 
 
 \begin{itemize}
-	\item \textbf{BRN} Estado queimado, nesse estado o Ataque do Pokémon é reduzido em 50\% e, ao final de cada turno o Pokémon recebe 12,5\% da vida máxima como dano.
-	\item \textbf{FRZ} Estado congelado, nesse estado o Pokémon não pode utilizar nenhum golpe, a cada turno o Pokémon tem uma chance de 20\% de se descongelar.
-	\item \textbf{PAR} Estado paralisado, nesse estado o Pokémon tem 25\% de chance de errar seu golpe e, sua velocidade é reduzida para 25\% do valor.
-	\item \textbf{PSN} Estado envenenado, nesse estado o Pokémon perde $\frac{1}{16}$ de seu HP no final do turno, aumentando em $\frac{1}{16}$ para cada turno que ele continuar envenenado.
-	\item \textbf{SLP} Estado dormindo, nesse estado o Pokémon não pode atacar. Esse efeito tem duração de 1 até 3 turnos.
+	\item \textbf{BRN.} Estado queimado, nesse estado o Ataque do Pokémon é reduzido em 50\% e, ao final de cada turno o Pokémon recebe 12,5\% da vida máxima como dano.
+	\item \textbf{FRZ.} Estado congelado, nesse estado o Pokémon não pode utilizar nenhum golpe, a cada turno o Pokémon tem uma chance de 20\% de se descongelar.
+	\item \textbf{PAR.} Estado paralisado, nesse estado o Pokémon tem 25\% de chance de errar seu golpe e, sua velocidade é reduzida para 25\% do valor.
+	\item \textbf{PSN.} Estado envenenado, nesse estado o Pokémon perde $\frac{1}{16}$ de seu HP no final do turno, aumentando em $\frac{1}{16}$ para cada turno que ele continuar envenenado.
+	\item \textbf{SLP.} Estado dormindo, nesse estado o Pokémon não pode atacar. Esse efeito tem duração de 1 até 3 turnos.
 \end{itemize}
 
-Existem outras categorias de efeitos que são chamados de efeitos secundários ou efeitos voláteis. Diferentemente dos estados primários, um Pokémon pode ter N desses efeitos aplicados. Existe uma grande lista de efeitos secundários. Um efeito secundário bastante conhecido é a confusão, onde o Pokémon fica confuso de 1 a 4 turnos, caso o Pokémon esteja confuso ele tem 50\% de chance de bater em si próprio ao invés de usar o golpe no adversário.
+Existem outras categorias de efeitos que são chamados de secundários ou voláteis. Diferentemente dos estados primários, um Pokémon pode ter N desses efeitos aplicados. Existe uma grande lista de efeitos secundários. Um efeito secundário bastante conhecido é a confusão, onde o Pokémon fica confuso de 1 a 4 turnos, caso o Pokémon sofra esse efeito ele tem 50\% de chance de bater em si próprio ao invés de usar o golpe no adversário.
 
 \section{Pokémon Showdown!}
 \label{sec:pokemonshowdown}
 
-Pokémon Showdown é um simulador de batalhas Pokémon. Permitindo jogar batalhas \textit{online} com times gerados aleatoriamente, times predefinidos, ou construindo seu próprio time (\cite{pokemonshowdown1}).
+Pokémon Showdown! é um simulador de batalhas Pokémon. Permitindo jogar batalhas \textit{online} com times gerados aleatoriamente, times predefinidos, ou construindo seu próprio time (\cite{pokemonshowdown1}).
 
-Esse ambiente é totalmente \textit{on-line} e pode ser jogado via navegador de internet. O código fonte do jogo é disponibilizado sobre a licença MIT. O projeto é construído em Html5, JavaScript 6 e Css3. O dono e principal mantenedor do projeto é Guangcong Luo e todo código fonte do projeto pode ser encontrado no Git Hub.
+Esse ambiente é totalmente \textit{on-line} e pode ser jogado via navegador de internet. O código fonte do jogo é disponibilizado sobre a licença MIT. O projeto é construído em Html5, JavaScript5 e Css3. O dono e principal mantenedor do projeto é Guangcong Luo e todo código fonte do projeto pode ser encontrado em sua página no GitHub.
 
 O ambiente conta um grande número de jogadores simultâneos. Durante o desenvolvimento do trabalho foi verificado que muitas vezes o número de usuários simultâneos ultrapassou a quantidade de 12000.
 
@@ -287,9 +287,9 @@ O ambiente conta um grande número de jogadores simultâneos. Durante o desenvolvi
 
 Competitivamente falando Pokémon tem uma série de problemas de balanceamento. Diferente dos jogos da franquia principal, o Pokémon Showdown! aplica algumas restrições para tornar as batalhas Pokémon ainda mais competitivas.
 
-Como existem vários Pokémon com atributos muitos mais altos e com movimentos muito melhores que outros algumas regras foram definidas para tornar as batalhas mais justas.
+Como existem vários Pokémon com atributos muitos mais altos e com movimentos muito melhores que outros, algumas regras foram definidas para tornar as batalhas mais justas.
 
-O jogo Pokémon Showdown! segue as regras definida por uma comunidade de jogadores competitivos chamada Smogon \cite{smogon}, essa comunidade regula e define as regras que são utilizadas em cada modo de jogo, para que o jogo se torne mais competitivo e balanceado. Um dos principais trabalhos da Smogon é balancear os mais de 800 Pokémon distribuindo eles em faixas chamadas de \textit{tiers}. Do mais fraco para o mais forte, os principais \textit{tiers} são:
+O jogo Pokémon Showdown! segue as regras definida por uma comunidade de jogadores competitivos chamada Smogon (\cite{smogon}), essa comunidade regula e define as regras que são utilizadas em cada modo de jogo, para que o jogo se torne mais competitivo e balanceado. Um dos principais trabalhos da Smogon é balancear os mais de 800 Pokémon distribuindo eles em faixas chamadas de \textit{tiers}. Do mais fraco para o mais forte, os principais \textit{tiers} são:
 
 \begin{itemize}
 	\item PU;
@@ -311,7 +311,7 @@ O jogo Pokémon Showdown! tem algumas dezenas de modos de batalhas diferentes com
 	
 	\item \textbf{OU Battle} O jogador monta seu time com Pokémon de no máximo \textit{tier} OU e são pareados com outro jogador também com time de Pokémon de \textit{tier} máximo OU. Nesse modo todos Pokémon batalham no mesmo nível.
 
-	\item \textbf{Battle Factory} nesse modo primeiro é sorteado um \textit{tier}, cada jogador recebe um time equilibrado predefinido desse \textit{tier}. Nesse modo todos Pokémon batalham no mesmo nível. Por ser o modo de batalha onde os times dependem menos da sorte é o preferido entre os jogadores profissionais.
+	\item \textbf{Battle Factory} nesse modo primeiro é sorteado um \textit{tier} e, cada jogador recebe um time equilibrado predefinido desse \textit{tier}. Nesse modo todos Pokémon batalham no mesmo nível. Por ser o modo de batalha onde os times dependem menos da sorte é o preferido junto com o \textbf{OU Battle} entre os jogadores profissionais.
 	
 \end{itemize}
 
@@ -334,7 +334,7 @@ Todos os modos de jogo do Pokémon Showdown! contam com um temporizador opcional,
 \label{fig:showdownTimer}
 \end{figure}
 
-Uma vez ligado, cada jogador recebe 150 segundos (2 minutos e meio) em seu banco de tempo para ser usado durante toda partida. A cada novo turno cada jogador recebe mais 20 segundos. O jogador que fez a escolha mais rápida também ganha 10 segundos adicionais. O tempo máximo que se pode ter no banco é de 150 segundos. A figura \ref{fig:showdownTimeLeft} mostra um indicador do tempo restante para realizar sua jogada.
+Uma vez ligado, cada jogador recebe 150 segundos (2 minutos e meio) em seu banco de tempo para ser usado durante toda partida. A cada novo turno cada jogador recebe mais 20 segundos. O jogador que fez a escolha mais rápida também ganha mais 10 segundos adicionais. O tempo máximo que se pode ter no banco é de 150 segundos. A figura \ref{fig:showdownTimeLeft} mostra um indicador do tempo restante para realizar sua jogada.
 
 \begin{figure}[H]
 \centering
@@ -345,9 +345,9 @@ Uma vez ligado, cada jogador recebe 150 segundos (2 minutos e meio) em seu banco
 
 \subsection{Sistema de ranqueamento Pokémon Showdown!}
 
-O Pokémon Showdown! utiliza o sistema de ranqueamento chamado \textbf{Elo}. O sistema Elo foi criado por Arpad Elo em 1950 como uma evolução do sistema de ranqueamento utilizada pela federação de xadrez dos Estados Unidos (\cite{glickman1999rating}). Segundo \cite{coulom2007computing} O princípio da classificação de Elo é que cada jogador recebe uma estimativa de força numérica, calculada a partir da observação de resultados do jogo passado.
+O Pokémon Showdown! utiliza o sistema de ranqueamento chamado \textbf{Elo}. O sistema Elo foi criado por Arpad Elo em 1950 como uma evolução do sistema de ranqueamento utilizada pela federação de xadrez dos Estados Unidos (\cite{glickman1999rating}). Segundo \cite{coulom2007computing} o princípio da classificação de Elo é que cada jogador recebe uma estimativa de força numérica, calculada a partir da observação de resultados de jogos passados.
 
-É muito comum associar Elo a xadrez, porém muitos jogos digitais, como Pokémon Showdown!,  e de tabuleiro, como Go, adotam esse mesmo sistema.
+É muito comum associar Elo a xadrez, porém muitos jogos digitais, como Pokémon Showdown!, e de tabuleiro, como Go, que adotam esse mesmo sistema.
 
 Elo também tem outras funções além de definir um ranqueamento para um jogador. Ele pode predizer quem tem mais chance de vencer uma partida. Pode ser usado para escolher o adversário mais apropriado para um jogo. Segundo \cite{glickman1999rating} o Elo também é utilizado para definir elegibilidade para torneios e para definição de prêmios.
 
@@ -361,7 +361,7 @@ A equação para variação do Elo após a partida é dado por:
 V = K \times \Big( score - \frac{ 1 }{ 10^{(foeElo - elo) / 400 } } \Big),
 \end{equation}
 
-onde \textbf{V} é a variação do Elo. A constante \textbf{K} regula a variação do Elo, ou seja, valores grandes para K fará com que cada partida a variação de Elo seja maior (para mais e para menos), o Pokémon Showdown utiliza o valor de K como 50. A variável \textbf{score} resultado da partida, é usado valor 0 para derrotas, 0.5 para empates e 1 para vitória. Já \textbf{foeElo} e \textbf{elo} são os valores de Elo do adversário e seu respectivamente.
+onde \textbf{V} é a variação do Elo. A constante \textbf{K} regula a variação do Elo, ou seja, valores grandes para K fará com que cada partida a variação de Elo seja maior (para mais e para menos), o Pokémon Showdown! utiliza o valor de K como 50. A variável \textbf{score} é o resultado da partida, é usado valor 0 para derrotas, 0.5 para empates e 1 para vitória. Já \textbf{foeElo} e \textbf{elo} são os valores de Elo do adversário e seu respectivamente.
 
 Como exemplo, vamos considerar dois jogadores iniciantes chamados \textbf{A} e \textbf{B}. Ambos os jogadores tem 1000 pontos de Elo. Substituindo a equação de variação do Elo, supondo que o jogador \textbf{A} venceu, se tem:
 
@@ -369,7 +369,7 @@ Como exemplo, vamos considerar dois jogadores iniciantes chamados \textbf{A} e \
 25 = 50 \times \Big( 1 - \frac{ 1 }{ 10^{(1000 - 1000) / 400 } } \Big),
 \end{equation}
 
-onde o jogador \textbf{A} totalizaria mais 1025 pontos de Elo.
+onde o jogador \textbf{A} totalizaria 1025 pontos de Elo.
 
 \section{API para Pokémon Showdown!}
 \label{sec:apipokemonshowdown}
@@ -387,7 +387,7 @@ Na imagem \ref{fig:APIsDiagram} mostra como um agente para Pokémon Showdown! pod
 
 \subsection{showdownAI}
 
-A API showdownAI é feita em JavaScript e entregue em formato de \textit{plugin} para o Google Chrome para facilitar a instalação. Todo o código fonte da API é escrito também e JavaScript. A figura \ref{fig:showdownAIplugin} mostra o \textit{plugin} instalado. 
+A API showdownAI é feita em JavaScript e entregue em formato de \textit{plugin} para o Google Chrome para facilitar a instalação. A figura \ref{fig:showdownAIplugin} mostra o \textit{plugin} instalado. 
 
 \begin{figure}[H]
 \centering
@@ -396,7 +396,7 @@ A API showdownAI é feita em JavaScript e entregue em formato de \textit{plugin} 
 \label{fig:showdownAIplugin}
 \end{figure}
 
-Apesar de ser feito todo em JavaScript, a API showdownAI pode se comunicar com qualquer linguagem que tenha a tecnologia de Sockets através do recurso de WebSocket (\cite{mdn:websocket}). Com esse recurso o navegador pode se comunicar com um IP (incluindo \textit{localhost}) utilizando Socket.
+Apesar de ser feito todo em JavaScript, a API showdownAI pode se comunicar com qualquer outra linguagem que tenha acesso a tecnologia de Sockets. Isso acontece pois o JavaScript conta com uma API chamada WebSocket (\cite{mdn:websocket}). Com esse recurso o navegador pode se comunicar com um IP (incluindo \textit{localhost}) utilizando uma determinada porta.
 
 \subsubsection{Métodos showdownAI}
 
@@ -414,7 +414,7 @@ A figura \ref{fig:showdownAIutilityMethods} mostra os métodos classificados como
 	
 	\item \textbf{getOpponentMessages}. Método retorna um vetor de mensagens (String). Com esse método é possível obter as mensagens do \textit{chat} do jogo. O \textit{chat} do jogo é o único meio de comunicação entre os dois jogadores.
 	
-	\item \textbf{pause}. Método não recebe argumentos nem retorna algum dado. Esse método faz com que a API para de ler e enviar dados para o Pokémon Shwodown!.
+	\item \textbf{pause}. Método não recebe argumentos nem retorna algum dado. Esse método faz com que a API pare de ler e enviar dados para o Pokémon Shwodown!.
 	
 	\item \textbf{pause}. Método não recebe argumentos nem retorna algum dado. Esse método faz com que a API volte a ler e enviar dados para o Pokémon Shwodown!.
 	
@@ -427,19 +427,19 @@ A figura \ref{fig:showdownAIutilityMethods} mostra os métodos classificados como
 \label{fig:showdownAIutilityMethods}
 \end{figure}
 
-A figura \ref{fig:showdownAILobbyMethods} mostra os métodos utilizados no menu inicial. Com mais detalhes, os principais métodos são:
+A figura \ref{fig:showdownAILobbyMethods} mostra os métodos utilizados no menu inicial. Nenhum desses métodos tem retorno pois, eles utilizam um sistema de \textit{callback}, ou seja, eles recebem uma função e essa função somente é executada quando um evento ocorrer. Com mais detalhes, os principais métodos são:
 
 \begin{itemize}
 
-	\item \textbf{login} Método recebe como argumento nome do usuário, senha e função para ser chamada após o \textit{login} ser efetuado. Método não contém retorno.
+	\item \textbf{login} Método recebe como argumento nome do usuário, senha e função para ser chamada após o \textit{login} ser efetuado. 
 	
-	\item \textbf{searchRandomBattle}. Método recebe como argumento uma função para ser executada após achar uma partida no modo Random Battle. Método não contém retorno.
+	\item \textbf{searchRandomBattle}. Método recebe como argumento uma função para ser executada após achar uma partida no modo Random Battle.
 	
-	\item \textbf{searchBattleFactoryBattle}. Método recebe como argumento uma função para ser executada após achar uma partida no modo Battle Factory. Método não contém retorno.
+	\item \textbf{searchBattleFactoryBattle}. Método recebe como argumento uma função para ser executada após achar uma partida no modo Battle Factory.
 	
-	\item \textbf{challengeUser}. Método recebe como argumento o nome de um usuário específico para desafiar e uma função para ser executada quando a batalha começar. Método não contém retorno.
+	\item \textbf{challengeUser}. Método recebe como argumento o nome de um usuário específico para desafiar e uma função para ser executada quando a batalha começar.
 	
-	\item \textbf{waitForBattleRequest}. Método para ficar no menu inicial aceitando qualquer batalha, ele recebe como argumento uma função para ser executada quando a batalha começar. Método não contém retorno.
+	\item \textbf{waitForBattleRequest}. Método para ficar no menu inicial aceitando qualquer batalha, ele recebe como argumento uma função para ser executada quando a batalha começar.
 	
 \end{itemize}
 
@@ -454,7 +454,7 @@ Por fim, a figura \ref{fig:showdownAIBattleMethods1} mostra os métodos utilizado
 
 \begin{itemize}
 
-	\item \textbf{getBattleSummary}. Método não recebe argumentos e retorna um texto com resumo da batalha (nome, quantidade de HP de cada Pokémon, entre outras informações suas e de seu adversário ).
+	\item \textbf{getBattleSummary}. Método não recebe argumentos, e retorna um texto com resumo da batalha (nome, quantidade de HP de cada Pokémon, entre outras informações suas e de seu adversário ).
 	
 	\item \textbf{getBattleCommands}. Método não recebe como argumentos e retorna um objeto do tipo \textit{BattleCommands}. Esse objeto pode conter 3 propriedades/métododos:
 		
@@ -506,7 +506,7 @@ O objeto \textbf{actions} tem as duas possíveis ações do turno, são elas:
 	
 	\item \textbf{pokemons}. Retorna um vetor com apenas os Pokémon que podem entrar na luta. Em cada objeto do vetor existem as seguintes propriedades e métodos:
 		
-		\subitem \textbf{name}. Propriedade que o nome do Pokémon.
+		\subitem \textbf{name}. Propriedade que retorna o nome do Pokémon.
 		
 		\subitem \textbf{info}. Propriedade que retorna informações completas do Pokémon (tipo, atributos, habilidade, item, entre outros).
 		
@@ -514,13 +514,13 @@ O objeto \textbf{actions} tem as duas possíveis ações do turno, são elas:
 	
 \end{itemize}
 
-Por fim, o objeto \textbf{opponent} tem todas as informações sobre os Pokémon do adversário, as propriedades são
+Por fim, o objeto \textbf{opponent} tem todas as informações conhecidas sobre os Pokémon do adversário, as propriedades são:
 
 \begin{itemize}
 	
 	\item \textbf{activePokemon}. Retorna um objeto com todas as informações conhecidas do Pokémon ativo do adversário.
 	
-	\item \textbf{activePokemon}. Retorna um vetor de objeto com todas as informações conhecidas dos outros Pokémon.
+	\item \textbf{pokemons}. Retorna um vetor de objeto com todas as informações conhecidas dos outros Pokémon.
 	
 \end{itemize}
 
@@ -570,9 +570,9 @@ A primeira grande função da API é criar uma batalha completa. A imagem \ref{fig:
 \label{fig:showdownSimulation1}
 \end{figure}
 
-O método \textbf{myCreateBattle} recebe dois argumentos. O primeiro é chamado de \textbf{preview}, se \textbf{true}, ele define que o primeiro turno da batalha será para escolha do Pokémon inicial, se \textbf{false}, a ordem do vetor do time decidirá qual Pokémon irá começar na batalha. O segundo argumento é um vetor de times, a primeira posição do vetor é o time 1 que é um vetor de objetos Pokémon, a segunda posição do vetor é o time 2 que também é um vetor de objetos Pokémon.
+O método \textbf{myCreateBattle} recebe dois argumentos. O primeiro é chamado de \textbf{preview}, se \textbf{true}, ele define que o primeiro turno da batalha será para escolha do Pokémon inicial, se \textbf{false}, a ordem do vetor do time decidirá qual Pokémon irá começar na batalha. O segundo argumento é um vetor de times, a primeira posição do vetor são os Pokémon do time 1, a segunda posição do vetor é o time 2 que também é um vetor de objetos Pokémon.
 
-Não é necessário um vetor completo de times (seis Pokémon em cada time) para criar uma batalha, ou seja, é possível simular um jogo onde cada time só tem um Pokémon (na imagem \ref{fig:showdownSimulation1} são criados dois times com apenas 3 Pokémon). Também não é necessário preencher todos os atributos do objeto Pokémon para criar uma batalha.
+Não é necessário um vetor completo de times (seis Pokémon em cada time) para criar uma batalha, ou seja, é possível simular um jogo onde cada time só tenha um Pokémon (na imagem \ref{fig:showdownSimulation1} são criados dois times com apenas 3 Pokémon). Também não é necessário preencher todos os atributos do objeto Pokémon para criar uma batalha.
 
 A imagem \ref{fig:showdownSimulation2} mostra dois exemplos de funções que criam objetos Pokémon com todos os atributos para criação de batalha.
 
@@ -602,15 +602,15 @@ Os objetos mais importantes dessa classe são:
 		
 		\subitem \textbf{switch}. É um turno apenas para troca de Pokémon, normalmente acontece quando um Pokémon é derrotado e um dos jogadores tem que escolher um novo Pokémon para entrar em batalha. Alguns golpes também podem forçar a troca de Pokémon, se enquadrando também nessa situação.
 		
-		\subitem \textbf{teampreview}. Acontece apenas no primeiro turno em batalhas criadas parâmetro \textbf{preview} com valor verdadeiro.
+		\subitem \textbf{teampreview}. Acontece apenas no primeiro turno em batalhas criadas com o parâmetro \textbf{preview} com valor verdadeiro.
 	
-	\item \textbf{log}. Um vetor de \textit{String} com todas as mensagens do Pokémon Showdown sobre o que está acontecendo na simulação. Informações sobre composição de cada time, turno atual, movimentos utilizados, entre outras informações sobre a batalha estão disponíveis nessa propriedade.
+	\item \textbf{log}. Um vetor de \textit{String} com todas as mensagens do Pokémon Showdown! sobre o que está acontecendo na simulação. Informações sobre composição de cada time, turno atual, movimentos utilizados, entre outras informações sobre a batalha estão disponíveis nessa propriedade.
 	
-	\item \textbf{p1} e \textbf{p2}. Objetos com todas as informações do jogador1 e jogador2 respectivamente da simulação.
+	\item \textbf{p1} e \textbf{p2}. Objetos com todas as informações do jogador 1 e jogador 2 respectivamente da simulação.
 	
 \end{itemize}
 
-Depois de criada a batalha ainda é possível alterar valores do objeto de batalha para melhor refletir a situação atual. Algumas propriedades que normalmente são necessários fazer ajustes: quantidade de HP atual de cada Pokémon, adicionar estados especiais de batalhas.
+Depois de criada a batalha ainda é possível alterar valores do objeto de batalha para melhor refletir a situação atual. Algumas propriedades que normalmente são necessários fazer ajustessão : quantidade de HP atual de cada Pokémon e adicionar estados especiais de batalhas.
 
 \subsubsection{Simulando ações}
 
@@ -647,7 +647,7 @@ Além dessas propriedades, existem três métodos muito importantes, que fazem as a
 	
 \end{itemize}.
 
-A figura \ref{fig:showdownSimulation5} mostra um exemplo de realização de ações os jogadores. Como a imagem mostra não é necessário nenhum comando para o turno avançar, assim que todos os jogadores façam suas escolhas o turno é avançado automaticamente. Existem situações em que apenas um dos dois jogadores tem que responder como a figura exemplifica.
+A figura \ref{fig:showdownSimulation5} mostra um exemplo de realização de ações de ambos os jogadores. Como a imagem mostra não é necessário nenhum comando para o turno avançar, assim que todos os jogadores da batalha fizerem suas escolhas o turno é avançado automaticamente. Existem situações em que apenas um dos dois jogadores tem que responder como a figura exemplifica.
 
 \begin{figure}[H]
 \centering
@@ -659,27 +659,27 @@ A figura \ref{fig:showdownSimulation5} mostra um exemplo de realização de ações 
 \section{Agentes MCTS para Pokémon}
 \label{sec:mctsPokemonShowdown}
 
-Utilizando as APIs desenvolvidas foram criados 4 agentes para testar os diferentes modos de jogo e validar algumas técnicas. Foram criados 2 agentes para \textbf{Random Battle} e 2 agentes para \textbf{Battle Factory}. Nesta seção serão mostradas as técnicas utilizadas em cada agente e como ele foi empregado para o problema proposto.
+Utilizando as APIs desenvolvidas foram criados 4 agentes para testar os diferentes modos de jogo e validar as APIs. Foram criados 2 agentes para \textbf{Random Battle} e 2 agentes para \textbf{Battle Factory}. Nesta seção serão mostradas as técnicas utilizadas em cada agente e como ele foi empregado para o problema proposto.
 
-Nos 4 agentes foram utilizadas técnicas de MCTS (explicados em \ref{sec:MCTS}), em alguns casos com modificações para se adequar ao teste proposto.
+Nos 4 agentes utiliziram técnicas de MCTS (explicados em \ref{sec:MCTS}), em alguns casos com modificações para se adequar ao teste proposto.
 
 \subsection{Agentes para Random Battle}
 
 Nesses dois primeiros agentes foram utilizados apenas a \textbf{showdownAI}, ou seja, não foram utilizados elementos de simulação durante o algoritmo. A ideia desses agentes é descobrir qual tipo de jogadas os agentes priorizam em certos momentos da batalha, ou seja, sem ter conhecimento nenhum sobre o jogo, descobrir em cada turno que se passa se é melhor utilizar: golpes fortes, golpes com efeitos de alteração de estados, trocar de Pokémon, entre outros. 
 
-Para realizar esse aprendizado, cada agente conta com dois modos: modo de aprendizagem e modo competitivo. No modo aprendizado os agentes escolhem sempre o grupo de ações menos explorado. No modo competitivo ele utiliza a base de dados estabelecida na fase de treino para escolher a melhor ação possível, porém, ainda alimentando a base de dados.
+Como nãso foi utilizado nenhuma simulação, ao invés de simular estados futuros é consultado uma base de dados previamente gerada. Para isso, os agentes contam com dois modos: modo de aprendizagem e modo competitivo. No modo aprendizado os agentes escolhem sempre o grupo de ações menos explorado. No modo competitivo ele utiliza a base de dados estabelecida na fase de treino para escolher a melhor ação possível e também atualiza essa base de dados.
 
-Ambos os agentes utilizam a mesmo algoritmo. A única diferença entre os dois um dos agentes é que um dos agentes efetua o treinamento contra humanos (o agente será chamado \textbf{humanRandomAgent} ) e o outro contra um terceiro agente cópia desse agente no modo competitivo (o agente será chamado \textbf{botRandomAgent} ).
+Ambos os agentes utilizam a mesmo algoritmo. A única diferença entre os dois um dos agentes é que um dos agentes efetua o treinamento contra humanos (o agente será chamado \textbf{humanRandomAgent}) e o outro contra um terceiro agente que é uma cópia desse agente no modo competitivo (o agente será chamado \textbf{botRandomAgent}).
 
 \subsubsection{Implementação dos agentes para Random Battle}
 
-Para diminuir a largura da árvore de decisões e adicionar algum conhecimento de jogo durante as escolhas foi utilizada a técnicas de Grupos de Movimentos (detalhada em \ref{sec:GruposMovimentos}). 
+Para diminuir a largura da árvore de decisões foi utilizada a técnicas de Grupos de Movimentos (detalhada em \ref{sec:GruposMovimentos}). 
 
 Em um turno comum cada jogador tem no máximo 9 escolhas: escolher um dos 4 golpes ou trocar para um dos outros 5 Pokémon. Essas escolhas foram classificadas em 5 grupos. Em grande maioria das vezes apenas 2 ou 3 grupos tinha alguma ação, diminuindo ainda mais a largura da árvore, os grupos estão divididos do seguinte modo:
 
 \begin{itemize}
 
-	\item \textbf{Grupo A}. Golpe que são efetivos ou muito efetivos (\ref{sec:golpesPokemon}) contra o Pokémon adversário.
+	\item \textbf{Grupo A}. Golpes que são efetivos ou muito efetivos (\ref{sec:golpesPokemon}) contra o Pokémon adversário.
 	
 	\item \textbf{Grupo B}. Golpes de condição, ou seja, golpes que alteram algum estado do adversário ou pode trazer alguma vantagem para o jogador.
 	
@@ -730,7 +730,7 @@ A função \textbf{getWeaknessAndResistances} também faz parte também da API showd
 \label{fig:weaknessResist}
 \end{figure}
 
-A figura \ref{fig:weaknessResistResult} mostra o objeto de retorno do método \textbf{getWeaknessAndResistances}. Como mostra a imagem é retornado um objeto com 5 vetores de \textbf{String} representando: imunidades (tipo de golpe que é imune ao Pokémon), super resistências (tipo de golpe que é não muito efetivo ao Pokémon), resistências (tipo de golpe que é não efetivo), fraquezas (tipo de golpe que é efetivo ao Pokémon) e super fraqueza (tipo de golpe que é muito efetivo ao Pokémon).
+A figura \ref{fig:weaknessResistResult} mostra o objeto de retorno do método \textbf{getWeaknessAndResistances}. Como mostra a imagem é retornado um objeto com 5 vetores de \textbf{String} representando: imunidades (tipo de golpe que o Pokémon é imune), super resistências (tipo de golpe que é não muito efetivo contra Pokémon), resistências (tipo de golpe que é não efetivo contra o Pokémon), fraquezas (tipo de golpe que é efetivo contra Pokémon) e super fraqueza (tipo de golpe que é muito efetivo contra Pokémon).
 
 \begin{figure}[H]
 \centering
@@ -739,13 +739,13 @@ A figura \ref{fig:weaknessResistResult} mostra o objeto de retorno do método \te
 \label{fig:weaknessResistResult}
 \end{figure}
 
-O algoritmo utilizado pelos dois agentes foi o UCT descrito em \ref{sec:uct}. A simulação é feita na base de dados gerada pelo agente. No modo treino a única diferença do UCT era a fase de seleção durante o modo treino, que era sempre escolhido o grupo menos testado.
+O algoritmo utilizado pelos dois agentes foi o UCT descrito em \ref{sec:uct}. Toda a árvore de jogadas é feita na base de dados gerada pelo agente. No modo treino a única diferença do UCT é a fase de seleção, nesse modo, é sempre escolhido o grupo menos testado.
 
 \subsubsection{Implementação dos agentes para Battle Factory}
 
 Nos outros dois agentes foi utilizado tanto a API \textbf{showdownAI} quanto a API \textbf{showdownSimulation}. Em um dos agentes foi utilizado um algoritmo comum de MCTS e no outro agente foi utilizada uma versão do MCTS para jogos simultâneos. 
 
-A ideia de criação dos dois algoritmos é ver a diferença de desempenho entre eles. Por isso foi utilizado o modo \textit{Battle Factory} que, competitivamente falando, são modos menos aleatórios.
+A ideia de criação dos dois algoritmos é ver a diferença de desempenho entre eles. Por isso, foi utilizado o modo \textit{Battle Factory} que, competitivamente falando, são modos menos aleatórios. A decisão de utilizar o modo \textit{Battle Factory} ao \textit{OU Battle} é o fato que no modo \textit{OU Battle} é necessário montar um time previamente e, para isso, é necessário um grande conhecimento de composição de times, um time mal escolhido pode levar um jogador a derrota independente de quão bem ele jogue.
 
 Nesses agentes foram adicionados alguns conhecimentos sobre o jogo. Além de criar simulações, a API \textbf{showdownSimulation} tem uma base de dados com as principais construções de cada Pokémon, ou seja, nela tem informações sobre as customizações mais utilizadas para aquele Pokémon como: golpes mais utilizados, itens, habilidades e distribuição de EV. Isso é feito através do objeto público \textbf{factory}. 
 
@@ -767,17 +767,17 @@ Em cada \textit{tier} tem disponível todos Pokémon e, em cada Pokémon tem as cus
 \label{fig:factoryPokemon}
 \end{figure}
 
-O objeto \textbf{factory} é muito importante nesses agentes, uma vez que não é conhecida qual customização o adversário utilizou em cada Pokémon, com um pouco de informação sobre o Pokémon já é possível estimar qual customização foi utilizada. Entre outras palavras, para fazer a simulação é pego todas as informações que são conhecidas durante a batalha sobre aquele Pokémon e é escolhido o \textit{set} que mais se assemelha a essas informações.
+O objeto \textbf{factory} é muito importante nesses agentes, uma vez que não é conhecida qual customização o adversário utilizou em cada Pokémon, com um pouco de informação sobre o Pokémon já é possível estimar qual customização foi utilizada. Entre outras palavras, para fazer a simulação é reunido todas as informações que são conhecidas durante a batalha sobre aquele Pokémon, e é escolhido o \textit{set} que mais se assemelha a essas informações.
 
 \subsubsection{Implementação dos agentes para Battle Factory}
 
-O primeiro agente utiliza o algoritmo DUCT (exposto em \ref{sec:duct}) esse agente é chamado de \textbf{ductAgent}. O outro utiliza UCT sem modificações chamado de \textbf{uctAgent}.
+O primeiro agente utiliza o algoritmo DUCT (exposto em \ref{sec:duct}) esse agente é chamado de \textbf{ductAgent}. O outro utiliza UCT sem quaisquer modificações, chamado de \textbf{uctAgent}.
 
-Com a API de simulação não existe nenhuma base de dados de treinamento, ou seja, cada jogada é simulada em memória e a simulação é feita até o fim de jogo (como o algoritmo de MCTS define).
+Com a API de simulação não é necessário nenhuma base de dados de treinamento, ou seja, cada jogada é simulada em memória e a simulação pode ser feita até o fim de jogo (como o algoritmo de MCTS define).
 
-Os dois agentes fazem os 4 passos do MCTS (seleção, expansão, simulação e retropropagação) enquanto o temporizador de batalha tenha mais de 30 segundos. Desse modo os primeiros turnos de jogo, onde a altura da árvore e largura é muito maior, o agente tem 2 minutos para processar e, no decorrer dos demais turnos o agente tem entre 20 e 30 para estimar a melhor jogada (a quantidade de tempo ganha por turno é detalhada em \ref{sec:temporizadorBatalha}).
+Os dois agentes fazem os 4 passos do MCTS (seleção, expansão, simulação e retropropagação) enquanto o temporizador de batalha tenha mais de 30 segundos. Desse modo os primeiros turnos de jogo, onde a altura da árvore e largura é muito maior, o agente tem 2 minutos para processar e, no decorrer dos demais turnos o agente tem entre 20 e 30 para estimar a melhor jogada (o temporizador de batalha é detalhado em \ref{sec:temporizadorBatalha}).
 
-Cada nó da árvore de busca contém uma cópia da batalha inteira. Para isso, toda vez que um nó é criado (fase de expansão do MCTS) é feito uma cópia completa do time dos dois jogadores. 
+Cada nó da árvore de busca contém uma cópia da batalha inteira. Para isso, toda vez que um nó é criado (fase de expansão do MCTS) é feito uma cópia completa dos times dos dois jogadores. 
 
 A cópia dos times é feita pela \textbf{showdownSimulation} como a imagem \ref{fig:createCurrentSimulation}. 
 
@@ -788,7 +788,7 @@ A cópia dos times é feita pela \textbf{showdownSimulation} como a imagem \ref{fi
 \label{fig:createCurrentSimulation}
 \end{figure}
 
-Os métodos \textbf{createSimulationTeam1}, \textbf{createSimulationTeam2} e \textbf{applyCurrentStatus} estão todos na API \textbf{showdownSimulation}. O método \textbf{createSimulationTeam1} e \textbf{createSimulationTeam2} criam uma cópia dos times dos jogadores 1 e 2 respectivamente, já o método \textbf{applyCurrentStatus} é utilizado após o método \textbf{myCreateBattle} para aplicar a situação atual de cada Pokémon. Na figura \ref{fig:createCurrentSimulation} é mostrado dois modos diferente de como utilizar esses métodos. No primeiro modo (linha 2 até linha 10) é criado uma cópia do estado atual da batalha, ou seja, da que está acontecendo no navegador, para isso a API \textbf{showdownSimulation} utiliza a API \textbf{showdownAI}. No segundo modo (linha 14 até linha 22) é necessário passar mais um argumento para os métodos que é uma batalha simulada, ou seja, quando um nó diferente do nó raiz é expandido, esse modo é utilizado.
+Os métodos \textbf{createSimulationTeam1}, \textbf{createSimulationTeam2} e \textbf{applyCurrentStatus} estão todos na API \textbf{showdownSimulation}. O método \textbf{createSimulationTeam1} e \textbf{createSimulationTeam2} criam uma cópia dos times dos jogadores 1 e 2 respectivamente, já o método \textbf{applyCurrentStatus} é utilizado após o método \textbf{myCreateBattle} para aplicar a situação atual de cada Pokémon. Na figura \ref{fig:createCurrentSimulation} é mostrado dois modos diferentes de como utilizar esses métodos. No primeiro modo (linha 2 até linha 10) é criado uma cópia do estado atual da batalha, ou seja, aquela está acontecendo no navegador, para isso a API \textbf{showdownSimulation} utiliza a API \textbf{showdownAI}. No segundo modo (linha 14 até linha 22) é necessário passar mais um argumento para os métodos que é uma batalha simulada, ou seja, quando um nó diferente do nó raiz é expandido, esse modo é utilizado (pois o nó que está sendo expandido não reflete a situação que ocorre no navegador de internet).
 
 A figura \ref{fig:ductRootNode} mostra o estado do nó raiz do agente \textbf{ductAgent} após 414 passos do DUCT.
 
