@@ -5,7 +5,7 @@
 
 Nos capítulos anteriores sobre árvore de jogos e aprendizagem de jogos com humanos. Nesse capítulo o foco será a implementação de um agente para o jogo Pokémon Showdown!. O interesse em fazer agente para esse jogo são quatro fatores. Alto nível de competitividade, dezenas de milhares de pessoas jogam diariamente o jogo, além da existência de diversos campeonatos. Jogo de informações imperfeitas com grande nível de ramificação de escolhas. Jogo totalmente \textit{online}, podendo explorar o aprendizado com jogadores humanos num ambiente difícil de identificar se o adversário é um \textit{bot} ou não. Possibilidade de criar uma API para possibilitar outros pesquisadores criar agentes e a possibilidade de se criar uma competição entre agentes jogadores.
 
-O capítulo está organizado da seguinte forma: a primeira seção \ref{sec:pokemon} é apresentada a franquia de jogos Pokémon. Na próxima seção \ref{sec:batalhaspokemon} é apresentado as mecânicas e as regras das batalhas Pokémon. Na seção \ref{sec:pokemonshowdown} será apresentado a plataforma Pokémon Showdown!, como ela funciona e suas regras competitivas especiais. Na seção \ref{sec:apipokemonshowdown} será apresentado a API para se comunicar com o jogo Pokémonm Showdown!. Em \ref{sec:mctsPokemonShowdown} é mostrado alguns a implementação de agentes utilizando MCTS para o Pokémon Showdown!.
+O capítulo está organizado da seguinte forma: a primeira seção \ref{sec:pokemon} é apresentada a franquia de jogos Pokémon. Na próxima seção \ref{sec:batalhaspokemon} é apresentado as mecânicas e as regras das batalhas Pokémon. Na seção \ref{sec:pokemonshowdown} será apresentado a plataforma Pokémon Showdown!, como ela funciona e suas regras competitivas especiais. Na seção \ref{sec:apipokemonshowdown} será apresentado a API para se comunicar com o jogo Pokémonm Showdown!. Em \ref{sec:mctsPokemonShowdown} é mostrado os agentes criados utilizando MCTS para o Pokémon Showdown!. Finalmente em \ref{sec:experimentosResutlados} o resultados obtidos pelos agentes propostos.
 
 \section{Pokémon}
 \label{sec:pokemon}
@@ -88,7 +88,7 @@ Cada Pokémon tem uma série de características únicas, são elas:
 	
 \end{itemize}
 	
-\begin{table}[]
+\begin{table}[H]
 \centering
 \caption{Possíveis naturezas de um Pokémon}
 \label{table:tabelaNatureza}
@@ -186,6 +186,7 @@ A decisão de quem irá a executar a ação primeira ocorre de maneira complexa. Sim
 \end{itemize}
 
 \subsection{Golpes do Pokémon}
+\label{sec:golpesPokemon}
 
 Uma das customizações mais importantes são quais golpes o Pokémon irá poder utilizar. Cada Pokémon pode escolher 4 golpes entre dezenas de golpes disponíveis para sua espécie. Cada espécie de Pokémon pode aprender um conjunto diferente de habilidades dependendo do seu tipo e características (por exemplo, apenas Pokémon com chifre conseguem aprender o golpe \textit{Mega Horn}). Existem mais de 600 golpes diferentes.
 
@@ -232,7 +233,7 @@ As principais características dos golpes são:
 
 A imagem a seguir foi retirada do site \cite{bulbapedia1} e contém uma tabela mostrando o modificador de dano para cada tipo de golpe em relação ao tipo do adversário. Ao escolher um golpe, o tipo (golpes tem apenas um único tipo) desse golpe é confrontado nessa tabela de acordo com o tipo do adversário, caso o adversário tenha dois tipos a consulta nessa tabela é feita duas vezes e os modificadores são multiplicados gerando um modificar final.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=16cm]{figures/pokemontypechart.png}
 \caption[Tabela de vantagens e desvantagens do Pokémon]{Tabela de vantagens e desvantagens do Pokémon. \cite{bulbapedia1}}
@@ -282,6 +283,7 @@ Esse ambiente é totalmente \textit{on-line} e pode ser jogado via navegador de i
 O ambiente conta um grande número de jogadores simultâneos. Durante o desenvolvimento do trabalho foi verificado que muitas vezes o número de usuários simultâneos ultrapassou a quantidade de 12000.
 
 \subsection{Regras especiais Pokémon Showdown!}
+\label{sec:regrasEspeciais}
 
 Competitivamente falando Pokémon tem uma série de problemas de balanceamento. Diferente dos jogos da franquia principal, o Pokémon Showdown! aplica algumas restrições para tornar as batalhas Pokémon ainda mais competitivas.
 
@@ -290,6 +292,7 @@ Como existem vários Pokémon com atributos muitos mais altos e com movimentos mui
 O jogo Pokémon Showdown! segue as regras definida por uma comunidade de jogadores competitivos chamada Smogon \cite{smogon}, essa comunidade regula e define as regras que são utilizadas em cada modo de jogo, para que o jogo se torne mais competitivo e balanceado. Um dos principais trabalhos da Smogon é balancear os mais de 800 Pokémon distribuindo eles em faixas chamadas de \textit{tiers}. Do mais fraco para o mais forte, os principais \textit{tiers} são:
 
 \begin{itemize}
+	\item PU;
 	\item \textit{Never Used} ou NU;
 	\item \textit{Rarely Used} ou RU;
 	\item \textit{Under Used} ou UU;
@@ -304,7 +307,7 @@ O jogo Pokémon Showdown! tem algumas dezenas de modos de batalhas diferentes com
 
 \begin{itemize}
 
-	\item \textbf{Random battle} os dois jogadores são pareados com times totalmente aleatórios. Para balancear esse modo são atribuídos diferentes níveis de acordo com o \textit{tier} do Pokémon. Pokémon NU batalham no nível 86, RU 82, UU 78, OU 74 e \textit{Ubers} no nível 70.
+	\item \textbf{Random battle} os dois jogadores são pareados com times totalmente aleatórios. Para balancear esse modo são atribuídos diferentes níveis de acordo com o \textit{tier} do Pokémon. Pokémon NU batalham no nível 86, RU 82, UU 78, OU 74 e \textit{Ubers} no nível 70. Os Pokémon do \textit{tier} PU não são utilizados nesse modo.
 	
 	\item \textbf{OU Battle} O jogador monta seu time com Pokémon de no máximo \textit{tier} OU e são pareados com outro jogador também com time de Pokémon de \textit{tier} máximo OU. Nesse modo todos Pokémon batalham no mesmo nível.
 
@@ -320,6 +323,7 @@ O jogo Pokémon Showdown! tem algumas dezenas de modos de batalhas diferentes com
 \end{figure}
 
 \subsection{Temporizador de batalha}
+\label{sec:temporizadorBatalha}
 
 Todos os modos de jogo do Pokémon Showdown! contam com um temporizador opcional, ou seja, está disponível para um dos dois jogadores pedirem para ligar o temporizador. A figura \ref{fig:showdownTimer} mostra a localização do temporizador.
 
@@ -551,7 +555,7 @@ Para exemplificar a utilização da API, na figura \ref{fig:showdownAPISimples} é 
 
 \subsection{showdownSimulation}
 
-Em adição da API de \textit{gameplay} foi desenvolvido uma API para simular situações e, ações em deterimanado cenários. Isso pode ser feito, pois o código fonte do Pokémon Showdown! (servidor e cliente) é aberto.
+Em adição da API de \textit{gameplay} foi desenvolvido uma API para simular situações e, ações em determinados cenários. Isso pode ser feito, pois o código fonte do Pokémon Showdown! (servidor e cliente) é aberto.
 
 Analisando as classes do código de servidor do Pokémon Showdown! foi possível isolar o trecho onde são criados os times e onde são executados as ações e, com isso, criar a API de simulação de jogadas.
 
@@ -637,7 +641,7 @@ Além dessas propriedades, existem três métodos muito importantes, que fazem as a
 
 	\item \textbf{chooseMove}. Esse método recebe como argumento um inteiro com valor de 1 a 4 relacionado ao golpe que o Pokémon ativo irá utilizar. Entre outras palavras ao chamar \textbf{chooseMove} passando 1 como argumento, será utilizado o golpe de ordem 1 do Pokémon ativo do jogador.
 	
-	\item \textbf{chooseSwitch}. Esse método recebe como argumento um inteiro com valor de 1 a 6 relacionado para qual Pokémon será efetuado a troca.
+	\item \textbf{chooseSwitch}. Esse método recebe como argumento um inteiro com valor de 1 a 6 relacionado para qual Pokémon será efetuada a troca.
 	
 	\item \textbf{chooseTeam}. Semelhante ao \textbf{chooseSwitch}, esse método também recebe como argumento um inteiro com valor de 1 a 6, porém, esse método só funciona para o primeiro turno quando existe o \textbf{preview} com valor verdadeiro.
 	
@@ -654,3 +658,146 @@ A figura \ref{fig:showdownSimulation5} mostra um exemplo de realização de ações 
 
 \section{Agentes MCTS para Pokémon}
 \label{sec:mctsPokemonShowdown}
+
+Utilizando as APIs desenvolvidas foram criados 4 agentes para testar os diferentes modos de jogo e validar algumas técnicas. Foram criados 2 agentes para \textbf{Random Battle} e 2 agentes para \textbf{Battle Factory}. Nesta seção serão mostradas as técnicas utilizadas em cada agente e como ele foi empregado para o problema proposto.
+
+Nos 4 agentes foram utilizadas técnicas de MCTS (explicados em \ref{sec:MCTS}), em alguns casos com modificações para se adequar ao teste proposto.
+
+\subsection{Agentes para Random Battle}
+
+Nesses dois primeiros agentes foram utilizados apenas a \textbf{showdownAI}, ou seja, não foram utilizados elementos de simulação durante o algoritmo. A ideia desses agentes é descobrir qual tipo de jogadas os agentes priorizam em certos momentos da batalha, ou seja, sem ter conhecimento nenhum sobre o jogo, descobrir em cada turno que se passa se é melhor utilizar: golpes fortes, golpes com efeitos de alteração de estados, trocar de Pokémon, entre outros. 
+
+Para realizar esse aprendizado, cada agente conta com dois modos: modo de aprendizagem e modo competitivo. No modo aprendizado os agentes escolhem sempre o grupo de ações menos explorado. No modo competitivo ele utiliza a base de dados estabelecida na fase de treino para escolher a melhor ação possível, porém, ainda alimentando a base de dados.
+
+Ambos os agentes utilizam a mesmo algoritmo. A única diferença entre os dois um dos agentes é que um dos agentes efetua o treinamento contra humanos (o agente será chamado \textbf{humanRandomAgent} ) e o outro contra um terceiro agente cópia desse agente no modo competitivo (o agente será chamado \textbf{botRandomAgent} ).
+
+\subsubsection{Implementação dos agentes para Random Battle}
+
+Para diminuir a largura da árvore de decisões e adicionar algum conhecimento de jogo durante as escolhas foi utilizada a técnicas de Grupos de Movimentos (detalhada em \ref{sec:GruposMovimentos}). 
+
+Em um turno comum cada jogador tem no máximo 9 escolhas: escolher um dos 4 golpes ou trocar para um dos outros 5 Pokémon. Essas escolhas foram classificadas em 5 grupos. Em grande maioria das vezes apenas 2 ou 3 grupos tinha alguma ação, diminuindo ainda mais a largura da árvore, os grupos estão divididos do seguinte modo:
+
+\begin{itemize}
+
+	\item \textbf{Grupo A}. Golpe que são efetivos ou muito efetivos (\ref{sec:golpesPokemon}) contra o Pokémon adversário.
+	
+	\item \textbf{Grupo B}. Golpes de condição, ou seja, golpes que alteram algum estado do adversário ou pode trazer alguma vantagem para o jogador.
+	
+	\item \textbf{Grupo C}. Golpes restantes que não se encaixam no Grupo A ou no Grupo B.
+	
+	
+	\item \textbf{Grupo D}. Trocar para um Pokémon que o tipo dele tenha vantagem contra os tipos do Pokémon adversário atual.
+	
+	\item \textbf{Grupo E}. Trocar para outro Pokémon que não se adequa ao Grupo D.
+	
+\end{itemize}.
+
+O pseudocódigo \ref{alg:mctsGruposMovimento} mostra como são criados os grupos.
+
+\begin{algorithm}[H]
+\caption{Algoritmo de criação de grupos}
+\label{alg:mctsGruposMovimento}
+\begin{algorithmic}[1]
+\Procedure{CreateGroups}{$activePokemon, myPokemonList, oponnentPokemon$}
+	\State $groups\gets []$
+	\State
+	\State $groupA\gets []$
+	\State $groupB\gets []$
+	\State $groupC\gets []$
+	\State $groupD\gets []$
+	\State $groupE\gets []$
+	\State
+	\State $weakAndResist\gets \Call{getWeaknessAndResistances}{oponnentPokemon}$
+	\State
+	\State $groupA\gets \Call{getEffectivenessMoves}{activePokemon, weakAndResist}$
+	\State $groupB\gets \Call{getStatusMoves}{activePokemon}$
+	\State $groupC\gets \Call{getOtherMoves}{activePokemon, groupA}$
+	
+	\State $groupD\gets \Call{getEffectivenessPokemon}{myPokemonList, weakAndResist}$
+	\State $groupE\gets \Call{getOtherMoves}{myPokemonList, groupD}$
+	\State
+	\State $groups\gets \Call{addAll}{groupA, groupB, groupC, groupD, groupE}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+A função \textbf{getWeaknessAndResistances} também faz parte também da API showdownAI. A imagem \ref{fig:weaknessResist} mostra a utilização dela. Como a figura mostra não é necessário o preenchimento completo do objeto Pokémon, basta passar os tipos a serem analisados.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/weaknessResist.png}
+\caption[Método getWeaknessAndResistances da showdownAI]{Utilização do método getWeaknessAndResistances da showdownAI.}
+\label{fig:weaknessResist}
+\end{figure}
+
+A figura \ref{fig:weaknessResistResult} mostra o objeto de retorno do método \textbf{getWeaknessAndResistances}. Como mostra a imagem é retornado um objeto com 5 vetores de \textbf{String} representando: imunidades (tipo de golpe que é imune ao Pokémon), super resistências (tipo de golpe que é não muito efetivo ao Pokémon), resistências (tipo de golpe que é não efetivo), fraquezas (tipo de golpe que é efetivo ao Pokémon) e super fraqueza (tipo de golpe que é muito efetivo ao Pokémon).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/weaknessResistResult.png}
+\caption[Objeto resultado do método getWeaknessAndResistances]{Objeto resultado do método getWeaknessAndResistances.}
+\label{fig:weaknessResistResult}
+\end{figure}
+
+O algoritmo utilizado pelos dois agentes foi o UCT descrito em \ref{sec:uct}. A simulação é feita na base de dados gerada pelo agente. No modo treino a única diferença do UCT era a fase de seleção durante o modo treino, que era sempre escolhido o grupo menos testado.
+
+\subsubsection{Implementação dos agentes para Battle Factory}
+
+Nos outros dois agentes foi utilizado tanto a API \textbf{showdownAI} quanto a API \textbf{showdownSimulation}. Em um dos agentes foi utilizado um algoritmo comum de MCTS e no outro agente foi utilizada uma versão do MCTS para jogos simultâneos. 
+
+A ideia de criação dos dois algoritmos é ver a diferença de desempenho entre eles. Por isso foi utilizado o modo \textit{Battle Factory} que, competitivamente falando, são modos menos aleatórios.
+
+Nesses agentes foram adicionados alguns conhecimentos sobre o jogo. Além de criar simulações, a API \textbf{showdownSimulation} tem uma base de dados com as principais construções de cada Pokémon, ou seja, nela tem informações sobre as customizações mais utilizadas para aquele Pokémon como: golpes mais utilizados, itens, habilidades e distribuição de EV. Isso é feito através do objeto público \textbf{factory}. 
+
+O objeto \textbf{factory} está separado por \textit{tiers} (descritos na seção: \ref{sec:regrasEspeciais}) como mostra a imagem \ref{fig:factoryTier}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/factoryTier.png}
+\caption[Objeto factory da showdownSimulation]{Objeto factory da showdownSimulation.}
+\label{fig:factoryTier}
+\end{figure}
+
+Em cada \textit{tier} tem disponível todos Pokémon e, em cada Pokémon tem as customizações mais usadas (chamadas de \textit{sets}). Na imagem \ref{fig:factoryPokemon} mostra um exemplo dos \textit{sets} para o Pokémon Mewtwo.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/factoryPokemon.png}
+\caption[Sets de um determinado Pokémon]{Sets de um determinado Pokémon.}
+\label{fig:factoryPokemon}
+\end{figure}
+
+O objeto \textbf{factory} é muito importante nesses agentes, uma vez que não é conhecida qual customização o adversário utilizou em cada Pokémon, com um pouco de informação sobre o Pokémon já é possível estimar qual customização foi utilizada. Entre outras palavras, para fazer a simulação é pego todas as informações que são conhecidas durante a batalha sobre aquele Pokémon e é escolhido o \textit{set} que mais se assemelha a essas informações.
+
+\subsubsection{Implementação dos agentes para Battle Factory}
+
+O primeiro agente utiliza o algoritmo DUCT (exposto em \ref{sec:duct}) esse agente é chamado de \textbf{ductAgent}. O outro utiliza UCT sem modificações chamado de \textbf{uctAgent}.
+
+Com a API de simulação não existe nenhuma base de dados de treinamento, ou seja, cada jogada é simulada em memória e a simulação é feita até o fim de jogo (como o algoritmo de MCTS define).
+
+Os dois agentes fazem os 4 passos do MCTS (seleção, expansão, simulação e retropropagação) enquanto o temporizador de batalha tenha mais de 30 segundos. Desse modo os primeiros turnos de jogo, onde a altura da árvore e largura é muito maior, o agente tem 2 minutos para processar e, no decorrer dos demais turnos o agente tem entre 20 e 30 para estimar a melhor jogada (a quantidade de tempo ganha por turno é detalhada em \ref{sec:temporizadorBatalha}).
+
+Cada nó da árvore de busca contém uma cópia da batalha inteira. Para isso, toda vez que um nó é criado (fase de expansão do MCTS) é feito uma cópia completa do time dos dois jogadores. 
+
+A cópia dos times é feita pela \textbf{showdownSimulation} como a imagem \ref{fig:createCurrentSimulation}. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/createCurrentSimulation.png}
+\caption[Criando uma cópia da batalha]{Criando uma cópia da batalha.}
+\label{fig:createCurrentSimulation}
+\end{figure}
+
+Os métodos \textbf{createSimulationTeam1}, \textbf{createSimulationTeam2} e \textbf{applyCurrentStatus} estão todos na API \textbf{showdownSimulation}. O método \textbf{createSimulationTeam1} e \textbf{createSimulationTeam2} criam uma cópia dos times dos jogadores 1 e 2 respectivamente, já o método \textbf{applyCurrentStatus} é utilizado após o método \textbf{myCreateBattle} para aplicar a situação atual de cada Pokémon. Na figura \ref{fig:createCurrentSimulation} é mostrado dois modos diferente de como utilizar esses métodos. No primeiro modo (linha 2 até linha 10) é criado uma cópia do estado atual da batalha, ou seja, da que está acontecendo no navegador, para isso a API \textbf{showdownSimulation} utiliza a API \textbf{showdownAI}. No segundo modo (linha 14 até linha 22) é necessário passar mais um argumento para os métodos que é uma batalha simulada, ou seja, quando um nó diferente do nó raiz é expandido, esse modo é utilizado.
+
+A figura \ref{fig:ductRootNode} mostra o estado do nó raiz do agente \textbf{ductAgent} após 414 passos do DUCT.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{figures/ductRootNode.png}
+\caption[Nó raiz DUCT]{Estado do nó raiz após 414 passos utilizando DUCT.}
+\label{fig:ductRootNode}
+\end{figure}
+
+\section{Experimentos e Resultados}
+\label{sec:experimentosResutlados}

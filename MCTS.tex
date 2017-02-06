@@ -44,7 +44,7 @@ Em jogos (especificamente jogos digitais), segundo \cite{Millington:2009:AIG:179
 
 Um modo muito comum de representar árvores de decisão para estratégias simples é o fluxograma. Segundo \cite{Millington:2009:AIG:1795711} as árvores de decisões representadas por fluxogramas têm normalmente duas respostas (sim e não, por exemplo). Na imagem \ref{fig:fluxogramaInimigos} é mostrado um diagrama simples de estratégia para um inimigo, nesse fluxograma o personagem patrulha o ambiente até achar um inimigo, ao ver um inimigo o personagem se aproxima se necessário e o ataca.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=10cm]{figures/fluxogramainimigo.pdf}
 \caption[Fluxograma estratégia inimigo]{Fluxograma Simples de estratégia para inimigos.}
@@ -73,7 +73,7 @@ Essa técnica é muito empregada em jogos comerciais. Segundo \cite{diller2004beha
 
 Um exemplo bem claro de FSM em jogos é o fantasma do clássico jogo do PacMan. No jogo o fantasma começa dentro de uma caixa (caixa de renascimento) por um determinado tempo (estado "esperando para nascer"), quando o tempo acaba ele entra no estado "caçando" indo atrás do PacMan, caso o PacMan coma uma bola de energia o fantasma entra no modo "sendo caçado" permitindo o PacMan derrotar ele, caso o temporizador da bola de energia se esgote o fantasma volta para o estado "caçando", caso o PacMan colida com o fantasma durante o estado "sendo caçado" o fantasma entra no estado "morto" e vai em direção da caixa de renascimento, ao chegar à caixa ele volta para o estado "esperando para nascer", a figura \ref{fig:fantasmaPacManFSM} ilustra essa FSM.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=12cm]{figures/pacManFSM.png}
 \caption[Fantasma PacMan FSM]{Fantasma PacMan FSM.}
@@ -146,7 +146,7 @@ O algoritmo básico do \textit{minimax} é ilustrado no Algoritmo \ref{alg:minimax
 
 Em seu trabalho, \cite{du1995minimax} propuseram uma relação entre árvores \textit{minimax} e árvore de jogos (especificamente jogos de tabuleiros). Essa relação pode ser vista na tabela \ref{tab:minimaxtreegames}.
 
-\begin{table}[]
+\begin{table}[H]
 \centering
 \caption{Árvore \textit{minimax} e árvore de jogos}
 \label{tab:minimaxtreegames}
@@ -275,7 +275,7 @@ O método de Monte Carlo possui diversas variantes, mas todas elas seguem os segu
 
 Um exemplo bem conhecido para utilização do método de Monte Carlo é para definir o valor de $\pi$. Primeiro é calculado a probabilidade de, ao gerar posições aleatórias dentro de uma área de um quadrado essa posição também estar dentro da área de um círculo (inserido no quadrado) como mostra a figura \ref{fig:quadradoCirculoPi}.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=12cm]{figures/piexample01.png}
 \caption[Método de Monte Carlo para descobrir o valor de $\pi$]{Quadrado com lado de $2r$ contendo um círculo com raio $r$.}
@@ -312,7 +312,7 @@ Com o auxílio de um computador é gerado 100.000 posições aleatórias. Dessa amost
 
 A imagem \ref{fig:quadradoCirculoPiAleatoria} faz uma demonstração gráfica desse conjunto de números gerados, os pontos mais escuros mostram posições geradas fora do círculo e os pontos mais claros as posições geradas dentro da área do círculo.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=12cm]{figures/montecarlopi.png}
 \caption[Método de Monte Carlo para descobrir o valor de $\pi$ - geração de pontos aleatórios]{Demonstração gráfica de geração de 100.000 posições aleatórias.}
@@ -337,7 +337,7 @@ Finalmente o valor aproximado de $\pi = 3,14484$.
 
 Com o método de Monte Carlo é bem fácil estimar probabilidades mais complexas. A imagem \ref{fig:montecarloroleta} representa uma roleta que pode ser dividida em 4 partes: em duas dessas partes o valor ganho é de $+1$, em uma dessas quatro partes o valor da recompensa é $+2$ e na última parte o valor é de $-2$. Nesse caso, vamos usar o método de Monte Carlo para descobrir qual a probabilidade de após girar 20 vezes a roleta, a soma dos pontos obtidos ser menor que zero.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=10cm]{figures/roleta.png}
 \caption[Método de Monte Carlo para calcular a probabilidade de uma roleta]{Distribuição de recompensas de uma roleta.}
@@ -491,6 +491,7 @@ Ao finalizar o MCTS existem quatro critérios de como escolher o melhor filho (\c
 \end{itemize}
 
 \subsubsection{Upper Confidence Bound for Trees (UCT)}
+\label{sec:uct}
 
 A implementação mais comum do algoritmo MCTS é o \textit{Upper Confidence Bound for Trees} (UCT) (\cite{browne12asurvey}). 
 
@@ -511,7 +512,7 @@ onde $j$ é a escolha que está sendo analisada (no exemplo uma máquina caça-níque
 
 Nessa equação fica claro como estão distribuídos os fatores exploração ($\sqrt{\frac{2 \ln n}{n_{j}}}$) e aprofundamento ($\overline{x}_{j}$). A imagem \ref{fig:exploreandexploitinequation} ilustra essa separação.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=12cm]{figures/exploreandexploit.png}
 \caption[UCB1 exploração e aprofundamento na equação]{UCB1 exploração e aprofundamento na equação.}
@@ -667,6 +668,7 @@ Existem muitos aprimoramentos que alteram em partes o funcionamento do MCTS para
 A técnica urgência de primeira jogada (do inglês First Play Urgency - FPU) de \cite{gelly2006exploration} sugere melhorias para a fase de seleção do algoritmo. Segundo os autores o UCT não dá nenhuma solução para escolher entre movimentos que ainda não foram explorados, ou seja, a equação UCB1 (\ref{eq:ucb1}) não é valida em nós com nenhuma visita. Em seu trabalho o autor sugere iniciar a avaliação dos nós com o valor de 10000, e após serem visitados ao menos uma vez a sua avaliação ocorre normalmente pela fórmula de UCB1.
 
 \subsubsection{Grupos de movimentos}
+\label{sec:GruposMovimentos}
 
 Um aprimoramento para o UCT para quando se tem muitas ações parecidas é a chamada grupos de movimentos. Proposto por \cite{childs2008transpositions} essa melhoria diminui consideravelmente a quantidade de ramos da árvore Monte Carlo. A técnica consiste em criar uma nova camada onde todas as possíveis ações são separadas em grupos e o UCB1 é usado para selecionar qual grupo será escolhido. A imagem a \ref{fig:movegroups} ilustra esse processo.
 
@@ -684,6 +686,7 @@ Jogos de movimentos simultâneos são jogos onde ambos os jogadores escolhem suas 
 %, Regret Matching e Outline Outcome Sampling.%
 
 \subsubsection{UCT desacoplado}
+\label{sec:duct}
 
 O UCT desacoplado (do inglês Decoupled UCT - DUCT) foi proposto por \cite{finnsson2007cadia} para a competição General Game Playing para resolver problemas de jogos com movimentos simultâneos. No DUCT cada nó representa uma escolha para cada jogador, ou seja, os nós que estão na mesma altura na árvore representam todas as combinações de movimentos dos dois ou mais jogadores, esses nós são chamados de articulações. Cada jogador mantém uma variáveis próprias para representar a recompensa (número de vitórias e derrotas) e visitas para cada nó (\cite{lanctot2013monteI}), ou seja, como o trabalho de \cite{lanctot2013monte2} diz: "na seleção, DUCT aplica o algoritmo UCB1 com as estatísticas da perspectiva de cada jogador independentemente". 
 
