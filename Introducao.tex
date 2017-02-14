@@ -3,7 +3,7 @@
 
 Com o aumento do poder computacional e a viabilidade de grandes empresas em construírem clusters de máquinas para processamento paralelo fomentou grandes avanços na área de Inteligência Artificial (IA), permitindo construções de algoritmos mais complexos e obtenção de resultados em larga-escala.
 
-Uma das subáreas de estudo de interesse em IA é a construção de agentes inteligentes capazes de tomar decisões de maneira autônoma para as mais diversas tarefas. Como exemplo é citado tarefas como geração de conteúdo procedural para jogos \cite{PCGsurvey2013}, geração de missões e desafios \cite{questGenerator2011}, agentes para jogos eletrônicos \cite{iaInGames}, dentre outras.
+Uma das subáreas de estudo de IA exploradas durante esse trabalho é a construção de agentes inteligentes capazes de tomar decisões de maneira autônoma para as mais diversas tarefas. Como exemplo, é citado tarefas como geração de conteúdo procedural para jogos \cite{PCGsurvey2013}, geração de missões e desafios \cite{questGenerator2011}, agentes para jogos eletrônicos \cite{iaInGames}, dentre outras.
 
 Especificamente sobre os agentes criados para jogos eletrônicos, temos que a tarefa desses agentes é a de vencer desafios lógicos ou de precisão de tal forma a vencer um determinado jogo eletrônico, o que geralmente é desafiador dadas as possíveis entradas e estados de saída, além de múltiplas formas de vencer o desafio.
 
@@ -24,21 +24,35 @@ Existem diversas finalidades para criação de agentes inteligentes para jogos. Po
 
 Esse trabalho explora a criação de agentes inteligentes que compitam em alto nível com jogadores humanos no sistema de batalhas \textit{Pokémon}.
 
-Um dos grandes desafios na criação desses agentes é a adaptabilidade e a competitividade. Diferentes de jogos como xadrez, damas, \textit{reversi} e outros jogos de tabuleiro, em batalhas \textit{Pokémon} pouco se sabe do adversário até que comece o jogo, ou seja, invalidando qualquer tipo de técnica prevendo possíveis movimentos antes do jogo começar, já que cada time pode ser composto de uma infinidade de maneiras diferentes (no capítulo \ref{cap:batalhasPokemon} é apresentado com detalhes essas possiblidades). Para acentuar ainda mais essas propriedades os agentes irão treinar e competir no modo randômico, nesse modo a escolha do seu time e de seu adversário é feito pelo próprio sistema do jogo.
+Um dos grandes desafios na criação desses agentes é a adaptabilidade e a competitividade. Diferentes de jogos como xadrez, damas, \textit{reversi} e outros jogos de tabuleiro, em batalhas \textit{Pokémon} pouco se sabe do adversário até que comece o jogo, ou seja, invalidando qualquer tipo de técnica prevendo possíveis movimentos antes de o jogo começar, já que cada time pode ser composto de uma infinidade de maneiras diferentes (no capítulo \ref{chap:mctsPokemon} é apresentado com detalhes essas possiblidades). Para acentuar ainda mais essas propriedades os agentes irão treinar e competir em modos de jogo com times aleatórios, nesses modos as escolhas do seu time e de seu adversário é feito pelo próprio sistema do jogo.
 
-Por causa da característica de desconhecimento do time adversário, a utilização de técnicas de criação de árvores de possíveis jogadas do adversário é bastante prejudicada, pois o agente precisaria predizer os possíveis \textit{Pokémons} adversários assim como suas características, dificultando a utilização da técnica que ficou famosa pelo sistema \textit{Deep Blue} que segundo o trabalho \textit{Deep Blue System Overview} \cite{deepblue1} "O \textit{Deep Blue} é um massivo sistema paralelo para realização de busca em árvores de jogos de xadrez".
+Por causa da característica de desconhecimento do time adversário, a utilização de técnicas de criação de árvores de possíveis jogadas do adversário é bastante prejudicada, pois o agente precisaria predizer os possíveis \textit{Pokémon} adversários assim como suas características, dificultando a utilização da técnica que ficou famosa pelo sistema \textit{Deep Blue} que segundo o trabalho \textit{Deep Blue System Overview} \cite{deepblue1} "O \textit{Deep Blue} é um massivo sistema paralelo para realização de busca em árvores de jogos de xadrez".
+
+Outro importante aspecto que esse tipo de jogo é a simultaneidade de jogadas, ou seja, ambos os jogadores escolhem ao mesmo tempo suas jogadas e ordem de execução é definida por uma série de regras. Os trabalhos de \cite{lanctot2013monteI}, \cite{lisy2013convergence}, \cite{tak2014monte}, e \cite{Lanctot2014} exploram com mais detalhes essa característica.
 
 \section{Objetivos}
 \label{sec:objetivos}
 
 O Objetivo desse trabalho é o desenvolvimento de agentes inteligentes que joguem e aprendam com milhares de jogadores humanos. Serão implementadas distintas técnicas para criação e aprendizado desses agentes. Durante o desenvolvimento da pesquisa será sumarizado a evolução dos agentes no sistema de ranqueamento do jogo e, essa posição será confrontada com a quantidade de treinamento que cada agente recebeu, podendo assim observar a curva de melhora em relação a quantidade de treinamento.
 
-Para criação desses agentes foi desenvolvida uma API que permitirá a comunicação com o jogo \textit{Pokémon Showdown}. Inicialmente a API está disponibilizada apenas para linguagem JavaScript, mas durante o desenvolvimento do projeto será portada para Java através da tecnologia de WebSockets.
+Para criação desses agentes foi desenvolvida uma API que permitirá a comunicação com o jogo \textit{Pokémon Showdown!}. Inicialmente a API está disponibilizada para linguagem JavaScript, mas pode ser utilizada em qualquer outra linguagem através da tecnologia de WebSockets.
 
 \section{Principais contribuições}
 \label{sec:principais}
 
-O trabalho irá explorar a criação de agentes inteligentes adaptativos, num ambiente que pouco se sabe sobre o adversário. Os agentes terão informações apenas durante a batalha e, essas informações são apenas aquelas que o adversário realizar, por exemplo, o agente só saberá que adversário tem um \textit{Pokémon} até o mesmo usá-lo, os movimentos que o \textit{Pokémon} tem serão apenas conhecidos a medida que o adversário utilizá-los e mesmo assim existirá características que agente não tem como descobrir, como por exemplo a quantidade de ataque e defesa distribuída no monstro.
+Estre trabalho explorou a criação de agentes utilizando árvore de busca de Monte Carlos para jogos de turnos simultâneos (comi limite de tempo para cada escolha) com informações imperfeitas e incompletas. Os agentes exploram técnicas adaptativas, num ambiente que se tem pouca informação sobre o adversário. Os agentes irão ganhando informação sobre o atual adversário conforme os turnos avançam, ou seja, muitas informações são descobertas apenas quando o adversário a mostra, por exemplo, o agente só saberá que adversário um Pokémon pode fazer certa ação até o mesmo usá-lo, informações como customização de característica e customização de atributos de cada Pokémon nunca são reveladas.
 
-Além disso, a construção de uma API para acesso ao jogo contribuirá para que outros pesquisadores também possam desenvolver estudos e criar seus próprios agentes podendo criar-se uma cultura de competição entre agente inteligentes na plataforma \textit{Pokémon Showdown}.
+Além disso, a construção de uma API para acesso ao jogo contribuirá para que outros pesquisadores também possam desenvolver estudos e criar seus próprios agentes podendo criar-se uma cultura de competição entre agente inteligentes na plataforma \textit{Pokémon Showdown!}.
 
+\section{Organização do trabalho}
+\label{sec:objetivos}
+
+Este trabalho foi dividido em cinco capítulos, compondo a estrutura que é apresentada nos parágrafos a seguir.
+
+No capítulo \ref{chap:arvoreDeJogos} é apresentada uma breve descrição sobre tomada de decisão. Em seguida, é explicado modelos computacionais de árvore de decisão para tomada de decisão, tais como \textit{minimax} e \textit{alpha-beta}. Por fim é discutido sobre a técnica que se tem obtido melhores resultados em jogos competitivos com grande ramificação de árvore chamada árvore de busca de Monte Carlo.
+
+No capítulo \ref{chap:aprendizadoJogosComHumanos} é discutido rapidamente sobre aprendizagem. Em seguida, é apresentando modelos matemáticos de aprendizagem que são utilizados em aprendizado de máquina, tais como \textit{perceptron}, \textit{perceptron}. Ainda em aprendizado de máquina é apresentado o modelo de neuroevolução, para isso é explicado sobre algoritmo genético e a sua importância para a neuroevolução. Por fim é feita uma revisão bibliográfica de trabalhos que utilizam algum modo de aprendizado com humanos em diferentes tipos de jogos e com diferentes propósitos.
+
+No capítulo \ref{chap:mctsPokemon} é apresentado informações sobre a franquia de jogos Pokémon e o jogo de estudo deste trabalho, o Pokémon Showdown!. Em seguida, são mostradas as APIs desenvolvidas para o jogo Pokémon Showdown!: \textit{showdownAI} e \textit{showdownSimulation}. Na sequência, são apresentados os agentes desenvolvidos utilizando uma ou as duas APIs. Por fim, são discutidos sobre os experimentos e resultados obtidos por esses agentes.
+
+Por fim, no capítulo \ref{chap:conclusoesPesquisasFuturas} são apresentadas as conclusões, limitações, dificuldades e oportunidades para trabalhos futuros.
