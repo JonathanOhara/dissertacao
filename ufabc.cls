@@ -102,35 +102,71 @@ a4paper,colorlinks=true,filecolor=blue,linkcolor=blue,citecolor=blue,]{hyperref}
             \@tipo~em~\@curso
         \end{spacing}
 
-        \vspace*{\stretch{2}}
+        \vspace*{\stretch{1}}
+		
+		Dissertação de Mestrado
+		
+		\vspace*{\stretch{1}}
 
         \@nome~\@sobrenome
 
-        \vspace*{\stretch{2}}
+        \vspace*{\stretch{1}}
+		
+		\normalsize
 
         \begin{spacing}{1.2}
             \MakeUppercase{\@titulo}
         \end{spacing}
 
-        \vspace*{\stretch{2}}
-
-        \normalsize
-
-        \begin{spacing}{1.2}
-            Dissertação
-        \end{spacing}
-
-        \vspace*{\stretch{2}}
+        \vspace*{\stretch{4}}
 
         \begin{spacing}{1.5}
            Santo André - SP \\ \@publyear
         \end{spacing}
 
+        \@makebranco
         \@makerosto
         \@makerostoverso
-        \@makeaprovacao
+        \@makededicatoria
+        \@makeagradecimentos
 
    \end{titlepage}
+}
+
+\newcommand{\@makebranco}{
+		\newpage
+		\thispagestyle{empty}
+		\noindent
+		\begin{center}
+		\end{center}
+}
+
+\newcommand{\@makeagradecimentos}{
+		\newpage
+		\thispagestyle{empty}
+		\noindent
+		
+		\begin{spacing}{1.5}
+		
+		\begin{center}\begin{large}\textbf{Agradecimentos}\end{large}\end{center}
+		
+		\vspace{1cm}
+		
+		Agradecimentos...
+		\end{spacing}		
+}
+
+\newcommand{\@makededicatoria}{
+		\newpage
+		\thispagestyle{empty}
+		\vspace*{\stretch{5}}
+		\begin{flushright}
+				\begin{minipage}[b]{100mm}
+						\begin{flushright}
+						\textit{Dedicatória.}
+						\end{flushright}
+				\end{minipage}
+		\end{flushright}
 }
 
 \newcommand{\texto}[1] {
@@ -142,45 +178,48 @@ a4paper,colorlinks=true,filecolor=blue,linkcolor=blue,citecolor=blue,]{hyperref}
 %
 \newcommand{\@makerosto}{%
     \newpage%
-
     \pdfbookmark[0]{Folha de Rosto}{rosto}
     \thispagestyle{empty}
     \noindent
 
     \center
 
-    \begin{spacing}{1.2}
-        \@nome~\@sobrenome
-    \end{spacing}
+	\begin{spacing}{1.2}
+		\@tipo~em~\@curso
+	\end{spacing}
+	
+	\vspace*{\stretch{1}}
+	
+	\begin{spacing}{1.2}
+		%\@documento
+		Dissertação de Mestrado
+	\end{spacing}
 
     \vspace*{\stretch{1}}
 
+	\begin{spacing}{1.2}
+		\@nome~\@sobrenome
+	\end{spacing}
+
+	\vspace*{\stretch{1}}
+	
     \begin{spacing}{1.2}
         \MakeUppercase{\@titulo}
     \end{spacing}
 
-    \vspace*{\stretch{1}}
-
     \normalsize
 
-    \begin{spacing}{1.2}
-        \@documento
-    \end{spacing}
+    \vspace*{\stretch{0.25}}
 
-    \vspace*{\stretch{2}}
-
-    \begin{spacing}{1.2}
-        \@documento~apresentada ao Curso de~\@tipo~da Universidade Federal do ABC
-        como requisito parcial para obtenção do grau de~\@grau~em~\@curso
-    \end{spacing}
-
-    \vspace*{\stretch{2}}
-
-    \begin{spacing}{1.5}
-        \@orientador
-    \end{spacing}
-
-    \vspace*{\stretch{2}}
+	\begin{flushright}
+		\begin{minipage}[c]{80mm}
+			\begin{spacing}{1.2}
+				Trabalho apresentado como requisito parcial para obtenção do título de~\@grau~em~\@curso, sob orientação do \@orientador.
+			\end{spacing}
+		\end{minipage}
+	\end{flushright}
+			
+    \vspace*{\stretch{5}}
 
     \begin{spacing}{1.5}
         Santo André - SP \\ \@publyear
@@ -191,30 +230,32 @@ a4paper,colorlinks=true,filecolor=blue,linkcolor=blue,citecolor=blue,]{hyperref}
 % Definição do verso da folha de rosto
 %
 \newcommand{\@makerostoverso}{%
-    \newpage%
-    \vspace*{\stretch{5}}
-    \pdfbookmark[0]{Ficha Catalográfica}{cip}
+    \newpage
     \thispagestyle{empty}
-
-    \begin{flushleft}
-    Ficha Catalográfica
-    \end{flushleft}
+    
     \begin{center}
-        \framebox[110mm] {
-            \begin{minipage}[b]{100mm}
-                \begin{flushleft}
-                    \vspace*{0.4ex}
-                    \setlength{\parindent}{0.5em}%
-                    \begin{footnotesize}
+        \framebox[155mm] {
+            \begin{minipage}[b]{145mm}
+                    		\vspace*{0.5cm}
                         \setlength{\baselineskip}{0.7\baselineskip}
-                        \noindent\@sobrenome, \@nome.\par
-                        \@titulo\ / \@nome\ \@sobrenome.\\
-                        \noindent Santo André, SP: UFABC, \@publyear.\par
-                        \thepage p.\\
+                        \begin{center}
+                        \textbf{Este exemplar foi revisado e alterado em relação à versão original, de acordo com as observações levantadas pela banca no dia da defesa, sob responsabilidade única do autor e com a anuência de seu orientador.}
+                        \end{center}
+                        
+                        \vspace*{0.5cm}
+                        
+                        \textbf{Santo André,} \underline{\hspace{2cm}} \textbf{de} \underline{\hspace{7cm}} \textbf{de 2017}
+                        
+                        \vspace*{0.5cm}
+                        
+                        \textbf{Assinatura do autor:} \underline{\hspace{10cm}}
+                        
+                        \vspace*{0.5cm}
+                        
+                        \textbf{Assinatura do orientador:} \underline{\hspace{9cm}}
+                        
                         \vspace{\baselineskip}
                         \vspace{0.4ex}
-                    \end{footnotesize}
-                \end{flushleft}
             \end{minipage}
         }
 
