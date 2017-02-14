@@ -95,35 +95,36 @@ a4paper,colorlinks=true,filecolor=blue,linkcolor=blue,citecolor=blue,]{hyperref}
         \pdfbookmark[0]{Capa}{capa}
         \noindent
 
-        \center
+        \begin{center}
 
-        \begin{spacing}{1.2}
-            \@instituicao\\
-            \@tipo~em~\@curso
-        \end{spacing}
+			\begin{spacing}{1.2}
+				\@instituicao\\
+				\@tipo~em~\@curso
+			\end{spacing}
 
-        \vspace*{\stretch{1}}
+			\vspace*{\stretch{1}}
+			
+			Dissertação de Mestrado
+			
+			\vspace*{\stretch{1}}
+
+			\@nome~\@sobrenome
+
+			\vspace*{\stretch{1}}
+			
+			\normalsize
+
+			\begin{spacing}{1.2}
+				\MakeUppercase{\@titulo}
+			\end{spacing}
+
+			\vspace*{\stretch{4}}
+
+			\begin{spacing}{1.5}
+			   Santo André - SP \\ \@publyear
+			\end{spacing}
+		\end{center}
 		
-		Dissertação de Mestrado
-		
-		\vspace*{\stretch{1}}
-
-        \@nome~\@sobrenome
-
-        \vspace*{\stretch{1}}
-		
-		\normalsize
-
-        \begin{spacing}{1.2}
-            \MakeUppercase{\@titulo}
-        \end{spacing}
-
-        \vspace*{\stretch{4}}
-
-        \begin{spacing}{1.5}
-           Santo André - SP \\ \@publyear
-        \end{spacing}
-
         \@makebranco
         \@makerosto
         \@makerostoverso
@@ -151,8 +152,18 @@ a4paper,colorlinks=true,filecolor=blue,linkcolor=blue,citecolor=blue,]{hyperref}
 		\begin{center}\begin{large}\textbf{Agradecimentos}\end{large}\end{center}
 		
 		\vspace{1cm}
+
+		Ao meu orientador, Prof. Dr. Fabrício Olivetti de França, por sua atenção e apoio em todos os momentos do curso e por sua solicitude em todo o tempo em que trabalhamos juntos.
 		
-		Agradecimentos...
+		Aos professores Ciro Cirne Trindade e André Luiz Vizine Pereira pelos incentivos e incontáveis ajudas em relação aos estudos.	
+		
+		Aos novos professores da UFABC que conheci pelos ensinamentos técnicos e de pesquisa.
+		
+		Aos meus familiares e esposa por me incentivar e acreditar que eu poderia chegar lá.
+
+		À minha esposa, Érica, por sua paciência e compreensão durante aos dias, noites e madrugadas que tive que ficar estudando.
+		
+		À UFABC pela qualidade do curso e de estrutura oferecida.
 		\end{spacing}		
 }
 
@@ -163,7 +174,7 @@ a4paper,colorlinks=true,filecolor=blue,linkcolor=blue,citecolor=blue,]{hyperref}
 		\begin{flushright}
 				\begin{minipage}[b]{100mm}
 						\begin{flushright}
-						\textit{Dedicatória.}
+						\textit{Aos meus professores, familia e esposa.}
 						\end{flushright}
 				\end{minipage}
 		\end{flushright}
@@ -182,48 +193,50 @@ a4paper,colorlinks=true,filecolor=blue,linkcolor=blue,citecolor=blue,]{hyperref}
     \thispagestyle{empty}
     \noindent
 
-    \center
+	\begin{center}
 
-	\begin{spacing}{1.2}
-		\@tipo~em~\@curso
-	\end{spacing}
-	
-	\vspace*{\stretch{1}}
-	
-	\begin{spacing}{1.2}
-		%\@documento
-		Dissertação de Mestrado
-	\end{spacing}
+		\begin{spacing}{1.2}
+			\@tipo~em~\@curso
+		\end{spacing}
+		
+		\vspace*{\stretch{1}}
+		
+		\begin{spacing}{1.2}
+			%\@documento
+			Dissertação de Mestrado
+		\end{spacing}
 
-    \vspace*{\stretch{1}}
+		\vspace*{\stretch{1}}
 
-	\begin{spacing}{1.2}
-		\@nome~\@sobrenome
-	\end{spacing}
+		\begin{spacing}{1.2}
+			\@nome~\@sobrenome
+		\end{spacing}
 
-	\vspace*{\stretch{1}}
-	
-    \begin{spacing}{1.2}
-        \MakeUppercase{\@titulo}
-    \end{spacing}
+		\vspace*{\stretch{1}}
+		
+		\begin{spacing}{1.2}
+			\MakeUppercase{\@titulo}
+		\end{spacing}
 
-    \normalsize
+		\normalsize
 
-    \vspace*{\stretch{0.25}}
+		\vspace*{\stretch{0.25}}
 
-	\begin{flushright}
-		\begin{minipage}[c]{80mm}
-			\begin{spacing}{1.2}
-				Trabalho apresentado como requisito parcial para obtenção do título de~\@grau~em~\@curso, sob orientação do \@orientador.
-			\end{spacing}
-		\end{minipage}
-	\end{flushright}
-			
-    \vspace*{\stretch{5}}
+		\begin{flushright}
+			\begin{minipage}[c]{80mm}
+				\begin{spacing}{1.2}
+					Trabalho apresentado como requisito parcial para obtenção do título de~\@grau~em~\@curso, sob orientação do Prof. Dr. Fabrício Olivetti de França.
+				\end{spacing}
+			\end{minipage}
+		\end{flushright}
+				
+		\vspace*{\stretch{5}}
 
-    \begin{spacing}{1.5}
-        Santo André - SP \\ \@publyear
-    \end{spacing}
+		\begin{spacing}{1.5}
+			Santo André - SP \\ \@publyear
+		\end{spacing}
+		
+	\end{center}
 }
 
 %
