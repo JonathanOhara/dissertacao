@@ -163,7 +163,7 @@ a4paper,colorlinks=true,filecolor=blue,linkcolor=blue,citecolor=blue,]{hyperref}
 
 		À minha esposa, Érica, por sua paciência e compreensão durante aos dias, noites e madrugadas que tive que ficar estudando.
 		
-		À UFABC pela qualidade do curso e de estrutura oferecida.
+		À UFABC pela qualidade do curso e pela estrutura oferecida.
 		\end{spacing}		
 }
 
