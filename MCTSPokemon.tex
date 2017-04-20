@@ -1,3 +1,5 @@
+\externaldocument{chap:aprendizadoJogosComHumanos}
+
 \chapter{MCTS para o jogo Pokémon}
 \label{chap:mctsPokemon}
 
@@ -663,8 +665,9 @@ Utilizando as APIs desenvolvidas foram criados 4 agentes para testar os diferent
 Os 4 agentes implementam MCTS (explicados em \ref{sec:MCTS}), em alguns casos com modificações para se adequar ao teste proposto.
 
 \subsection{Agentes para Random Battle}
+\label{sec:agentesRandomBattle}
 
-Nesses dois primeiros agentes foram utilizados apenas a \textbf{showdownAI}, ou seja, não foram utilizados elementos de simulação durante o algoritmo. A ideia desses agentes é descobrir qual tipo de jogadas os agentes priorizam em certos momentos da batalha, ou seja, sem ter conhecimento nenhum sobre o jogo, descobrir com o passar dos turnos, qual a é o melhor tipo de ação a tomar.
+Nesses dois primeiros agentes foram utilizados apenas a biblioteca \textbf{showdownAI}, ou seja, não foram utilizados elementos de simulação durante o algoritmo. A ideia desses agentes é descobrir qual tipo de jogadas os agentes priorizam em certos momentos da batalha, ou seja, sem ter conhecimento nenhum sobre o jogo, descobrir com o passar dos turnos, qual a é o melhor tipo de ação a tomar.
 
 Como não foi utilizada nenhuma simulação, ao invés de simular estados futuros é consultada uma base de dados previamente gerada. Para isso, os agentes contam com dois modos: modo de aprendizagem e modo competitivo. No modo aprendizado os agentes escolhem sempre o grupo de ações menos explorado. No modo competitivo é utilizada a base de dados estabelecida na fase de treino para escolher a melhor ação possível e, ao terminar a batalha, a base de dados também é atualizada.
 
@@ -740,7 +743,8 @@ A figura \ref{fig:weaknessResistResult} mostra o objeto de retorno do método \te
 
 O algoritmo utilizado pelos dois agentes foi o UCT descrito em \ref{sec:uct}. Toda a árvore de jogadas é feita na base de dados gerada pelo agente. No modo treino a única diferença do UCT é a fase de seleção, nessa fase, o UCB1 é descartado e sempre é escolhido o grupo menos testado.
 
-\subsubsection{Implementação dos agentes para Battle Factory}
+\subsection{Agentes para Battle Factory}
+\label{sec:agentesBattleFactory}
 
 Nos outros dois agentes foi utilizado tanto a API \textbf{showdownAI} quanto a API \textbf{showdownSimulation}. Em um dos agentes foi utilizado um algoritmo comum de MCTS e no outro agente foi utilizada uma versão do MCTS para jogos simultâneos. 
 
@@ -800,3 +804,17 @@ A figura \ref{fig:ductRootNode} mostra o estado do nó raiz do agente \textbf{duc
 
 \section{Experimentos e Resultados}
 \label{sec:experimentosResutlados}
+
+Esta seção, primeiro nos fornece uma visão geral da configuração de ambiente utilizada nos experimentos em \ref{sec:setupEnv}. A subseção \ref{sec:resultadosRandomBattle} mostra os resultados dos agentes para Random Battle (detalhados em \ref{sec:agentesRandomBattle}). Na subseção \ref{sec:resultadosBattleFactory} são mostrados os resultados para os agentes de Battle Factory (detalhados em \ref{sec:agentesBattleFactory}). Por fim, em \ref{sec:resultadosTesteTuringBots} são mostrados os resultados para o teste de Turing para Bots (apresentados em \ref{sec:testeTuringBots}) de todos os agentes.
+
+\subsection{Configuração de ambiente}
+\label{sec:setupEnv}
+
+\subsection{Resultados dos agentes para Random Battle}
+\label{sec:resultadosRandomBattle}
+
+\subsection{Resultados dos agentes para Battle Factory}
+\label{sec:resultadosBattleFactory}
+
+\subsection{Resultados para o teste de Turing para Bots}
+\label{sec:resultadosTesteTuringBots}
